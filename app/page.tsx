@@ -4,9 +4,6 @@ import About from "@/components/sections/About";
 import Stats from "@/components/sections/Stats";
 import Events from "@/components/sections/Events";
 import Schedule from "@/components/sections/Schedule";
-import Gallery from "@/components/sections/Gallery";
-import Sponsors from "@/components/sections/Sponsors";
-import Team from "@/components/sections/Team";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/Footer";
 
@@ -19,9 +16,6 @@ export default function Home() {
       <Stats />
       <Events />
       <Schedule />
-      <Gallery />
-      <Sponsors />
-      <Team />
       <Contact />
       <Footer />
     </main>
