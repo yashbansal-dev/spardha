@@ -32,7 +32,7 @@ const cards = [
 
 export default function About() {
     return (
-        <section id="about" className="section-padding bg-spardha-bg relative overflow-hidden">
+        <section id="about" className="section-padding relative overflow-hidden">
             {/* Background Decorative */}
             <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-neon-cyan/5 rounded-full blur-[100px] -translate-y-1/2"></div>
 

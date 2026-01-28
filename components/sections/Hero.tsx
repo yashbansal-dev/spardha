@@ -1,15 +1,11 @@
 'use client';
 
-import { useEffect, useState, useMemo, useRef } from "react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
+import { useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
-import { type ISourceOptions } from "@tsparticles/engine";
 import Link from "next/link";
 import { FaArrowRight, FaPlay } from "react-icons/fa";
 
 export default function Hero() {
-    const [init, setInit] = useState(false);
     const { scrollY } = useScroll();
     const y1 = useTransform(scrollY, [0, 500], [0, 200]);
     const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -24,12 +20,6 @@ export default function Hero() {
     const springY = useSpring(mouseY, springConfig);
 
     useEffect(() => {
-        initParticlesEngine(async (engine) => {
-            await loadSlim(engine);
-        }).then(() => {
-            setInit(true);
-        });
-
         const handleMouseMove = (e: MouseEvent) => {
             const { clientX, clientY } = e;
             const { innerWidth, innerHeight } = window;
@@ -45,109 +35,12 @@ export default function Hero() {
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, [mouseX, mouseY]);
 
-    const options: ISourceOptions = useMemo(
-        () => ({
-            background: {
-                color: {
-                    value: "transparent",
-                },
-            },
-            fpsLimit: 120,
-            interactivity: {
-                events: {
-                    onClick: {
-                        enable: true,
-                        mode: "push",
-                    },
-                    onHover: {
-                        enable: true,
-                        mode: "bubble", // Changed to bubble for a more subtle effect
-                    },
-                },
-                modes: {
-                    bubble: {
-                        distance: 200,
-                        duration: 2,
-                        opacity: 0.8,
-                        size: 6, // Slightly grow particles on hover
-                    },
-                    push: {
-                        quantity: 4,
-                    },
-                },
-            },
-            particles: {
-                color: {
-                    value: ["#00f3ff", "#bc13fe", "#ffffff"],
-                },
-                links: {
-                    // Disabled links for "dust" effect
-                    enable: false,
-                },
-                move: {
-                    direction: "none",
-                    enable: true,
-                    outModes: {
-                        default: "out",
-                    },
-                    random: true,
-                    speed: 0.5, // Slower, more floaty
-                    straight: false,
-                },
-                number: {
-                    density: {
-                        enable: true,
-                        height: 800,
-                        width: 800
-                    },
-                    value: 160, // Increased count for dust
-                },
-                opacity: {
-                    animation: {
-                        enable: true,
-                        speed: 1,
-                        sync: false,
-                    },
-                    value: { min: 0.1, max: 0.5 },
-                },
-                shape: {
-                    type: "circle",
-                },
-                size: {
-                    value: { min: 1, max: 3 },
-                },
-            },
-            detectRetina: true,
-        }),
-        [],
-    );
-
     return (
-        <section id="home" className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-[#020617]">
-            {/* 1. Dynamic Nebula Background Layers */}
-            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                {/* Deep Space Base gradient */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#0a0f2c] to-[#020617] opacity-80"></div>
+        <section id="home" className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+            {/* 1. Transparent Background needed for Global Parallax to show through */}
 
-                {/* Moving Nebula Clouds - Animated via CSS (needs global CSS keyframes 'nebula-move') */}
-                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-neon-cyan/10 rounded-full blur-[100px] animate-nebula mix-blend-screen"></div>
-                <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-neon-purple/10 rounded-full blur-[120px] animate-nebula mix-blend-screen" style={{ animationDelay: '-5s', animationDirection: 'reverse' }}></div>
-                <div className="absolute top-[40%] left-[20%] w-[30%] h-[30%] bg-neon-blue/10 rounded-full blur-[80px] animate-nebula mix-blend-screen" style={{ animationDelay: '-10s' }}></div>
-            </div>
 
-            {/* 2. Particles Layer */}
-            {init && (
-                <motion.div
-                    style={{ y: y1, opacity }}
-                    className="absolute inset-0 z-0"
-                >
-                    <Particles
-                        id="tsparticles"
-                        options={options}
-                        className="w-full h-full"
-                    />
-                </motion.div>
-            )}
+
 
             {/* 3. Main Content with Glass/Parallax Effect */}
             <motion.div
