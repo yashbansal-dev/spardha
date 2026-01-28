@@ -72,28 +72,23 @@ export default function ParallaxBackground() {
                 ></div>
             </motion.div>
 
-            {/* Layer 2 - Stadium Atmosphere (Crowd & Fog) */}
+            {/* Layer 2 - Sports Background (Main) */}
             <motion.div
                 className="absolute inset-0 w-full h-[120%]"
                 style={{ y: y2, x: springX }}
             >
-                {/* Silhouette Crowd Effect (Bottom) */}
                 <div
-                    className="absolute bottom-0 w-full h-1/3 opacity-30 bg-repeat-x"
+                    className="absolute inset-0 w-full h-full bg-no-repeat"
                     style={{
-                        backgroundImage: 'url("https://images.unsplash.com/photo-1510412095928-86716da76135?q=80&w=2670&auto=format&fit=crop")', // Abstract stadium lights/crowd
+                        backgroundImage: 'url("/assets/sports-bg-1.png")',
                         backgroundSize: 'cover',
-                        backgroundPosition: 'center bottom',
-                        filter: 'blur(4px) grayscale(80%) sepia(20%) hue-rotate(190deg)',
-                        mixBlendMode: 'screen'
+                        backgroundPosition: 'center center',
+                        opacity: 0.8
                     }}
                 ></div>
 
-                {/* Fog/Mist */}
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/10 via-transparent to-transparent"></div>
-
-                {/* Moving Light Beams */}
-                <div className="absolute -top-[50%] left-[-20%] w-[50%] h-[200%] bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent transform rotate-45 blur-3xl animate-pulse"></div>
+                {/* Fog/Mist Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent"></div>
             </motion.div>
 
             {/* Layer 3 - Mid Energy (Floating Particles & Shapes) */}
@@ -102,17 +97,8 @@ export default function ParallaxBackground() {
                 style={{ y: y3, x: useTransform(springX, x => x * -1.5) }} // Parallax opposition
             >
                 {/* Floating Shapes */}
-                <div className="absolute top-[20%] left-[15%] w-32 h-32 bg-purple-600/20 rounded-full blur-[60px] animate-pulse"></div>
-                <div className="absolute top-[60%] right-[20%] w-48 h-48 bg-cyan-600/20 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }}></div>
-
-                {/* Energy Lines */}
-                <div className="absolute top-0 w-full h-full opacity-20"
-                    style={{
-                        backgroundImage: 'linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)',
-                        backgroundSize: '100px 100px',
-                        transform: 'perspective(500px) rotateX(60deg) translateY(-100px) scale(2)'
-                    }}
-                ></div>
+                <div className="absolute top-[20%] left-[15%] w-32 h-32 bg-purple-600/10 rounded-full blur-[60px] animate-pulse"></div>
+                <div className="absolute top-[60%] right-[20%] w-48 h-48 bg-cyan-600/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }}></div>
             </motion.div>
         </div>
     );
