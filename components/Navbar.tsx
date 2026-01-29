@@ -35,12 +35,13 @@ export default function Navbar() {
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className={`fixed top-4 left-0 right-0 z-50 transition-all duration-300 mx-auto max-w-7xl px-4 md:px-8`}
+                className={`fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none`}
             >
                 <div
                     className={`
-                        backdrop-blur-md border border-white/10 rounded-full px-6 py-3
-                        flex items-center justify-between
+                        pointer-events-auto
+                        backdrop-blur-md border border-white/10 rounded-full px-8 py-3
+                        flex items-center gap-16
                         transition-all duration-300
                         ${isScrolled ? 'bg-[#020617]/80 shadow-[0_0_20px_rgba(0,243,255,0.1)]' : 'bg-transparent border-transparent'}
                     `}
@@ -80,6 +81,14 @@ export default function Navbar() {
                             );
                         })}
                     </div>
+
+                    {/* Register Button */}
+                    <Link
+                        href="/#register"
+                        className="hidden md:flex items-center gap-2 px-6 py-2 bg-white text-black font-bold rounded-full transition-all hover:bg-gradient-to-r hover:from-neon-cyan hover:to-neon-purple hover:text-white hover:shadow-[0_0_20px_rgba(0,243,255,0.4)] hover:scale-105 ml-4"
+                    >
+                        Register Now
+                    </Link>
 
 
 

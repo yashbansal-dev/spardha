@@ -1,132 +1,170 @@
 'use client';
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import Link from "next/link";
-import { FaArrowRight, FaPlay } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function Hero() {
+    const ref = useRef(null);
     const { scrollY } = useScroll();
-    const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-    const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
-    // Mouse parallax effect
+    // Parallax logic
+    const bgY = useTransform(scrollY, [0, 1000], [0, 300]);
+    const contentY = useTransform(scrollY, [0, 600], [0, 200]);
+    const contentOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+
+    // Mouse Parallax
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
-
-    // Smooth spring animation for mouse movement
-    const springConfig = { damping: 25, stiffness: 150 };
+    const springConfig = { damping: 30, stiffness: 100 };
     const springX = useSpring(mouseX, springConfig);
     const springY = useSpring(mouseY, springConfig);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
-            const { clientX, clientY } = e;
             const { innerWidth, innerHeight } = window;
-            // Calculate normalized position (-1 to 1)
-            const x = (clientX / innerWidth - 0.5) * 2;
-            const y = (clientY / innerHeight - 0.5) * 2;
-
-            mouseX.set(x * 20); // Max 20px movement
-            mouseY.set(y * 20);
+            const x = (e.clientX / innerWidth - 0.5) * 20;
+            const y = (e.clientY / innerHeight - 0.5) * 20;
+            mouseX.set(x);
+            mouseY.set(y);
         };
-
         window.addEventListener("mousemove", handleMouseMove);
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, [mouseX, mouseY]);
 
     return (
-        <section id="home" className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-            {/* 1. Transparent Background needed for Global Parallax to show through */}
-
-
-
-
-            {/* 3. Main Content with Glass/Parallax Effect */}
+        <section
+            ref={ref}
+            className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-[#020617]"
+        >
+            {/* --- ANTIGRAVITY HERO BACKGROUND --- */}
             <motion.div
-                className="relative z-10 text-center px-4 max-w-6xl mx-auto"
-                style={{ x: springX, y: springY }} // Apply subtle parallax to potential container
+                className="absolute inset-0 z-0"
+                style={{
+                    y: bgY,
+                    scale: 1, // Reduced scale to show full image
+                    x: springX, // Subtle mouse movement on the BG
+                    rotateX: useTransform(springY, y => y * 0.05),
+                }}
             >
-                {/* Introduction Tag */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="mb-8"
+                <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                        backgroundImage: 'url("/assets/antigravity-hero-bg.png")',
+                    }}
                 >
-                    <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-neon-cyan text-xs md:text-sm font-bold tracking-[0.2em] uppercase">
-                        JK Lakshmipat University Presents
-                    </span>
-                </motion.div>
+                    {/* Dark gradient overlay for text readability - Reduced opacity */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-[#020617]/20"></div>
+                </div>
+            </motion.div>
 
-                {/* Main Heading - Glass Typography */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1, delay: 0.2, type: "spring" }}
-                    className="relative mb-6"
-                >
-                    <h1 className="text-7xl md:text-9xl font-black font-sans tracking-tight text-white relative z-10 drop-shadow-[0_0_25px_rgba(0,243,255,0.3)]">
-                        SPARDHA
-                        <span className="text-transparent bg-clip-text bg-gradient-to-tr from-neon-cyan to-neon-purple">.</span>
-                    </h1>
+            {/* --- FOREGROUND PARTICLES (Floating Debris/Sparks) --- */}
+            <motion.div
+                className="absolute inset-0 z-10 pointer-events-none"
+                style={{ y: useTransform(scrollY, [0, 1000], [0, 600]) }}
+            >
+                {[...Array(20)].map((_, i) => (
+                    <div
+                        key={i}
+                        className="absolute rounded-full bg-neon-cyan/60 blur-[1px]"
+                        style={{
+                            top: `${Math.random() * 100}%`,
+                            left: `${Math.random() * 100}%`,
+                            width: `${Math.random() * 3 + 1}px`,
+                            height: `${Math.random() * 3 + 1}px`,
+                            boxShadow: '0 0 10px rgba(0,243,255,0.5)',
+                            animation: `float-particle ${Math.random() * 5 + 5}s infinite linear`
+                        }}
+                    ></div>
+                ))}
+                {[...Array(10)].map((_, i) => (
+                    <div
+                        key={i}
+                        className="absolute rounded-full bg-neon-purple/60 blur-[2px]"
+                        style={{
+                            top: `${Math.random() * 100}%`,
+                            left: `${Math.random() * 100}%`,
+                            width: `${Math.random() * 4 + 2}px`,
+                            height: `${Math.random() * 4 + 2}px`,
+                            boxShadow: '0 0 15px rgba(188,19,254,0.5)',
+                            animation: `float-particle ${Math.random() * 8 + 8}s infinite reverse`
+                        }}
+                    ></div>
+                ))}
+            </motion.div>
 
-                    {/* Glow behind text */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-r from-neon-cyan/20 to-neon-purple/20 blur-[60px] -z-10 rounded-full"></div>
-                </motion.div>
-
-                {/* Tagline */}
+            {/* --- CONTENT (Center) --- */}
+            <motion.div
+                className="relative z-20 text-center px-4 max-w-7xl mx-auto flex flex-col items-center"
+                style={{ y: contentY, opacity: contentOpacity }}
+            >
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-gray-300 text-lg md:text-2xl mb-12 max-w-2xl mx-auto leading-relaxed font-light"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-neon-cyan tracking-[0.3em] uppercase font-bold text-sm md:text-lg mb-4 drop-shadow-[0_0_10px_rgba(0,243,255,0.8)]"
                 >
-                    The Annual Sports Festival of <strong className="text-white font-semibold">JK Lakshmipat University</strong>.
-                    <br />
-                    <span className="inline-block mt-2 text-white/80">
-                        Experience the <span className="text-neon-cyan font-medium">Energy</span>. Unleash the <span className="text-neon-purple font-medium">Champion</span>.
-                    </span>
+                    The Annual Sports Festival
                 </motion.p>
 
-                {/* CTA Buttons */}
+                <motion.h1
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-[12vw] md:text-[10rem] leading-[0.8] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 drop-shadow-[0_0_40px_rgba(0,243,255,0.2)]"
+                >
+                    SPARDHA
+                </motion.h1>
+
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                    className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.8 }}
+                    className="mt-8 mb-12"
+                >
+                    <p className="text-xl md:text-3xl text-gray-200 font-light italic tracking-wide">
+                        "Experience the <span className="text-neon-cyan font-semibold">Energy</span>. Unleash the <span className="text-neon-purple font-semibold">Champion</span>."
+                    </p>
+                </motion.div>
+
+                <motion.div
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 1 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                 >
                     <Link
                         href="#register"
-                        className="group relative px-8 py-4 bg-white text-black font-bold text-lg rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.4)]"
+                        className="group relative inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-black font-black text-xl tracking-wider uppercase clip-path-slant transition-all hover:bg-neon-cyan whitespace-nowrap min-w-[250px]"
+                        style={{ clipPath: 'polygon(10% 0, 100% 0, 90% 100%, 0 100%)' }}
                     >
-                        <span className="relative z-10 flex items-center gap-2 group-hover:gap-3 transition-all">
+                        <span className="relative z-10 flex items-center gap-3">
                             Register Now <FaArrowRight />
                         </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-neon-cyan to-neon-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 group-hover:gap-3 transition-all opacity-0 group-hover:opacity-100 text-white">
-                            Register Now <FaArrowRight />
-                        </span>
-                    </Link>
-
-                    <Link
-                        href="#events"
-                        className="group px-8 py-4 backdrop-blur-md bg-white/5 border border-white/10 text-white font-bold text-lg rounded-full transition-all hover:bg-white/10 hover:border-white/30 hover:scale-105 flex items-center gap-2"
-                    >
-                        <FaPlay className="text-xs group-hover:text-neon-cyan transition-colors" /> Explore Events
+                        <div className="absolute inset-0 bg-neon-cyan opacity-0 group-hover:opacity-100 blur-xl transition-all duration-300 -z-10"></div>
                     </Link>
                 </motion.div>
             </motion.div>
 
             {/* Scroll Indicator */}
             <motion.div
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 opacity-50 mix-blend-overlay"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
+                transition={{ delay: 2, duration: 1 }}
             >
-                <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-neon-cyan to-transparent animate-pulse"></div>
+                <div className="w-[1px] h-16 bg-white animate-pulse"></div>
             </motion.div>
+
+            <style jsx>{`
+                @keyframes float-particle {
+                    0% { transform: translateY(0) translateX(0); opacity: 0; }
+                    50% { opacity: 1; }
+                    100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+                }
+            `}</style>
         </section>
     );
 }
