@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+
 
 const events = [
     {
@@ -68,7 +68,7 @@ export default function PastEvents() {
                 </div>
             </section>
 
-            <Footer />
+
         </main>
     );
 }

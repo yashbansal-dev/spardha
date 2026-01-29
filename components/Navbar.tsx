@@ -10,6 +10,7 @@ import { BsLightningChargeFill } from 'react-icons/bs';
 const navLinks = [
     { name: 'Home', href: '/' },
 
+    { name: 'Events', href: '/events' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Team', href: '/team' },
     { name: 'Past Events', href: '/past-events' },

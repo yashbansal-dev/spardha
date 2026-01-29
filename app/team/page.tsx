@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaLinkedinIn, FaInstagram, FaEnvelope, FaPhone } from 'react-icons/fa';
 
@@ -108,7 +108,7 @@ export default function Team() {
                 </div>
             </section>
 
-            <Footer />
+
         </main>
     );
 }

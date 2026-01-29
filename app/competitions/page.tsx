@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+
 
 export default function Competitions() {
     return (
@@ -72,7 +72,7 @@ export default function Competitions() {
 
             </section>
 
-            <Footer />
+
         </main>
     );
 }
