@@ -13,7 +13,11 @@ module.exports = {
         'neon-blue': '#0066ff',
         'neon-purple': '#bc13fe',
         'neon-pink': '#ff0055',
-        'neon-orange': '#ff9900',
+        'neon-pink': '#ff0055',
+        'neon-orange': '#ff9900', // Kept generic orange in case used elsewhere, but adding specific request below
+        'street-orange': '#FF5E00',
+        'electric-blue': '#2DE2E6',
+        'dark-charcoal': '#121212',
         'spardha-bg': '#020617',
         'spardha-card': 'rgba(255, 255, 255, 0.03)',
       },

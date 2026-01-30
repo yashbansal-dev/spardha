@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
@@ -48,10 +49,18 @@ export default function Navbar() {
                     `}
                 >
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <div className="relative w-8 h-8 flex items-center justify-center bg-gradient-to-br from-neon-cyan to-neon-blue rounded-lg overflow-hidden group-hover:shadow-[0_0_15px_rgba(0,243,255,0.5)] transition-shadow">
-                            <BsLightningChargeFill className="text-white text-lg" />
+                    <Link href="/" className="flex items-center gap-3 group">
+                        {/* JKLU Logo */}
+                        <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-neon-cyan/50 transition-all">
+                            <Image
+                                src="/assets/images/jklu_logo.png"
+                                alt="JKLU Logo"
+                                width={40}
+                                height={40}
+                                className="object-contain"
+                            />
                         </div>
+
                         <span className="font-bold text-xl tracking-wider text-white">
                             SPARDHA
                         </span>

@@ -1,30 +1,45 @@
 'use client';
 
-import { useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll, useTransform, useMotionValue, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
+
+const HERO_IMAGES = [
+    '/assets/images/media_1.jpeg',
+    '/assets/images/media_2.jpeg',
+    '/assets/images/media_3.jpeg',
+    '/assets/images/media_4.jpeg',
+    '/assets/images/media_5.jpeg',
+    '/assets/images/media_6.jpeg',
+];
 
 export default function Hero() {
     const ref = useRef(null);
     const { scrollY } = useScroll();
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    // Slideshow Logic
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+        }, 3000); // Change every 3 seconds
+        return () => clearInterval(timer);
+    }, []);
 
     // Parallax logic
-    const bgY = useTransform(scrollY, [0, 1000], [0, 300]);
-    const contentY = useTransform(scrollY, [0, 600], [0, 200]);
-    const contentOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+    const bgY = useTransform(scrollY, [0, 1000], [0, 200]);
+    const contentY = useTransform(scrollY, [0, 600], [0, 150]);
+    const textParallax = useTransform(scrollY, [0, 500], [0, -50]);
 
-    // Mouse Parallax
+    // Mouse Parallax for subtle depth
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
-    const springConfig = { damping: 30, stiffness: 100 };
-    const springX = useSpring(mouseX, springConfig);
-    const springY = useSpring(mouseY, springConfig);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             const { innerWidth, innerHeight } = window;
-            const x = (e.clientX / innerWidth - 0.5) * 20;
+            const x = (e.clientX / innerWidth - 0.5) * 20; // Reduced sensitivity
             const y = (e.clientY / innerHeight - 0.5) * 20;
             mouseX.set(x);
             mouseY.set(y);
@@ -36,135 +51,165 @@ export default function Hero() {
     return (
         <section
             ref={ref}
-            className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-[#020617]"
+            className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-[#000]"
         >
-            {/* --- ANTIGRAVITY HERO BACKGROUND --- */}
+            {/* --- BACKGROUND: Premium Depth & Slideshow --- */}
+
+            {/* 0. Slideshow Background */}
             <motion.div
                 className="absolute inset-0 z-0"
-                style={{
-                    y: bgY,
-                    scale: 1, // Reduced scale to show full image
-                    x: springX, // Subtle mouse movement on the BG
-                    rotateX: useTransform(springY, y => y * 0.05),
-                }}
+                style={{ y: bgY }}
             >
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{
-                        backgroundImage: 'url("/assets/antigravity-hero-bg.png")',
-                    }}
-                >
-                    {/* Dark gradient overlay for text readability - Reduced opacity */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-[#020617]/20"></div>
+                <AnimatePresence mode="popLayout">
+                    <motion.div
+                        key={currentImageIndex}
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{
+                            backgroundImage: `url("${HERO_IMAGES[currentImageIndex]}")`,
+                            filter: 'brightness(0.5) contrast(1.1)', // Dimmed for text readability
+                        }}
+                        initial={{ opacity: 0, scale: 1.1 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1.5, ease: "easeInOut" }}
+                    />
+                </AnimatePresence>
+
+                {/* Fallback/Base background */}
+                <div className="absolute inset-0 bg-[#000] -z-10"></div>
+
+                {/* Overlay Gradient to blend with black bg */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/80"></div>
+            </motion.div>
+
+            {/* 1. Noise Filter (Film Grain) */}
+            <div className="bg-noise mix-blend-overlay"></div>
+
+            {/* 2. Perspective Grid (Floor) */}
+            <div className="absolute inset-x-0 bottom-0 h-[50vh] bg-grid-perspective opacity-40 z-10 pointer-events-none"></div>
+
+            {/* 3. Ambient Glows */}
+            <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-neon-cyan/10 rounded-full blur-[120px] pointer-events-none z-5"></div>
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-neon-purple/10 rounded-full blur-[100px] pointer-events-none z-5"></div>
+
+            {/* 4. Animated Speed Lines (Thinner, cleaner) */}
+            <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden skew-x-[-20deg] opacity-20">
+                {[...Array(6)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        className="absolute h-[1px] bg-gradient-to-r from-transparent via-white to-transparent"
+                        style={{
+                            top: `${Math.random() * 100}%`,
+                            left: `-100%`,
+                            width: `150%`,
+                        }}
+                        animate={{
+                            x: ['-100%', '200%'],
+                        }}
+                        transition={{
+                            duration: Math.random() * 2 + 1,
+                            repeat: Infinity,
+                            ease: "linear",
+                            delay: Math.random() * 5,
+                        }}
+                    />
+                ))}
+            </div>
+
+            {/* --- CONTENT --- */}
+            <motion.div
+                className="relative z-20 w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center p-4"
+                style={{ y: contentY }}
+            >
+                <div className="relative w-full flex flex-col items-center justify-center">
+
+                    {/* Background "Watermark" Text */}
+                    <motion.h1
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] md:text-[22rem] font-black leading-none select-none pointer-events-none text-stroke opacity-5 whitespace-nowrap z-0"
+                        style={{
+                            y: textParallax,
+                            x: mouseX,
+                        }}
+                    >
+                        VICTORY
+                    </motion.h1>
+
+                    {/* Foreground Content Stack */}
+                    <div className="relative z-10 flex flex-col items-center text-center">
+
+                        {/* Eyebrow */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2, duration: 0.8 }}
+                            className="flex items-center gap-4 mb-6"
+                        >
+                            <span className="h-[1px] w-12 bg-neon-orange"></span>
+                            <span className="text-neon-cyan tracking-[0.3em] text-xs md:text-sm font-bold uppercase">JK Lakshmipat University Presents</span>
+                            <span className="h-[1px] w-12 bg-neon-orange"></span>
+                        </motion.div>
+
+                        {/* Main Title - Clean & Bold */}
+                        <motion.h2
+                            className="text-[5rem] md:text-[9rem] font-black tracking-tighter text-white uppercase leading-none mb-2"
+                            style={{ fontFamily: 'Fonstery, sans-serif' }}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+
+                        >
+                            SPARDHA
+                        </motion.h2>
+
+                        {/* Year - Neon Accent */}
+                        <motion.div
+                            className="relative overflow-hidden"
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.8 }}
+                        >
+                            <h3 className="text-[3rem] md:text-[5rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-red-600 italic tracking-wide transform -skew-x-12">
+                                2026
+                            </h3>
+                        </motion.div>
+
+                        {/* Description */}
+                        <motion.p
+                            className="text-gray-400 text-lg md:text-xl max-w-xl mx-auto mt-8 font-light tracking-wide leading-relaxed"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.6 }}
+                        >
+                            Experience the pinnacle of athleticism. <br />
+                            <span className="text-white font-medium">#DefyGravity</span>
+                        </motion.p>
+                    </div>
+
+                    {/* Interactive CTA */}
+                    <motion.div
+                        className="mt-12 md:mt-16"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.8 }}
+                    >
+                        <Link
+                            href="#register"
+                            className="group relative inline-flex items-center gap-4 px-12 py-4 overflow-hidden rounded-full bg-white/5 backdrop-blur-sm border border-white/10 transition-all duration-300 hover:bg-white/10 hover:border-neon-cyan/50 hover:shadow-[0_0_30px_rgba(45,226,230,0.3)]"
+                        >
+                            <span className="relative z-10 font-bold text-lg tracking-widest text-white group-hover:text-neon-cyan transition-colors">
+                                REGISTER NOW
+                            </span>
+                            <FaArrowRight className="relative z-10 text-white group-hover:translate-x-1 group-hover:text-neon-cyan transition-all" />
+
+                            {/* Hover Fill Effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-neon-cyan/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </Link>
+                    </motion.div>
                 </div>
             </motion.div>
 
-            {/* --- FOREGROUND PARTICLES (Floating Debris/Sparks) --- */}
-            <motion.div
-                className="absolute inset-0 z-10 pointer-events-none"
-                style={{ y: useTransform(scrollY, [0, 1000], [0, 600]) }}
-            >
-                {[...Array(20)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="absolute rounded-full bg-neon-cyan/60 blur-[1px]"
-                        style={{
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 100}%`,
-                            width: `${Math.random() * 3 + 1}px`,
-                            height: `${Math.random() * 3 + 1}px`,
-                            boxShadow: '0 0 10px rgba(0,243,255,0.5)',
-                            animation: `float-particle ${Math.random() * 5 + 5}s infinite linear`
-                        }}
-                    ></div>
-                ))}
-                {[...Array(10)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="absolute rounded-full bg-neon-purple/60 blur-[2px]"
-                        style={{
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 100}%`,
-                            width: `${Math.random() * 4 + 2}px`,
-                            height: `${Math.random() * 4 + 2}px`,
-                            boxShadow: '0 0 15px rgba(188,19,254,0.5)',
-                            animation: `float-particle ${Math.random() * 8 + 8}s infinite reverse`
-                        }}
-                    ></div>
-                ))}
-            </motion.div>
-
-            {/* --- CONTENT (Center) --- */}
-            <motion.div
-                className="relative z-20 text-center px-4 max-w-7xl mx-auto flex flex-col items-center"
-                style={{ y: contentY, opacity: contentOpacity }}
-            >
-                <motion.p
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                    className="text-neon-cyan tracking-[0.3em] uppercase font-bold text-sm md:text-lg mb-4 drop-shadow-[0_0_10px_rgba(0,243,255,0.8)]"
-                >
-                    The Annual Sports Festival
-                </motion.p>
-
-                <motion.h1
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-[12vw] md:text-[10rem] leading-[0.8] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 drop-shadow-[0_0_40px_rgba(0,243,255,0.2)]"
-                >
-                    SPARDHA
-                </motion.h1>
-
-                <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.8 }}
-                    className="mt-8 mb-12"
-                >
-                    <p className="text-xl md:text-3xl text-gray-200 font-light italic tracking-wide">
-                        "Experience the <span className="text-neon-cyan font-semibold">Energy</span>. Unleash the <span className="text-neon-purple font-semibold">Champion</span>."
-                    </p>
-                </motion.div>
-
-                <motion.div
-                    initial={{ y: 50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 1 }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                >
-                    <Link
-                        href="#register"
-                        className="group relative inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-black font-black text-xl tracking-wider uppercase clip-path-slant transition-all hover:bg-neon-cyan whitespace-nowrap min-w-[250px]"
-                        style={{ clipPath: 'polygon(10% 0, 100% 0, 90% 100%, 0 100%)' }}
-                    >
-                        <span className="relative z-10 flex items-center gap-3">
-                            Register Now <FaArrowRight />
-                        </span>
-                        <div className="absolute inset-0 bg-neon-cyan opacity-0 group-hover:opacity-100 blur-xl transition-all duration-300 -z-10"></div>
-                    </Link>
-                </motion.div>
-            </motion.div>
-
-            {/* Scroll Indicator */}
-            <motion.div
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 opacity-50 mix-blend-overlay"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 2, duration: 1 }}
-            >
-                <div className="w-[1px] h-16 bg-white animate-pulse"></div>
-            </motion.div>
-
-            <style jsx>{`
-                @keyframes float-particle {
-                    0% { transform: translateY(0) translateX(0); opacity: 0; }
-                    50% { opacity: 1; }
-                    100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
-                }
-            `}</style>
+            {/* Bottom Vignette */}
+            <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#020617] to-transparent z-10 pointer-events-none"></div>
         </section>
     );
 }
