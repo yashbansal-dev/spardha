@@ -1,7 +1,12 @@
 'use client';
 
 import Navbar from '@/components/Navbar';
-import InfiniteMenu from '@/components/ui/InfiniteMenu';
+import dynamic from 'next/dynamic';
+
+const InfiniteMenu = dynamic(() => import('@/components/ui/InfiniteMenu'), {
+    ssr: false,
+    loading: () => <div className="absolute inset-0 bg-[#020617] text-white flex items-center justify-center">Loading Gallery...</div>
+});
 
 const items = [
     {
