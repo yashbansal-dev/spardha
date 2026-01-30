@@ -174,37 +174,10 @@ export default function Hero() {
                         </motion.div>
 
                         {/* Description */}
-                        <motion.p
-                            className="text-gray-400 text-lg md:text-xl max-w-xl mx-auto mt-8 font-light tracking-wide leading-relaxed"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.6 }}
-                        >
-                            Experience the pinnacle of athleticism. <br />
-                            <span className="text-white font-medium">#DefyGravity</span>
-                        </motion.p>
+
                     </div>
 
-                    {/* Interactive CTA */}
-                    <motion.div
-                        className="mt-12 md:mt-16"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8 }}
-                    >
-                        <Link
-                            href="#register"
-                            className="group relative inline-flex items-center gap-4 px-12 py-4 overflow-hidden rounded-full bg-white/5 backdrop-blur-sm border border-white/10 transition-all duration-300 hover:bg-white/10 hover:border-neon-cyan/50 hover:shadow-[0_0_30px_rgba(45,226,230,0.3)]"
-                        >
-                            <span className="relative z-10 font-bold text-lg tracking-widest text-white group-hover:text-neon-cyan transition-colors">
-                                REGISTER NOW
-                            </span>
-                            <FaArrowRight className="relative z-10 text-white group-hover:translate-x-1 group-hover:text-neon-cyan transition-all" />
 
-                            {/* Hover Fill Effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-neon-cyan/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </Link>
-                    </motion.div>
                 </div>
             </motion.div>
 

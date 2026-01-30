@@ -1,7 +1,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import Events from "@/components/sections/Events";
+import EventsArena from "@/components/sections/EventsArena";
 
 import ParallaxBackground from "@/components/ParallaxBackground";
 
@@ -13,7 +13,7 @@ export default function EventsPage() {
 
             <div className="pt-24 min-h-screen flex flex-col">
                 <div className="flex-grow">
-                    <Events />
+                    <EventsArena />
                 </div>
 
             </div>

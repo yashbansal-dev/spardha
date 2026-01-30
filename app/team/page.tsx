@@ -35,7 +35,10 @@ export default function Team() {
     const members = teamData[activeTab as keyof typeof teamData] || teamData["default"];
 
     return (
-        <main className="min-h-screen bg-[#060b14] text-white">
+        <main
+            className="min-h-screen text-white bg-cover bg-center bg-fixed bg-no-repeat"
+            style={{ backgroundImage: "url('/assets/images/team-background.png')" }}
+        >
             <Navbar />
 
             <section className="pt-32 pb-20 px-4 min-h-screen flex flex-col">
