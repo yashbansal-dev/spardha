@@ -40,7 +40,7 @@ export default function FinalCTA() {
                     transition={{ delay: 0.3, duration: 0.5 }}
                 >
                     <Link
-                        href="#register"
+                        href="/register"
                         className="inline-flex items-center gap-4 px-12 py-6 bg-white text-black text-2xl font-bold uppercase tracking-widest rounded-full hover:scale-105 hover:bg-neon-cyan transition-all shadow-[0_0_50px_rgba(255,255,255,0.3)]"
                     >
                         Register Now <FaArrowRight />

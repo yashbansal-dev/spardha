@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { FaMapMarkerAlt, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 export default function Contact() {
@@ -13,14 +14,12 @@ export default function Contact() {
                     <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto relative z-10">
                         registrations are open for all events. Secure your spot now and represent your college at Spardha.
                     </p>
-                    <a
-                        href="https://forms.google.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <Link
+                        href="/register"
                         className="relative z-10 inline-block px-10 py-4 bg-neon-cyan text-black font-bold text-lg rounded-full shadow-[0_0_20px_rgba(0,243,255,0.4)] hover:shadow-[0_0_40px_rgba(0,243,255,0.8)] hover:scale-105 transition-all"
                     >
                         REGISTER NOW
-                    </a>
+                    </Link>
                 </div>
             </div>
 

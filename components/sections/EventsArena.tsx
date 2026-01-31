@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useRef, useMemo } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import {
-    FaFutbol, FaBasketballBall, FaRunning, FaGamepad, FaChessKing, FaTrophy, FaMedal
+    FaFutbol, FaBasketballBall, FaRunning, FaGamepad, FaChessKing
 } from 'react-icons/fa';
 import { MdSportsCricket, MdSportsKabaddi } from 'react-icons/md';
 import { GiVolleyballBall, GiShuttlecock } from 'react-icons/gi';
@@ -185,16 +186,17 @@ export default function EventsArena() {
                         className="absolute inset-0 bg-cover bg-center"
                         style={{
                             backgroundImage: `url(${activeZone ? activeZone.bg : 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80'})`,
+                            filter: activeZone ? 'brightness(1.2) contrast(1.1)' : 'none',
                         }}
                         initial={{ opacity: 0 }}
-                        animate={{ opacity: 0.4 }} // Lower opacity natively instead of brightness filter
+                        animate={{ opacity: activeZone ? 1 : 0.4 }} // Lower opacity natively instead of brightness filter
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
+                        transition={{ duration: 0.6, ease: "easeInOut" }}
                     />
                 </AnimatePresence>
 
                 {/* Static Gradient Overlay (Performance > Dynamic Gradient) */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-black/40"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/40 via-[#020617]/20 to-black/10"></div>
 
                 {/* Subtle Color Tint */}
                 <div className={`absolute inset-0 transition-colors duration-700 pointer-events-none ${activeZone ? 'bg-' + activeZone.color.split('-')[1] + '-900/10' : 'bg-transparent'}`}></div>
@@ -282,7 +284,9 @@ export default function EventsArena() {
                         transition={{ duration: 0.3, ease: "circOut" }}
                         className="fixed bottom-0 left-0 w-full z-50 flex justify-center pointer-events-none"
                     >
-                        <div className="relative w-full max-w-4xl bg-[#050505] border-t border-white/10 shadow-2xl p-6 pb-8 pointer-events-auto">
+                        <div className="relative w-full max-w-4xl bg-black/40 backdrop-blur-md border-t border-white/10 shadow-2xl p-6 pb-8 pointer-events-auto overflow-hidden">
+                            {/* Spotlight Effect */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-radial-gradient from-white/10 to-transparent pointer-events-none blur-3xl opacity-50"></div>
 
                             {/* Accent Line */}
                             <div className={`absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r ${activeZone.color}`}></div>
@@ -301,18 +305,33 @@ export default function EventsArena() {
                                     </div>
                                 </div>
 
-                                <div className="flex gap-4 text-right">
+                                <div className="flex gap-4 text-right items-center">
                                     <div>
                                         <div className="text-[10px] text-gray-500 uppercase tracking-widest">Winner</div>
                                         <div className="text-xl md:text-2xl font-mono font-bold text-neon-cyan">{activeZone.prize.winner}</div>
                                     </div>
-                                    <div className="hidden md:block w-[1px] bg-white/10"></div>
+                                    <div className="hidden md:block w-[1px] h-8 bg-white/10"></div>
                                     <div>
                                         <div className="text-[10px] text-gray-500 uppercase tracking-widest">Runner Up</div>
                                         <div className="text-xl md:text-2xl font-mono font-bold text-gray-400">{activeZone.prize.runner}</div>
                                     </div>
+
+                                    <Link
+                                        href="/register"
+                                        className="hidden md:flex items-center gap-2 px-6 py-2 bg-white text-black font-bold uppercase tracking-wider text-sm rounded-sm hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] ml-4"
+                                    >
+                                        Register Now
+                                    </Link>
                                 </div>
                             </div>
+
+                            {/* Mobile Button */}
+                            <Link
+                                href="/register"
+                                className="md:hidden w-full mt-6 flex items-center justify-center gap-2 px-6 py-3 bg-white text-black font-bold uppercase tracking-wider text-sm rounded-sm active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                            >
+                                Register Now
+                            </Link>
                         </div>
                     </motion.div>
                 )}
@@ -323,6 +342,6 @@ export default function EventsArena() {
                     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
                 }
             `}</style>
-        </section>
+        </section >
     );
 }

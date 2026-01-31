@@ -94,7 +94,7 @@ export default function Navbar() {
 
                     {/* Register Button */}
                     <Link
-                        href="/#register"
+                        href="/register"
                         className="hidden md:flex items-center gap-2 px-6 py-2 bg-white text-black font-bold rounded-full transition-all hover:bg-gradient-to-r hover:from-neon-cyan hover:to-neon-purple hover:text-white hover:shadow-[0_0_20px_rgba(0,243,255,0.4)] hover:scale-105 ml-4"
                     >
                         Register Now
