@@ -9,17 +9,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'neon-cyan': '#00f3ff',
-        'neon-blue': '#0066ff',
-        'neon-purple': '#bc13fe',
-        'neon-pink': '#ff0055',
-        'neon-pink': '#ff0055',
-        'neon-orange': '#ff9900', // Kept generic orange in case used elsewhere, but adding specific request below
-        'street-orange': '#FF5E00',
-        'electric-blue': '#2DE2E6',
+        'neon-cyan': '#E37233',   // Mapped to Main Orange
+        'neon-blue': '#B75222',   // Mapped to Dark Orange
+        'neon-purple': '#F2995C', // Mapped to Light Orange
+        'neon-pink': '#E37233',   // Mapped to Main Orange (unifying pinks too)
+        'neon-orange': '#E37233', // Main Orange
+        'street-orange': '#E37233', // Main Orange
+        'electric-blue': '#F2995C', // Mapped to Light Orange
         'dark-charcoal': '#121212',
         'spardha-bg': '#020617',
         'spardha-card': 'rgba(255, 255, 255, 0.03)',
+        // Semantic Names
+        'spardha-orange': '#E37233',
+        'spardha-orange-light': '#F2995C',
+        'spardha-orange-dark': '#B75222',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'sans-serif'],
@@ -31,8 +34,8 @@ module.exports = {
           '50%': { transform: 'translateY(-20px)' },
         },
         'pulse-glow': {
-          '0%': { boxShadow: '0 0 5px rgba(0, 243, 255, 0.2)' },
-          '100%': { boxShadow: '0 0 20px rgba(0, 243, 255, 0.6), 0 0 10px rgba(188, 19, 254, 0.4)' },
+          '0%': { boxShadow: '0 0 5px rgba(227, 114, 51, 0.2)' },
+          '100%': { boxShadow: '0 0 20px rgba(227, 114, 51, 0.6), 0 0 10px rgba(242, 153, 92, 0.4)' },
         },
       },
       animation: {

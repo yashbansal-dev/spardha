@@ -78,7 +78,7 @@ export default function SportsDraftBoard({ cart, setCart, onNext, onPrev }: Prop
                                         <div className="flex justify-between items-start">
                                             <span className={`px-2 py-1 rounded text-[10px] uppercase font-bold tracking-wider ${sport.difficulty === 'Elite' ? 'bg-red-500 text-white' :
                                                 sport.difficulty === 'Pro' ? 'bg-orange-500 text-white' :
-                                                    'bg-blue-500 text-white'
+                                                    'bg-neon-blue text-white'
                                                 }`}>
                                                 {sport.difficulty}
                                             </span>

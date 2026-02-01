@@ -19,7 +19,7 @@ const websitesData = [
         title: 'Social Initiatives',
         description: 'Making a Difference',
         icon: FaHandsHelping,
-        color: 'from-blue-500 to-cyan-600',
+        color: 'from-neon-blue to-neon-cyan',
         image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800&auto=format&fit=crop&q=60'
     },
     {
@@ -44,7 +44,7 @@ const websitesData = [
         title: 'Gallery',
         description: 'Visual Journey',
         icon: FaCamera,
-        color: 'from-indigo-500 to-blue-600',
+        color: 'from-neon-blue to-neon-purple',
         image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&auto=format&fit=crop&q=60'
     },
     {

@@ -45,7 +45,7 @@ const SPORTS_DATA: SportData[] = [
         name: 'Cricket',
         categories: ['Boys'],
         icon: MdSportsCricket,
-        color: 'from-blue-600 to-indigo-600',
+        color: 'from-neon-blue to-neon-purple',
         bg: 'https://images.unsplash.com/photo-1531415074968-bc2ce3a106e2?auto=format&fit=crop&q=80',
         details: {
             rules: ['ICC T20 Rules apply.', 'Hard leather ball usage.', '11 players per side + 3 substitutes.', 'Umpire decision is final.'],
@@ -200,7 +200,7 @@ export default function EventsArena() {
                     whileInView={{ opacity: 1, y: 0 }}
                     className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white"
                 >
-                    Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-blue-500">Battle</span>
+                    Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-blue">Battle</span>
                 </motion.h1>
                 <div className="h-1 w-24 bg-neon-cyan mx-auto rounded-full shadow-[0_0_15px_rgba(6,182,212,0.6)]"></div>
             </div>
@@ -262,8 +262,8 @@ function SportCard({ sport, onEnter }: { sport: SportData, onEnter: (cat: 'Boys'
                                 key={cat}
                                 onClick={(e) => { e.stopPropagation(); setSelectedCategory(cat); }}
                                 className={`px-4 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full transition-all ${selectedCategory === cat
-                                        ? 'bg-neon-cyan text-black shadow-[0_0_10px_rgba(6,182,212,0.5)]'
-                                        : 'text-gray-400 hover:text-white'
+                                    ? 'bg-neon-cyan text-black shadow-[0_0_10px_rgba(6,182,212,0.5)]'
+                                    : 'text-gray-400 hover:text-white'
                                     }`}
                             >
                                 {cat}
@@ -412,7 +412,7 @@ function EventDetailModal({ sport, initialCategory, onClose }: { sport: SportDat
 
                     {/* Venue & Info */}
                     <div>
-                        <h3 className="flex items-center gap-2 text-blue-400 font-bold uppercase tracking-wider mb-4">
+                        <h3 className="flex items-center gap-2 text-neon-blue font-bold uppercase tracking-wider mb-4">
                             <FaMapMarkerAlt /> Additional Info
                         </h3>
                         <div className="flex flex-wrap gap-4">
@@ -433,7 +433,7 @@ function EventDetailModal({ sport, initialCategory, onClose }: { sport: SportDat
                 <div className="p-6 border-t border-white/10 bg-[#020617]">
                     <button
                         onClick={handleRegister}
-                        className="w-full py-4 bg-gradient-to-r from-neon-cyan to-blue-600 text-black font-black uppercase tracking-widest text-lg rounded-xl shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                        className="w-full py-4 bg-gradient-to-r from-neon-cyan to-neon-blue text-black font-black uppercase tracking-widest text-lg rounded-xl shadow-[0_0_20px_rgba(227,114,51,0.4)] hover:shadow-[0_0_40px_rgba(227,114,51,0.6)] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
                     >
                         Register Now <FaArrowRight />
                     </button>

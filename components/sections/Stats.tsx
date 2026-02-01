@@ -56,7 +56,7 @@ function Counter({ stat, index }: { stat: any, index: number }) {
             className="flex flex-col items-center justify-center p-6 bg-white/5 border border-white/10 rounded-2xl relative group hover:bg-white/10 transition-colors"
         >
             {/* Digital Scoreboard Number */}
-            <div className="text-5xl md:text-7xl font-mono font-bold text-transparent bg-clip-text bg-gradient-to-b from-neon-cyan to-blue-600 mb-2 drop-shadow-[0_0_15px_rgba(0,243,255,0.4)]">
+            <div className="text-5xl md:text-7xl font-mono font-bold text-transparent bg-clip-text bg-gradient-to-b from-neon-cyan to-neon-blue mb-2 drop-shadow-[0_0_15px_rgba(227,114,51,0.4)]">
                 {stat.value}{stat.suffix}
             </div>
 

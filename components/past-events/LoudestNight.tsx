@@ -30,7 +30,7 @@ export default function LoudestNight() {
                 >
                     <h2 className="text-6xl md:text-9xl font-black italic uppercase text-white leading-none tracking-tighter mb-4 drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
                         THE LOUDEST<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-b from-neon-cyan to-blue-600">NIGHT</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-b from-neon-cyan to-neon-blue">NIGHT</span>
                     </h2>
 
                     <div className="flex items-center justify-center gap-4 mb-8">

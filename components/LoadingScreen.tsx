@@ -59,7 +59,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
         >
             {/* Background Elements */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black opacity-80" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neon-blue/20 via-black to-black opacity-80" />
             <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:50px_50px]" />
 
             <div className="relative flex flex-col items-center justify-center">
@@ -163,7 +163,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
                         >
                             {Math.floor(progress)}%
                         </motion.div>
-                        <div className="text-xs text-blue-400/80 uppercase tracking-[0.2em] mt-1">Target Acquired</div>
+                        <div className="text-xs text-neon-blue/80 uppercase tracking-[0.2em] mt-1">Target Acquired</div>
                     </div>
                 </motion.div>
             </div>

@@ -1,7 +1,36 @@
 'use client';
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+const DecryptText = ({ text, className }: { text: string, className?: string }) => {
+    const [displayText, setDisplayText] = useState(text);
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
+
+    useEffect(() => {
+        if (!isInView) return;
+
+        let iteration = 0;
+        const interval = setInterval(() => {
+            setDisplayText(prev =>
+                text.split("").map((letter, index) => {
+                    if (index < iteration) return text[index];
+                    return letters[Math.floor(Math.random() * 26)];
+                }).join("")
+            );
+
+            if (iteration >= text.length) clearInterval(interval);
+            iteration += 1 / 3;
+        }, 30);
+
+        return () => clearInterval(interval);
+    }, [isInView, text]);
+
+    return <span ref={ref} className={className}>{displayText}</span>;
+};
 
 export default function Story() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -11,94 +40,113 @@ export default function Story() {
     });
 
     return (
-        <section ref={containerRef} className="relative h-[300vh] bg-black">
+        <section ref={containerRef} className="relative h-[300vh] bg-[#020617] font-mono">
+            {/* Sticky Wrapper */}
+            <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
 
-            {/* Sticky Content Wrapper */}
-            <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+                {/* HUD Overlay Layer */}
+                <div className="absolute inset-0 z-20 pointer-events-none p-6 md:p-12 border-[20px] border-transparent">
+                    {/* Corners */}
+                    <div className="absolute top-8 left-8 w-8 h-8 border-t-2 border-l-2 border-neon-cyan"></div>
+                    <div className="absolute top-8 right-8 w-8 h-8 border-t-2 border-r-2 border-neon-cyan"></div>
+                    <div className="absolute bottom-8 left-8 w-8 h-8 border-b-2 border-l-2 border-neon-cyan"></div>
+                    <div className="absolute bottom-8 right-8 w-8 h-8 border-b-2 border-r-2 border-neon-cyan"></div>
 
-                {/* Background Images - Cross-fading based on scroll */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    {/* Image 1: Volleyball Match (Start) */}
-                    <motion.div
-                        className="absolute inset-0 bg-contain bg-center bg-no-repeat grayscale"
-                        style={{
-                            backgroundImage: 'url("/volleyball-match.png")',
-                            scale: useTransform(scrollYProgress, [0, 1], [1, 1.2]),
-                            opacity: useTransform(scrollYProgress, [0, 0.35], [0.4, 0])
-                        }}
-                    />
-                    {/* Image 2: Basketball Match (Middle 1) */}
-                    <motion.div
-                        className="absolute inset-0 bg-contain bg-center bg-no-repeat grayscale"
-                        style={{
-                            backgroundImage: 'url("/basketball-match.jpg")',
-                            scale: useTransform(scrollYProgress, [0, 1], [1, 1.2]),
-                            opacity: useTransform(scrollYProgress, [0.3, 0.4, 0.55, 0.65], [0, 0.4, 0.4, 0])
-                        }}
-                    />
-                    {/* Image 3: Basketball Action (Middle 2) */}
-                    <motion.div
-                        className="absolute inset-0 bg-contain bg-center bg-no-repeat grayscale"
-                        style={{
-                            backgroundImage: 'url("/basketball-action.jpg")',
-                            scale: useTransform(scrollYProgress, [0, 1], [1, 1.2]),
-                            opacity: useTransform(scrollYProgress, [0.6, 0.65, 0.8, 0.85], [0, 0.4, 0.4, 0])
-                        }}
-                    />
-                    {/* Image 4: Basketball Night (End) */}
-                    <motion.div
-                        className="absolute inset-0 bg-contain bg-center bg-no-repeat grayscale"
-                        style={{
-                            backgroundImage: 'url("/basketball-night.jpg")',
-                            scale: useTransform(scrollYProgress, [0, 1], [1, 1.2]),
-                            opacity: useTransform(scrollYProgress, [0.8, 0.9], [0, 0.4])
-                        }}
-                    />
+                    {/* System Status Indicators */}
+                    <div className="absolute top-12 left-20 flex gap-4 text-xs text-neon-cyan/70 tracking-widest">
+                        <span>SYS://ONLINE</span>
+                        <span>LINK_ESTABLISHED</span>
+                    </div>
+
+                    <div className="absolute bottom-12 right-20 text-xs text-neon-orange/70 tracking-widest animate-pulse">
+                        REC_STREAM_ACTIVE
+                    </div>
+
+                    {/* Scanlines */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(18,255,247,0.02)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none"></div>
                 </div>
 
-                {/* Text 1 */}
-                <motion.div
-                    className="absolute z-10 text-center"
-                    style={{
-                        opacity: useTransform(scrollYProgress, [0.1, 0.2, 0.3], [0, 1, 0]),
-                        y: useTransform(scrollYProgress, [0.1, 0.3], [50, -50])
-                    }}
-                >
-                    <h2 className="text-4xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-white">
-                        Between <span className="text-red-600">Fear</span> and <span className="text-neon-cyan">Courage</span>
-                    </h2>
-                </motion.div>
+                {/* Background Images */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-40">
+                    <motion.div
+                        className="absolute inset-0 bg-cover bg-center grayscale mix-blend-luminosity"
+                        style={{ backgroundImage: 'url("/volleyball-match.png")', opacity: useTransform(scrollYProgress, [0, 0.3], [1, 0]) }}
+                    />
+                    <motion.div
+                        className="absolute inset-0 bg-cover bg-center grayscale mix-blend-luminosity"
+                        style={{ backgroundImage: 'url("/basketball-match.jpg")', opacity: useTransform(scrollYProgress, [0.3, 0.4, 0.6], [0, 1, 0]) }}
+                    />
+                    <motion.div
+                        className="absolute inset-0 bg-cover bg-center grayscale mix-blend-luminosity"
+                        style={{ backgroundImage: 'url("/basketball-action.jpg")', opacity: useTransform(scrollYProgress, [0.6, 0.7, 1], [0, 1, 0]) }}
+                    />
 
-                {/* Text 2 */}
-                <motion.div
-                    className="absolute z-10 text-center"
-                    style={{
-                        opacity: useTransform(scrollYProgress, [0.4, 0.5, 0.6], [0, 1, 0]),
-                        y: useTransform(scrollYProgress, [0.4, 0.6], [50, -50])
-                    }}
-                >
-                    <h2 className="text-4xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-white">
-                        Between <span className="text-orange-600">Fatigue</span> and <span className="text-neon-cyan">Discipline</span>
-                    </h2>
-                </motion.div>
+                    {/* Digital Noise Overlay */}
+                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-[#020617]"></div>
+                </div>
 
-                {/* Text 3 */}
-                <motion.div
-                    className="absolute z-10 text-center"
-                    style={{
-                        opacity: useTransform(scrollYProgress, [0.7, 0.8, 0.9], [0, 1, 0]),
-                        y: useTransform(scrollYProgress, [0.7, 0.9], [50, -50])
-                    }}
-                >
-                    <h2 className="text-4xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-white">
-                        Between <span className="text-gray-500">Giving Up</span> and <span className="text-neon-purple">Pushing Forward</span>
-                    </h2>
-                </motion.div>
+                {/* Narrative Text Content */}
+                <div className="relative z-30 max-w-4xl mx-auto text-center px-4">
 
-                {/* Fog/Mist Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none"></div>
+                    {/* Block 1 */}
+                    <motion.div
+                        style={{ opacity: useTransform(scrollYProgress, [0.1, 0.3], [1, 0]), display: useTransform(scrollYProgress, (v) => v > 0.3 ? "none" : "block") }}
+                    >
+                        <div className="text-neon-cyan text-sm mb-4 tracking-[0.5em] border-b border-neon-cyan/30 inline-block pb-2">
+                            MISSION_01: ORIGIN
+                        </div>
+                        <h2 className="text-4xl md:text-7xl font-bold text-white mb-6 uppercase">
+                            <DecryptText text="Between Fear" /> <br />
+                            <span className="text-neon-cyan">And Courage</span>
+                        </h2>
+                        <p className="text-gray-400 max-w-lg mx-auto leading-relaxed border-l-2 border-neon-orange pl-4 text-left">
+                            Protocol initialized. The arena is not just a ground; it's a crucible where hesitation is deleted and legends are compiled.
+                        </p>
+                    </motion.div>
+
+                    {/* Block 2 */}
+                    <motion.div
+                        style={{
+                            opacity: useTransform(scrollYProgress, [0.35, 0.5, 0.65], [0, 1, 0]),
+                            display: useTransform(scrollYProgress, (v) => (v < 0.35 || v > 0.65) ? "none" : "block")
+                        }}
+                    >
+                        <div className="text-neon-orange text-sm mb-4 tracking-[0.5em] border-b border-neon-orange/30 inline-block pb-2">
+                            MISSION_02: ENDURANCE
+                        </div>
+                        <h2 className="text-4xl md:text-7xl font-bold text-white mb-6 uppercase">
+                            <span className="text-neon-orange">Fatigue Is</span> <br />
+                            <DecryptText text="Just a Glitch" />
+                        </h2>
+                        <p className="text-gray-400 max-w-lg mx-auto leading-relaxed border-r-2 border-neon-cyan pr-4 text-right">
+                            System overload imminent. Pushing past theoretical limits. Re-routing power to will. Success is the only valid output.
+                        </p>
+                    </motion.div>
+
+                    {/* Block 3 */}
+                    <motion.div
+                        style={{
+                            opacity: useTransform(scrollYProgress, [0.7, 0.85], [0, 1]),
+                            display: useTransform(scrollYProgress, (v) => v < 0.7 ? "none" : "block")
+                        }}
+                    >
+                        <div className="text-white/50 text-sm mb-4 tracking-[0.5em] border-b border-white/20 inline-block pb-2">
+                            MISSION_03: VICTORY
+                        </div>
+                        <h2 className="text-4xl md:text-7xl font-bold text-white mb-6 uppercase">
+                            <DecryptText text="Defining" /> <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple">The Legacy</span>
+                        </h2>
+                        <p className="text-gray-400 max-w-lg mx-auto leading-relaxed border-l-2 border-white/50 pl-4 text-left">
+                            Archive complete. The data is clear: only those who dare to override their limits will remain in history.
+                        </p>
+                    </motion.div>
+
+                </div>
+
             </div>
-
         </section>
     );
 }
+

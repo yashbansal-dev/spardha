@@ -12,7 +12,7 @@ import { MdSportsCricket } from 'react-icons/md';
 import { GiShuttlecock } from 'react-icons/gi';
 
 const SPORTS = [
-    { name: "Cricket", icon: MdSportsCricket, color: "text-blue-400" },
+    { name: "Cricket", icon: MdSportsCricket, color: "text-neon-blue" },
     { name: "Football", icon: FaFutbol, color: "text-green-400" },
     { name: "Basketball", icon: FaBasketballBall, color: "text-orange-400" },
     { name: "Volleyball", icon: FaVolleyballBall, color: "text-yellow-400" },
@@ -45,13 +45,6 @@ export default function SportsMarquee() {
             `}</style>
 
             <div className="group flex overflow-hidden w-full">
-                {/* 
-                   We translate -50% (half the width). 
-                   So we need content to cover 200% width roughly to be seamless?
-                   Actually, if we have [A, B] and translate to -50%, we show A then B.
-                   We need to duplicate the list enough times so that 50% of the total width is larger than the screen width.
-                   Let's use 4 sets of sports to be safe.
-                */}
                 <div className="animate-marquee hover:paused flex">
                     {[...SPORTS, ...SPORTS, ...SPORTS, ...SPORTS].map((sport, idx) => (
                         <div

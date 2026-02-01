@@ -83,7 +83,7 @@ export default function ArenaPayment({ onComplete, onPrev, amount }: Props) {
                         <button
                             onClick={handlePayment}
                             disabled={isProcessing}
-                            className="w-full bg-gradient-to-r from-neon-cyan to-blue-500 text-black font-black italic uppercase text-xl py-5 rounded-lg shadow-[0_0_30px_rgba(0,243,255,0.5)] hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 relative overflow-hidden"
+                            className="w-full bg-gradient-to-r from-neon-cyan to-neon-blue text-black font-black italic uppercase text-xl py-5 rounded-lg shadow-[0_0_30px_rgba(227,114,51,0.5)] hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 relative overflow-hidden"
                         >
                             {isProcessing && (
                                 <div className="absolute inset-0 bg-white/20 animate-progress-loading origin-left"></div>

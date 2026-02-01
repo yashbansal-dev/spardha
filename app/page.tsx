@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
 import SportsMarquee from "@/components/sections/SportsMarquee";
 import Story from "@/components/sections/Story";
-import VideoStrip from "@/components/sections/VideoStrip";
+import InteractiveGallery from "@/components/sections/InteractiveGallery";
 import Stats from "@/components/sections/Stats";
 import FinalCTA from "@/components/sections/FinalCTA";
 import Footer from "@/components/Footer";
@@ -27,12 +27,8 @@ export default function Home() {
         {/* Story Section - Full width cinematic */}
         <Story />
 
-        {/* Video Strip - Angled Cut */}
-        <div className="relative z-20 py-10 overflow-hidden">
-          <div className="origin-left transform -skew-y-2">
-            <VideoStrip />
-          </div>
-        </div>
+        {/* Interactive Gallery Section */}
+        <InteractiveGallery />
 
         {/* Stats Section */}
         <Stats />
