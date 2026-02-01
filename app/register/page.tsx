@@ -1,5 +1,4 @@
-'use client';
-
+import React, { Suspense } from 'react';
 import Navbar from "@/components/Navbar";
 import ParallaxBackground from "@/components/ParallaxBackground";
 import GamifiedWizard from "@/components/booking/GamifiedWizard";
@@ -18,7 +17,9 @@ export default function RegisterPage() {
                 <Navbar />
 
                 <div className="relative z-10 w-full min-h-screen pt-20 pb-10 flex flex-col">
-                    <GamifiedWizard />
+                    <Suspense fallback={<div className="text-white text-center pt-20">Loading Arena...</div>}>
+                        <GamifiedWizard />
+                    </Suspense>
                 </div>
             </div>
 

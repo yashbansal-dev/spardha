@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSearchParams } from 'next/navigation';
 import AthleteCardBuilder from './steps/AthleteCardBuilder';
-import SportsDraftBoard from './steps/SportsDraftBoard';
+import SportsDraftBoard, { ALL_SPORTS } from './steps/SportsDraftBoard';
 import FinalEntryPass from './steps/FinalEntryPass';
 import ArenaPayment from './steps/ArenaPayment';
 import VictoryMoment from './steps/VictoryMoment';
@@ -24,6 +25,7 @@ export type SportItem = {
 };
 
 export default function GamifiedWizard() {
+    const searchParams = useSearchParams();
     const [step, setStep] = useState(1);
     const [userData, setUserData] = useState<UserData>({
         fullName: '',
@@ -32,7 +34,28 @@ export default function GamifiedWizard() {
         email: '',
         phone: ''
     });
-    const [cart, setCart] = useState<SportItem[]>([]);
+
+    // Initialize cart from URL param if present
+    const [cart, setCart] = useState<SportItem[]>(() => {
+        const sportParam = searchParams.get('sport');
+        if (!sportParam) return [];
+
+        const found = ALL_SPORTS.find(s =>
+            s.name.toLowerCase() === sportParam.toLowerCase() ||
+            s.id === sportParam ||
+            (sportParam === 'esports' && s.name === 'E-Sports')
+        );
+
+        if (found) {
+            return [{
+                id: found.id,
+                name: found.name,
+                price: found.price,
+                image: found.bg
+            }];
+        }
+        return [];
+    });
     const [orderId, setOrderId] = useState('');
 
     const nextStep = () => setStep(prev => prev + 1);

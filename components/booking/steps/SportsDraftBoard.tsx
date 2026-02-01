@@ -7,7 +7,7 @@ import { MdSportsCricket, MdSportsKabaddi } from 'react-icons/md';
 import { GiVolleyballBall, GiShuttlecock } from 'react-icons/gi';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const ALL_SPORTS = [
+export const ALL_SPORTS = [
     { id: '1', name: 'Cricket', price: 500, icon: MdSportsCricket, bg: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&q=80', difficulty: 'Elite' },
     { id: '2', name: 'Football', price: 400, icon: FaFutbol, bg: 'https://images.unsplash.com/photo-1579952363873-27f3bde87a34?auto=format&fit=crop&q=80', difficulty: 'Pro' },
     { id: '3', name: 'Basketball', price: 350, icon: FaBasketballBall, bg: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80', difficulty: 'Pro' },
@@ -16,6 +16,8 @@ const ALL_SPORTS = [
     { id: '6', name: 'Chess', price: 200, icon: FaChessKing, bg: 'https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&q=80', difficulty: 'Tactical' },
     { id: '7', name: 'Athletics', price: 300, icon: FaRunning, bg: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80', difficulty: 'Endurance' },
     { id: '8', name: 'E-Sports', price: 600, icon: FaGamepad, bg: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80', difficulty: 'Digital' },
+    { id: '9', name: 'Volleyball', price: 350, icon: GiVolleyballBall, bg: 'https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&q=80', difficulty: 'Team' },
+    { id: '10', name: 'Kabaddi', price: 350, icon: MdSportsKabaddi, bg: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&q=80', difficulty: 'Power' },
 ];
 
 interface Props {
@@ -75,8 +77,8 @@ export default function SportsDraftBoard({ cart, setCart, onNext, onPrev }: Prop
                                     <div className="absolute inset-0 p-6 flex flex-col justify-between">
                                         <div className="flex justify-between items-start">
                                             <span className={`px-2 py-1 rounded text-[10px] uppercase font-bold tracking-wider ${sport.difficulty === 'Elite' ? 'bg-red-500 text-white' :
-                                                    sport.difficulty === 'Pro' ? 'bg-orange-500 text-white' :
-                                                        'bg-blue-500 text-white'
+                                                sport.difficulty === 'Pro' ? 'bg-orange-500 text-white' :
+                                                    'bg-blue-500 text-white'
                                                 }`}>
                                                 {sport.difficulty}
                                             </span>
