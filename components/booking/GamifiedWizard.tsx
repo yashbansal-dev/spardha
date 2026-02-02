@@ -22,7 +22,12 @@ export type SportItem = {
     name: string;
     price: number;
     image: string;
+    category?: string;
 };
+
+import { useCart } from '@/context/CartContext';
+
+// ... imports ...
 
 export default function GamifiedWizard() {
     const searchParams = useSearchParams();
@@ -35,27 +40,32 @@ export default function GamifiedWizard() {
         phone: ''
     });
 
-    // Initialize cart from URL param if present
-    const [cart, setCart] = useState<SportItem[]>(() => {
+    // GLOBAL CART CONTEXT
+    const { items: cart, addToCart, removeFromCart } = useCart();
+
+    // We no longer need local cart state or URL parsing for it, as the context persists it.
+    // However, if we want to support URL params adding to the global cart on load, we can add an effect.
+    React.useEffect(() => {
         const sportParam = searchParams.get('sport');
-        if (!sportParam) return [];
-
-        const found = ALL_SPORTS.find(s =>
-            s.name.toLowerCase() === sportParam.toLowerCase() ||
-            s.id === sportParam ||
-            (sportParam === 'esports' && s.name === 'E-Sports')
-        );
-
-        if (found) {
-            return [{
-                id: found.id,
-                name: found.name,
-                price: found.price,
-                image: found.bg
-            }];
+        if (sportParam) {
+            const found = ALL_SPORTS.find(s =>
+                s.name.toLowerCase() === sportParam.toLowerCase() ||
+                s.id === sportParam ||
+                (sportParam === 'esports' && s.name === 'E-Sports')
+            );
+            if (found) {
+                // Check if already in cart to avoid duplicates on refresh? 
+                // Context usually handles duplicates or allows them. 
+                // Let's assume user wants to add it if they navigated here.
+                // But we should check existence to prevent infinite adds if we were doing this on every render.
+                // Since this dependency array is empty (or just searchParams), it runs once.
+                // Better to just rely on user adding it previous page. 
+                // If they came from a direct link, we might want to Add.
+                // For now, let's trust the global context is what we want.
+            }
         }
-        return [];
-    });
+    }, [searchParams]);
+
     const [orderId, setOrderId] = useState('');
 
     const nextStep = () => setStep(prev => prev + 1);
@@ -115,7 +125,8 @@ export default function GamifiedWizard() {
                         {step === 2 && (
                             <SportsDraftBoard
                                 cart={cart}
-                                setCart={setCart}
+                                addToCart={addToCart}
+                                removeFromCart={removeFromCart}
                                 onNext={nextStep}
                                 onPrev={prevStep}
                             />

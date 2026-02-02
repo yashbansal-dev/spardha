@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
 import SportsMarquee from "@/components/sections/SportsMarquee";
 import Story from "@/components/sections/Story";
-import InteractiveGallery from "@/components/sections/InteractiveGallery";
 import Stats from "@/components/sections/Stats";
 import FinalCTA from "@/components/sections/FinalCTA";
 import Footer from "@/components/Footer";
@@ -12,7 +11,7 @@ import ParallaxBackground from "@/components/ParallaxBackground";
 
 export default function Home() {
   return (
-    <main className="min-h-screen text-white selection:bg-neon-cyan selection:text-black relative bg-[#020617]">
+    <main className="min-h-screen text-white selection:bg-neon-cyan selection:text-black relative bg-black">
       <ParallaxBackground />
 
       <div className="relative z-10">
@@ -26,9 +25,6 @@ export default function Home() {
 
         {/* Story Section - Full width cinematic */}
         <Story />
-
-        {/* Interactive Gallery Section */}
-        <InteractiveGallery />
 
         {/* Stats Section */}
         <Stats />

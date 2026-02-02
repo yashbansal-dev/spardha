@@ -1,8 +1,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import EventsArena from "@/components/sections/EventsArena";
-
+import EventsScrollStack from "@/components/sections/EventsScrollStack";
 import ParallaxBackground from "@/components/ParallaxBackground";
 
 export default function EventsPage() {
@@ -11,12 +10,9 @@ export default function EventsPage() {
             <ParallaxBackground />
             <Navbar />
 
-            <div className="pt-24 min-h-screen flex flex-col">
-                <div className="flex-grow">
-                    <EventsArena />
-                </div>
+            {/* Scroll Stack Events Implementation */}
+            <EventsScrollStack />
 
-            </div>
         </main>
     );
 }

@@ -25,8 +25,10 @@ module.exports = {
         'spardha-orange-dark': '#B75222',
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'sans-serif'],
-        mono: ['var(--font-mono)', 'monospace'],
+        sans: ['var(--font-gang)', 'sans-serif'],
+        mono: ['var(--font-gang)', 'monospace'], // Override mono to standard
+        cinzel: ['var(--font-gang)', 'serif'], // Override legacy cinzel classes
+        gang: ['var(--font-gang)', 'sans-serif'],
       },
       keyframes: {
         float: {

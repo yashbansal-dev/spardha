@@ -12,12 +12,12 @@ const stats = [
 
 export default function Stats() {
     return (
-        <section className="py-24 bg-[#050505] border-y border-white/5 relative overflow-hidden">
-            {/* Grid Background */}
-            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:32px_32px]"></div>
+        <section className="py-32 bg-black relative overflow-hidden">
+            {/* Ambient Background Elements */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200vw] h-[200vw] bg-[radial-gradient(circle,_rgba(255,69,0,0.05)_0%,_transparent_60%)] pointer-events-none"></div>
 
             <div className="container mx-auto px-4 relative z-10">
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-16">
                     {stats.map((stat, index) => (
                         <Counter key={index} stat={stat} index={index} />
                     ))}
@@ -32,41 +32,41 @@ function Counter({ stat, index }: { stat: any, index: number }) {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: index * 0.1, duration: 0.6, type: "spring" }}
             onViewportEnter={() => {
-                // Simple counter effect
                 let start = 0;
                 const end = stat.value;
                 const duration = 2000;
-                const incrementTime = (duration / end) * (end > 100 ? 10 : 1); // faster for bigger numbers
-
                 const timer = setInterval(() => {
-                    start += 1;
-                    setCount(prev => {
-                        if (prev >= end) {
-                            clearInterval(timer);
-                            return end;
-                        }
-                        return prev + 1;
-                    });
-                }, 10); // simplified logic for demo
+                    start += Math.ceil(end / 100);
+                    if (start >= end) {
+                        setCount(end);
+                        clearInterval(timer);
+                    } else {
+                        setCount(start);
+                    }
+                }, 20);
             }}
-            className="flex flex-col items-center justify-center p-6 bg-white/5 border border-white/10 rounded-2xl relative group hover:bg-white/10 transition-colors"
+            className="group relative flex flex-col items-center justify-center p-8 md:p-12 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-neon-orange/50 transition-all duration-500 backdrop-blur-sm"
         >
-            {/* Digital Scoreboard Number */}
-            <div className="text-5xl md:text-7xl font-mono font-bold text-transparent bg-clip-text bg-gradient-to-b from-neon-cyan to-neon-blue mb-2 drop-shadow-[0_0_15px_rgba(227,114,51,0.4)]">
-                {stat.value}{stat.suffix}
+            {/* Glow Behind */}
+            <div className="absolute inset-0 bg-neon-orange/20 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+
+            {/* Main Number - God Level Typography */}
+            <div className="relative z-10 text-7xl md:text-9xl font-gang text-white group-hover:text-neon-orange transition-colors duration-300 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_30px_rgba(255,69,0,0.6)]">
+                {count}{stat.suffix}
             </div>
 
-            <div className="text-gray-400 uppercase tracking-[0.2em] font-semibold text-sm">
+            {/* Label */}
+            <div className="relative z-10 mt-4 text-gray-500 group-hover:text-white font-sans font-bold uppercase tracking-[0.3em] text-sm md:text-base transition-colors duration-300">
                 {stat.label}
             </div>
 
-            {/* Corner Accents */}
-            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-neon-cyan/50 rounded-tl-lg"></div>
-            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-neon-cyan/50 rounded-br-lg"></div>
+            {/* Tech Corners */}
+            <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/20 group-hover:border-neon-orange transition-colors duration-500"></div>
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/20 group-hover:border-neon-orange transition-colors duration-500"></div>
         </motion.div>
     );
 }

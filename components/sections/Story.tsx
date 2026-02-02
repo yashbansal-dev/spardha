@@ -8,7 +8,7 @@ const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 const DecryptText = ({ text, className }: { text: string, className?: string }) => {
     const [displayText, setDisplayText] = useState(text);
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
+    const isInView = useInView(ref, { once: false });
 
     useEffect(() => {
         if (!isInView) return;
@@ -40,27 +40,16 @@ export default function Story() {
     });
 
     return (
-        <section ref={containerRef} className="relative h-[300vh] bg-[#020617] font-mono">
+        <section ref={containerRef} className="relative h-[300vh] bg-black font-mono">
             {/* Sticky Wrapper */}
             <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
 
                 {/* HUD Overlay Layer */}
                 <div className="absolute inset-0 z-20 pointer-events-none p-6 md:p-12 border-[20px] border-transparent">
                     {/* Corners */}
-                    <div className="absolute top-8 left-8 w-8 h-8 border-t-2 border-l-2 border-neon-cyan"></div>
-                    <div className="absolute top-8 right-8 w-8 h-8 border-t-2 border-r-2 border-neon-cyan"></div>
-                    <div className="absolute bottom-8 left-8 w-8 h-8 border-b-2 border-l-2 border-neon-cyan"></div>
-                    <div className="absolute bottom-8 right-8 w-8 h-8 border-b-2 border-r-2 border-neon-cyan"></div>
 
-                    {/* System Status Indicators */}
-                    <div className="absolute top-12 left-20 flex gap-4 text-xs text-neon-cyan/70 tracking-widest">
-                        <span>SYS://ONLINE</span>
-                        <span>LINK_ESTABLISHED</span>
-                    </div>
 
-                    <div className="absolute bottom-12 right-20 text-xs text-neon-orange/70 tracking-widest animate-pulse">
-                        REC_STREAM_ACTIVE
-                    </div>
+
 
                     {/* Scanlines */}
                     <div className="absolute inset-0 bg-[linear-gradient(rgba(18,255,247,0.02)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none"></div>
@@ -83,7 +72,7 @@ export default function Story() {
 
                     {/* Digital Noise Overlay */}
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-[#020617]"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black"></div>
                 </div>
 
                 {/* Narrative Text Content */}

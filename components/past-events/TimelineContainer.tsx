@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import TimelineEvent from './TimelineEvent';
-import TimeTravelIndicator from './TimeTravelIndicator';
+import ChronoGuide from './ChronoGuide';
 
 // Filters
 const FILTERS = ["All Events", "Concerts", "Sports Finals", "Legacy Moments"];
 
-// Mock Data with Emotional Stats
+// Mock Data
 export const PAST_EVENTS = [
     {
         id: 1,
@@ -53,82 +53,84 @@ export const PAST_EVENTS = [
 ];
 
 export default function TimelineContainer() {
-    const [activeFilter, setActiveFilter] = useState("All Events");
+    const targetRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: targetRef,
+    });
 
+    // Horizontal Scroll Logic
+    // We map vertical scroll (0 to 1) to horizontal movement (-1% to -95%)
+    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
+
+    // Parallax Layers
+    const yearX = useTransform(scrollYProgress, [0, 1], ["10%", "-120%"]); // Moves faster
+    const bgX = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]); // Moves slower
+
+    const [activeFilter, setActiveFilter] = useState("All Events");
     const filteredEvents = activeFilter === "All Events"
         ? PAST_EVENTS
         : PAST_EVENTS.filter(e => e.type === activeFilter);
 
+    // Provide progress to guide
+    const [progress, setProgress] = useState(0);
+    useEffect(() => {
+        return scrollYProgress.on("change", (latest) => setProgress(latest));
+    }, [scrollYProgress]);
+
     return (
-        <div className="relative w-full min-h-screen py-20 bg-black overflow-hidden">
+        <section ref={targetRef} className="relative h-[400vh] bg-black">
+            {/* 400vh height ensures enough scroll space */}
 
-            <TimeTravelIndicator />
+            <div className="sticky top-0 flex h-screen items-center overflow-hidden">
 
-            {/* Atmospheric Background Effects */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 animate-pulse"></div>
-                {/* Floating Particles */}
-                {[...Array(20)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute w-1 h-1 bg-white rounded-full opacity-20"
-                        initial={{ x: Math.random() * 1000, y: Math.random() * 1000 }}
-                        animate={{ y: [0, -100, 0], opacity: [0.2, 0.5, 0.2] }}
-                        transition={{ duration: Math.random() * 10 + 5, repeat: Infinity, ease: "linear" }}
-                    />
-                ))}
-                {/* Occasional Flash */}
-                <motion.div
-                    className="absolute inset-0 bg-white mix-blend-overlay z-10"
-                    animate={{ opacity: [0, 0.1, 0] }}
-                    transition={{ duration: 0.2, repeat: Infinity, repeatDelay: 5 }}
-                />
-            </div>
+                {/* Background Parallax Layer */}
+                <motion.div style={{ x: bgX }} className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10"></div>
+                </motion.div>
 
-            {/* Filter Bar */}
-            <div className="sticky top-24 z-40 flex justify-center gap-4 mb-32 px-4 flex-wrap">
-                {FILTERS.map((filter) => (
-                    <button
-                        key={filter}
-                        onClick={() => setActiveFilter(filter)}
-                        className={`px-6 py-2 rounded-full border text-xs uppercase tracking-[0.2em] transition-all duration-300 backdrop-blur-md ${activeFilter === filter
-                                ? 'bg-neon-cyan/10 text-neon-cyan border-neon-cyan font-bold shadow-[0_0_20px_rgba(0,243,255,0.2)]'
-                                : 'bg-black/20 text-gray-500 border-white/10 hover:border-white/30 hover:text-white'
-                            }`}
-                    >
-                        {filter}
-                    </button>
-                ))}
-            </div>
-
-            {/* Center Line with Glow */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-gray-800 to-transparent transform md:-translate-x-1/2 z-0"></div>
-            <motion.div
-                className="absolute left-4 md:left-1/2 top-0 h-[50vh] w-[2px] bg-gradient-to-b from-neon-cyan to-transparent transform md:-translate-x-1/2 z-0 shadow-[0_0_20px_#0ef]"
-                style={{ position: 'fixed', top: '50vh' }}
-            />
-
-            {/* Events List */}
-            <div className="container mx-auto px-4 relative z-10">
-                <AnimatePresence mode="popLayout">
-                    {filteredEvents.map((event, index) => (
-                        <motion.div
-                            key={event.id}
-                            layout
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.95 }}
-                            transition={{ duration: 0.5 }}
+                {/* Filter Bar */}
+                <div className="absolute top-24 left-1/2 -translate-x-1/2 z-40 flex gap-4">
+                    {FILTERS.map((filter) => (
+                        <button
+                            key={filter}
+                            onClick={() => setActiveFilter(filter)}
+                            className={`px-4 py-1 rounded-full text-[10px] uppercase tracking-[0.2em] transition-all duration-300 border backdrop-blur-md ${activeFilter === filter
+                                ? 'bg-neon-cyan/20 text-neon-cyan border-neon-cyan shadow-[0_0_15px_rgba(0,243,255,0.3)]'
+                                : 'bg-black/40 text-gray-500 border-white/5 hover:border-white/20 hover:text-white'
+                                }`}
                         >
-                            <TimelineEvent event={event} index={index} />
-                        </motion.div>
+                            {filter}
+                        </button>
                     ))}
-                </AnimatePresence>
-            </div>
+                </div>
 
-            <div className="text-center py-20 text-gray-600 text-xs uppercase tracking-[0.5em] pb-40">
-                End of Archive
+                {/* Giant Parallax Years Background */}
+                <motion.div style={{ x: yearX }} className="absolute top-1/2 -translate-y-1/2 flex gap-[50vw] left-[10vw] z-0 pointer-events-none">
+                    {PAST_EVENTS.map(event => (
+                        <div key={event.id} className="text-[20vw] font-black text-white/5 whitespace-nowrap font-gang leading-none">
+                            {event.year}
+                        </div>
+                    ))}
+                </motion.div>
+
+                {/* Horizontal Cards Container */}
+                <motion.div style={{ x }} className="flex gap-[40vw] pl-[10vw] pr-[50vw] relative z-10 items-center">
+                    {filteredEvents.map((event, index) => (
+                        <div key={event.id} className="relative w-[80vw] md:w-[60vw] lg:w-[45vw] flex-shrink-0">
+                            <TimelineEvent event={event} index={index} />
+                        </div>
+                    ))}
+
+                    {/* End Marker */}
+                    <div className="flex-shrink-0 text-gray-700 font-mono tracking-widest text-xl rotate-90">
+                        // END OF ARCHIVE
+                    </div>
+                </motion.div>
+
+                {/* Guide at Bottom */}
+                <ChronoGuide years={PAST_EVENTS.map(e => e.year)} progress={progress} />
             </div>
-        </div>
+        </section>
     );
 }

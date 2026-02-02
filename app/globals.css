@@ -13,6 +13,21 @@ body {
   overflow-x: hidden;
 }
 
+/* Force Font Everywhere - Using Variable from localFont */
+* {
+  font-family: var(--font-gang), sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-gang), sans-serif !important;
+  letter-spacing: 20px !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -36,21 +51,7 @@ html {
 }
 
 /* Custom Fonts */
-@font-face {
-  font-family: 'Fonstery';
-  src: url('/fonts/Fonstery.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Fonstery';
-  src: url('/fonts/Fonstery-Bone.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+/* Custom Fonts - Managed via next/font/local in layout.tsx */
 
 @layer utilities {
   .glass {
@@ -372,5 +373,21 @@ html {
   100% {
     clip: rect(90px, 9999px, 110px, 0);
     transform: skew(0.5deg);
+  }
+}
+
+@layer utilities {
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 }

@@ -92,30 +92,6 @@ export default function Hero() {
             <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-neon-cyan/10 rounded-full blur-[120px] pointer-events-none z-5"></div>
             <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-neon-purple/10 rounded-full blur-[100px] pointer-events-none z-5"></div>
 
-            {/* 4. Animated Speed Lines (Thinner, cleaner) */}
-            <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden skew-x-[-20deg] opacity-20">
-                {[...Array(6)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute h-[1px] bg-gradient-to-r from-transparent via-white to-transparent"
-                        style={{
-                            top: `${Math.random() * 100}%`,
-                            left: `-100%`,
-                            width: `150%`,
-                        }}
-                        animate={{
-                            x: ['-100%', '200%'],
-                        }}
-                        transition={{
-                            duration: Math.random() * 2 + 1,
-                            repeat: Infinity,
-                            ease: "linear",
-                            delay: Math.random() * 5,
-                        }}
-                    />
-                ))}
-            </div>
-
             {/* --- CONTENT --- */}
             <motion.div
                 className="relative z-20 w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center p-4"
@@ -144,15 +120,12 @@ export default function Hero() {
                             transition={{ delay: 0.2, duration: 0.8 }}
                             className="flex items-center gap-4 mb-6"
                         >
-                            <span className="h-[1px] w-12 bg-neon-orange"></span>
                             <span className="text-neon-cyan tracking-[0.3em] text-xs md:text-sm font-bold uppercase">JK Lakshmipat University Presents</span>
-                            <span className="h-[1px] w-12 bg-neon-orange"></span>
                         </motion.div>
 
                         {/* Main Title - Clean & Bold */}
                         <motion.h2
-                            className="text-[5rem] md:text-[9rem] font-black tracking-tighter text-white uppercase leading-none mb-2"
-                            style={{ fontFamily: 'Fonstery, sans-serif' }}
+                            className="text-[5rem] md:text-[9rem] font-black tracking-tighter text-white uppercase leading-none mb-2 font-gang"
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
@@ -182,7 +155,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Bottom Vignette */}
-            <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#020617] to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none"></div>
         </section>
     );
 }

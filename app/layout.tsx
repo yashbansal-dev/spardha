@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Roboto_Mono } from "next/font/google";
+import localFont from 'next/font/local';
 import "./globals.css";
+import ClientLoader from "@/components/ClientLoader";
+import { CartProvider } from "@/context/CartContext";
+import CartDrawer from "@/components/cart/CartDrawer";
 
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
-
-const robotoMono = Roboto_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
+const gangOfThree = localFont({
+  src: [
+    {
+      path: './fonts/go3v2.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-gang',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -25,10 +30,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${robotoMono.variable} antialiased`}
+        className={`${gangOfThree.variable} antialiased font-gang`}
       >
-        {children}
+        <CartProvider>
+          <ClientLoader>
+            {children}
+            <CartDrawer />
+          </ClientLoader>
+        </CartProvider>
       </body>
     </html>
   );
 }
+

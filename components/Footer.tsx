@@ -1,69 +1,75 @@
 import Link from 'next/link';
-import { FaInstagram, FaLinkedin, FaTwitter, FaFacebook, FaYoutube } from 'react-icons/fa';
+import { FaHeart, FaMapMarkerAlt, FaFileAlt, FaHandshake, FaQuestionCircle } from 'react-icons/fa';
 
 export default function Footer() {
     return (
-        <footer className="bg-black border-t border-white/10 pt-16 pb-8 relative overflow-hidden">
-            {/* Glow effect */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-neon-cyan to-transparent opacity-50"></div>
+        <footer className="bg-[#050505] border-t border-white/5 pt-8 pb-4 relative overflow-hidden font-sans">
 
-            <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            {/* Background Texture/Gradient */}
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+            <div className="absolute -left-[20%] top-[20%] w-[50%] h-[50%] bg-neon-cyan/5 rounded-full blur-[150px] pointer-events-none"></div>
 
-                    {/* Brand Info */}
-                    <div>
-                        <h2 className="text-3xl font-bold text-neon-cyan mb-4">SPARDHA</h2>
-                        <p className="text-gray-400 mb-6">
-                            The Annual Sports Festival of <br />
-                            <span className="text-white font-semibold">JK Lakshmipat University (JKLU)</span>.
-                            <br />
-                            Celebrating sportsmanship, energy, and excellence.
+            <div className="container mx-auto px-6 md:px-12">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-16 md:gap-0 mb-12">
+
+                    {/* LEFT COLUMN: BRANDING */}
+                    <div className="flex-1 max-w-2xl">
+                        <p className="text-xl md:text-2xl text-gray-400 mb-2 font-light tracking-wide">
+                            Become a part of
                         </p>
-                        <div className="flex gap-4">
-                            {[FaInstagram, FaLinkedin, FaTwitter, FaYoutube].map((Icon, idx) => (
-                                <Link key={idx} href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-neon-cyan hover:text-black transition-all hover:scale-110">
-                                    <Icon size={18} />
-                                </Link>
-                            ))}
-                        </div>
+                        <h1 className="text-[15vw] md:text-9xl font-gang text-white leading-[0.8] mb-8 tracking-tighter uppercase select-none">
+                            SPARDHA
+                        </h1>
+                        <p className="text-gray-400 text-lg md:text-xl max-w-md leading-relaxed">
+                            Unforgettable experiences. Limitless energy. Thrilling innovation, culture, and sports. All in one place.
+                            Whether you're a participant, sponsor, or curious attendee, we'd love to connect.
+                        </p>
                     </div>
 
-                    {/* Quick Links */}
-                    <div>
-                        <h3 className="text-white font-bold text-lg mb-6 uppercase tracking-wider">Quick Links</h3>
-                        <ul className="space-y-3">
-                            {['Home', 'Events', 'Schedule', 'Team', 'Sponsors'].map((item) => (
-                                <li key={item}>
-                                    <Link href={`#${item.toLowerCase()}`} className="text-gray-400 hover:text-neon-cyan transition-colors">
-                                        {item}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
+                    {/* RIGHT COLUMN: LARGE LINKS */}
+                    <div className="flex flex-col items-start md:items-end gap-4 md:gap-6 min-w-[300px]">
+                        {[
+                            { label: 'Support', href: '/contact', icon: <FaQuestionCircle /> },
+                            { label: 'Sponsor', href: '/#sponsors', icon: <FaHandshake /> },
+                            { label: 'Info Kit', href: '/brochure', icon: <FaFileAlt /> },
+                            { label: 'Location', href: 'https://maps.google.com', icon: <FaMapMarkerAlt />, external: true },
+                            { label: 'Site Aid', href: '/team', icon: <FaHeart /> },
+                        ].map((link, i) => (
+                            <Link
+                                key={i}
+                                href={link.href}
+                                target={link.external ? "_blank" : "_self"}
+                                className="group flex items-center gap-4 text-4xl md:text-6xl font-bold uppercase text-white/40 hover:text-white transition-all duration-300"
+                            >
+                                <span className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-2xl text-neon-cyan">
+                                    {link.icon}
+                                </span>
+                                <span className='group-hover:tracking-widest transition-all duration-300'>
+                                    {link.label}
+                                </span>
+                            </Link>
+                        ))}
                     </div>
 
-                    {/* Contact */}
-                    <div>
-                        <h3 className="text-white font-bold text-lg mb-6 uppercase tracking-wider">Contact Us</h3>
-                        <address className="not-italic text-gray-400 space-y-3">
-                            <p>JK Lakshmipat University,</p>
-                            <p>Near Mahindra SEZ, P.O. Mahapura,</p>
-                            <p>Ajmer Road, Jaipur - 302026</p>
-                            <p className="pt-2">
-                                <span className="block text-sm text-gray-500">Email:</span>
-                                <a href="mailto:spardha@jklu.edu.in" className="hover:text-neon-cyan transition-colors">spardha@jklu.edu.in</a>
-                            </p>
-                            <p>
-                                <span className="block text-sm text-gray-500">Phone:</span>
-                                <a href="tel:+919876543210" className="hover:text-neon-cyan transition-colors">+91 98765 43210</a>
-                            </p>
-                        </address>
-                    </div>
                 </div>
 
-                <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 gap-4">
-                    <p>© {new Date().getFullYear()} SPARDHA - JKLU. All rights reserved.</p>
-                    <p>Designed with <span className="text-neon-pink">❤</span> by <span className="text-white">JKLU Tech Team</span></p>
+                {/* BOTTOM CENTER: LOGO */}
+                <div className="flex justify-center items-center -mt-40 relative z-10 pointer-events-none">
+                    <img
+                        src="/assets/images/jklu_logo.png"
+                        alt="Spardha Logo"
+                        className="w-80 h-80 md:w-[500px] md:h-[500px] object-contain transition-opacity duration-300 contrast-125"
+                    />
+                </div>
+
+                {/* BOTTOM BAR */}
+                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm md:text-base text-gray-500 uppercase tracking-widest gap-4">
+                    <p>
+                        © {new Date().getFullYear()} All rights reserved <span className="text-white font-bold">JKLU</span>
+                    </p>
+                    <p className="flex items-center gap-2">
+                        Designed and Developed by <span className="text-neon-cyan font-bold cursor-pointer hover:underline">Team SPARDHA</span>
+                    </p>
                 </div>
             </div>
         </footer>
