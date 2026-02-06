@@ -60,8 +60,8 @@ export default function Navbar() {
         },
         {
             icon: <IoTime size={22} />,
-            label: 'History',
-            onClick: () => router.push('/past-events')
+            label: 'Schedule',
+            onClick: () => router.push('/schedule')
         },
 
         {
@@ -95,7 +95,7 @@ export default function Navbar() {
                                 />
                             </div>
                             <div className="flex items-baseline gap-2">
-                                <span className="font-bold text-lg tracking-widest text-white leading-none">
+                                <span className="font-bold text-lg tracking-widest text-white leading-none font-gang font-restore">
                                     SPARDHA
                                 </span>
                             </div>

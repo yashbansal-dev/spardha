@@ -88,7 +88,7 @@ export default function FinalCTA() {
                     initial={{ y: 50, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.8 }}
-                    className="text-5xl md:text-8xl font-gang text-white tracking-tight mb-8 drop-shadow-[0_0_30px_rgba(0,0,0,0.8)] leading-[0.9]"
+                    className="text-5xl md:text-8xl font-gang font-restore text-white tracking-tight mb-8 drop-shadow-[0_0_30px_rgba(0,0,0,0.8)] leading-[0.9]"
                 >
                     YOUR GAME <br />
                     <span className="text-neon-cyan">STARTS NOW.</span>

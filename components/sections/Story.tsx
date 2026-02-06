@@ -40,7 +40,7 @@ export default function Story() {
     });
 
     return (
-        <section ref={containerRef} className="relative h-[300vh] bg-black font-mono">
+        <section ref={containerRef} className="relative h-[300vh] bg-black font-restore">
             {/* Sticky Wrapper */}
             <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
 

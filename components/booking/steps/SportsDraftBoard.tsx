@@ -17,16 +17,17 @@ export const ALL_SPORTS = [
         hasGender: true,
         bgGradient: 'from-blue-900 to-slate-900',
         prizes: { boys: 33000, girls: 8000 },
-        fees: { boys: 4000, girls: 2000 },
-        price: 500
+        fees: { boys: 400, girls: 0 },
+        price: 400
     },
     {
         id: 'football',
-        name: 'Football',
+        name: 'Football (7v7 / 5v5)',
         icon: FaFutbol,
         bg: 'https://images.unsplash.com/photo-1579952363873-27f3bde87a34?auto=format&fit=crop&q=80',
         hasGender: true,
-        price: 400
+        fees: { boys: 250, girls: 0 },
+        price: 250
     },
     {
         id: 'basketball',
@@ -34,7 +35,8 @@ export const ALL_SPORTS = [
         icon: FaBasketballBall,
         bg: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80',
         hasGender: true,
-        price: 350
+        fees: { boys: 250, girls: 0 },
+        price: 250
     },
     {
         id: 'volleyball',
@@ -42,63 +44,62 @@ export const ALL_SPORTS = [
         icon: GiVolleyballBall,
         bg: 'https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&q=80',
         hasGender: true,
-        price: 350
-    },
-    {
-        id: 'badminton',
-        name: 'Badminton',
-        icon: GiShuttlecock,
-        bg: 'https://images.unsplash.com/photo-1626224583764-847890e058f5?auto=format&fit=crop&q=80',
-        hasGender: true,
-        price: 300
-    },
-    {
-        id: 'table-tennis',
-        name: 'Table Tennis',
-        icon: FaRunning,
-        bg: 'https://images.unsplash.com/photo-1534158914592-062992bbe900?auto=format&fit=crop&q=80',
-        hasGender: true,
+        fees: { boys: 250, girls: 0 },
         price: 250
     },
     {
-        id: 'athletics',
-        name: 'Athletics',
-        icon: FaRunning,
-        bg: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80',
+        id: 'badminton',
+        name: 'Badminton (Singles)',
+        icon: GiShuttlecock,
+        bg: 'https://images.unsplash.com/photo-1626224583764-847890e058f5?auto=format&fit=crop&q=80',
         hasGender: true,
-        price: 200
+        fees: { boys: 250, girls: 0 },
+        price: 250
     },
+    {
+        id: 'badminton-doubles',
+        name: 'Badminton (Doubles)',
+        icon: GiShuttlecock,
+        bg: 'https://images.unsplash.com/photo-1626224583764-847890e058f5?auto=format&fit=crop&q=80',
+        hasGender: true,
+        fees: { boys: 500, girls: 0 },
+        price: 500
+    },
+    {
+        id: 'badminton-mixed',
+        name: 'Badminton (Mixed)',
+        icon: GiShuttlecock,
+        bg: 'https://images.unsplash.com/photo-1626224583764-847890e058f5?auto=format&fit=crop&q=80',
+        hasGender: false,
+        price: 250
+    },
+
+
     {
         id: 'kabaddi',
         name: 'Kabaddi',
         icon: MdSportsKabaddi,
         bg: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&q=80',
         hasGender: false,
-        price: 350
+        price: 1100
     },
-    {
-        id: 'kho-kho',
-        name: 'Kho-Kho',
-        icon: FaRunning, // Placeholder
-        bg: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80',
-        hasGender: false,
-        price: 300
-    },
+
     {
         id: 'box-cricket',
         name: 'Box Cricket',
         icon: MdSportsCricket,
         bg: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80',
         hasGender: false,
-        price: 400
+        price: 1100
     },
     {
         id: 'chess',
         name: 'Chess',
         icon: FaChessKing,
         bg: 'https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&q=80',
-        hasGender: false,
-        price: 200
+        hasGender: true,
+        fees: { boys: 150, girls: 0 },
+        price: 150
     },
     {
         id: 'esports',
@@ -106,7 +107,7 @@ export const ALL_SPORTS = [
         icon: FaGamepad,
         bg: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80',
         hasGender: false,
-        price: 600
+        price: 500
     }
 ];
 
@@ -138,8 +139,8 @@ export default function SportsDraftBoard({ cart, addToCart, removeFromCart, onNe
         } else {
             // Determine price based on category if specific fees exist
             let finalPrice = sport.price;
-            if (category === 'Boys' && (sport as any).fees?.boys) finalPrice = (sport as any).fees.boys;
-            if (category === 'Girls' && (sport as any).fees?.girls) finalPrice = (sport as any).fees.girls;
+            if (category === 'Boys' && (sport as any).fees?.boys !== undefined) finalPrice = (sport as any).fees.boys;
+            if (category === 'Girls' && (sport as any).fees?.girls !== undefined) finalPrice = (sport as any).fees.girls;
 
             addToCart({
                 id: uniqueId,

@@ -120,7 +120,7 @@ export default function Hero() {
                             transition={{ delay: 0.2, duration: 0.8 }}
                             className="flex items-center gap-4 mb-6"
                         >
-                            <span className="text-neon-cyan tracking-[0.3em] text-xs md:text-sm font-bold uppercase">JK Lakshmipat University Presents</span>
+                            <span className="text-neon-cyan tracking-[0.3em] text-xs md:text-sm font-bold font-gang font-restore uppercase">JK Lakshmipat University Presents</span>
                         </motion.div>
 
                         {/* Main Title - Clean & Bold */}

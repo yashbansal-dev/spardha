@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Disallow admin or private routes if any
+# Disallow: /admin
+# Disallow: /api
+
+# Sitemap location
+Sitemap: https://spardha-jklu.com/sitemap.xml
+
+# Crawl-delay (optional, helps prevent server overload)
+Crawl-delay: 1

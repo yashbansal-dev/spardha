@@ -11,7 +11,7 @@ export default function Contact() {
                 <div className="glass-card p-12 text-center rounded-2xl relative overflow-hidden group">
                     <div className="absolute inset-0 bg-gradient-to-r from-neon-purple/20 via-transparent to-neon-cyan/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 relative z-10">Ready to Compete?</h2>
-                    <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto relative z-10">
+                    <p className="font-alice text-xl text-gray-300 mb-8 max-w-2xl mx-auto relative z-10">
                         registrations are open for all events. Secure your spot now and represent your college at Spardha.
                     </p>
                     <Link
@@ -27,7 +27,7 @@ export default function Contact() {
             <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
                     <h2 className="text-4xl font-bold font-sans mb-8">Get in <span className="text-neon-cyan">Touch</span></h2>
-                    <p className="text-gray-400 mb-8 leading-relaxed">
+                    <p className="font-alice text-gray-400 mb-8 leading-relaxed text-lg">
                         Have questions about events, accommodation, or registration? Reach out to us.
                     </p>
 
@@ -36,21 +36,21 @@ export default function Contact() {
                             <div className="p-3 bg-white/5 rounded-lg text-neon-cyan"><FaMapMarkerAlt size={20} /></div>
                             <div>
                                 <h4 className="text-white font-bold mb-1">Address</h4>
-                                <p className="text-gray-400 text-sm">JK Lakshmipat University, Near Mahindra SEZ, P.O. Mahapura, Ajmer Road, Jaipur - 302026</p>
+                                <p className="font-alice text-gray-400 text-base">JK Lakshmipat University, Near Mahindra SEZ, P.O. Mahapura, Ajmer Road, Jaipur - 302026</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
                             <div className="p-3 bg-white/5 rounded-lg text-neon-cyan"><FaEnvelope size={20} /></div>
                             <div>
                                 <h4 className="text-white font-bold mb-1">Email</h4>
-                                <p className="text-gray-400 text-sm">spardha@jklu.edu.in</p>
+                                <p className="font-alice text-gray-400 text-base">spardha@jklu.edu.in</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
                             <div className="p-3 bg-white/5 rounded-lg text-neon-cyan"><FaPhone size={20} /></div>
                             <div>
                                 <h4 className="text-white font-bold mb-1">Phone</h4>
-                                <p className="text-gray-400 text-sm">+91 98765 43210</p>
+                                <p className="font-alice text-gray-400 text-base">+91 98765 43210</p>
                             </div>
                         </div>
                     </div>

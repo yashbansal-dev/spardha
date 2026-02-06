@@ -18,6 +18,21 @@ body {
   font-family: var(--font-gang), sans-serif !important;
 }
 
+/* Global Small Text - Alice Font Override */
+p,
+span,
+li,
+a,
+button,
+input,
+textarea,
+label,
+td,
+th {
+  font-family: var(--font-alice), sans-serif !important;
+  letter-spacing: normal !important;
+}
+
 h1,
 h2,
 h3,
@@ -25,7 +40,13 @@ h4,
 h5,
 h6 {
   font-family: var(--font-gang), sans-serif !important;
-  letter-spacing: 20px !important;
+  letter-spacing: 0.1em !important;
+}
+
+/* Utility to restore Gang font (overriding Alice) */
+.font-restore,
+.font-restore * {
+  font-family: var(--font-gang), sans-serif !important;
 }
 
 html {
@@ -389,5 +410,10 @@ html {
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
+  }
+
+  /* Custom Clip Paths */
+  .clip-path-slant {
+    clip-path: polygon(10% 0, 100% 0, 100% 80%, 90% 100%, 0 100%, 0 20%);
   }
 }

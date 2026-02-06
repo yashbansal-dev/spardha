@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
+import { Alice } from 'next/font/google';
 import "./globals.css";
 import ClientLoader from "@/components/ClientLoader";
 import { CartProvider } from "@/context/CartContext";
@@ -17,6 +18,13 @@ const gangOfThree = localFont({
   display: 'swap',
 });
 
+const alice = Alice({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-alice',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: "SPARDHA | JKLU Sports Fest",
   description: "Annual Sports Festival of JK Lakshmipat University (JKLU). Experience the energy.",
@@ -30,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${gangOfThree.variable} antialiased font-gang`}
+        className={`${gangOfThree.variable} ${alice.variable} antialiased font-gang`}
       >
         <CartProvider>
           <ClientLoader>
@@ -42,4 +50,3 @@ export default function RootLayout({
     </html>
   );
 }
-
