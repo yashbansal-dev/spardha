@@ -1,13 +1,13 @@
 'use client';
 
 import Navbar from '@/components/Navbar';
-import SeamlessInfiniteGallery from '@/components/gallery/SeamlessInfiniteGallery';
+import AutoScrollGallery from '@/components/gallery/AutoScrollGallery';
 
 export default function Gallery() {
     return (
         <main className="min-h-screen bg-[#1A1A1A] text-white overflow-hidden">
             <Navbar />
-            <SeamlessInfiniteGallery />
+            <AutoScrollGallery />
         </main>
     );
 }
