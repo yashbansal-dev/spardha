@@ -5,6 +5,7 @@ import "./globals.css";
 import ClientLoader from "@/components/ClientLoader";
 import { CartProvider } from "@/context/CartContext";
 import CartDrawer from "@/components/cart/CartDrawer";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 const gangOfThree = localFont({
   src: [
@@ -42,6 +43,7 @@ export default function RootLayout({
       >
         <CartProvider>
           <ClientLoader>
+            <CustomCursor />
             {children}
             <CartDrawer />
           </ClientLoader>
