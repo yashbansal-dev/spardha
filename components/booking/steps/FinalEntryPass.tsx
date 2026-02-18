@@ -18,8 +18,7 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
 
     // Calculations
     const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
-    const gst = subtotal * 0.18;
-    const total = subtotal + gst;
+    const total = subtotal;
 
     return (
         <div className="h-full flex flex-col items-center justify-center p-4">
@@ -72,7 +71,7 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
                         <div>
                             <div className="text-xs font-bold uppercase tracking-wider mb-1">Total Payable</div>
                             <div className="text-4xl font-black font-mono tracking-tighter">₹{total.toFixed(0)}</div>
-                            <div className="text-[10px] text-gray-500">(Inc. all taxes)</div>
+                            <div className="text-[10px] text-gray-500">(Total Amount)</div>
                         </div>
                         <FaBarcode className="text-6xl opacity-50" />
                     </div>

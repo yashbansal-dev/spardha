@@ -76,6 +76,7 @@ export default function ArenaPayment({ userData, teamMembers, cart, onPrev, amou
                     items: cart.map(item => ({
                         id: item.id,
                         title: item.name,
+                        category: item.category, // Added category for backend smart lookup
                         price: item.price
                     }))
                 }),

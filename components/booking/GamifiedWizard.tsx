@@ -216,7 +216,7 @@ export default function GamifiedWizard() {
                                 teamMembers={teamMembers} // Pass team data
                                 cart={cart}
                                 onPrev={prevStep}
-                                amount={cart.reduce((acc, item) => acc + item.price, 0) * 1.18}
+                                amount={cart.reduce((acc, item) => acc + item.price, 0)}
 
                             />
                         )}
