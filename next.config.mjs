@@ -17,26 +17,27 @@ const nextConfig = {
         ],
     },
     async rewrites() {
+        const backendUrl = process.env.BACKEND_URL || 'https://backendspardha-production.up.railway.app';
         return [
             {
                 source: '/api/register-action',
-                destination: 'http://localhost:5000/register',
+                destination: `${backendUrl}/register`,
             },
             {
                 source: '/api/:path*',
-                destination: 'http://localhost:5000/api/:path*',
+                destination: `${backendUrl}/api/:path*`,
             },
             {
                 source: '/auth/:path*',
-                destination: 'http://localhost:5000/auth/:path*',
+                destination: `${backendUrl}/auth/:path*`,
             },
             {
                 source: '/login',
-                destination: 'http://localhost:5000/login',
+                destination: `${backendUrl}/login`,
             },
             {
                 source: '/signup',
-                destination: 'http://localhost:5000/signup',
+                destination: `${backendUrl}/signup`,
             },
 
         ];
