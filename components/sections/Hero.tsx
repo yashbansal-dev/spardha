@@ -173,20 +173,20 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.8 }}
-                            className="flex items-center gap-4 mb-6"
+                            className="flex items-center gap-4 mb-3"
                         >
-                            <span className="text-neon-cyan tracking-[0.3em] text-xs md:text-sm font-bold font-gang font-restore uppercase">JK Lakshmipat University Presents</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-white tracking-[0.15em] text-lg sm:text-2xl md:text-4xl font-black font-gang font-restore uppercase drop-shadow-[0_2px_10px_rgba(255,100,0,0.3)] filter">JK Lakshmipat University Presents</span>
                         </motion.div>
 
                         {/* Main Title - Clean & Bold */}
                         <motion.h2
-                            className="text-[14vw] sm:text-[15vw] md:text-[9rem] font-black tracking-tighter text-white uppercase leading-none mb-2 font-gang"
+                            className="text-[14vw] sm:text-[15vw] md:text-[9rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-orange-600 to-white uppercase leading-none mb-2 font-gang"
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
 
                         >
-                            SPARDHA
+                            SPARDHA'26
                         </motion.h2>
 
                         {/* Year - Neon Accent */}
@@ -197,7 +197,7 @@ export default function Hero() {
                             transition={{ delay: 0.4, duration: 0.8 }}
                         >
                             <h3 className="text-4xl sm:text-[3rem] md:text-[5rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-red-600 italic tracking-wide transform -skew-x-12">
-                                2026
+                                {/* 2026 */}
                             </h3>
                         </motion.div>
 
@@ -210,7 +210,7 @@ export default function Hero() {
                         >
                             <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-white/90">
                                 Prize Pool Worth Over{" "}
-                                <span className="text-neon-cyan font-bold">₹1,50,000+</span>
+                                <span className="text-neon-cyan font-bold">₹1,60,000+</span>
                             </p>
                         </motion.div>
 

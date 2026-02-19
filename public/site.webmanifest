@@ -9,7 +9,7 @@
     "orientation": "portrait-primary",
     "icons": [
         {
-            "src": "/favicon.ico",
+            "src": "/assets/spardha_logo.png",
             "sizes": "any",
             "type": "image/x-icon"
         }

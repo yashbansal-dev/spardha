@@ -30,6 +30,11 @@ const alice = Alice({
 export const metadata: Metadata = {
   title: "SPARDHA | JKLU Sports Fest",
   description: "Annual Sports Festival of JK Lakshmipat University (JKLU). Experience the energy.",
+  icons: {
+    icon: "/assets/images/spardha_logo.png",
+    shortcut: "/assets/images/spardha_logo.png",
+    apple: "/assets/images/spardha_logo.png",
+  },
 };
 
 export default function RootLayout({

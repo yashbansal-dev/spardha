@@ -47,7 +47,7 @@ export default function Story() {
     });
 
     return (
-        <section ref={containerRef} className="relative h-[200vh] md:h-[300vh] bg-black font-restore">
+        <section ref={containerRef} className="relative h-[400vh] md:h-[500vh] bg-black font-restore">
             {/* Sticky Wrapper */}
             <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
 
@@ -68,7 +68,7 @@ export default function Story() {
                     <motion.div
                         className="absolute inset-0"
                         style={{
-                            opacity: useTransform(smoothProgress, [0, 0.25, 0.45], [1, 1, 0]),
+                            opacity: useTransform(smoothProgress, [0, 0.1, 0.25, 0.3], [0, 1, 1, 0]),
                             willChange: "opacity"
                         }}
                     >
@@ -87,7 +87,7 @@ export default function Story() {
                     <motion.div
                         className="absolute inset-0"
                         style={{
-                            opacity: useTransform(smoothProgress, [0.3, 0.5, 0.75], [0, 1, 0]),
+                            opacity: useTransform(smoothProgress, [0.3, 0.35, 0.6, 0.65], [0, 1, 1, 0]),
                             willChange: "opacity"
                         }}
                     >
@@ -106,7 +106,7 @@ export default function Story() {
                     <motion.div
                         className="absolute inset-0"
                         style={{
-                            opacity: useTransform(smoothProgress, [0.5, 0.8, 1], [0, 1, 1]),
+                            opacity: useTransform(smoothProgress, [0.65, 0.7, 1], [0, 1, 1]),
                             willChange: "opacity"
                         }}
                     >
@@ -131,7 +131,7 @@ export default function Story() {
                     {/* Block 1 */}
                     <motion.div
                         className="col-start-1 row-start-1 w-full"
-                        style={{ opacity: useTransform(smoothProgress, [0.1, 0.35], [1, 0]), display: useTransform(smoothProgress, (v) => v > 0.35 ? "none" : "block") }}
+                        style={{ opacity: useTransform(smoothProgress, [0, 0.1, 0.25, 0.3], [0, 1, 1, 0]), display: useTransform(smoothProgress, (v) => v > 0.3 ? "none" : "block") }}
                     >
                         <div className="text-neon-cyan text-sm mb-4 tracking-[0.5em] border-b border-neon-cyan/30 inline-block pb-2">
                             MISSION_01: ORIGIN
@@ -149,8 +149,8 @@ export default function Story() {
                     <motion.div
                         className="col-start-1 row-start-1 w-full"
                         style={{
-                            opacity: useTransform(smoothProgress, [0.35, 0.5, 0.65], [0, 1, 0]),
-                            display: useTransform(smoothProgress, (v) => (v < 0.35 || v > 0.65) ? "none" : "block")
+                            opacity: useTransform(smoothProgress, [0.3, 0.35, 0.6, 0.65], [0, 1, 1, 0]),
+                            display: useTransform(smoothProgress, (v) => (v < 0.3 || v > 0.65) ? "none" : "block")
                         }}
                     >
                         <div className="text-neon-orange text-sm mb-4 tracking-[0.5em] border-b border-neon-orange/30 inline-block pb-2">
@@ -169,8 +169,8 @@ export default function Story() {
                     <motion.div
                         className="col-start-1 row-start-1 w-full"
                         style={{
-                            opacity: useTransform(smoothProgress, [0.6, 0.85], [0, 1]),
-                            display: useTransform(smoothProgress, (v) => v < 0.6 ? "none" : "block")
+                            opacity: useTransform(smoothProgress, [0.65, 0.7, 1], [0, 1, 1]),
+                            display: useTransform(smoothProgress, (v) => v < 0.65 ? "none" : "block")
                         }}
                     >
                         <div className="text-white/50 text-sm mb-4 tracking-[0.5em] border-b border-white/20 inline-block pb-2">

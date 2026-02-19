@@ -457,7 +457,7 @@ export default function EventsScrollStack() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-900/50 via-[#111] to-[#000] z-0"></div>
 
             {/* Header */}
-            <div className="event-header absolute top-[11vh] w-full z-40 pointer-events-none mix-blend-normal transition-all duration-300">
+            <div className="event-header relative md:absolute pt-24 md:pt-0 md:top-[11vh] w-full z-40 pointer-events-none mix-blend-normal transition-all duration-300">
                 <div className="w-full max-w-[1400px] mx-auto px-6 text-center">
                     <h2 className="text-neon-cyan font-gang tracking-[0.5em] text-xs md:text-sm uppercase mb-2 drop-shadow-md">The Arena</h2>
                     <h1 className="event-title text-4xl md:text-6xl xl:text-7xl font-gang text-white uppercase tracking-widest drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] transition-all duration-300">
@@ -467,7 +467,7 @@ export default function EventsScrollStack() {
             </div>
 
             {/* CARDS CONTAINER */}
-            <div ref={wrapperRef} className="relative w-full max-w-[1400px] mx-auto h-auto md:h-[55vh] md:mt-[26vh] flex flex-col md:block items-center justify-center z-10 md:perspective-1000 pb-32 md:pb-0 gap-10 md:gap-0 pt-40 md:pt-0">
+            <div ref={wrapperRef} className="relative w-full max-w-[1400px] mx-auto h-auto md:h-[55vh] md:mt-[26vh] flex flex-col md:block items-center justify-center z-10 md:perspective-1000 pb-32 md:pb-0 gap-10 md:gap-0 pt-10 md:pt-0">
                 {SPORTS_DATA.map((sport, i) => (
                     <div
                         key={sport.id}

@@ -98,7 +98,7 @@ export default function Footer() {
                         © {new Date().getFullYear()} All rights reserved <span className="text-white font-bold">JKLU</span>
                     </p>
                     <p className="flex items-center gap-2">
-                        Designed and Developed by <span className="text-neon-cyan font-bold cursor-pointer hover:underline">Yash Bansal</span>
+                        Designed and Developed by <span className="text-neon-cyan font-bold cursor-pointer hover:underline">Yash Bansal & Kartik Gupta</span>
                     </p>
                 </div>
             </div>

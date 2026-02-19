@@ -1,168 +1,183 @@
 'use client';
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { FaTrophy, FaUsers, FaUniversity, FaGamepad, FaBolt } from "react-icons/fa";
 
-const sportsArsenal = [
-    { name: "BASKETBALL", image: "/assets/games/basketball.JPG", color: "from-orange-500 to-red-600" },
-    { name: "FOOTBALL", image: "/assets/games/football.JPG", color: "from-green-500 to-emerald-600" },
-    { name: "CRICKET", image: "/assets/games/cricket.JPG", color: "from-blue-500 to-cyan-600" },
-    { name: "VOLLEYBALL", image: "/assets/games/volleyball_v2.jpg", color: "from-purple-500 to-pink-600" },
-    { name: "BADMINTON", image: "/assets/games/badminton_v2.jpg", color: "from-red-500 to-rose-600" },
+const battlefields = [
+    {
+        id: "basketball",
+        name: "BASKETBALL",
+        image: "/assets/games/basketball.JPG",
+        color: "from-orange-600 to-red-600",
+        accent: "text-orange-500",
+        stats: "5v5 // COURT"
+    },
+    {
+        id: "football",
+        name: "FOOTBALL",
+        image: "/assets/games/football.JPG",
+        color: "from-emerald-600 to-teal-600",
+        accent: "text-emerald-500",
+        stats: "7v7 // TURF"
+    },
+    {
+        id: "cricket",
+        name: "CRICKET",
+        image: "/assets/games/cricket.JPG",
+        color: "from-blue-600 to-indigo-600",
+        accent: "text-blue-500",
+        stats: "11v11 // FIELD"
+    },
+    {
+        id: "volleyball",
+        name: "VOLLEYBALL",
+        image: "/assets/games/volleyball_v2.jpg",
+        color: "from-purple-600 to-pink-600",
+        accent: "text-purple-500",
+        stats: "6v6 // NET"
+    },
+    {
+        id: "badminton",
+        name: "BADMINTON",
+        image: "/assets/games/badminton_v2.jpg",
+        color: "from-rose-600 to-red-600",
+        accent: "text-rose-500",
+        stats: "1v1 // COURT"
+    },
 ];
 
 export default function SportsArsenal() {
+    const [activeId, setActiveId] = useState<string | null>(null);
+
     return (
-        <section className="relative py-20 md:py-32 bg-black overflow-hidden">
-            {/* Animated Background */}
-            <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(227,114,51,0.15)_0%,_transparent_50%)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_rgba(0,255,255,0.1)_0%,_transparent_50%)]" />
+        <section className="relative min-h-screen bg-black overflow-hidden flex flex-col justify-center py-20 font-sans">
+
+            {/* Cyber-Grid Background */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.1)_0%,transparent_70%)]"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black,transparent)]"></div>
             </div>
 
-            {/* Section Title */}
-            <div className="container mx-auto px-4 mb-16 relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center"
-                >
-                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-4 tracking-tight">
-                        YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-red-600">BATTLEFIELD</span>
-                    </h2>
-                    <p className="text-gray-400 text-lg md:text-xl">Choose your arena. Claim your victory.</p>
-                </motion.div>
-            </div>
+            <div className="container mx-auto px-4 z-20 flex flex-col h-full items-center">
 
-            {/* CSS Animation Styles for Marquee */}
-            <style jsx>{`
-                @keyframes marquee-left {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-50%); }
-                }
-                .animate-marquee-left {
-                    display: flex;
-                    width: max-content;
-                    animation: marquee-left 40s linear infinite;
-                    will-change: transform;
-                }
-                .group:hover .animate-marquee-left {
-                    animation-play-state: paused;
-                }
-            `}</style>
+                {/* Section Header */}
+                <div className="w-full max-w-7xl mb-12 md:mb-16 flex flex-col md:flex-row items-end justify-between border-b border-white/10 pb-6">
+                    <div>
+                        <motion.h2
+                            className="text-6xl md:text-8xl font-black font-gang text-white tracking-tighter uppercase leading-none mix-blend-difference"
+                            initial={{ x: -100, opacity: 0 }}
+                            whileInView={{ x: 0, opacity: 1 }}
+                            viewport={{ once: true }}
+                        >
+                            BATTLE<span className="text-neon-cyan">FIELD</span>
+                        </motion.h2>
 
-            {/* Auto-Scrolling Marquee */}
-            <div className="relative overflow-hidden group">
-                <div className="animate-marquee-left flex gap-6">
-                    {/* First set of cards */}
-                    {sportsArsenal.map((sport, index) => (
-                        <SportCard key={`first-${index}`} sport={sport} index={index} />
-                    ))}
-                    {/* Duplicate set for seamless loop */}
-                    {sportsArsenal.map((sport, index) => (
-                        <SportCard key={`second-${index}`} sport={sport} index={index} />
-                    ))}
-                    {/* Triplicate set for larger screens/safety */}
-                    {sportsArsenal.map((sport, index) => (
-                        <SportCard key={`third-${index}`} sport={sport} index={index} />
-                    ))}
-                    {/* Quadruplicate set for safety */}
-                    {sportsArsenal.map((sport, index) => (
-                        <SportCard key={`fourth-${index}`} sport={sport} index={index} />
+                    </div>
+                </div>
+
+                {/* The Prism Deck - Using Skew for better rendering stability */}
+                <div className="w-full max-w-7xl h-[600px] flex flex-col md:flex-row gap-2 md:gap-0 pl-12 pr-12">
+                    {battlefields.map((field) => (
+                        <ShardCard
+                            key={field.id}
+                            field={field}
+                            active={activeId === field.id}
+                            onHover={() => setActiveId(field.id)}
+                            onLeave={() => setActiveId(null)}
+                        />
                     ))}
                 </div>
 
-                {/* Gradient Edges */}
-                <div className="absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-black to-transparent pointer-events-none z-10" />
-                <div className="absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-black to-transparent pointer-events-none z-10" />
-            </div>
-
-            {/* Stats Banner */}
-            <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="container mx-auto px-4 mt-16 relative z-10"
-            >
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-                    <StatPill label="Sports" value="20+" />
-                    <StatPill label="Athletes" value="500+" />
-                    <StatPill label="Colleges" value="40+" />
-                    <StatPill label="Prize Pool" value="₹1.5L+" />
+                {/* Footer Stats - Cyber HUD Style */}
+                <div className="w-full max-w-7xl mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 border-t border-white/10 pt-8">
+                    <StatHUD label="Arenas" value="05" sub="Active" />
+                    <StatHUD label="Athletes" value="500+" sub="Registered" />
+                    <StatHUD label="Institutes" value="40+" sub="Incoming" />
+                    <StatHUD label="Bounty" value="1.6L" sub="Credits" isCurrency />
                 </div>
-            </motion.div>
+
+            </div>
         </section>
     );
 }
 
-function SportCard({ sport, index }: any) {
+function ShardCard({ field, active, onHover, onLeave }: any) {
     return (
-        <div className="group relative flex-shrink-0 w-[280px] md:w-[320px] h-[400px]">
-            {/* Card Container */}
-            <div className="relative w-full h-full rounded-2xl overflow-hidden cursor-pointer">
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                    <Image
-                        src={sport.image}
-                        alt={sport.name}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-700"
-                        sizes="(max-width: 768px) 90vw, 320px"
-                    />
-                    {/* Dark Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-                </div>
+        <motion.div
+            onMouseEnter={onHover}
+            onMouseLeave={onLeave}
+            className={`
+                relative h-full transition-all duration-500 ease-out cursor-pointer
+                flex-1 md:hover:flex-[2.5] 
+                overflow-hidden
+                group
+                border border-white/10
+                md:transform md:-skew-x-12
+                md:-ml-4 first:ml-0
+                grayscale hover:grayscale-0
+                bg-white/5
+            `}
+        >
+            {/* Background Image - Counter Skewed */}
+            <div className="absolute inset-0 bg-black md:transform md:skew-x-12 md:scale-125 origin-center">
+                <Image
+                    src={field.image}
+                    alt={field.name}
+                    fill
+                    className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                />
 
-                {/* Content */}
-                <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                    {/* Sport Name */}
-                    <motion.h3
-                        className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tight group-hover:text-neon-orange transition-colors duration-300"
-                        whileHover={{ scale: 1.05 }}
-                    >
-                        {sport.name}
-                    </motion.h3>
+                {/* Scanline Overlay */}
+                <div className="absolute inset-0 bg-[linear-gradient(transparent_2px,black_3px)] bg-[size:100%_4px] opacity-20 pointer-events-none"></div>
 
-                    {/* Action Bar */}
-                    <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className={`h-1 flex-1 bg-gradient-to-r ${sport.color} rounded-full`} />
-                        <span className="text-xs text-gray-400 uppercase tracking-wider">Compete</span>
+                {/* Gradient tint */}
+                <div className={`absolute inset-0 bg-gradient-to-t ${field.color} opacity-0 group-hover:opacity-60 mix-blend-hard-light transition-opacity duration-500`}></div>
+            </div>
+
+            {/* Content Content - Counter Skewed */}
+            <div className="absolute inset-0 p-6 flex flex-col justify-end items-center md:items-start text-center md:text-left transition-all duration-500 md:transform md:skew-x-12">
+
+                {/* Glowing Border Lines */}
+                <div className="absolute top-0 left-0 w-full h-[1px] bg-white/20 group-hover:bg-neon-cyan transition-colors shadow-[0_0_10px_currentColor]"></div>
+                <div className="absolute bottom-0 right-0 w-full h-[1px] bg-white/20 group-hover:bg-neon-orange transition-colors shadow-[0_0_10px_currentColor]"></div>
+
+                {/* Text Content */}
+                <div className="relative z-10 w-full">
+                    <h3 className={`text-4xl md:text-5xl font-black font-gang uppercase tracking-tighter text-white drop-shadow-lg mb-2 transition-all duration-500 ${active ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-70'}`}>
+                        {field.name}
+                    </h3>
+
+                    <div className={`overflow-hidden transition-all duration-500 ${active ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}`}>
+                        <div className={`flex items-center gap-3 text-sm font-mono font-bold uppercase tracking-widest bg-black/80 backdrop-blur-md px-3 py-1 w-fit mx-auto md:mx-0 border-l-2 border-neon-cyan`}>
+                            <FaBolt className="text-neon-cyan" /> {field.stats}
+                        </div>
                     </div>
                 </div>
 
-                {/* Hover Glow */}
-                <div className={`absolute inset-0 bg-gradient-to-t ${sport.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500 mix-blend-overlay`} />
-
-                {/* Corner Brackets */}
-                <div className="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-white/30 group-hover:border-neon-orange transition-colors duration-300" />
-                <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-white/30 group-hover:border-neon-orange transition-colors duration-300" />
             </div>
 
-            {/* Floating Particles on Hover */}
-            <motion.div
-                className="absolute -top-2 -right-2 w-4 h-4 bg-neon-orange rounded-full opacity-0 group-hover:opacity-100"
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-            />
-        </div>
+            {/* Hover Glitch Effect Overlay */}
+            <div className="absolute inset-0 bg-white mix-blend-overlay opacity-0 group-hover:animate-pulse pointer-events-none md:transform md:skew-x-12"></div>
+        </motion.div>
     );
 }
 
-function StatPill({ label, value }: { label: string; value: string }) {
+function StatHUD({ label, value, sub, isCurrency }: any) {
     return (
-        <motion.div
-            whileHover={{ scale: 1.05, y: -5 }}
-            className="relative p-4 rounded-xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-sm group cursor-pointer overflow-hidden"
-        >
-            {/* Animated background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-neon-orange/0 via-neon-orange/10 to-neon-orange/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-
-            <div className="relative z-10 text-center">
-                <div className="text-2xl md:text-3xl font-black text-neon-orange mb-1">{value}</div>
-                <div className="text-xs text-gray-400 uppercase tracking-wider">{label}</div>
+        <div className="flex items-center gap-4 group">
+            <div className="h-12 w-1 bg-white/20 group-hover:bg-neon-cyan transition-colors"></div>
+            <div>
+                <div className="flex items-baseline gap-1">
+                    {isCurrency && <span className="text-neon-orange text-lg">₹</span>}
+                    <span className="text-4xl md:text-5xl font-black text-white font-gang tracking-tighter">{value}</span>
+                </div>
+                <div className="flex gap-2 text-xs font-mono uppercase tracking-wider text-gray-500 group-hover:text-white transition-colors">
+                    <span className="text-neon-cyan">{label}</span> // {sub}
+                </div>
             </div>
-        </motion.div>
+        </div>
     );
 }
