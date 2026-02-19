@@ -77,7 +77,7 @@ export default function Story() {
                                 src="/assets/1.JPG"
                                 alt="Volleyball Match"
                                 fill
-                                className="object-cover"
+                                className="!object-contain md:!object-cover"
                                 priority
                                 quality={100}
                             />
@@ -97,7 +97,7 @@ export default function Story() {
                                 src="/assets/2.JPG"
                                 alt="Basketball Match"
                                 fill
-                                className="object-cover"
+                                className="!object-contain md:!object-cover"
                                 quality={100}
                             />
                         </div>
@@ -116,7 +116,7 @@ export default function Story() {
                                 src="/assets/3.JPG"
                                 alt="Basketball Action"
                                 fill
-                                className="object-cover"
+                                className="!object-contain md:!object-cover"
                                 quality={100}
                             />
                         </div>
