@@ -126,8 +126,9 @@ function ShardCard({ field, active, onHover, onLeave }: any) {
                     src={field.image}
                     alt={field.name}
                     fill
-                    className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                    className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
                     sizes="(max-width: 768px) 100vw, 33vw"
+                    quality={100}
                 />
 
                 {/* Scanline Overlay */}

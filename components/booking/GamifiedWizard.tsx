@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
 import AthleteCardBuilder from './steps/AthleteCardBuilder';
@@ -56,7 +56,7 @@ export default function GamifiedWizard() {
     };
 
     // GLOBAL CART CONTEXT
-    const { items: cart, addToCart, removeFromCart } = useCart();
+    const { items: cart, addToCart, removeFromCart, setCart } = useCart();
 
     // We no longer need local cart state or URL parsing for it, as the context persists it.
     // However, if we want to support URL params adding to the global cart on load, we can add an effect.
@@ -129,6 +129,78 @@ export default function GamifiedWizard() {
             setStep(prev => prev - 1);
         }
     };
+
+    // ----------------------------------------------------------------------
+    // AUTO-SAVE & RESTORE LOGIC
+    // ----------------------------------------------------------------------
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://spardha-backend-production.up.railway.app';
+    const [isRestoring, setIsRestoring] = useState(false);
+
+    // 1. Restore Draft on Mount (if email exists in localStorage or just check)
+    useEffect(() => {
+        const checkDraft = async () => {
+            // Try to get email from localStorage if we saved it there previously
+            const savedEmail = localStorage.getItem('spardha-user-email');
+            if (!savedEmail) return;
+
+            try {
+                setIsRestoring(true);
+                console.log("Found saved email, checking for draft...", savedEmail);
+                const res = await fetch(`${API_URL}/api/draft?email=${savedEmail}`);
+                const data = await res.json();
+
+                if (data.success && data.draft) {
+                    console.log("Restoring draft:", data.draft);
+                    const { step: savedStep, userData: savedUserData, cart: savedCart, teamMembers: savedTeamMembers } = data.draft;
+
+                    if (savedUserData) setUserData(savedUserData);
+                    if (savedCart && savedCart.length > 0) setCart(savedCart);
+                    if (savedTeamMembers) setTeamMembers(savedTeamMembers);
+                    // Optional: Restore step, or let user start at 1 but with data filled
+                    if (savedStep && savedStep > 1) setStep(savedStep);
+                }
+            } catch (err) {
+                console.error("Failed to restore draft", err);
+            } finally {
+                setIsRestoring(false);
+            }
+        };
+
+        checkDraft();
+    }, []);
+
+    // 2. Auto-Save when state changes
+    useEffect(() => {
+        // Debounce save
+        const timer = setTimeout(async () => {
+            if (!userData.email || !userData.email.includes('@')) return;
+
+            // Save email to local storage to enable restore on return
+            localStorage.setItem('spardha-user-email', userData.email);
+
+            try {
+                // Formatting payload
+                const payload = {
+                    email: userData.email,
+                    step,
+                    userData,
+                    cart,
+                    teamMembers
+                };
+
+                await fetch(`${API_URL}/api/save-draft`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                console.log("Draft auto-saved");
+            } catch (err) {
+                console.error("Failed to auto-save draft", err);
+            }
+        }, 2000); // 2 second debounce
+
+        return () => clearTimeout(timer);
+    }, [userData, cart, teamMembers, step]);
 
     const steps = [
         { id: 1, title: 'Athlete Profile' },

@@ -89,7 +89,7 @@ export default function Hero() {
                         className="absolute inset-0 bg-cover bg-center will-change-transform"
                         style={{
                             // backgroundImage: `url("${HERO_IMAGES[currentImageIndex]}")`, // Removed to prevent double loading
-                            filter: 'brightness(0.5) contrast(1.1)',
+                            filter: 'brightness(0.8)',
                             backfaceVisibility: 'hidden',
                         }}
                         initial={{
@@ -115,6 +115,7 @@ export default function Hero() {
                             fill
                             className="object-cover object-center"
                             priority
+                            quality={100}
                             sizes="100vw"
                         />
                         {/* Preload next image for smoothness */}

@@ -19,6 +19,7 @@ interface CartContextType {
     addToCart: (item: CartItem) => void;
     removeFromCart: (itemId: string) => void;
     toggleCart: () => void;
+    setCart: (items: CartItem[]) => void;
     totalAmount: number;
 }
 
@@ -60,10 +61,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     const toggleCart = () => setIsOpen(prev => !prev);
 
+    // Allow external updates (e.g. from draft restore)
+    const setCart = (newItems: CartItem[]) => {
+        setItems(newItems);
+    };
+
     const totalAmount = items.reduce((sum, item) => sum + item.price, 0);
 
     return (
-        <CartContext.Provider value={{ items, isOpen, addToCart, removeFromCart, toggleCart, totalAmount }}>
+        <CartContext.Provider value={{ items, isOpen, addToCart, removeFromCart, toggleCart, setCart, totalAmount }}>
             {children}
         </CartContext.Provider>
     );

@@ -68,7 +68,7 @@ export default function Story() {
                     <motion.div
                         className="absolute inset-0"
                         style={{
-                            opacity: useTransform(smoothProgress, [0, 0.1, 0.25, 0.3], [0, 1, 1, 0]),
+                            opacity: useTransform(smoothProgress, [0, 0.1, 0.3, 0.4], [0, 1, 1, 0]),
                             willChange: "opacity"
                         }}
                     >
@@ -79,6 +79,7 @@ export default function Story() {
                                 fill
                                 className="object-cover"
                                 priority
+                                quality={100}
                             />
                         </div>
                     </motion.div>
@@ -87,7 +88,7 @@ export default function Story() {
                     <motion.div
                         className="absolute inset-0"
                         style={{
-                            opacity: useTransform(smoothProgress, [0.3, 0.35, 0.6, 0.65], [0, 1, 1, 0]),
+                            opacity: useTransform(smoothProgress, [0.3, 0.4, 0.6, 0.7], [0, 1, 1, 0]),
                             willChange: "opacity"
                         }}
                     >
@@ -106,7 +107,7 @@ export default function Story() {
                     <motion.div
                         className="absolute inset-0"
                         style={{
-                            opacity: useTransform(smoothProgress, [0.65, 0.7, 1], [0, 1, 1]),
+                            opacity: useTransform(smoothProgress, [0.6, 0.7, 1], [0, 1, 1]),
                             willChange: "opacity"
                         }}
                     >
@@ -116,12 +117,13 @@ export default function Story() {
                                 alt="Basketball Action"
                                 fill
                                 className="object-cover"
+                                quality={100}
                             />
                         </div>
                     </motion.div>
 
                     {/* Digital Noise Overlay */}
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black pointer-events-none"></div>
                 </div>
 
