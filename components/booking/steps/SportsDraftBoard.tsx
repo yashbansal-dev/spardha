@@ -18,7 +18,7 @@ export const ALL_SPORTS = [
         hasGender: true,
         bgGradient: 'from-blue-900 to-slate-900',
         prizes: { boys: 33000, girls: 8000 },
-        fees: { boys: 400, girls: 0 },
+        fees: { boys: 400, girls: 1 },
         price: 400
     },
     {
@@ -27,7 +27,7 @@ export const ALL_SPORTS = [
         icon: FaFutbol,
         bg: 'https://images.unsplash.com/photo-1579952363873-27f3bde87a34?auto=format&fit=crop&q=80',
         hasGender: true,
-        fees: { boys: 250, girls: 0 },
+        fees: { boys: 250, girls: 1 },
         price: 250
     },
     {
@@ -36,7 +36,7 @@ export const ALL_SPORTS = [
         icon: FaBasketballBall,
         bg: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80',
         hasGender: true,
-        fees: { boys: 250, girls: 0 },
+        fees: { boys: 250, girls: 1 },
         price: 250
     },
     {
@@ -45,7 +45,7 @@ export const ALL_SPORTS = [
         icon: GiVolleyballBall,
         bg: '/assets/games/volleyball_v2.jpg',
         hasGender: true,
-        fees: { boys: 250, girls: 0 },
+        fees: { boys: 250, girls: 1 },
         price: 250
     },
     {
@@ -54,7 +54,7 @@ export const ALL_SPORTS = [
         icon: GiShuttlecock,
         bg: '/assets/games/badminton_v2.jpg',
         hasGender: true,
-        fees: { boys: 250, girls: 0 },
+        fees: { boys: 250, girls: 1 },
         price: 250
     },
     {
@@ -63,7 +63,7 @@ export const ALL_SPORTS = [
         icon: GiShuttlecock,
         bg: 'https://images.unsplash.com/photo-1626224583764-847890e058f5?auto=format&fit=crop&q=80',
         hasGender: true,
-        fees: { boys: 500, girls: 0 },
+        fees: { boys: 500, girls: 1 },
         price: 500
     },
     {
@@ -99,7 +99,7 @@ export const ALL_SPORTS = [
         icon: FaChessKing,
         bg: 'https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&q=80',
         hasGender: true,
-        fees: { boys: 150, girls: 0 },
+        fees: { boys: 150, girls: 1 },
         price: 150
     },
     {
