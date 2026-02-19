@@ -25,7 +25,6 @@ interface Props {
 export default function ArenaPayment({ userData, teamMembers, cart, onPrev, amount }: Props) {
     const [isProcessing, setIsProcessing] = useState(false);
     const [showTunnel, setShowTunnel] = useState(true);
-    const [paymentMethod, setPaymentMethod] = useState('CARD'); // Default method
     const [sdkLoaded, setSdkLoaded] = useState(false);
 
     // Initial Tunnel Effect & Load SDK
@@ -151,21 +150,6 @@ export default function ArenaPayment({ userData, teamMembers, cart, onPrev, amou
                         <span className="text-4xl font-mono font-bold text-neon-cyan">₹{amount.toFixed(2)}</span>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 w-full mb-8">
-                        {['UPI', 'CARD', 'NET BANKING', 'WALLET'].map((method) => (
-                            <button
-                                key={method}
-                                onClick={() => setPaymentMethod(method)}
-                                className={`p-4 rounded-lg font-bold uppercase transition-all flex flex-col items-center gap-2 border ${paymentMethod === method ? 'bg-neon-cyan text-black border-neon-cyan shadow-[0_0_20px_rgba(0,243,255,0.4)]' : 'bg-white/5 hover:bg-white/10 border-white/10 text-gray-300'}`}
-                            >
-                                {method === 'UPI' && <FaWallet className="text-xl" />}
-                                {method === 'CARD' && <FaCreditCard className="text-xl" />}
-                                {method === 'NET BANKING' && <FaUniversity className="text-xl" />}
-                                {method === 'WALLET' && <FaWallet className="text-xl" />}
-                                <span>{method}</span>
-                            </button>
-                        ))}
-                    </div>
 
                     <div className="w-full">
                         <button

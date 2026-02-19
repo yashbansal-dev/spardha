@@ -1,10 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { SportItem, UserData } from '../GamifiedWizard';
 import { TeamMember } from './TeamRoster';
 import { FaBarcode, FaQrcode, FaCheckCircle, FaLock, FaUsers } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+
+declare global {
+    interface Window {
+        Cashfree: any;
+    }
+}
 
 interface Props {
     cart: SportItem[];
@@ -16,9 +22,84 @@ interface Props {
 
 export default function FinalEntryPass({ cart, userData, teamMembers, onNext, onPrev }: Props) {
 
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [sdkLoaded, setSdkLoaded] = useState(false);
+
     // Calculations
     const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
     const total = subtotal;
+
+    // Load Cashfree SDK
+    React.useEffect(() => {
+        const loadSdk = () => {
+            const script = document.createElement('script');
+            script.src = 'https://sdk.cashfree.com/js/v3/cashfree.js';
+            script.onload = () => {
+                console.log('✅ Cashfree SDK Loaded');
+                setSdkLoaded(true);
+            };
+            document.body.appendChild(script);
+        };
+        loadSdk();
+    }, []);
+
+    const handlePayment = async () => {
+        if (!sdkLoaded) {
+            alert('Payment SDK is still loading. Please wait...');
+            return;
+        }
+
+        setIsProcessing(true);
+
+        try {
+            // 1. Create Order on Backend
+            const response = await fetch('/api/payments/create-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    amount: total,
+                    customerName: userData.fullName,
+                    customerEmail: userData.email,
+                    customerPhone: userData.phone,
+                    customerGender: userData.gender,
+                    customerAge: userData.age,
+                    universityName: userData.college,
+                    universityIdCard: userData.universityIdCard,
+                    address: userData.address,
+                    teamMembers: teamMembers,
+                    items: cart.map(item => ({
+                        id: item.id,
+                        title: item.name,
+                        category: item.category,
+                        price: item.price
+                    }))
+                }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                // 2. Initialize Cashfree Payment
+                const cashfree = new window.Cashfree({
+                    mode: data.data.environment || 'sandbox',
+                });
+
+                const checkoutOptions = {
+                    paymentSessionId: data.data.payment_session_id,
+                    redirectTarget: '_self',
+                };
+
+                cashfree.checkout(checkoutOptions);
+            } else {
+                alert('Failed to create order: ' + data.message);
+                setIsProcessing(false);
+            }
+        } catch (error) {
+            console.error('Payment Error:', error);
+            alert('Payment initialization failed.');
+            setIsProcessing(false);
+        }
+    };
 
     return (
         <div className="h-full flex flex-col items-center justify-center p-4">
@@ -89,17 +170,24 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
                     </div>
 
                     <button
-                        onClick={onNext}
-                        className="w-full bg-black text-white py-4 font-black italic uppercase tracking-wider hover:bg-neon-cyan hover:text-black transition-colors flex items-center justify-center gap-2 group"
+                        onClick={handlePayment}
+                        disabled={isProcessing}
+                        className="w-full bg-black text-white py-4 font-black italic uppercase tracking-wider hover:bg-neon-cyan hover:text-black transition-colors flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        <FaLock className="text-sm group-hover:hidden" />
-                        <span>Confirm</span>
+                        {isProcessing ? (
+                            <span className="animate-pulse">Processing...</span>
+                        ) : (
+                            <>
+                                <FaLock className="text-sm group-hover:hidden" />
+                                <span>PAY & JOIN</span>
+                            </>
+                        )}
                     </button>
                 </div>
             </motion.div>
 
             <div className="mt-8">
-                <button onClick={onPrev} className="text-gray-500 hover:text-white transition-colors text-sm uppercase tracking-widest">
+                <button onClick={onPrev} disabled={isProcessing} className="text-gray-500 hover:text-white transition-colors text-sm uppercase tracking-widest">
                     &larr; Modified Selection
                 </button>
             </div>

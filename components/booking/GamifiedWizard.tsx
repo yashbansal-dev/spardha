@@ -6,7 +6,6 @@ import { useSearchParams } from 'next/navigation';
 import AthleteCardBuilder from './steps/AthleteCardBuilder';
 import SportsDraftBoard, { ALL_SPORTS } from './steps/SportsDraftBoard';
 import FinalEntryPass from './steps/FinalEntryPass';
-import ArenaPayment from './steps/ArenaPayment';
 import VictoryMoment from './steps/VictoryMoment';
 import TeamRoster, { TeamMember } from './steps/TeamRoster';
 
@@ -29,6 +28,38 @@ export type SportItem = CartItem;
 import { useCart } from '@/context/CartContext';
 
 // ... imports ...
+
+// Simple Error Boundary Component
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean, error: Error | null }> {
+    constructor(props: { children: React.ReactNode }) {
+        super(props);
+        this.state = { hasError: false, error: null };
+    }
+
+    static getDerivedStateFromError(error: Error) {
+        return { hasError: true, error };
+    }
+
+    componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+        console.error("Uncaught error:", error, errorInfo);
+    }
+
+    render() {
+        if (this.state.hasError) {
+            return (
+                <div className="p-8 text-center border border-red-500 bg-red-900/20 rounded-xl my-8">
+                    <h2 className="text-xl font-bold text-red-500 mb-2">SYSTEM FAILURE</h2>
+                    <p className="text-gray-400 mb-4">The module crashed. Please refresh or contact support.</p>
+                    <pre className="text-xs text-left bg-black p-4 rounded text-red-400 overflow-auto max-h-40">
+                        {this.state.error?.toString()}
+                    </pre>
+                </div>
+            );
+        }
+
+        return this.props.children;
+    }
+}
 
 export default function GamifiedWizard() {
     const searchParams = useSearchParams();
@@ -207,8 +238,7 @@ export default function GamifiedWizard() {
         { id: 2, title: 'Sport Selection' },
         { id: 3, title: 'Team Roster' },
         { id: 4, title: 'Final Pass' },
-        { id: 5, title: 'Payment' },
-        { id: 6, title: 'Victory' }
+        { id: 5, title: 'Victory' }
     ];
 
 
@@ -239,67 +269,60 @@ export default function GamifiedWizard() {
 
             {/* Main Stage */}
             <main className="flex-1 w-full max-w-7xl mx-auto pt-24 pb-12 px-4 relative overflow-y-auto overflow-x-hidden">
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={step}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.4, ease: "anticipate" }}
-                        className="h-full"
-                    >
-                        {step === 1 && (
-                            <AthleteCardBuilder
-                                data={userData}
-                                updateData={setUserData}
-                                onNext={nextStep}
-                            />
-                        )}
-                        {step === 2 && (
-                            <SportsDraftBoard
-                                cart={cart}
-                                addToCart={addToCart}
-                                removeFromCart={removeFromCart}
-                                onNext={nextStep}
-                                onPrev={prevStep}
-                            />
-                        )}
-                        {step === 3 && (
-                            <TeamRoster
-                                cart={cart}
-                                teamMembers={teamMembers}
-                                updateTeamMembers={updateTeamMembers}
-                                onNext={nextStep}
-                                onPrev={prevStep}
-                            />
-                        )}
-                        {step === 4 && (
-                            <FinalEntryPass
-                                cart={cart}
-                                userData={userData}
-                                teamMembers={teamMembers}
-                                onNext={nextStep}
-                                onPrev={prevStep}
-                            />
-                        )}
-                        {step === 5 && (
-                            <ArenaPayment
-                                userData={userData}
-                                teamMembers={teamMembers} // Pass team data
-                                cart={cart}
-                                onPrev={prevStep}
-                                amount={cart.reduce((acc, item) => acc + item.price, 0)}
-
-                            />
-                        )}
-                        {step === 6 && (
-                            <VictoryMoment
-                                orderId={orderId}
-                                cart={cart}
-                            />
-                        )}
-                    </motion.div>
-                </AnimatePresence>
+                <ErrorBoundary>
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={step}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                            transition={{ duration: 0.4, ease: "anticipate" }}
+                            className="h-full"
+                        >
+                            {step === 1 && (
+                                <AthleteCardBuilder
+                                    data={userData}
+                                    updateData={setUserData}
+                                    onNext={nextStep}
+                                />
+                            )}
+                            {step === 2 && (
+                                <SportsDraftBoard
+                                    cart={cart}
+                                    addToCart={addToCart}
+                                    removeFromCart={removeFromCart}
+                                    onNext={nextStep}
+                                    onPrev={prevStep}
+                                />
+                            )}
+                            {step === 3 && (
+                                <TeamRoster
+                                    cart={cart}
+                                    teamMembers={teamMembers}
+                                    updateTeamMembers={updateTeamMembers}
+                                    onNext={nextStep}
+                                    onPrev={prevStep}
+                                />
+                            )}
+                            {step === 4 && (
+                                <FinalEntryPass
+                                    cart={cart}
+                                    userData={userData}
+                                    teamMembers={teamMembers}
+                                    onNext={nextStep}
+                                    onPrev={prevStep}
+                                />
+                            )}
+                            {/* ArenaPayment Removed */}
+                            {step === 5 && (
+                                <VictoryMoment
+                                    orderId={orderId}
+                                    cart={cart}
+                                />
+                            )}
+                        </motion.div>
+                    </AnimatePresence>
+                </ErrorBoundary>
             </main>
         </div>
     );
