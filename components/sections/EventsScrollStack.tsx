@@ -252,13 +252,11 @@ const EventCardContent = ({ sport, index, onOpenRules }: { sport: typeof SPORTS_
                     fill
                     sizes="(max-width: 768px) 100vw, 80vw"
                     priority={index === 0}
-                    className="object-cover opacity-70 group-hover:opacity-80 group-hover:scale-110 transition-all duration-700"
+                    className="object-cover group-hover:scale-110 transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-500"></div>
             </div>
 
-            {/* GRADIENT BG */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${sport.color} opacity-40 group-hover:opacity-60 transition-opacity duration-500 mix-blend-overlay z-0`}></div>
+
 
             {/* Neon Glow Border */}
             <div className={`absolute inset-0 rounded-[30px] border border-white/5 group-hover:border-${sport.badgeColor.split('-')[1]}-400/50 transition-colors duration-500 pointer-events-none`}></div>
@@ -451,7 +449,7 @@ export default function EventsScrollStack() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative min-h-[100dvh] w-full bg-[#1a1a1a] overflow-x-hidden">
+        <section ref={sectionRef} className="relative h-[100vh] w-full bg-[#1a1a1a] overflow-hidden">
 
             {/* Background Elements */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-900/50 via-[#111] to-[#000] z-0"></div>
@@ -460,7 +458,7 @@ export default function EventsScrollStack() {
             <div className="event-header relative md:absolute pt-24 md:pt-0 md:top-[11vh] w-full z-40 pointer-events-none mix-blend-normal transition-all duration-300">
                 <div className="w-full max-w-[1400px] mx-auto px-6 text-center">
                     <h2 className="text-neon-cyan font-gang tracking-[0.5em] text-xs md:text-sm uppercase mb-2 drop-shadow-md">The Arena</h2>
-                    <h1 className="event-title text-4xl md:text-6xl xl:text-7xl font-gang text-white uppercase tracking-widest drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] transition-all duration-300">
+                    <h1 className="event-title text-4xl md:text-6xl xl:text-7xl font-gang uppercase tracking-widest drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] transition-all duration-300 bg-gradient-to-r from-spardha-orange to-white bg-clip-text text-transparent">
                         Event Schedule
                     </h1>
                 </div>

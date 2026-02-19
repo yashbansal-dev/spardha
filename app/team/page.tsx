@@ -34,6 +34,18 @@ const teamMembers = [
         members: [
 
             {
+                name: 'Vaibhav Topiwala',
+                position: 'Head Of Sports',
+                image: '/assets/Core_photos/VaibhavTopiwala.jpeg',
+                bio: 'Leading the sports committee with vision and dedication.'
+            },
+            {
+                name: 'Ishaan Saraswat',
+                position: 'General Secretary',
+                image: '/assets/Core_photos/IshaanSaraswat.jpeg',
+                bio: 'Coordinating student activities and ensuring seamless operations.'
+            },
+            {
                 name: 'Aman Prakash',
                 position: 'Sports Affairs',
                 image: '/assets/Core_photos/aman_prakash.jpg',

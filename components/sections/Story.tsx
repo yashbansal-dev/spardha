@@ -74,7 +74,7 @@ export default function Story() {
                     >
                         <div className="relative w-full h-full">
                             <NextImage
-                                src="/assets/images/media_1.jpeg"
+                                src="/assets/1.JPG"
                                 alt="Volleyball Match"
                                 fill
                                 className="object-cover"
@@ -94,7 +94,7 @@ export default function Story() {
                     >
                         <div className="relative w-full h-full">
                             <NextImage
-                                src="/assets/images/media_2.jpeg"
+                                src="/assets/2.JPG"
                                 alt="Basketball Match"
                                 fill
                                 className="object-cover"
@@ -113,7 +113,7 @@ export default function Story() {
                     >
                         <div className="relative w-full h-full">
                             <NextImage
-                                src="/assets/images/media_3.jpeg"
+                                src="/assets/3.JPG"
                                 alt="Basketball Action"
                                 fill
                                 className="object-cover"
