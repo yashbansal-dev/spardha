@@ -11,7 +11,7 @@ const bg1 = '/assets/images/media_1.jpeg';
 
 const teamMembers = [
     {
-        role: 'Faculty Coordinators',
+        role: 'Student Affairs',
         gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
         members: [
             {
@@ -137,8 +137,8 @@ const Team = () => {
                             transition={{ duration: 0.6 }}
                             className="text-center"
                         >
-                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-spardha-text mb-6">
-                                Meet The <span className="text-spardha-gold">Team</span>
+                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold mb-6 bg-gradient-to-r from-spardha-orange-dark to-white bg-clip-text text-transparent">
+                                Meet The <span className="!font-gang">Team</span>
                             </h1>
                             <p className="text-base md:text-lg lg:text-xl text-spardha-textMuted max-w-4xl mx-auto px-4 sm:px-0">
                                 The dedicated individuals working tirelessly to make Spardha 2026 an unforgettable experience
@@ -211,7 +211,7 @@ const Team = () => {
                                                             {/* Member Image Animation */}
                                                             <motion.div
                                                                 animate={{
-                                                                    filter: isActive ? 'blur(0px) grayscale(0%)' : 'blur(8px) grayscale(60%)',
+                                                                    filter: 'grayscale(0%)',
                                                                     scale: isActive ? 1.05 : 1
                                                                 }}
                                                                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -235,12 +235,7 @@ const Team = () => {
                                                                     </div>
                                                                 )}
 
-                                                                {/* Initials Placeholder */}
-                                                                <div className="absolute inset-0 flex items-center justify-center">
-                                                                    <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-black text-white/25">
-                                                                        {member.name.split(' ').map(n => n[0]).join('')}
-                                                                    </span>
-                                                                </div>
+
                                                             </motion.div>
 
                                                             {/* Gradient Overlay */}
@@ -329,12 +324,7 @@ const Team = () => {
                                                                 backgroundSize: '20px 20px'
                                                             }}></div>
 
-                                                            {/* Initials Overlay */}
-                                                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                                                <span className={`font-heading font-black text-white/30 group-hover:text-white/40 transition-all duration-500 ${isActive ? 'text-5xl sm:text-6xl md:text-7xl lg:text-8xl' : 'text-4xl sm:text-5xl md:text-6xl'}`}>
-                                                                    {member.name.split(' ').map(n => n[0]).join('')}
-                                                                </span>
-                                                            </div>
+
 
                                                             {/* Info Bar - Slides up only on Hover */}
                                                             <div className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 transition-all duration-500 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>

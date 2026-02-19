@@ -71,7 +71,7 @@ export default function SportsArsenal() {
                             whileInView={{ x: 0, opacity: 1 }}
                             viewport={{ once: true }}
                         >
-                            BATTLE<span className="text-neon-cyan">FIELD</span>
+                            BATTLE<span className="text-neon-cyan !font-gang">FIELD</span>
                         </motion.h2>
 
                     </div>
@@ -92,7 +92,7 @@ export default function SportsArsenal() {
 
                 {/* Footer Stats - Cyber HUD Style */}
                 <div className="w-full max-w-7xl mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 border-t border-white/10 pt-8">
-                    <StatHUD label="Arenas" value="05" sub="Active" />
+                    <StatHUD label="Arenas" value="11" sub="Active" />
                     <StatHUD label="Athletes" value="500+" sub="Registered" />
                     <StatHUD label="Institutes" value="40+" sub="Incoming" />
                     <StatHUD label="Bounty" value="1.6L" sub="Credits" isCurrency />
@@ -133,8 +133,7 @@ function ShardCard({ field, active, onHover, onLeave }: any) {
                 {/* Scanline Overlay */}
                 <div className="absolute inset-0 bg-[linear-gradient(transparent_2px,black_3px)] bg-[size:100%_4px] opacity-20 pointer-events-none"></div>
 
-                {/* Gradient tint */}
-                <div className={`absolute inset-0 bg-gradient-to-t ${field.color} opacity-0 group-hover:opacity-60 mix-blend-hard-light transition-opacity duration-500`}></div>
+
             </div>
 
             {/* Content Content - Counter Skewed */}
@@ -146,7 +145,12 @@ function ShardCard({ field, active, onHover, onLeave }: any) {
 
                 {/* Text Content */}
                 <div className="relative z-10 w-full">
-                    <h3 className={`text-4xl md:text-5xl font-black font-gang uppercase tracking-tighter text-white drop-shadow-lg mb-2 transition-all duration-500 ${active ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-70'}`}>
+                    <h3 className={`font-gang uppercase text-white drop-shadow-lg mb-2 transition-all duration-500 ease-out origin-left
+                        ${active
+                            ? 'text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter opacity-100 translate-y-0 scale-100 whitespace-nowrap'
+                            : 'text-sm md:text-xl font-bold tracking-widest opacity-60 translate-y-8 scale-100 whitespace-normal break-words leading-tight'
+                        }
+                    `}>
                         {field.name}
                     </h3>
 
