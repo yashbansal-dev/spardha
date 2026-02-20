@@ -449,7 +449,7 @@ export default function EventsScrollStack() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative h-[100vh] w-full bg-[#1a1a1a] overflow-hidden">
+        <section ref={sectionRef} className="relative w-full bg-[#1a1a1a] md:h-[100vh] md:overflow-hidden h-auto overflow-x-hidden min-h-screen">
 
             {/* Background Elements */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-900/50 via-[#111] to-[#000] z-0"></div>
