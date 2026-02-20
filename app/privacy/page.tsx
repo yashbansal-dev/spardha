@@ -22,7 +22,7 @@ export default function Privacy() {
                     <p>We implement security measures to protect your personal information from unauthorized access.</p>
 
                     <h2 className="text-2xl font-bold text-white mt-8 mb-4">Contact Us</h2>
-                    <p>If you have any questions about this Privacy Policy, please contact us at support@spardha.jklu.edu.in.</p>
+                    <p>If you have any questions about this Privacy Policy, please contact us at spardha@jklu.edu.in.</p>
                 </div>
             </div>
             <Footer />

@@ -19,7 +19,7 @@ export default function Terms() {
                     <p>Participants are expected to behave with sportsmanship and respect towards others. Any form of harassment or misconduct will result in immediate disqualification.</p>
 
                     <h2 className="text-2xl font-bold text-white mt-8 mb-4">3. Intellectual Property</h2>
-                    <p>All content on this website, including logos, text, and images, is the property of Jitu Lakshmipat University and Spardha 2026.</p>
+                    <p>All content on this website, including logos, text, and images, is the property of JK Lakshmipat University and Spardha 2026.</p>
 
                     <h2 className="text-2xl font-bold text-white mt-8 mb-4">4. Limitation of Liability</h2>
                     <p>Spardha 2026 is not liable for any injuries or damages sustained during the event, except where required by law.</p>

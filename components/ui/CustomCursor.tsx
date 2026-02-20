@@ -52,7 +52,7 @@ export default function CustomCursor() {
     // Optimized hover detection - reduced throttle to 16ms (60fps) for instant feeling
     const handleMouseOver = useCallback((e: MouseEvent) => {
         const now = Date.now();
-        if (now - lastCheckRef.current < 16) return; 
+        if (now - lastCheckRef.current < 16) return;
         lastCheckRef.current = now;
 
         const target = e.target as HTMLElement;
