@@ -21,19 +21,26 @@ export default function PaymentSuccessPage() {
 
         const verifyPayment = async () => {
             try {
-                // Determine API URL based on environment
-                const apiUrl = '';
-
                 // Call verification endpoint
-                const response = await fetch(`${apiUrl}/api/payments/verify/${orderId}`);
+                const response = await fetch(`/api/payments/verify/${orderId}`);
                 const data = await response.json();
 
-                if (data.success && (data.data[0]?.payment_status === 'SUCCESS' || data.data.order_status === 'PAID')) {
+                // data.data is an array of payments — check the last payment
+                const paymentsArr = Array.isArray(data.data) ? data.data : [];
+                const lastPayment = paymentsArr[paymentsArr.length - 1];
+                const isPaid = data.success && lastPayment?.payment_status === 'SUCCESS';
+
+                if (isPaid) {
                     setStatus('success');
                     setOrderDetails(data.data);
 
-                    // Trigger the success handler to generate QR and emails
-                    fetch(`/api/payments/success/${orderId}`);
+                    // Trigger the success handler to generate QR and send email
+                    // Backend has a retry loop — await so we don't fire-and-forget
+                    try {
+                        await fetch(`/api/payments/success/${orderId}`);
+                    } catch (e) {
+                        console.error('Success handler error (non-fatal, webhook is fallback):', e);
+                    }
                 } else {
                     setStatus('failed');
                 }
