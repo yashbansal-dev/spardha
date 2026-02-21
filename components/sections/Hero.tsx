@@ -22,6 +22,7 @@ export default function Hero() {
     const ref = useRef(null);
     const { scrollY } = useScroll();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(true); // Default true for safety layout
 
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
@@ -41,6 +42,14 @@ export default function Hero() {
             setIsModalOpen(true);
         }
     };
+
+    // Client-side detection for mobile
+    useEffect(() => {
+        setIsMobile(window.innerWidth < 768);
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Slideshow Logic
     useEffect(() => {
@@ -83,14 +92,12 @@ export default function Hero() {
                 className="absolute inset-0 z-0"
                 style={{ y: bgY }}
             >
-                <AnimatePresence mode="popLayout">
+                <AnimatePresence>
                     <motion.div
                         key={currentImageIndex}
-                        className="absolute inset-0 bg-cover bg-center will-change-transform"
+                        className="absolute inset-0"
                         style={{
-                            // backgroundImage: `url("${HERO_IMAGES[currentImageIndex]}")`, // Removed to prevent double loading
                             filter: 'brightness(0.8)',
-                            backfaceVisibility: 'hidden',
                         }}
                         initial={{
                             opacity: 0,
@@ -98,15 +105,15 @@ export default function Hero() {
                         }}
                         animate={{
                             opacity: 1,
-                            scale: 1.05, // Subtle Ken Burns zoom
+                            scale: isMobile ? 1 : 1.05,
                         }}
                         exit={{
                             opacity: 0,
-                            scale: 1.05,
+                            scale: isMobile ? 1 : 1.05,
                         }}
                         transition={{
                             opacity: { duration: 1.2, ease: "easeInOut" },
-                            scale: { duration: 7, ease: "linear" } // Slow zoom during display
+                            scale: { duration: 7, ease: "linear" } 
                         }}
                     >
                         <Image
@@ -117,8 +124,8 @@ export default function Hero() {
                             priority
                             sizes="(max-width: 768px) 100vw, 100vw"
                         />
-                        {/* Preload next image for smoothness */}
-                        <div className="hidden">
+                        {/* Preload next image efficiently without display: none DOM issues on mobile browsers */}
+                        <div className="absolute opacity-0 pointer-events-none -z-10 w-[1px] h-[1px] overflow-hidden">
                             <Image
                                 src={HERO_IMAGES[(currentImageIndex + 1) % HERO_IMAGES.length]}
                                 alt="preload"
