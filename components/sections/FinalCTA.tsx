@@ -40,7 +40,7 @@ export default function FinalCTA() {
                         '/assets/gallery-all/DSC_0105.JPG',
                         '/assets/gallery-all/121A0374.JPG',
                         '/assets/gallery-all/DSC_0814.JPG'
-                    ]} />
+                    ]} className="hidden sm:flex" />
 
                     {/* Column 2 */}
                     <StaticColumn images={[
@@ -73,13 +73,13 @@ export default function FinalCTA() {
             </div>
 
             {/* 2. Optimized Visibility Overlay (Extremely subtle to maintain HD clarity) */}
-            <div className="absolute inset-0 bg-black/5 mix-blend-multiply z-0" />
+            <div className="absolute inset-0 bg-black/5 md:mix-blend-multiply z-0" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 z-0" />
 
 
 
             {/* 4. Noise & Texture (Matches Hero) */}
-            <div className="absolute inset-0 bg-noise opacity-20 mix-blend-overlay z-10 pointer-events-none" />
+            <div className="absolute inset-0 bg-noise opacity-10 md:opacity-20 md:mix-blend-overlay z-10 pointer-events-none" />
 
             {/* 3. Perspective Grid (Floor) - Subtle & Dark (Matches Hero) */}
             <div className="absolute inset-x-0 bottom-0 h-[40vh] bg-grid-perspective opacity-30 z-10 pointer-events-none"
@@ -142,11 +142,13 @@ export default function FinalCTA() {
                 .perspective-container {
                     perspective: 2000px;
                 }
-                .ticket-mask {
-                    -webkit-mask-image: radial-gradient(circle at 71.5% 0%, transparent 15px, black 16px), 
-                                      radial-gradient(circle at 71.5% 100%, transparent 15px, black 16px);
-                    mask-image: radial-gradient(circle at 71.5% 0%, transparent 15px, black 16px), 
-                                radial-gradient(circle at 71.5% 100%, transparent 15px, black 16px);
+                @media (min-width: 768px) {
+                    .ticket-mask {
+                        -webkit-mask-image: radial-gradient(circle at 71.5% 0%, transparent 15px, black 16px), 
+                                        radial-gradient(circle at 71.5% 100%, transparent 15px, black 16px);
+                        mask-image: radial-gradient(circle at 71.5% 0%, transparent 15px, black 16px), 
+                                    radial-gradient(circle at 71.5% 100%, transparent 15px, black 16px);
+                    }
                 }
             `}</style>
             <RegistrationModal
@@ -169,7 +171,7 @@ function StaticColumn({ images, className }: { images: string[], className?: str
                         alt="Collage Item"
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 33vw, 20vw"
+                        sizes="(max-width: 768px) 50vw, 20vw"
                     />
                 </div>
             ))}
@@ -229,11 +231,11 @@ function Ticket({ handleRegisterClick }: { handleRegisterClick: (e: React.MouseE
             >
                 {/* TICKET BODY */}
                 <div
-                    className="absolute inset-0 bg-black/80 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden ticket-mask"
+                    className="absolute inset-0 bg-black/90 md:bg-black/80 md:backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden ticket-mask"
                     style={{ transform: "translateZ(0px)" }}
                 >
                     {/* Background Texture - Concrete/Noise */}
-                    <div className="absolute inset-0 bg-[url('/assets/noise.png')] opacity-10 mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-[url('/assets/noise.png')] opacity-10 md:mix-blend-overlay" />
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50" />
 
                     {/* Content Grid */}

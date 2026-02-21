@@ -115,8 +115,7 @@ export default function Hero() {
                             fill
                             className="object-cover object-center"
                             priority
-                            quality={100}
-                            sizes="100vw"
+                            sizes="(max-width: 768px) 100vw, 100vw"
                         />
                         {/* Preload next image for smoothness */}
                         <div className="hidden">
@@ -139,14 +138,14 @@ export default function Hero() {
             </motion.div>
 
             {/* 1. Noise Filter (Film Grain) */}
-            <div className="bg-noise mix-blend-overlay"></div>
+            <div className="bg-noise md:mix-blend-overlay opacity-30"></div>
 
             {/* 2. Perspective Grid (Floor) */}
-            <div className="absolute inset-x-0 bottom-0 h-[50vh] bg-grid-perspective opacity-40 z-10 pointer-events-none"></div>
+            <div className="absolute inset-x-0 bottom-0 h-[50vh] bg-grid-perspective opacity-40 z-10 pointer-events-none md:mask-image-[linear-gradient(to_bottom,transparent,black)]"></div>
 
             {/* 3. Ambient Glows */}
-            <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-neon-cyan/10 rounded-full blur-[120px] pointer-events-none z-5"></div>
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-neon-purple/10 rounded-full blur-[100px] pointer-events-none z-5"></div>
+            <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-neon-cyan/10 rounded-full blur-[60px] md:blur-[120px] pointer-events-none z-5"></div>
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-neon-purple/10 rounded-full blur-[50px] md:blur-[100px] pointer-events-none z-5"></div>
 
             {/* --- CONTENT --- */}
             <motion.div
