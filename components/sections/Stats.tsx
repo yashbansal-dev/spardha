@@ -9,7 +9,7 @@ const battlefields = [
     {
         id: "basketball",
         name: "BASKETBALL",
-        image: "/assets/games/basketball.JPG",
+        image: "/assets/games/basketball_premium.png",
         color: "from-orange-600 to-red-600",
         accent: "text-orange-500",
         stats: "5v5 // COURT"
@@ -17,7 +17,7 @@ const battlefields = [
     {
         id: "football",
         name: "FOOTBALL",
-        image: "/assets/games/football.JPG",
+        image: "/assets/games/football_premium.png",
         color: "from-emerald-600 to-teal-600",
         accent: "text-emerald-500",
         stats: "7v7 // TURF"
@@ -25,7 +25,7 @@ const battlefields = [
     {
         id: "cricket",
         name: "CRICKET",
-        image: "/assets/games/cricket.JPG",
+        image: "/assets/games/cricket_premium.png",
         color: "from-blue-600 to-indigo-600",
         accent: "text-blue-500",
         stats: "11v11 // FIELD"
@@ -33,7 +33,7 @@ const battlefields = [
     {
         id: "volleyball",
         name: "VOLLEYBALL",
-        image: "/assets/games/volleyball_v2.jpg",
+        image: "/assets/games/volleyball_premium.png",
         color: "from-purple-600 to-pink-600",
         accent: "text-purple-500",
         stats: "6v6 // NET"
@@ -41,7 +41,7 @@ const battlefields = [
     {
         id: "badminton",
         name: "BADMINTON",
-        image: "/assets/games/badminton_v2.jpg",
+        image: "/assets/games/badminton_premium.png",
         color: "from-rose-600 to-red-600",
         accent: "text-rose-500",
         stats: "1v1 // COURT"
