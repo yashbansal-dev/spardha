@@ -9,7 +9,7 @@ const battlefields = [
     {
         id: "cricket",
         name: "CRICKET",
-        image: "/assets/games/cricket_premium.png",
+        image: "/assets/games/cricket.JPG",
         stats: "11v11 // FIELD",
         zone: "ZONE_A",
         description: "TACTICAL BATTLEFIELD FOR ELITE COMPETITION. STRATEGIC DOMINANCE REQUIRED.",
@@ -18,7 +18,7 @@ const battlefields = [
     {
         id: "football",
         name: "FOOTBALL",
-        image: "/assets/games/football_premium.png",
+        image: "/assets/games/football.JPG",
         stats: "7v7 // TURF",
         zone: "ZONE_B",
         description: "HIGH-INTENSITY ENGAGEMENT ZONE. SPEED AND PRECISION ARE VITAL.",
@@ -27,7 +27,7 @@ const battlefields = [
     {
         id: "volleyball",
         name: "VOLLEYBALL",
-        image: "/assets/games/volleyball_premium.png",
+        image: "/volleyball-match.png",
         stats: "6v6 // NET",
         zone: "ZONE_C",
         description: "AERIAL SUPREMACY ZONE. DEFY GRAVITY, SECURE THE MATCH.",
@@ -36,7 +36,7 @@ const battlefields = [
     {
         id: "basketball",
         name: "BASKETBALL",
-        image: "/assets/games/basketball_premium.png",
+        image: "/basketball-match.jpg",
         stats: "5v5 // COURT",
         zone: "ZONE_D",
         description: "CLOSE-QUARTERS COMBAT. DOMINATE THE PAINT, HIT THE ARC.",
@@ -45,7 +45,7 @@ const battlefields = [
     {
         id: "badminton",
         name: "BADMINTON",
-        image: "/assets/games/badminton_premium.png",
+        image: "/assets/images/badminton.png",
         stats: "1v1 // COURT",
         zone: "ZONE_E",
         description: "PRECISION EXECUTION. THE FASTEST STRIKES IN THE OPERATION.",
