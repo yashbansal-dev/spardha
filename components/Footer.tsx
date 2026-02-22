@@ -35,8 +35,7 @@ export default function Footer() {
                             { label: 'Sponsor', href: '/#sponsors', icon: <FaHandshake /> },
                             { label: 'Brochure', href: '/docs/Brochure.pdf', icon: <FaFileAlt />, download: true },
                             { label: 'Rulebook', href: '/docs/rulebook.pdf', icon: <FaFileAlt />, download: true },
-                            { label: 'Location', href: 'https://maps.google.com/?q=JK+Lakshmipat+University', icon: <FaMapMarkerAlt />, external: true },
-                            { label: 'Site Aid', href: '/team', icon: <FaHeart /> },
+                            { label: 'Location', href: 'https://maps.app.goo.gl/Pz6JmG4a5p9Y2j2Q6', icon: <FaMapMarkerAlt />, external: true },
                         ].map((link, i) => {
                             const commonClasses = "group flex items-center gap-4 text-4xl md:text-5xl lg:text-6xl font-gang font-black tracking-tighter uppercase text-white/40 hover:text-white transition-all duration-300";
                             const content = (
