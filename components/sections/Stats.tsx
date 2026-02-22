@@ -180,6 +180,20 @@ export default function SportsArsenal() {
                     <StatNode label="Institutional Nodes" value="40+" />
                     <StatNode label="Bounty Pool" value="1.6L" isCurrency />
                 </div>
+
+                {/* Preload Bucket - Renders images hidden to prime browser cache */}
+                <div className="fixed opacity-0 pointer-events-none -z-50 w-0 h-0 overflow-hidden">
+                    {battlefields.map((field) => (
+                        <Image
+                            key={`preload-${field.id}`}
+                            src={field.image}
+                            alt="preload"
+                            width={10}
+                            height={10}
+                            priority
+                        />
+                    ))}
+                </div>
             </div>
         </section>
     );
