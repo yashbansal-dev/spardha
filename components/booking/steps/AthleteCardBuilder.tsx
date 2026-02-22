@@ -122,7 +122,15 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
 
                             {/* Avatar Container */}
                             <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-neon-cyan/50 shadow-[0_0_30px_rgba(0,243,255,0.2)] bg-black/50 backdrop-blur-sm z-10 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                                <Image src="/assets/images/spardha_logo.png" alt="Avatar" width={80} height={80} className="w-20 h-20 object-contain brightness-125 drop-shadow-lg" />
+                                <div className="relative w-24 h-24 transform scale-125">
+                                    <Image
+                                        src="/assets/images/spardha_logo.png"
+                                        alt="Avatar"
+                                        fill
+                                        className="object-contain brightness-125 drop-shadow-lg"
+                                        priority
+                                    />
+                                </div>
 
 
                                 {/* Glare */}
