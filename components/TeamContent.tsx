@@ -111,7 +111,7 @@ const teamMembers = [
     },
     {
         role: 'Sports Heads',
-        gradient: 'from-orange-500 via-red-500 to-pink-500',
+        gradient: 'from-red-600 via-red-500 to-white',
         members: [
             { name: 'Arjun Singh Tanwar', position: 'All Sports Core', image: '/assets/Core_photos/ArjunSinghTanwar.jpg' },
             { name: 'Harshveer Singh Rathore', position: 'Leather Cricket Head', image: '/assets/Core_photos/Harshveercricketcore.jpg' },
@@ -174,7 +174,7 @@ const Team = () => {
                             viewport={{ once: true }}
                             className="text-center mb-16"
                         >
-                            <h2 className="text-4xl md:text-5xl font-heading font-bold text-spardha-text mb-4">
+                            <h2 className="text-4xl md:text-5xl font-gang tracking-widest uppercase text-spardha-text mb-4">
                                 The <span className="text-spardha-gold">Architects</span>
                             </h2>
                             <div className="w-24 h-1 bg-spardha-gold mx-auto rounded-full"></div>
@@ -271,7 +271,7 @@ const Team = () => {
                                                                     <p className="text-xs text-spardha-gold uppercase tracking-[0.3em] font-semibold mb-2">
                                                                         {member.position}
                                                                     </p>
-                                                                    <h4 className="text-3xl font-heading font-bold text-white tracking-tight">
+                                                                    <h4 className="text-3xl font-gang tracking-widest uppercase text-white">
                                                                         {member.name}
                                                                     </h4>
                                                                     <p className={`mt-4 text-sm text-white/70 leading-relaxed max-w-xs transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
@@ -351,10 +351,10 @@ const Team = () => {
 
                                                             {/* Info Bar - Slides up only on Hover */}
                                                             <div className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 transition-all duration-500 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
-                                                                <h4 className="text-lg md:text-xl font-bold text-spardha-text mb-1 group-hover:text-spardha-gold transition-colors leading-tight">
+                                                                <h4 className="text-lg md:text-xl font-gang tracking-widest uppercase text-spardha-text mb-1 group-hover:text-spardha-gold transition-colors leading-tight">
                                                                     {member.name}
                                                                 </h4>
-                                                                <p className="text-xs text-spardha-textMuted uppercase tracking-wider font-medium">
+                                                                <p className="text-xs text-spardha-textMuted uppercase tracking-wider font-gang">
                                                                     {member.position}
                                                                 </p>
                                                                 <div className={`h-[2px] w-12 mt-4 bg-gradient-to-r ${category.gradient}`}></div>
