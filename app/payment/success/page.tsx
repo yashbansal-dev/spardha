@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Check, Download, Home } from 'lucide-react';
+import { Check, Home } from 'lucide-react';
 import Link from 'next/link';
 
-export default function PaymentSuccessPage() {
+function SuccessContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const orderId = searchParams.get('order_id');
@@ -21,11 +21,8 @@ export default function PaymentSuccessPage() {
 
         const verifyPayment = async () => {
             try {
-                // Call verification endpoint
                 const response = await fetch(`/api/payments/verify/${orderId}`);
                 const data = await response.json();
-
-                // data.data is an array of payments — check the last payment
                 const paymentsArr = Array.isArray(data.data) ? data.data : [];
                 const lastPayment = paymentsArr[paymentsArr.length - 1];
                 const isPaid = data.success && lastPayment?.payment_status === 'SUCCESS';
@@ -33,13 +30,10 @@ export default function PaymentSuccessPage() {
                 if (isPaid) {
                     setStatus('success');
                     setOrderDetails(data.data);
-
-                    // Trigger the success handler to generate QR and send email
-                    // Backend has a retry loop — await so we don't fire-and-forget
                     try {
                         await fetch(`/api/payments/success/${orderId}`);
                     } catch (e) {
-                        console.error('Success handler error (non-fatal, webhook is fallback):', e);
+                        console.error('Success handler error:', e);
                     }
                 } else {
                     setStatus('failed');
@@ -73,7 +67,7 @@ export default function PaymentSuccessPage() {
                     </div>
                     <h1 className="text-2xl font-bold mb-4 font-gang">Payment Failed</h1>
                     <p className="text-gray-400 mb-8">
-                        We couldn't verify your payment. If money was deducted, it will be refunded automatically within 5-7 business days.
+                        We couldn't verify your payment. If money was deducted, it will be refunded automatically.
                     </p>
                     <div className="flex gap-4 justify-center">
                         <button
@@ -93,7 +87,6 @@ export default function PaymentSuccessPage() {
 
     return (
         <div className="min-h-screen bg-black flex items-center justify-center text-white p-4 relative overflow-hidden">
-            {/* Background Effects */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,243,255,0.1)_0%,transparent_70%)] pointer-events-none"></div>
 
             <motion.div
@@ -102,8 +95,6 @@ export default function PaymentSuccessPage() {
                 className="max-w-lg w-full bg-[#0a0a0a] border border-white/10 rounded-3xl p-1 relative z-10 shadow-[0_0_50px_rgba(0,243,255,0.2)]"
             >
                 <div className="bg-[#111] rounded-[22px] p-8 md:p-12 text-center relative overflow-hidden">
-                    {/* Confetti / Particle Effect would go here */}
-
                     <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
@@ -146,5 +137,17 @@ export default function PaymentSuccessPage() {
                 </div>
             </motion.div>
         </div>
+    );
+}
+
+export default function PaymentSuccessPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-black flex items-center justify-center text-white">
+                <div className="w-16 h-16 border-4 border-neon-cyan border-t-transparent rounded-full animate-spin"></div>
+            </div>
+        }>
+            <SuccessContent />
+        </Suspense>
     );
 }
