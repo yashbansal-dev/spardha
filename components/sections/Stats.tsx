@@ -1,3 +1,10 @@
+'use client';
+
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import Image from "next/image";
+import { FaBolt } from "react-icons/fa";
+
 const battlefields = [
     {
         id: "cricket",
@@ -252,5 +259,3 @@ function StatNode({ label, value, isCurrency }: any) {
         </div>
     );
 }
-
-import { useMotionValue, useTransform } from "framer-motion";
