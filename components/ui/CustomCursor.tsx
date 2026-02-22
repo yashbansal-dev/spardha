@@ -16,7 +16,7 @@ import Image from 'next/image';
 export default function CustomCursor() {
     const cursorRef = useRef<HTMLDivElement>(null);
     const innerRef = useRef<HTMLDivElement>(null);
-    
+
     // State refs
     const isVisible = useRef(false);
     const isHovering = useRef(false);
@@ -53,7 +53,6 @@ export default function CustomCursor() {
             }
         };
 
-<<<<<<< HEAD
         const handleMouseUp = () => {
             if (innerRef.current) {
                 innerRef.current.style.transform = isHovering.current ? 'scale(1.5)' : 'scale(1)';
@@ -63,34 +62,10 @@ export default function CustomCursor() {
         const handleMouseOver = (e: MouseEvent) => {
             if (!isVisible.current) return;
             const target = e.target as HTMLElement;
-            
-            // Ultra-fast check using closest() instead of expensive getComputedStyle()
-            const interactive = !!(target && typeof target.closest === 'function' && 
-                target.closest('a, button, input, select, textarea, [role="button"], .cursor-pointer'));
-=======
-    // Optimized hover detection - reduced throttle to 16ms (60fps) for instant feeling
-    const handleMouseOver = useCallback((e: MouseEvent) => {
-        const now = Date.now();
-        if (now - lastCheckRef.current < 16) return;
-        lastCheckRef.current = now;
 
-        const target = e.target as HTMLElement;
-        // Optimized interactive element check
-        const isInteractive =
-            target.tagName === 'BUTTON' ||
-            target.tagName === 'A' ||
-            target.tagName === 'INPUT' ||
-            target.tagName === 'SELECT' ||
-            target.tagName === 'TEXTAREA' ||
-            target.tagName === 'LABEL' ||
-            target.tagName === 'SUMMARY' ||
-            target.getAttribute('role') === 'button' ||
-            target.getAttribute('role') === 'link' ||
-            target.closest('button') ||
-            target.closest('a') ||
-            target.closest('.interactive') ||
-            target.closest('.cursor-pointer');
->>>>>>> 6c176b0 (finishing)
+            // Ultra-fast check using closest() instead of expensive getComputedStyle()
+            const interactive = !!(target && typeof target.closest === 'function' &&
+                target.closest('a, button, input, select, textarea, [role="button"], .cursor-pointer'));
 
             isHovering.current = interactive;
 
