@@ -77,10 +77,10 @@ const RegistrationModal = ({ isOpen, onClose }: RegistrationModalProps) => {
 
 
                                 <h3 className="text-3xl md:text-4xl font-gang font-black text-white mb-2 uppercase tracking-wide">
-                                    Registration <span className="font-alice font-normal capitalize text-white ml-2">Locked</span>
+                                    Registration <span className="font-gang font-normal capitalize text-white ml-2">Locked</span>
                                 </h3>
 
-                                <p className="font-alice text-gray-400 mb-8 max-w-sm mx-auto leading-relaxed text-lg">
+                                <p className="font-gang text-gray-400 mb-8 max-w-sm mx-auto leading-relaxed text-lg">
                                     Registration for Spardha 2026 begins on <br />
                                     <span className="text-white font-bold">22 February 2026</span> at 2:00 PM.
                                 </p>
@@ -94,7 +94,7 @@ const RegistrationModal = ({ isOpen, onClose }: RegistrationModalProps) => {
                                         { label: 'Secs', value: timeLeft.seconds }
                                     ].map((item, index) => (
                                         <div key={index} className="flex flex-col items-center p-4 bg-white/5 rounded-xl border border-white/10 backdrop-blur-md">
-                                            <span className="text-3xl md:text-4xl font-bold font-alice text-white mb-1">
+                                            <span className="text-3xl md:text-4xl font-bold font-gang text-white mb-1">
                                                 {String(item.value).padStart(2, '0')}
                                             </span>
                                             <span className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400 font-gang">

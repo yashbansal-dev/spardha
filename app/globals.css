@@ -22,20 +22,7 @@ body {
   font-family: var(--font-gang), sans-serif !important;
 }
 
-/* Global Small Text - Alice Font Override */
-p,
-span,
-li,
-a,
-button,
-input,
-textarea,
-label,
-td,
-th {
-  font-family: var(--font-alice), sans-serif !important;
-  letter-spacing: normal !important;
-}
+/* Global Small Text - Alice Font Override removed to unify fonts */
 
 h1,
 h2,

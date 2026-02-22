@@ -19,7 +19,7 @@ export default function SchedulePage() {
                     <h1 className="text-6xl md:text-8xl font-gang text-transparent bg-clip-text bg-gradient-to-r from-white via-neon-cyan to-white tracking-widest drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
                         SCHEDULE
                     </h1>
-                    <p className="text-xl md:text-3xl font-alice text-gray-400 tracking-widest uppercase border-y border-white/10 py-4 max-w-2xl mx-auto">
+                    <p className="text-xl md:text-3xl font-gang text-gray-400 tracking-widest uppercase border-y border-white/10 py-4 max-w-2xl mx-auto">
                         Coming Soon
                     </p>
                     <p className="text-sm text-white/50 font-mono tracking-wide">
