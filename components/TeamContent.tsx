@@ -26,19 +26,24 @@ const teamMembers = [
                 image: '/assets/Core_photos/deepak_sogani.png',
                 bio: 'Dedicated to fostering student growth and ensuring smooth event execution.'
             },
-        ]
-    },
-    {
-        role: 'Sports Affairs',
-        gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
-        members: [
-
             {
                 name: 'Vaibhav Topiwala',
                 position: 'Head Of Sports',
                 image: '/assets/Core_photos/VaibhavTopiwala.jpeg',
                 bio: 'Leading the sports committee with vision and dedication.'
-            },
+            }
+        ]
+    },
+    {
+        role: 'Students Council',
+        gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
+        members: [
+            // {
+            //     name: 'Shubham Jain',
+            //     position: 'President',
+            //     image: '/assets/Core_photos/shubhamjain.jpg',
+            //     bio: 'Coordinating student activities and ensuring seamless operations.'
+            // },
             {
                 name: 'Ishaan Saraswat',
                 position: 'General Secretary',
