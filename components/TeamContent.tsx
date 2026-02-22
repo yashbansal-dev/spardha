@@ -152,12 +152,12 @@ const Team = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
-                            className="text-center"
+                            className="text-center mt-12 md:mt-20 lg:mt-24"
                         >
-                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold mb-6 bg-gradient-to-r from-spardha-orange-dark to-white bg-clip-text text-transparent">
-                                Meet The <span className="!font-gang">Team</span>
+                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-gang font-black uppercase tracking-widest mb-6 bg-gradient-to-r from-red-600 via-red-500 to-white bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(255,0,0,0.4)]">
+                                Meet The Team
                             </h1>
-                            <p className="text-base md:text-lg lg:text-xl text-spardha-textMuted max-w-4xl mx-auto px-4 sm:px-0">
+                            <p className="text-base md:text-lg lg:text-xl text-spardha-textMuted max-w-4xl mx-auto px-4 sm:px-0 font-gang tracking-widest uppercase">
                                 The dedicated individuals working tirelessly to make Spardha 2026 an unforgettable experience
                             </p>
                         </motion.div>
