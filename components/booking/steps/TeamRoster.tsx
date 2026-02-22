@@ -34,14 +34,8 @@ const memberSchema = z.object({
 export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNext, onPrev }: Props) {
     // identify team sports in cart
     // identify team sports in cart
-    const teamSports = cart.filter(item => {
-        const teamIds = ['cricket-leather', 'football', 'basketball', 'volleyball', 'kabaddi', 'tug-of-war'];
-        const isTeamId = teamIds.some(id => item.id.startsWith(id));
+    const teamSports = cart.filter(item => item.pricingType === 'team');
 
-        return isTeamId ||
-            item.name.toLowerCase().includes('team') ||
-            item.name.toLowerCase().includes('doubles');
-    });
 
     const [currentSportIndex, setCurrentSportIndex] = useState(0);
     const currentSport = teamSports[currentSportIndex];

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa';
+import Image from 'next/image';
 
 // Simplified high-quality sports images
 const galleryItems = [
@@ -101,11 +102,15 @@ export default function Gallery() {
                                         transform: isLoaded ? `translate(${item.x}px, ${item.y}px)` : 'none'
                                     }}
                                 >
-                                    <motion.img
-                                        src={item.src}
-                                        alt=""
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                    />
+                                    <div className="w-full h-full relative">
+                                        <Image
+                                            src={item.src}
+                                            alt=""
+                                            fill
+                                            sizes="(max-width: 768px) 50vw, 25vw"
+                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                        />
+                                    </div>
                                     {/* Hover Overlay */}
                                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                         <span className="border border-white/50 text-white px-4 py-1 text-xs tracking-widest uppercase">
@@ -134,10 +139,13 @@ export default function Gallery() {
                                 className="relative w-full max-w-5xl aspect-video bg-black rounded-sm overflow-hidden shadow-2xl border border-white/10"
                                 onClick={(e) => e.stopPropagation()}
                             >
-                                <img
-                                    src={galleryItems.find(i => i.id === activeId)?.src}
+                                <Image
+                                    src={galleryItems.find(i => i.id === activeId)?.src || ''}
                                     alt=""
-                                    className="w-full h-full object-contain bg-black"
+                                    fill
+                                    priority
+                                    className="object-contain bg-black"
+                                    sizes="100vw"
                                 />
 
                                 {/* UI Controls */}

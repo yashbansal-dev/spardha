@@ -22,7 +22,7 @@ const SPORTS_DATA = [
     {
         id: 'cricket-leather',
         name: 'Leather Cricket',
-        image: '/assets/images/media_2.jpeg',
+        image: '/assets/games/cricket.JPG',
         date: '14th - 16th Feb',
         type: 'Flagship Event',
         color: 'from-[#0f172a] to-[#1e293b]',
@@ -30,7 +30,7 @@ const SPORTS_DATA = [
         badgeColor: 'bg-yellow-400 text-black',
         hasGender: true,
         prize: { boys: '₹33,000', girls: '₹8,000' },
-        fee: { boys: 400, girls: 0 },
+        fee: { boys: 400, girls: 1 },
         rulebook: '/docs/Rule_Book_Leather_Cricket_Spardha.pdf',
         rules: {
             boys: ['Knockout Format', '11 Players + 4 Subs', 'T20 Rules'],
@@ -40,7 +40,7 @@ const SPORTS_DATA = [
     {
         id: 'football',
         name: 'Football (7v7 / 5v5)',
-        image: '/assets/images/media_6.jpeg',
+        image: '/assets/games/football.JPG',
         date: '14th - 16th Feb',
         type: 'Flagship Event',
         color: 'from-[#022c22] to-[#064e3b]',
@@ -48,7 +48,7 @@ const SPORTS_DATA = [
         badgeColor: 'bg-emerald-400 text-black',
         hasGender: true,
         prize: { boys: '₹15,000', girls: '₹8,000' },
-        fee: { boys: 250, girls: 0 },
+        fee: { boys: 250, girls: 1 },
         rulebook: "/docs/football_Tournament_Rule_Book.pdf",
         rules: {
             boys: ['7v7 Format', '30 Min Halves', 'Studs Allowed'],
@@ -58,7 +58,7 @@ const SPORTS_DATA = [
     {
         id: 'basketball',
         name: 'Basketball',
-        image: '/assets/images/media_4.jpeg',
+        image: '/assets/games/basketball.JPG',
         date: '15th - 16th Feb',
         type: 'Core Sport',
         color: 'from-[#431407] to-[#7c2d12]',
@@ -66,7 +66,7 @@ const SPORTS_DATA = [
         badgeColor: 'bg-orange-400 text-black',
         hasGender: true,
         prize: { boys: '₹17,000', girls: '₹8,000' },
-        fee: { boys: 250, girls: 0 },
+        fee: { boys: 250, girls: 1 },
         rulebook: "/docs/Basketball Rulebook SPARDHA'26.pdf",
         rules: {
             boys: ['4 Quarters', 'FIBA Rules', 'Full Court'],
@@ -76,7 +76,7 @@ const SPORTS_DATA = [
     {
         id: 'volleyball',
         name: 'Volleyball',
-        image: '/assets/images/media_3.jpeg',
+        image: '/assets/games/volleyball_v2.jpg',
         date: '15th Feb',
         type: 'Core Sport',
         color: 'from-[#1e1b4b] to-[#312e81]',
@@ -84,7 +84,7 @@ const SPORTS_DATA = [
         badgeColor: 'bg-indigo-400 text-white',
         hasGender: true,
         prize: { boys: '₹13,000', girls: '₹8,000' },
-        fee: { boys: 250, girls: 0 },
+        fee: { boys: 250, girls: 1 },
         rulebook: '/docs/Volleyball_Tournament_Rule_Book.pdf',
         rules: {
             boys: ['Best of 3 Sets', '6 Players', 'Rotation Rules'],
@@ -94,7 +94,7 @@ const SPORTS_DATA = [
     {
         id: 'badminton',
         name: 'Badminton (Singles)',
-        image: '/assets/images/badminton.png',
+        image: '/assets/games/badminton_singles.png',
         date: '14th Feb',
         type: 'Racquet Sport',
         color: 'from-[#831843] to-[#be185d]',
@@ -102,7 +102,7 @@ const SPORTS_DATA = [
         badgeColor: 'bg-pink-400 text-white',
         hasGender: true,
         prize: { boys: '₹4,500', girls: '₹3,100' },
-        fee: { boys: 250, girls: 0 },
+        fee: { boys: 250, girls: 1 },
         rulebook: '/docs/rulebookk_badminton.PDF.pdf',
         rules: {
             boys: ['Singles', 'Points System', 'Feather Shuttle'],
@@ -112,7 +112,7 @@ const SPORTS_DATA = [
     {
         id: 'badminton-doubles',
         name: 'Badminton (Doubles)',
-        image: '/assets/images/badminton.png',
+        image: '/assets/games/badminton_doubles.png',
         date: '14th Feb',
         type: 'Racquet Sport',
         color: 'from-[#831843] to-[#be185d]',
@@ -120,7 +120,7 @@ const SPORTS_DATA = [
         badgeColor: 'bg-pink-400 text-white',
         hasGender: true,
         prize: { boys: '₹6,100', girls: '₹3,600' },
-        fee: { boys: 500, girls: 0 },
+        fee: { boys: 500, girls: 1 },
         rulebook: '/docs/rulebookk_badminton.PDF.pdf',
         rules: {
             boys: ['Doubles', 'Points System', 'Feather Shuttle'],
@@ -130,7 +130,7 @@ const SPORTS_DATA = [
     {
         id: 'badminton-mixed',
         name: 'Badminton (Mixed)',
-        image: '/assets/images/badminton.png',
+        image: '/assets/games/badminton_mixed.png',
         date: '14th Feb',
         type: 'Racquet Sport',
         color: 'from-[#831843] to-[#be185d]',
@@ -200,7 +200,7 @@ const SPORTS_DATA = [
         badgeColor: 'bg-gray-200 text-black',
         hasGender: true,
         prize: { boys: '₹2,500', girls: '₹2,500' },
-        fee: { boys: 150, girls: 0 },
+        fee: { boys: 150, girls: 1 },
         rulebook: '/docs/Spardha Chess Rule Book.pdf',
         rules: {
             boys: ['Rapid Format', '10+5 Time Control', 'FIDE Rules'],

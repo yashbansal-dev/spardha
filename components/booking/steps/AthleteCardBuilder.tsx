@@ -8,6 +8,8 @@ import { motion, useAnimation } from 'framer-motion';
 import { UserData } from '../GamifiedWizard';
 import { FaIdCard, FaUniversity, FaCity, FaPhoneAlt, FaEnvelope, FaFingerprint, FaWifi, FaMicrochip } from 'react-icons/fa';
 import { BiBarcodeReader } from 'react-icons/bi';
+import Image from 'next/image';
+
 
 // Validation Schema
 const userSchema = z.object({
@@ -120,7 +122,8 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
 
                             {/* Avatar Container */}
                             <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-neon-cyan/50 shadow-[0_0_30px_rgba(0,243,255,0.2)] bg-black/50 backdrop-blur-sm z-10 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                                <img src="/assets/images/spardha_logo.png" alt="Avatar" className="w-20 h-20 object-contain brightness-125 drop-shadow-lg" />
+                                <Image src="/assets/images/spardha_logo.png" alt="Avatar" width={80} height={80} className="w-20 h-20 object-contain brightness-125 drop-shadow-lg" />
+
 
                                 {/* Glare */}
                                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

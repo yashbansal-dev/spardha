@@ -35,6 +35,12 @@ export const metadata: Metadata = {
     shortcut: "/assets/images/spardha_logo.png",
     apple: "/assets/images/spardha_logo.png",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "SPARDHA | JKLU Sports Fest",
+    description: "Annual Sports Festival of JK Lakshmipat University (JKLU).",
+    images: ["/assets/images/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({

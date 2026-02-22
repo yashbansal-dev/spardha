@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function CinematicLogo() {
     return (
@@ -32,10 +33,13 @@ export default function CinematicLogo() {
                 />
 
                 {/* The Base Logo Image */}
-                <img
+                <Image
                     src="/assets/images/spardha_logo.png"
                     alt="Spardha Logo"
+                    width={500}
+                    height={500}
                     className="relative z-10 w-full h-full object-contain"
+                    priority
                 />
 
                 {/* 

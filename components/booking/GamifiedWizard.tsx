@@ -118,19 +118,8 @@ export default function GamifiedWizard() {
     const nextStep = () => {
         if (step === 2) {
             console.log('Cart items:', cart);
-            // Check if any team sports are selected
-            const hasTeamSports = cart.some(item => {
-                // Check if ID starts with known team sport IDs (to handle -Boys/-Girls suffix)
-                const teamIds = ['cricket-leather', 'football', 'basketball', 'volleyball', 'kabaddi', 'tug-of-war'];
-                const isTeamId = teamIds.some(id => item.id.startsWith(id));
-
-                const isTeam = isTeamId ||
-                    item.name.toLowerCase().includes('team') ||
-                    item.name.toLowerCase().includes('doubles');
-
-                console.log(`Checking item: ${item.name} (${item.id}) -> isTeam: ${isTeam}`);
-                return isTeam;
-            });
+            // Check if any team sports are selected based on pricingType
+            const hasTeamSports = cart.some(item => item.pricingType === 'team');
 
             console.log('Has team sports:', hasTeamSports);
 
@@ -146,11 +135,7 @@ export default function GamifiedWizard() {
 
     const prevStep = () => {
         if (step === 4) {
-            const hasTeamSports = cart.some(item =>
-                ['cricket-leather', 'football', 'basketball', 'volleyball', 'kabaddi', 'tug-of-war'].includes(item.id) ||
-                item.name.toLowerCase().includes('team') ||
-                item.name.toLowerCase().includes('doubles')
-            );
+            const hasTeamSports = cart.some(item => item.pricingType === 'team');
             if (hasTeamSports) {
                 setStep(3); // Go back to Team Roster
             } else {
@@ -251,19 +236,30 @@ export default function GamifiedWizard() {
                     {/* SPARDHA 2026 title removed */}
                     <div></div>
 
-                    {/* Retro Level Indicator */}
+                    {/* Interactive Level Indicator */}
                     <div className="flex items-center gap-1.5 md:gap-2">
-                        {steps.map((s) => (
-                            <div
-                                key={s.id}
-                                className={`h-1.5 md:h-2 w-3 md:w-8 rounded-full transition-all duration-300 ${s.id <= step ? 'bg-neon-cyan shadow-[0_0_10px_rgba(0,243,255,0.5)]' : 'bg-white/10'}`}
-                            />
-                        ))}
+                        {steps.map((s) => {
+                            const isClickable = s.id < step || (s.id === 2 && userData.email) || (s.id === 3 && cart.length > 0);
+
+                            return (
+                                <button
+                                    key={s.id}
+                                    onClick={() => isClickable && setStep(s.id)}
+                                    disabled={!isClickable}
+                                    className={`h-1.5 md:h-2 w-3 md:w-8 rounded-full transition-all duration-300 ${s.id <= step
+                                        ? 'bg-neon-cyan shadow-[0_0_10px_rgba(0,243,255,0.5)]'
+                                        : 'bg-white/10'
+                                        } ${isClickable ? 'cursor-pointer hover:bg-neon-cyan/50 hover:scale-y-125' : 'cursor-not-allowed'}`}
+                                    title={isClickable ? `Back to ${s.title}` : s.title}
+                                />
+                            );
+                        })}
                     </div>
 
                     <div className="font-mono font-bold text-neon-cyan text-xs md:text-base">
                         LEVEL {step}/{steps.length}
                     </div>
+
                 </div>
             </header>
 

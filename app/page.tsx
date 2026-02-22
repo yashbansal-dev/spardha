@@ -1,56 +1,73 @@
-"use client";
+import { Metadata } from "next";
+import HomeContent from "@/components/HomeContent";
 
-import { useState, useEffect } from "react";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/sections/Hero";
-import SportsMarquee from "@/components/sections/SportsMarquee";
-import Story from "@/components/sections/Story";
-import Stats from "@/components/sections/Stats";
-import FinalCTA from "@/components/sections/FinalCTA";
-import Footer from "@/components/Footer";
-import ParallaxBackground from "@/components/ParallaxBackground";
-import SpardhaLoader from "@/components/ui/SpardhaLoader";
+export const metadata: Metadata = {
+  title: "SPARDHA 2026 | JKLU Annual Sports Fest",
+  description: "Experience the energy at SPARDHA 2026, the annual sports festival of JK Lakshmipat University. Join us for Cricket, Football, Basketball, E-Sports and more!",
+  keywords: ["SPARDHA 2026", "JKLU Sports Fest", "College Sports Festival", "JK Lakshmipat University", "Sports Tournament Jaipur"],
+  openGraph: {
+    title: "SPARDHA 2026 | JKLU Annual Sports Fest",
+    description: "Join the ultimate sports celebration at JK Lakshmipat University. March 27-29, 2026.",
+    url: "https://spardha-jklu.com",
+    siteName: "SPARDHA",
+    images: [
+      {
+        url: "/assets/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "SPARDHA 2026",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SPARDHA 2026 | JKLU Annual Sports Fest",
+    description: "Join the ultimate sports celebration at JK Lakshmipat University. March 27-29, 2026.",
+    images: ["/assets/images/og-image.jpg"],
+  },
+};
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Show loader on initial mount
-    setIsLoading(true);
-  }, []);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "SPARDHA 2026",
+    "description": "The Annual Sports Festival of JK Lakshmipat University (JKLU).",
+    "startDate": "2026-03-27",
+    "endDate": "2026-03-29",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "location": {
+      "@type": "Place",
+      "name": "JK Lakshmipat University",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "P.O. Mahapura, Ajmer Road",
+        "addressLocality": "Jaipur",
+        "postalCode": "302026",
+        "addressRegion": "Rajasthan",
+        "addressCountry": "IN"
+      }
+    },
+    "image": [
+      "https://spardha-jklu.com/assets/images/spardha_logo.png"
+    ],
+    "organizer": {
+      "@type": "Organization",
+      "name": "JK Lakshmipat University",
+      "url": "https://jklu.edu.in"
+    }
+  };
 
   return (
     <>
-      {isLoading && (
-        <SpardhaLoader
-          onComplete={() => setIsLoading(false)}
-          className="z-[9999]"
-        />
-      )}
-      <main className="min-h-screen text-white selection:bg-neon-cyan selection:text-black relative bg-black">
-        <ParallaxBackground />
-
-        <div className="relative z-10">
-          <Navbar />
-
-          <Hero />
-
-          <div className="relative z-30">
-            <SportsMarquee />
-          </div>
-
-          {/* Story Section - Full width cinematic */}
-          <Story />
-
-          {/* Stats Section */}
-          <Stats />
-
-          {/* Final CTA */}
-          <FinalCTA />
-
-          <Footer />
-        </div>
-      </main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <HomeContent />
     </>
   );
 }

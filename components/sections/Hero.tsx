@@ -18,6 +18,109 @@ const HERO_IMAGES = [
     '/assets/images/media_6.jpeg',
 ];
 
+// ─── Glitched / cut hero title ───────────────────────────────────────────────
+const GLITCH_CSS = `
+  @keyframes spardha-scan {
+    0%   { top: -4px;  opacity: 0; }
+    4%   { opacity: 1; }
+    96%  { opacity: 1; }
+    100% { top: 108%; opacity: 0; }
+  }
+  @keyframes spardha-flicker {
+    0%, 89%, 91%, 93%, 100% { opacity: 1; }
+    90%  { opacity: 0.82; }
+    92%  { opacity: 0.93; }
+  }
+`;
+
+function GlitchedTitle({ text }: { text: string }) {
+    // Responsive class — same size as old motion.h2
+    const cls =
+        'font-black tracking-tighter uppercase leading-none font-gang ' +
+        'text-[15vw] sm:text-[16vw] md:text-[9.5rem]';
+
+    // globals.css sets font-alice !important on span elements.
+    // font-restore class + inline fontFamily overrides that back to go3v2.ttf
+    const fontOverride: React.CSSProperties = {
+        fontFamily: 'var(--font-gang)',
+        fontWeight: 900,
+    };
+
+    return (
+        <div
+            className="relative inline-block select-none font-restore"
+            aria-label={text}
+            style={{ animation: 'spardha-flicker 6s ease-in-out infinite' }}
+        >
+            <style>{GLITCH_CSS}</style>
+
+            {/* ── Warm ambient glow ── */}
+            <span
+                aria-hidden="true"
+                className={`${cls} absolute inset-0 pointer-events-none`}
+                style={{
+                    ...fontOverride,
+                    color: '#c05820',
+                    opacity: 0.28,
+                    filter: 'blur(22px)',
+                    whiteSpace: 'nowrap',
+                    transform: 'scale(1.06)',
+                }}
+            >{text}</span>
+
+            {/* ── Ghost base for sizing ── */}
+            <span
+                className={`${cls} opacity-0 block`}
+                style={{ ...fontOverride, whiteSpace: 'nowrap' }}
+            >{text}</span>
+
+            {/* ── TOP half — clipped 0→46%, shifted RIGHT ── */}
+            <span
+                aria-hidden="true"
+                className={`${cls} absolute inset-0`}
+                style={{
+                    ...fontOverride,
+                    whiteSpace: 'nowrap',
+                    color: '#A04522',
+                    clipPath: 'polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%)',
+                    transform: 'translateX(0px)',
+                    textShadow: '-3px 4px 0 rgba(0,0,0,0.9), 0 0 20px rgba(160,69,34,0.3)',
+                }}
+            >{text}</span>
+
+            {/* ── BOTTOM half — clipped 50→100% ── */}
+            <span
+                aria-hidden="true"
+                className={`${cls} absolute inset-0`}
+                style={{
+                    ...fontOverride,
+                    whiteSpace: 'nowrap',
+                    color: '#8B3A1A',
+                    clipPath: 'polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%)',
+                    transform: 'translateX(0px)',
+                    textShadow: '3px 4px 0 rgba(0,0,0,0.9), 0 0 20px rgba(139,58,26,0.3)',
+                }}
+            >{text}</span>
+
+            {/* ── Grain texture overlay ── */}
+            <div
+                aria-hidden="true"
+                style={{
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage:
+                        `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+                    opacity: 0.06,
+                    mixBlendMode: 'overlay',
+                    pointerEvents: 'none',
+                }}
+            />
+        </div>
+    );
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
+
 export default function Hero() {
     const ref = useRef(null);
     const { scrollY } = useScroll();
@@ -122,6 +225,7 @@ export default function Hero() {
                             fill
                             className="object-cover object-center"
                             priority
+<<<<<<< HEAD
                             sizes="(max-width: 768px) 100vw, 100vw"
                         />
                         {/* Preload next image efficiently without display: none DOM issues on mobile browsers */}
@@ -134,6 +238,15 @@ export default function Hero() {
                                 priority
                             />
                         </div>
+=======
+                            quality={90}
+                            sizes="100vw"
+                        />
+
+                        {/* Preload next image for smoothness */}
+                        <link rel="preload" href={HERO_IMAGES[(currentImageIndex + 1) % HERO_IMAGES.length]} as="image" />
+
+>>>>>>> 6c176b0 (finishing)
                     </motion.div>
                 </AnimatePresence>
 
@@ -185,16 +298,15 @@ export default function Hero() {
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-white tracking-[0.15em] text-lg sm:text-2xl md:text-4xl font-black font-gang font-restore uppercase drop-shadow-[0_2px_10px_rgba(255,100,0,0.3)] filter">JK Lakshmipat University Presents</span>
                         </motion.div>
 
-                        {/* Main Title - Clean & Bold */}
-                        <motion.h2
-                            className="text-[14vw] sm:text-[15vw] md:text-[9rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-orange-600 to-white uppercase leading-none mb-2 font-gang"
+                        {/* Main Title — Glitched horizontal-cut effect */}
+                        <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-
+                            className="mb-2"
                         >
-                            SPARDHA'26
-                        </motion.h2>
+                            <GlitchedTitle text="SPARDHA'26" />
+                        </motion.div>
 
                         {/* Year - Neon Accent */}
                         <motion.div

@@ -2,6 +2,12 @@ import React, { Suspense } from 'react';
 import Navbar from "@/components/Navbar";
 import ParallaxBackground from "@/components/ParallaxBackground";
 import GamifiedWizard from "@/components/booking/GamifiedWizard";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Register | SPARDHA 2026",
+    description: "Secure your pass for SPARDHA 2026. Register now for the biggest sports festival in Jaipur.",
+};
 
 export default function RegisterPage() {
     return (

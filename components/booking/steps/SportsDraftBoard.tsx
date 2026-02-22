@@ -12,32 +12,47 @@ import Image from 'next/image';
 export const ALL_SPORTS = [
     {
         id: 'cricket-leather',
-        name: 'Cricket (Leather)',
+        name: 'Leather Cricket',
         icon: MdSportsCricket,
-        bg: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&q=80',
+        bg: '/assets/games/cricket.JPG',
         hasGender: true,
         bgGradient: 'from-blue-900 to-slate-900',
         prizes: { boys: 33000, girls: 8000 },
         fees: { boys: 400, girls: 1 },
-        price: 400
+        price: 400,
+        pricingType: 'person'
     },
     {
-        id: 'football',
-        name: 'Football (7v7 / 5v5)',
+        id: 'football-7v7',
+        name: 'Football (7v7)',
         icon: FaFutbol,
-        bg: 'https://images.unsplash.com/photo-1579952363873-27f3bde87a34?auto=format&fit=crop&q=80',
+        bg: '/assets/games/football.JPG',
         hasGender: true,
+        onlyGender: 'Boys',
         fees: { boys: 250, girls: 1 },
-        price: 250
+        price: 250,
+        pricingType: 'person'
+    },
+    {
+        id: 'football-5v5',
+        name: 'Football (5v5)',
+        icon: FaFutbol,
+        bg: '/assets/games/football_5v5.png',
+        hasGender: true,
+        onlyGender: 'Girls',
+        fees: { boys: 0, girls: 1 },
+        price: 1,
+        pricingType: 'person'
     },
     {
         id: 'basketball',
         name: 'Basketball',
         icon: FaBasketballBall,
-        bg: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80',
+        bg: '/assets/games/basketball.JPG',
         hasGender: true,
         fees: { boys: 250, girls: 1 },
-        price: 250
+        price: 250,
+        pricingType: 'person'
     },
     {
         id: 'volleyball',
@@ -46,71 +61,81 @@ export const ALL_SPORTS = [
         bg: '/assets/games/volleyball_v2.jpg',
         hasGender: true,
         fees: { boys: 250, girls: 1 },
-        price: 250
+        price: 250,
+        pricingType: 'person'
     },
     {
         id: 'badminton',
         name: 'Badminton (Singles)',
         icon: GiShuttlecock,
-        bg: '/assets/games/badminton_v2.jpg',
+        bg: '/assets/games/badminton_singles.png',
         hasGender: true,
         fees: { boys: 250, girls: 1 },
-        price: 250
+        price: 250,
+        pricingType: 'person'
     },
     {
         id: 'badminton-doubles',
         name: 'Badminton (Doubles)',
         icon: GiShuttlecock,
-        bg: 'https://images.unsplash.com/photo-1626224583764-847890e058f5?auto=format&fit=crop&q=80',
+        bg: '/assets/games/badminton_doubles.png',
         hasGender: true,
         fees: { boys: 500, girls: 1 },
-        price: 500
+        price: 500,
+        pricingType: 'team'
     },
     {
         id: 'badminton-mixed',
         name: 'Badminton (Mixed)',
         icon: GiShuttlecock,
-        bg: 'https://images.unsplash.com/photo-1626224583764-847890e058f5?auto=format&fit=crop&q=80',
-        hasGender: false,
-        price: 250
+        bg: '/assets/games/badminton_mixed.png',
+        hasGender: true,
+        fees: { boys: 250, girls: 1 },
+        price: 250,
+        pricingType: 'person'
     },
-
-
     {
         id: 'kabaddi',
         name: 'Kabaddi',
         icon: MdSportsKabaddi,
-        bg: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&q=80',
-        hasGender: false,
-        price: 1100
+        bg: '/assets/images/kabaddi.png',
+        hasGender: true,
+        fees: { boys: 1100, girls: 1 },
+        price: 1100,
+        pricingType: 'team'
     },
-
     {
         id: 'box-cricket',
         name: 'Box Cricket',
         icon: MdSportsCricket,
-        bg: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80',
-        hasGender: false,
-        price: 1100
+        bg: '/assets/images/media_2.jpeg',
+        hasGender: true,
+        fees: { boys: 1100, girls: 1 },
+        price: 1100,
+        pricingType: 'team'
     },
     {
         id: 'chess',
         name: 'Chess',
         icon: FaChessKing,
-        bg: 'https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&q=80',
+        bg: '/assets/images/chess.png',
         hasGender: true,
         fees: { boys: 150, girls: 1 },
-        price: 150
+        price: 150,
+        pricingType: 'person'
     },
     {
         id: 'esports',
         name: 'E-Sports',
         icon: FaGamepad,
-        bg: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80',
-        hasGender: false,
-        price: 500
+        bg: '/assets/images/esports.png',
+        hasGender: true,
+        fees: { boys: 500, girls: 1 },
+        price: 500,
+        pricingType: 'team'
     }
 ];
+
 
 interface Props {
     cart: SportItem[];
@@ -157,28 +182,38 @@ const SportCard = memo(({ sport, isBoyInCart, isGirlInCart, isOpenInCart, onTogg
 
             {/* Controls */}
             <div className="p-4 space-y-3 flex flex-col h-full justify-between">
-                <div className="text-xs font-mono text-gray-400 flex justify-between">
-                    <span>ENTRY FEE</span>
-                    <span className="text-white font-bold">₹{sport.price}</span>
+                <div className="text-xs font-mono text-gray-400 flex flex-col items-start">
+                    <div className="flex justify-between w-full">
+                        <span>REGISTRATION FEE</span>
+                        <span className="text-white font-bold">₹{sport.price}</span>
+                    </div>
+                    <div className="text-[10px] opacity-50 uppercase tracking-widest mt-0.5">
+                        {sport.pricingType === 'team' ? '// per team entry' : '// per individual person'}
+                    </div>
                 </div>
+
 
                 <div className="flex gap-2 mt-auto">
                     {sport.hasGender ? (
                         <>
-                            <button
-                                onClick={() => onToggle(sport, 'Boys')}
-                                className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 border ${isBoyInCart ? 'bg-neon-cyan text-black border-neon-cyan shadow-[0_0_15px_rgba(34,211,238,0.4)]' : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'}`}
-                            >
-                                {isBoyInCart ? <FaCheck /> : <MdMale className="text-lg" />}
-                                BOYS
-                            </button>
-                            <button
-                                onClick={() => onToggle(sport, 'Girls')}
-                                className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 border ${isGirlInCart ? 'bg-pink-500 text-white border-pink-500 shadow-[0_0_15px_rgba(236,72,153,0.4)]' : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'}`}
-                            >
-                                {isGirlInCart ? <FaCheck /> : <MdFemale className="text-lg" />}
-                                GIRLS
-                            </button>
+                            {(!(sport as any).onlyGender || (sport as any).onlyGender === 'Boys') && (
+                                <button
+                                    onClick={() => onToggle(sport, 'Boys')}
+                                    className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 border ${isBoyInCart ? 'bg-neon-cyan text-black border-neon-cyan shadow-[0_0_15px_rgba(34,211,238,0.4)]' : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'}`}
+                                >
+                                    {isBoyInCart ? <FaCheck /> : <MdMale className="text-lg" />}
+                                    BOYS
+                                </button>
+                            )}
+                            {(!(sport as any).onlyGender || (sport as any).onlyGender === 'Girls') && (
+                                <button
+                                    onClick={() => onToggle(sport, 'Girls')}
+                                    className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 border ${isGirlInCart ? 'bg-pink-500 text-white border-pink-500 shadow-[0_0_15px_rgba(236,72,153,0.4)]' : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'}`}
+                                >
+                                    {isGirlInCart ? <FaCheck /> : <MdFemale className="text-lg" />}
+                                    GIRLS
+                                </button>
+                            )}
                         </>
                     ) : (
                         <button
@@ -225,8 +260,10 @@ export default function SportsDraftBoard({ cart, addToCart, removeFromCart, onNe
                 price: finalPrice,
                 image: sport.bg,
                 category: category,
-                color: color
+                color: color,
+                pricingType: (sport as any).pricingType
             });
+
         }
     }, [addToCart, removeFromCart]); // Only recreate if context helpers change (rare)
 
@@ -320,13 +357,23 @@ export default function SportsDraftBoard({ cart, addToCart, removeFromCart, onNe
                             </span>
                         </div>
 
-                        <button
-                            onClick={onNext}
-                            disabled={cart.length === 0}
-                            className="w-full bg-gradient-to-r from-neon-cyan to-blue-500 text-black font-black italic uppercase py-4 rounded-xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_20px_rgba(0,243,255,0.3)] disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed group"
-                        >
-                            Confirm Selection <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
-                        </button>
+                        <div className="flex flex-col gap-3">
+                            <button
+                                onClick={onNext}
+                                disabled={cart.length === 0}
+                                className="w-full bg-gradient-to-r from-neon-cyan to-blue-500 text-black font-black italic uppercase py-4 rounded-xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_20px_rgba(0,243,255,0.3)] disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed group"
+                            >
+                                Confirm Selection <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
+                            </button>
+
+                            <button
+                                onClick={onPrev}
+                                className="w-full bg-white/5 border border-white/10 text-gray-400 font-bold uppercase py-3 rounded-xl hover:bg-white/10 hover:text-white transition-all text-xs flex items-center justify-center gap-2"
+                            >
+                                <span>←</span> Edit Profile Details
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             </div>
