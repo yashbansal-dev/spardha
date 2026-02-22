@@ -33,7 +33,7 @@ export default function Footer() {
                         {[
                             { label: 'Support', href: '/contact', icon: <FaQuestionCircle /> },
                             { label: 'Sponsor', href: '/#sponsors', icon: <FaHandshake /> },
-                            { label: 'Info Kit', href: '/docs/Brochure.pdf', icon: <FaFileAlt />, download: true },
+                            { label: 'Brochure', href: '/docs/Brochure.pdf', icon: <FaFileAlt />, download: true },
                             { label: 'Rulebook', href: '/docs/rulebook.pdf', icon: <FaFileAlt />, download: true },
                             { label: 'Location', href: 'https://maps.google.com/?q=JK+Lakshmipat+University', icon: <FaMapMarkerAlt />, external: true },
                             { label: 'Site Aid', href: '/team', icon: <FaHeart /> },

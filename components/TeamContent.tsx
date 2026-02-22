@@ -11,24 +11,30 @@ const bg1 = '/assets/images/media_1.jpeg';
 
 const teamMembers = [
     {
-        role: 'Student Affairs',
+        role: 'Vice Chancellor',
         gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
         members: [
             {
                 name: 'Vijay Chellobonia',
-                position: 'Faculty Coordinator',
+                position: 'Vice Chancellor',
                 image: '/assets/Core_photos/vijay.png',
                 bio: 'Leading strategic initiatives and academic excellence.'
-            },
+            }
+        ]
+    },
+    {
+        role: 'Student Affairs',
+        gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
+        members: [
             {
                 name: 'Deepak Sogani',
-                position: 'Faculty Coordinator',
+                position: 'Incharge Of Student Affairs',
                 image: '/assets/Core_photos/deepak_sogani.png',
                 bio: 'Dedicated to fostering student growth and ensuring smooth event execution.'
             },
             {
                 name: 'Vaibhav Topiwala',
-                position: 'Head Of Sports',
+                position: 'Sports Officer',
                 image: '/assets/Core_photos/VaibhavTopiwala.jpeg',
                 bio: 'Leading the sports committee with vision and dedication.'
             }
@@ -38,12 +44,12 @@ const teamMembers = [
         role: 'Students Council',
         gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
         members: [
-            // {
-            //     name: 'Shubham Jain',
-            //     position: 'President',
-            //     image: '/assets/Core_photos/shubhamjain.jpg',
-            //     bio: 'Coordinating student activities and ensuring seamless operations.'
-            // },
+            {
+                name: 'Shubham Jain',
+                position: 'President',
+                image: '/assets/Core_photos/shubhamjain_v2.jpg',
+                bio: 'Coordinating student activities and ensuring seamless operations.'
+            },
             {
                 name: 'Ishaan Saraswat',
                 position: 'General Secretary',
@@ -52,7 +58,7 @@ const teamMembers = [
             },
             {
                 name: 'Aman Prakash',
-                position: 'Sports Affairs',
+                position: 'Secretary',
                 image: '/assets/Core_photos/aman_prakash.jpg',
                 bio: 'Working to elevate the sports culture and infrastructure.'
             }
@@ -197,9 +203,9 @@ const Team = () => {
                                     <div className="w-16 h-[1px] bg-spardha-gold/40 mx-auto"></div>
                                 </motion.div>
 
-                                {/* EDITORIAL MINIMALIST DESIGN FOR FIRST THREE CATEGORIES */}
-                                {catIndex < 3 ? (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto px-4 md:px-0">
+                                {/* EDITORIAL MINIMALIST DESIGN FOR FIRST FOUR CATEGORIES */}
+                                {catIndex < 4 ? (
+                                    <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-7xl mx-auto px-4 md:px-0">
                                         {category.members.map((member, memIndex) => {
                                             const cardId = `${catIndex}-${memIndex}`;
                                             const isHovered = hoveredEditorial === cardId;
@@ -214,7 +220,7 @@ const Team = () => {
                                                     transition={{ delay: memIndex * 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                                                     onMouseEnter={() => setHoveredEditorial(cardId)}
                                                     onMouseLeave={() => setHoveredEditorial(null)}
-                                                    className="group"
+                                                    className="group w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-[400px]"
                                                 >
                                                     <motion.div
                                                         animate={{
