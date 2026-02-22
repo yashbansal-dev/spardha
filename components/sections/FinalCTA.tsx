@@ -37,37 +37,37 @@ export default function FinalCTA() {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4 w-full h-full p-2 md:p-4 font-sans uppercase">
                     {/* Column 1 */}
                     <StaticColumn images={[
-                        '/assets/validictory/121A0589.JPG',
-                        '/assets/validictory/121A0592.JPG',
-                        '/assets/validictory/121A0595.JPG'
+                        { src: '/assets/validictory/121A0589.JPG', position: 'object-center' },
+                        { src: '/assets/validictory/121A0592.JPG', position: 'object-center' },
+                        { src: '/assets/validictory/121A0595.JPG', position: 'object-center' }
                     ]} className="hidden sm:flex" />
 
                     {/* Column 2 */}
                     <StaticColumn images={[
-                        '/assets/validictory/121A0597.JPG',
-                        '/assets/validictory/121A0601.JPG',
-                        '/assets/validictory/121A0602.JPG'
+                        { src: '/assets/validictory/121A0597.JPG', position: 'object-[center_30%]' },
+                        { src: '/assets/validictory/121A0601.JPG', position: 'object-center' },
+                        { src: '/assets/validictory/121A0602.JPG', position: 'object-center' }
                     ]} className="mt-12 hidden md:flex" />
 
                     {/* Column 3 (Center) */}
                     <StaticColumn images={[
-                        '/assets/validictory/121A0604.JPG',
-                        '/assets/validictory/121A0608.JPG',
-                        '/assets/validictory/121A0622.JPG'
+                        { src: '/assets/validictory/121A0604.JPG', position: 'object-[center_20%]' },
+                        { src: '/assets/validictory/121A0608.JPG', position: 'object-[center_20%]' },
+                        { src: '/assets/validictory/121A0622.JPG', position: 'object-center' }
                     ]} />
 
-                    {/* Column 4 */}
+                    {/* Column 4 - Fix for "top right 2 image" */}
                     <StaticColumn images={[
-                        '/assets/validictory/121A0623.JPG',
-                        '/assets/validictory/121A0625.JPG',
-                        '/assets/validictory/121A0629.JPG'
+                        { src: '/assets/validictory/121A0623.JPG', position: 'object-center' },
+                        { src: '/assets/validictory/121A0625.JPG', position: 'object-center' },
+                        { src: '/assets/validictory/121A0629.JPG', position: 'object-center' }
                     ]} className="mt-20 hidden lg:flex" />
 
-                    {/* Column 5 */}
+                    {/* Column 5 - Fix for "top right 2 image" */}
                     <StaticColumn images={[
-                        '/assets/validictory/121A0632.JPG',
-                        '/assets/validictory/121A0636.JPG',
-                        '/assets/validictory/121A0662.JPG'
+                        { src: '/assets/validictory/121A0632.JPG', position: 'object-center' },
+                        { src: '/assets/validictory/121A0636.JPG', position: 'object-[center_30%]' },
+                        { src: '/assets/validictory/121A0662.JPG', position: 'object-[center_20%]' }
                     ]} className="hidden lg:flex" />
                 </div>
             </div>
@@ -159,21 +159,31 @@ export default function FinalCTA() {
 
 // --- HELPER COMPONENTS ---
 
-function StaticColumn({ images, className }: { images: string[], className?: string }) {
+interface ImageProps {
+    src: string;
+    position?: string;
+}
+
+function StaticColumn({ images, className }: { images: (string | ImageProps)[], className?: string }) {
     return (
         <div className={`relative flex flex-col gap-4 w-full h-full ${className}`}>
-            {images.map((src, i) => (
-                <div key={i} className="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-white/5 hover:scale-[1.02] transition-all duration-500 shadow-2xl">
-                    <Image
-                        src={src}
-                        alt="Ceremony Moment"
-                        fill
-                        className="object-cover brightness-[1.15] contrast-[1.1] saturate-[1.1]"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        priority={i < 2}
-                    />
-                </div>
-            ))}
+            {images.map((item, i) => {
+                const src = typeof item === 'string' ? item : item.src;
+                const position = typeof item === 'string' ? 'object-center' : (item.position || 'object-center');
+
+                return (
+                    <div key={i} className="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-white/5 hover:scale-[1.02] transition-all duration-500 shadow-2xl">
+                        <Image
+                            src={src}
+                            alt="Ceremony Moment"
+                            fill
+                            className={`object-cover brightness-[1.15] contrast-[1.1] saturate-[1.1] ${position}`}
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                            priority={i < 2}
+                        />
+                    </div>
+                );
+            })}
         </div>
     );
 }
