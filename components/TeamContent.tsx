@@ -15,7 +15,7 @@ const teamMembers = [
         gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
         members: [
             {
-                name: 'Dr. Vijay Chellaboina',
+                name: 'Dr. Vijay SekharChellaboina',
                 image: '/assets/Core_photos/vijay.png',
             }
         ]
