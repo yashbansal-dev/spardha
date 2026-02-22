@@ -135,30 +135,15 @@ export default function SportsArsenal() {
 
                                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 pointer-events-none"></div>
 
-                                {/* Info HUD */}
-                                <div className="absolute bottom-8 left-8 right-8 z-20 flex flex-col md:flex-row items-end justify-between gap-6 pointer-events-none">
-                                    <div className="max-w-md">
-                                        <div className="flex items-center gap-3 mb-2">
-                                            <span className="px-2 py-0.5 bg-neon-cyan text-black text-[10px] font-mono font-black uppercase tracking-tighter">
-                                                {activeField.zone}
-                                            </span>
-                                            <div className="h-[1px] w-12 bg-white/20"></div>
-                                        </div>
-                                        <p className="text-[11px] md:text-xs font-bold text-white/60 leading-relaxed tracking-widest uppercase italic">
-                                            {activeField.description}
-                                        </p>
-                                    </div>
-
-                                    <div className="flex flex-col items-end gap-2 pr-4">
-                                        <div className="text-neon-cyan text-xs font-mono tracking-widest animate-pulse uppercase">Target Locked // 0{activeIdx + 1}</div>
-                                        <div className="h-[2px] w-32 bg-white/10 overflow-hidden">
-                                            <motion.div
-                                                initial={{ x: "-100%" }}
-                                                animate={{ x: "100%" }}
-                                                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                                                className="w-full h-full bg-neon-cyan"
-                                            />
-                                        </div>
+                                {/* Info HUD - Progress Bar Only */}
+                                <div className="absolute bottom-8 right-8 z-20 flex flex-col items-end gap-2 pointer-events-none">
+                                    <div className="h-[2px] w-32 bg-white/10 overflow-hidden">
+                                        <motion.div
+                                            initial={{ x: "-100%" }}
+                                            animate={{ x: "100%" }}
+                                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                            className="w-full h-full bg-neon-cyan"
+                                        />
                                     </div>
                                 </div>
                             </motion.div>
