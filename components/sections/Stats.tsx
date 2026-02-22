@@ -45,7 +45,7 @@ const battlefields = [
     {
         id: "badminton",
         name: "BADMINTON",
-        image: "/assets/images/badminton.png",
+        image: "/assets/games/badminton_engaging.png",
         stats: "1v1 // COURT",
         zone: "ZONE_E",
         description: "PRECISION EXECUTION. THE FASTEST STRIKES IN THE OPERATION.",
