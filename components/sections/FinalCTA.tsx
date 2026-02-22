@@ -37,37 +37,37 @@ export default function FinalCTA() {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4 w-full h-full p-2 md:p-4 font-sans uppercase">
                     {/* Column 1 */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/121A0589.JPG', position: 'object-center' },
-                        { src: '/assets/validictory/121A0592.JPG', position: 'object-center' },
+                        { src: '/assets/validictory/121A0589.JPG', position: 'object-top' },
+                        { src: '/assets/validictory/121A0592.JPG', position: 'object-top' },
                         { src: '/assets/validictory/121A0595.JPG', position: 'object-center' }
                     ]} className="hidden sm:flex" />
 
                     {/* Column 2 */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/121A0597.JPG', position: 'object-[center_30%]' },
+                        { src: '/assets/validictory/121A0597.JPG', position: 'object-top' },
                         { src: '/assets/validictory/121A0601.JPG', position: 'object-center' },
                         { src: '/assets/validictory/121A0602.JPG', position: 'object-center' }
                     ]} className="mt-12 hidden md:flex" />
 
                     {/* Column 3 (Center) */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/121A0604.JPG', position: 'object-[center_20%]' },
-                        { src: '/assets/validictory/121A0608.JPG', position: 'object-[center_20%]' },
+                        { src: '/assets/validictory/121A0604.JPG', position: 'object-top' },
+                        { src: '/assets/validictory/121A0608.JPG', position: 'object-top' },
                         { src: '/assets/validictory/121A0622.JPG', position: 'object-center' }
                     ]} />
 
                     {/* Column 4 - Fix for "top right 2 image" */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/121A0623.JPG', position: 'object-center' },
+                        { src: '/assets/validictory/121A0623.JPG', position: 'object-[50%_10%]' },
                         { src: '/assets/validictory/121A0625.JPG', position: 'object-center' },
                         { src: '/assets/validictory/121A0629.JPG', position: 'object-center' }
                     ]} className="mt-20 hidden lg:flex" />
 
                     {/* Column 5 - Fix for "top right 2 image" */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/121A0632.JPG', position: 'object-center' },
-                        { src: '/assets/validictory/121A0636.JPG', position: 'object-[center_30%]' },
-                        { src: '/assets/validictory/121A0662.JPG', position: 'object-[center_20%]' }
+                        { src: '/assets/validictory/121A0632.JPG', position: 'object-[50%_10%]' },
+                        { src: '/assets/validictory/121A0636.JPG', position: 'object-[50%_20%]' },
+                        { src: '/assets/validictory/121A0662.JPG', position: 'object-center' }
                     ]} className="hidden lg:flex" />
                 </div>
             </div>
