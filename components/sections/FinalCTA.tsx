@@ -56,17 +56,17 @@ export default function FinalCTA() {
                         { src: '/assets/validictory/121A0622.JPG', position: 'object-center' }
                     ]} />
 
-                    {/* Column 4 - Fix for "top right 2 image" */}
+                    {/* Column 4 - Refreshed images to fix clipping and repetition */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/121A0623.JPG', position: 'object-[50%_10%]' },
+                        { src: '/assets/validictory/DSC_0990.JPG', position: 'object-center' },
                         { src: '/assets/validictory/121A0625.JPG', position: 'object-center' },
                         { src: '/assets/validictory/121A0629.JPG', position: 'object-center' }
                     ]} className="mt-20 hidden lg:flex" />
 
-                    {/* Column 5 - Fix for "top right 2 image" */}
+                    {/* Column 5 - Refreshed images to fix clipping and repetition */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/121A0632.JPG', position: 'object-[50%_10%]' },
-                        { src: '/assets/validictory/121A0636.JPG', position: 'object-[50%_20%]' },
+                        { src: '/assets/validictory/DSC_0932.JPG', position: 'object-center' },
+                        { src: '/assets/validictory/DSC_0953.JPG', position: 'object-center' },
                         { src: '/assets/validictory/121A0662.JPG', position: 'object-center' }
                     ]} className="hidden lg:flex" />
                 </div>
