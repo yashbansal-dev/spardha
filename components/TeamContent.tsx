@@ -90,7 +90,7 @@ const teamMembers = [
             {
                 name: 'Ashmit Sharma',
                 position: 'Organizing Head',
-                image: '/assets/Core_photos/ashmit_sharma_v2.png',
+                image: '/assets/Core_photos/ashmit_sharma_v4.png',
                 bio: 'Bridging administration and on-ground execution for India\'s premier sports fest.'
             }
         ]
