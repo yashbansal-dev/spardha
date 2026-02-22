@@ -114,12 +114,8 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                             </div>
                         </div>
 
-                        {/* Middle: Avatar & Rings */}
+                        {/* Middle: Avatar */}
                         <div className="relative flex-1 flex flex-col items-center justify-center">
-                            {/* Rotating HUD Rings */}
-                            <div className="absolute w-48 h-48 border border-dashed border-white/20 rounded-full animate-spin-slow-reverse"></div>
-                            <div className="absolute w-56 h-56 border border-white/5 rounded-full animate-pulse"></div>
-
                             {/* Avatar Container */}
                             <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-neon-cyan/50 shadow-[0_0_30px_rgba(0,243,255,0.2)] bg-black/50 backdrop-blur-sm z-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                                 <div className="relative w-full h-full transform scale-150">
@@ -136,7 +132,6 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                 {/* Glare */}
                                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
-
                         </div>
 
                         {/* Lower: ID Details */}
