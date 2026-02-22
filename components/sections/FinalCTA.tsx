@@ -37,68 +37,66 @@ export default function FinalCTA() {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4 w-full h-full p-2 md:p-4 font-sans uppercase">
                     {/* Column 1 */}
                     <StaticColumn images={[
-                        '/assets/gallery-all/DSC_0105.JPG',
-                        '/assets/gallery-all/121A0374.JPG',
-                        '/assets/gallery-all/DSC_0814.JPG'
+                        '/assets/validictory/121A0589.JPG',
+                        '/assets/validictory/121A0592.JPG',
+                        '/assets/validictory/121A0595.JPG'
                     ]} className="hidden sm:flex" />
 
                     {/* Column 2 */}
                     <StaticColumn images={[
-                        '/assets/gallery-all/121A0227.JPG',
-                        '/assets/gallery-all/DSC_0469.JPG',
-                        '/assets/gallery-all/121A0228.JPG'
+                        '/assets/validictory/121A0597.JPG',
+                        '/assets/validictory/121A0601.JPG',
+                        '/assets/validictory/121A0602.JPG'
                     ]} className="mt-12 hidden md:flex" />
 
                     {/* Column 3 (Center) */}
                     <StaticColumn images={[
-                        '/assets/gallery-all/121A0938.JPG',
-                        '/assets/gallery-all/DSC_0369.JPG',
-                        '/assets/gallery-all/121A0231.JPG'
+                        '/assets/validictory/121A0604.JPG',
+                        '/assets/validictory/121A0608.JPG',
+                        '/assets/validictory/121A0622.JPG'
                     ]} />
 
                     {/* Column 4 */}
                     <StaticColumn images={[
-                        '/assets/gallery-all/DSC_0232.JPG',
-                        '/assets/gallery-all/DSC_0386.JPG',
-                        '/assets/gallery-all/121A0238.JPG'
+                        '/assets/validictory/121A0623.JPG',
+                        '/assets/validictory/121A0625.JPG',
+                        '/assets/validictory/121A0629.JPG'
                     ]} className="mt-20 hidden lg:flex" />
 
                     {/* Column 5 */}
                     <StaticColumn images={[
-                        '/assets/gallery-all/DSC_8174.JPG',
-                        '/assets/gallery-all/DSC_0861.JPG',
-                        '/assets/gallery-all/121A0326.JPG'
+                        '/assets/validictory/121A0632.JPG',
+                        '/assets/validictory/121A0636.JPG',
+                        '/assets/validictory/121A0662.JPG'
                     ]} className="hidden lg:flex" />
                 </div>
             </div>
 
-            {/* 2. Optimized Visibility Overlay (Extremely subtle to maintain HD clarity) */}
-            <div className="absolute inset-0 bg-black/5 md:mix-blend-multiply z-0" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 z-0" />
+            {/* 2. Enhanced Visibility Overlay - Removed heavy multiply to let quality shine through */}
+            <div className="absolute inset-0 bg-black/10 z-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-0" />
 
-
-
-            {/* 4. Noise & Texture (Matches Hero) */}
-            <div className="absolute inset-0 bg-noise opacity-10 md:opacity-20 md:mix-blend-overlay z-10 pointer-events-none" />
+            {/* 4. Noise & Texture - Subtler overlay to maintain sharpness */}
+            <div className="absolute inset-0 bg-noise opacity-[0.05] z-10 pointer-events-none" />
 
             {/* 3. Perspective Grid (Floor) - Subtle & Dark (Matches Hero) */}
-            <div className="absolute inset-x-0 bottom-0 h-[40vh] bg-grid-perspective opacity-30 z-10 pointer-events-none"
+            <div className="absolute inset-x-0 bottom-0 h-[40vh] bg-grid-perspective opacity-20 z-10 pointer-events-none"
                 style={{ maskImage: 'linear-gradient(to bottom, transparent, black)' }}
             />
 
-            {/* 3. Bottom Fade-Out (Moved to cover Grid) */}
-            <div className="absolute inset-x-0 bottom-0 h-[40vh] bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-10 pointer-events-none" />
+            {/* 3. Bottom Fade-Out */}
+            <div className="absolute inset-x-0 bottom-0 h-[40vh] bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent z-10 pointer-events-none" />
 
-            {/* 4. Top Fade-In (User Request - "Same as above") */}
-            <div className="absolute inset-x-0 top-0 h-[40vh] bg-gradient-to-b from-[#050505] via-[#050505]/80 to-transparent z-10 pointer-events-none" />
+            {/* 4. Top Fade-In */}
+            <div className="absolute inset-x-0 top-0 h-[40vh] bg-gradient-to-b from-[#050505] via-[#050505]/60 to-transparent z-10 pointer-events-none" />
 
-            {/* 4. Ambient Glows (Matches Hero) */}
+            {/* 4. Ambient Glows */}
             <div className="absolute top-1/2 left-1/4 w-[40vw] h-[40vw] bg-neon-cyan/5 rounded-full blur-[120px] pointer-events-none z-5" />
             <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-neon-orange/10 rounded-full blur-[100px] pointer-events-none z-5" />
 
-            {/* 5. Looming Watermark Text (Matches Hero Style) */}
+            {/* 5. Looming Watermark Text */}
             <div className="absolute top-[20%] inset-x-0 flex justify-center pointer-events-none z-0">
-                <h1 className="text-[15vw] font-black text-white/[0.03] tracking-widest uppercase leading-none font-gang select-none mix-blend-overlay">
+                <h1 className="text-[15vw] font-black text-white/[0.04] tracking-widest uppercase leading-none font-gang select-none">
                     ARENA
                 </h1>
             </div>
@@ -165,13 +163,14 @@ function StaticColumn({ images, className }: { images: string[], className?: str
     return (
         <div className={`relative flex flex-col gap-4 w-full h-full ${className}`}>
             {images.map((src, i) => (
-                <div key={i} className="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-white/5 hover:scale-[1.02] transition-all duration-500">
+                <div key={i} className="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-white/5 hover:scale-[1.02] transition-all duration-500 shadow-2xl">
                     <Image
                         src={src}
-                        alt="Collage Item"
+                        alt="Ceremony Moment"
                         fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 50vw, 20vw"
+                        className="object-cover brightness-[1.15] contrast-[1.1] saturate-[1.1]"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        priority={i < 2}
                     />
                 </div>
             ))}
