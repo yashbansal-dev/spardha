@@ -81,10 +81,10 @@ function GlitchedTitle({ text }: { text: string }) {
                 style={{
                     ...fontOverride,
                     whiteSpace: 'nowrap',
-                    color: '#A04522',
+                    color: '#ff2a00',
                     clipPath: 'polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%)',
                     transform: 'translateX(0px)',
-                    textShadow: '-3px 4px 0 rgba(0,0,0,0.9), 0 0 20px rgba(160,69,34,0.3)',
+                    textShadow: '-4px 4px 0 rgba(0,0,0,0.9), 0 0 40px rgba(255,0,0,0.6)',
                 }}
             >{text}</span>
 
@@ -95,10 +95,10 @@ function GlitchedTitle({ text }: { text: string }) {
                 style={{
                     ...fontOverride,
                     whiteSpace: 'nowrap',
-                    color: '#8B3A1A',
+                    color: '#cc0000',
                     clipPath: 'polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%)',
                     transform: 'translateX(0px)',
-                    textShadow: '3px 4px 0 rgba(0,0,0,0.9), 0 0 20px rgba(139,58,26,0.3)',
+                    textShadow: '4px 4px 0 rgba(0,0,0,0.9), 0 0 40px rgba(200,0,0,0.6)',
                 }}
             >{text}</span>
 
@@ -279,7 +279,7 @@ export default function Hero() {
                             transition={{ delay: 0.2, duration: 0.8 }}
                             className="flex items-center gap-4 mb-3"
                         >
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-white tracking-[0.15em] text-lg sm:text-2xl md:text-4xl font-black font-gang font-restore uppercase drop-shadow-[0_2px_10px_rgba(255,100,0,0.3)] filter">JK Lakshmipat University Presents</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-500 to-red-950 tracking-[0.15em] text-lg sm:text-2xl md:text-4xl font-black font-gang font-restore uppercase drop-shadow-[0_2px_15px_rgba(255,0,0,0.5)] filter">JK Lakshmipat University Presents</span>
                         </motion.div>
 
                         {/* Main Title — Glitched horizontal-cut effect */}
