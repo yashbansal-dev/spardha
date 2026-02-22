@@ -59,7 +59,9 @@ const teamMembers = [
             {
                 name: 'Aman Prakash',
                 position: 'Secretary',
-                image: '/assets/Core_photos/aman_prakash.jpg',
+                image: '/assets/Core_photos/aman_new.png',
+                priority: true,
+                unoptimized: true,
                 bio: 'Working to elevate the sports culture and infrastructure.'
             }
         ]
@@ -248,7 +250,7 @@ const Team = () => {
                                                                         fill
                                                                         className="object-cover"
                                                                         style={{
-                                                                            transform: member.rotate ? `rotate(${member.rotate}deg) scale(${isMobile ? 1.9 : 1.5})` : 'none'
+                                                                            transform: (member as any).rotate ? `rotate(${(member as any).rotate}deg) scale(${isMobile ? 1.9 : 1.5})` : 'none'
                                                                         }}
                                                                         sizes="(max-width: 768px) 100vw, 50vw"
                                                                         priority={catIndex === 0 || (member as any).priority}
