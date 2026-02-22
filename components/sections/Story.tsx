@@ -79,7 +79,7 @@ export default function Story() {
                                 fill
                                 className="!object-contain md:!object-cover"
                                 priority
-                                quality={100}
+                                sizes="(max-width: 768px) 100vw, 100vw"
                             />
                         </div>
                     </motion.div>
@@ -98,7 +98,7 @@ export default function Story() {
                                 alt="Basketball Match"
                                 fill
                                 className="!object-contain md:!object-cover"
-                                quality={100}
+                                sizes="(max-width: 768px) 100vw, 100vw"
                             />
                         </div>
                     </motion.div>
@@ -117,13 +117,13 @@ export default function Story() {
                                 alt="Basketball Action"
                                 fill
                                 className="!object-contain md:!object-cover"
-                                quality={100}
+                                sizes="(max-width: 768px) 100vw, 100vw"
                             />
                         </div>
                     </motion.div>
 
                     {/* Digital Noise Overlay */}
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5 md:opacity-10 pointer-events-none mix-blend-overlay md:mix-blend-normal"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black pointer-events-none"></div>
                 </div>
 

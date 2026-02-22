@@ -66,7 +66,7 @@ export default function SportsArsenal() {
                 <div className="w-full max-w-7xl mb-12 md:mb-16 flex flex-col md:flex-row items-end justify-between border-b border-white/10 pb-6">
                     <div>
                         <motion.h2
-                            className="text-6xl md:text-8xl font-black font-gang text-white tracking-tighter uppercase leading-none mix-blend-difference"
+                            className="text-6xl md:text-8xl font-black font-gang text-white tracking-tighter uppercase leading-none md:mix-blend-difference"
                             initial={{ x: -100, opacity: 0 }}
                             whileInView={{ x: 0, opacity: 1 }}
                             viewport={{ once: true }}
@@ -128,11 +128,11 @@ function ShardCard({ field, active, onHover, onLeave }: any) {
                     fill
                     className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    quality={100}
+                    quality={80} // Reduced from 100 for better mobile sizing
                 />
 
-                {/* Scanline Overlay */}
-                <div className="absolute inset-0 bg-[linear-gradient(transparent_2px,black_3px)] bg-[size:100%_4px] opacity-20 pointer-events-none"></div>
+                {/* Scanline Overlay - simplified on mobile */}
+                <div className="absolute inset-0 bg-[linear-gradient(transparent_2px,black_3px)] bg-[size:100%_4px] opacity-10 md:opacity-20 pointer-events-none"></div>
 
 
             </div>

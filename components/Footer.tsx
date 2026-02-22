@@ -41,7 +41,7 @@ export default function Footer() {
                                 key={i}
                                 href={link.href}
                                 target={link.external ? "_blank" : "_self"}
-                                className="group flex items-center gap-4 text-4xl md:text-5xl lg:text-6xl font-bold uppercase text-white/40 hover:text-white transition-all duration-300"
+                                className="group flex items-center gap-4 text-4xl md:text-5xl lg:text-6xl font-gang font-black tracking-tighter uppercase text-white/40 hover:text-white transition-all duration-300"
                             >
                                 <span className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-2xl text-neon-cyan">
                                     {link.icon}

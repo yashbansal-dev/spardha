@@ -11,10 +11,7 @@ export default function Refunds() {
 
                 <div className="space-y-6 text-gray-300">
                     <h2 className="text-2xl font-bold text-white mt-8 mb-4">Cancellation Policy</h2>
-                    <p>Participants may cancel their registration up to 7 days before the event start date for a full refund. Cancellations made within 7 days of the event are non-refundable.</p>
-
-                    <h2 className="text-2xl font-bold text-white mt-8 mb-4">Refund Process</h2>
-                    <p>Allowed refunds will be processed within 5-7 business days to the original payment method. Please contact support@spardha.jklu.edu.in for any issues.</p>
+                    <p>All payments are final. Once payment has been made, no cancellations, refunds, or credits will be provided under any circumstances.</p>
 
                     <h2 className="text-2xl font-bold text-white mt-8 mb-4">Event Cancellation</h2>
                     <p>If Spardha 2026 cancels an event due to unforeseen circumstances, all registered participants will receive a full refund.</p>

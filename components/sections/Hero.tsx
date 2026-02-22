@@ -125,6 +125,7 @@ export default function Hero() {
     const ref = useRef(null);
     const { scrollY } = useScroll();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(true); // Default true for safety layout
 
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
@@ -144,6 +145,14 @@ export default function Hero() {
             setIsModalOpen(true);
         }
     };
+
+    // Client-side detection for mobile
+    useEffect(() => {
+        setIsMobile(window.innerWidth < 768);
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Slideshow Logic
     useEffect(() => {
@@ -186,14 +195,12 @@ export default function Hero() {
                 className="absolute inset-0 z-0"
                 style={{ y: bgY }}
             >
-                <AnimatePresence mode="popLayout">
+                <AnimatePresence>
                     <motion.div
                         key={currentImageIndex}
-                        className="absolute inset-0 bg-cover bg-center will-change-transform"
+                        className="absolute inset-0"
                         style={{
-                            // backgroundImage: `url("${HERO_IMAGES[currentImageIndex]}")`, // Removed to prevent double loading
                             filter: 'brightness(0.8)',
-                            backfaceVisibility: 'hidden',
                         }}
                         initial={{
                             opacity: 0,
@@ -201,15 +208,15 @@ export default function Hero() {
                         }}
                         animate={{
                             opacity: 1,
-                            scale: 1.05, // Subtle Ken Burns zoom
+                            scale: isMobile ? 1 : 1.05,
                         }}
                         exit={{
                             opacity: 0,
-                            scale: 1.05,
+                            scale: isMobile ? 1 : 1.05,
                         }}
                         transition={{
                             opacity: { duration: 1.2, ease: "easeInOut" },
-                            scale: { duration: 7, ease: "linear" } // Slow zoom during display
+                            scale: { duration: 7, ease: "linear" } 
                         }}
                     >
                         <Image
@@ -218,13 +225,37 @@ export default function Hero() {
                             fill
                             className="object-cover object-center"
                             priority
+<<<<<<< HEAD
                             quality={90}
                             sizes="100vw"
                         />
+=======
+<<<<<<< HEAD
+                            sizes="(max-width: 768px) 100vw, 100vw"
+                        />
+                        {/* Preload next image efficiently without display: none DOM issues on mobile browsers */}
+                        <div className="absolute opacity-0 pointer-events-none -z-10 w-[1px] h-[1px] overflow-hidden">
+                            <Image
+                                src={HERO_IMAGES[(currentImageIndex + 1) % HERO_IMAGES.length]}
+                                alt="preload"
+                                width={10}
+                                height={10}
+                                priority
+                            />
+                        </div>
+=======
+                            quality={90}
+                            sizes="100vw"
+                        />
+>>>>>>> save-work
 
                         {/* Preload next image for smoothness */}
                         <link rel="preload" href={HERO_IMAGES[(currentImageIndex + 1) % HERO_IMAGES.length]} as="image" />
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6c176b0 (finishing)
+>>>>>>> save-work
                     </motion.div>
                 </AnimatePresence>
 
@@ -236,14 +267,14 @@ export default function Hero() {
             </motion.div>
 
             {/* 1. Noise Filter (Film Grain) */}
-            <div className="bg-noise mix-blend-overlay"></div>
+            <div className="bg-noise md:mix-blend-overlay opacity-30"></div>
 
             {/* 2. Perspective Grid (Floor) */}
-            <div className="absolute inset-x-0 bottom-0 h-[50vh] bg-grid-perspective opacity-40 z-10 pointer-events-none"></div>
+            <div className="absolute inset-x-0 bottom-0 h-[50vh] bg-grid-perspective opacity-40 z-10 pointer-events-none md:mask-image-[linear-gradient(to_bottom,transparent,black)]"></div>
 
             {/* 3. Ambient Glows */}
-            <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-neon-cyan/10 rounded-full blur-[120px] pointer-events-none z-5"></div>
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-neon-purple/10 rounded-full blur-[100px] pointer-events-none z-5"></div>
+            <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-neon-cyan/10 rounded-full blur-[60px] md:blur-[120px] pointer-events-none z-5"></div>
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-neon-purple/10 rounded-full blur-[50px] md:blur-[100px] pointer-events-none z-5"></div>
 
             {/* --- CONTENT --- */}
             <motion.div
