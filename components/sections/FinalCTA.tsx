@@ -33,37 +33,37 @@ export default function FinalCTA() {
             {/* 1. Dynamic 3-Column Marquee Collage */}
             {/* 1. Fixed 3-Column Grid */}
             {/* 1. Fixed 5-Column Grid (Full Width) */}
-            <div className="absolute inset-0 z-0 overflow-hidden flex gap-4 justify-center items-center opacity-100 select-none pointer-events-none">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4 w-full h-full p-2 md:p-4 font-sans uppercase">
-                    {/* Column 1 */}
+            <div className="absolute inset-x-0 inset-y-0 md:inset-x-0 md:inset-y-0 z-0 overflow-hidden flex justify-center items-center opacity-60 md:opacity-100 select-none pointer-events-none">
+                <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 md:gap-4 w-[120%] sm:w-[120%] md:w-full shrink-0 h-max p-2 md:p-4 font-sans uppercase">
+                    {/* Column 1 - Left on mobile */}
                     <StaticColumn images={[
                         { src: '/assets/validictory/121A0589.JPG', position: 'object-top' },
                         { src: '/assets/validictory/121A0592.JPG', position: 'object-top' },
                         { src: '/assets/validictory/121A0595.JPG', position: 'object-center' }
-                    ]} className="hidden sm:flex" />
+                    ]} className="flex" />
 
-                    {/* Column 2 */}
+                    {/* Column 2 - Right on mobile */}
                     <StaticColumn images={[
                         { src: '/assets/validictory/121A0597.JPG', position: 'object-top' },
                         { src: '/assets/validictory/121A0601.JPG', position: 'object-center' },
                         { src: '/assets/validictory/121A0602.JPG', position: 'object-center' }
-                    ]} className="mt-12 hidden md:flex" />
+                    ]} className="mt-12 flex" />
 
-                    {/* Column 3 (Center) */}
+                    {/* Column 3 - Hidden on mobile, visible on desktop */}
                     <StaticColumn images={[
                         { src: '/assets/validictory/121A0604.JPG', position: 'object-top' },
                         { src: '/assets/validictory/121A0608.JPG', position: 'object-top' },
                         { src: '/assets/validictory/121A0622.JPG', position: 'object-center' }
-                    ]} />
+                    ]} className="mt-24 md:mt-0 hidden md:flex" />
 
-                    {/* Column 4 - Refreshed images to fix clipping and repetition */}
+                    {/* Column 4 */}
                     <StaticColumn images={[
                         { src: '/assets/validictory/DSC_0990.JPG', position: 'object-center' },
                         { src: '/assets/validictory/121A0625.JPG', position: 'object-center' },
                         { src: '/assets/validictory/121A0629.JPG', position: 'object-center' }
-                    ]} className="mt-20 hidden lg:flex" />
+                    ]} className="hidden lg:flex" />
 
-                    {/* Column 5 - Refreshed images to fix clipping and repetition */}
+                    {/* Column 5 */}
                     <StaticColumn images={[
                         { src: '/assets/validictory/DSC_0932.JPG', position: 'object-center' },
                         { src: '/assets/validictory/DSC_0953.JPG', position: 'object-center' },
@@ -165,7 +165,7 @@ interface ImageProps {
 
 function StaticColumn({ images, className }: { images: (string | ImageProps)[], className?: string }) {
     return (
-        <div className={`relative flex flex-col gap-4 w-full h-full ${className}`}>
+        <div className={`relative flex flex-col gap-2 md:gap-4 w-full h-max ${className}`}>
             {images.map((item, i) => {
                 const src = typeof item === 'string' ? item : item.src;
                 const position = typeof item === 'string' ? 'object-center' : (item.position || 'object-center');

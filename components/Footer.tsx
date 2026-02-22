@@ -33,24 +33,48 @@ export default function Footer() {
                         {[
                             { label: 'Support', href: '/contact', icon: <FaQuestionCircle /> },
                             { label: 'Sponsor', href: '/#sponsors', icon: <FaHandshake /> },
-                            { label: 'Info Kit', href: '/brochure', icon: <FaFileAlt /> },
-                            { label: 'Location', href: 'https://maps.google.com', icon: <FaMapMarkerAlt />, external: true },
+                            { label: 'Info Kit', href: '/docs/Brochure.pdf', icon: <FaFileAlt />, download: true },
+                            { label: 'Rulebook', href: '/docs/rulebook.pdf', icon: <FaFileAlt />, download: true },
+                            { label: 'Location', href: 'https://maps.google.com/?q=JK+Lakshmipat+University', icon: <FaMapMarkerAlt />, external: true },
                             { label: 'Site Aid', href: '/team', icon: <FaHeart /> },
-                        ].map((link, i) => (
-                            <Link
-                                key={i}
-                                href={link.href}
-                                target={link.external ? "_blank" : "_self"}
-                                className="group flex items-center gap-4 text-4xl md:text-5xl lg:text-6xl font-gang font-black tracking-tighter uppercase text-white/40 hover:text-white transition-all duration-300"
-                            >
-                                <span className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-2xl text-neon-cyan">
-                                    {link.icon}
-                                </span>
-                                <span className='group-hover:tracking-widest transition-all duration-300'>
-                                    {link.label}
-                                </span>
-                            </Link>
-                        ))}
+                        ].map((link, i) => {
+                            const commonClasses = "group flex items-center gap-4 text-4xl md:text-5xl lg:text-6xl font-gang font-black tracking-tighter uppercase text-white/40 hover:text-white transition-all duration-300";
+                            const content = (
+                                <>
+                                    <span className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-2xl text-neon-cyan">
+                                        {link.icon}
+                                    </span>
+                                    <span className='group-hover:tracking-widest transition-all duration-300'>
+                                        {link.label}
+                                    </span>
+                                </>
+                            );
+
+                            if (link.download) {
+                                return (
+                                    <a
+                                        key={i}
+                                        href={link.href}
+                                        download
+                                        className={commonClasses}
+                                    >
+                                        {content}
+                                    </a>
+                                );
+                            }
+
+                            return (
+                                <Link
+                                    key={i}
+                                    href={link.href}
+                                    target={link.external ? "_blank" : "_self"}
+                                    rel={link.external ? "noopener noreferrer" : undefined}
+                                    className={commonClasses}
+                                >
+                                    {content}
+                                </Link>
+                            );
+                        })}
                     </div>
 
                 </div>

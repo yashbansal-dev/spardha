@@ -58,7 +58,14 @@ export default function Contact() {
                             <div className="p-3 bg-white/5 rounded-lg text-neon-cyan"><FaMapMarkerAlt size={20} /></div>
                             <div>
                                 <h4 className="text-white font-bold mb-1">Address</h4>
-                                <p className="font-gang text-gray-400 text-base">JK Lakshmipat University, Near Mahindra SEZ, P.O. Mahapura, Ajmer Road, Jaipur - 302026</p>
+                                <a
+                                    href="https://maps.google.com/?q=JK+Lakshmipat+University"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="font-gang text-gray-400 text-base hover:text-neon-cyan transition-colors block"
+                                >
+                                    JK Lakshmipat University, Near Mahindra SEZ, P.O. Mahapura, Ajmer Road, Jaipur - 302026
+                                </a>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">

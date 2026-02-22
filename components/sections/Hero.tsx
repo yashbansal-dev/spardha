@@ -279,7 +279,13 @@ export default function Hero() {
                             transition={{ delay: 0.2, duration: 0.8 }}
                             className="flex items-center gap-4 mb-3"
                         >
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-500 to-red-950 tracking-[0.15em] text-lg sm:text-2xl md:text-4xl font-black font-gang font-restore uppercase drop-shadow-[0_2px_15px_rgba(255,0,0,0.5)] filter">JK Lakshmipat University Presents</span>
+                            <span
+                                className="tracking-[0.15em] text-lg sm:text-2xl md:text-3xl font-black font-gang font-restore uppercase"
+                                style={{
+                                    color: '#ff1a1a',
+                                    textShadow: '-1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 2px 15px rgba(255,0,0,0.2)'
+                                }}
+                            >JK Lakshmipat University Presents</span>
                         </motion.div>
 
                         {/* Main Title — Glitched horizontal-cut effect */}
