@@ -13,16 +13,15 @@ export default function ClientLoader({
     const pathname = usePathname();
 
     useEffect(() => {
-        // Check if we've already shown the loader in this session
-        const hasLoaded = sessionStorage.getItem("hasLoaded");
-        if (hasLoaded) {
-            setIsLoading(false);
-        }
-    }, []);
+        // Trigger loading screen on every navigation
+        setIsLoading(true);
+
+        // Scroll to top on navigation to simulate fresh page load
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     const handleComplete = () => {
         setIsLoading(false);
-        sessionStorage.setItem("hasLoaded", "true");
     };
 
     return (

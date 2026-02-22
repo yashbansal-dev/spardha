@@ -73,7 +73,7 @@ export default function VideoStrip() {
                 >
                     ADRENALINE
                 </motion.h2>
-                <p className="font-mono text-sm md:text-lg text-neon-orange mt-4 uppercase tracking-[0.5em] bg-black/50 inline-block px-4 py-1 border border-neon-orange/30">
+                <p className="font-mono text-sm md:text-lg text-red-500 mt-4 uppercase tracking-[0.5em] bg-black/50 inline-block px-4 py-1 border border-red-500/30">
                     // RAW_UNFILTERED_ACTION
                 </p>
             </div>

@@ -250,7 +250,7 @@ function StatNode({ label, value, isCurrency }: any) {
                 <span className="text-[10px] font-mono font-black uppercase text-white/30 tracking-widest group-hover:text-white/60 transition-colors">{label}</span>
             </div>
             <div className="flex items-baseline gap-2">
-                {isCurrency && <span className="text-neon-orange text-2xl font-black font-gang -mr-1">₹</span>}
+                {isCurrency && <span className="text-red-500 text-2xl font-black font-gang -mr-1">₹</span>}
                 <span className="text-5xl md:text-7xl font-black text-white font-gang tracking-tighter group-hover:text-neon-cyan transition-colors duration-300">
                     {value}
                 </span>

@@ -142,7 +142,7 @@ export default function Story() {
                             <DecryptText text="Between Fear" /> <br />
                             <span className="text-neon-cyan">And Courage</span>
                         </h2>
-                        <p className="text-gray-400 max-w-lg mx-auto leading-relaxed border-l-2 border-neon-orange pl-4 text-left">
+                        <p className="text-gray-400 max-w-lg mx-auto leading-relaxed border-l-2 border-red-500 pl-4 text-left">
                             Protocol initialized. The arena is not just a ground; it's a crucible where hesitation is deleted and legends are compiled.
                         </p>
                     </motion.div>
@@ -155,11 +155,11 @@ export default function Story() {
                             display: useTransform(smoothProgress, (v) => (v < 0.3 || v > 0.65) ? "none" : "block")
                         }}
                     >
-                        <div className="text-neon-orange text-sm mb-4 tracking-[0.5em] border-b border-neon-orange/30 inline-block pb-2">
+                        <div className="text-red-500 text-sm mb-4 tracking-[0.5em] border-b border-red-500/30 inline-block pb-2">
                             MISSION_02: ENDURANCE
                         </div>
                         <h2 className="text-3xl sm:text-4xl md:text-7xl font-bold text-white mb-6 uppercase">
-                            <span className="text-neon-orange">Fatigue Is</span> <br />
+                            <span className="text-red-500">Fatigue Is</span> <br />
                             <DecryptText text="Just a Glitch" />
                         </h2>
                         <p className="text-gray-400 max-w-lg mx-auto leading-relaxed border-r-2 border-neon-cyan pr-4 text-right">

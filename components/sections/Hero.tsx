@@ -84,7 +84,7 @@ function GlitchedTitle({ text }: { text: string }) {
                     color: '#ff2a00',
                     clipPath: 'polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%)',
                     transform: 'translateX(0px)',
-                    textShadow: '-4px 4px 0 rgba(0,0,0,0.9), 0 0 40px rgba(255,0,0,0.6)',
+                    textShadow: '-4px 4px 0 rgba(0,0,0,0.9), 0 0 60px rgba(255,0,0,1)',
                 }}
             >{text}</span>
 
@@ -98,7 +98,7 @@ function GlitchedTitle({ text }: { text: string }) {
                     color: '#cc0000',
                     clipPath: 'polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%)',
                     transform: 'translateX(0px)',
-                    textShadow: '4px 4px 0 rgba(0,0,0,0.9), 0 0 40px rgba(200,0,0,0.6)',
+                    textShadow: '4px 4px 0 rgba(0,0,0,0.9), 0 0 60px rgba(200,0,0,1)',
                 }}
             >{text}</span>
 
@@ -279,7 +279,7 @@ export default function Hero() {
                             transition={{ delay: 0.2, duration: 0.8 }}
                             className="flex items-center gap-4 mb-3"
                         >
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-500 to-red-950 tracking-[0.15em] text-lg sm:text-2xl md:text-4xl font-black font-gang font-restore uppercase drop-shadow-[0_2px_15px_rgba(255,0,0,0.5)] filter">JK Lakshmipat University Presents</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-400 to-white tracking-[0.15em] text-lg sm:text-2xl md:text-4xl font-black font-gang font-restore uppercase drop-shadow-[0_2px_15px_rgba(255,0,0,0.8)] filter">JK Lakshmipat University Presents</span>
                         </motion.div>
 
                         {/* Main Title — Glitched horizontal-cut effect */}
@@ -299,7 +299,7 @@ export default function Hero() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4, duration: 0.8 }}
                         >
-                            <h3 className="text-4xl sm:text-[3rem] md:text-[5rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-orange to-red-600 italic tracking-wide transform -skew-x-12">
+                            <h3 className="text-4xl sm:text-[3rem] md:text-[5rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700 italic tracking-wide transform -skew-x-12">
                                 {/* 2026 */}
                             </h3>
                         </motion.div>
