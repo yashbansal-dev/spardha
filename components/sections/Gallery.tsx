@@ -109,6 +109,7 @@ export default function Gallery() {
                                             fill
                                             sizes="(max-width: 768px) 50vw, 25vw"
                                             className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                            unoptimized
                                         />
                                     </div>
                                     {/* Hover Overlay */}
@@ -146,6 +147,7 @@ export default function Gallery() {
                                     priority
                                     className="object-contain bg-black"
                                     sizes="100vw"
+                                    unoptimized
                                 />
 
                                 {/* UI Controls */}

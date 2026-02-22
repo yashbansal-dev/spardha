@@ -64,6 +64,7 @@ export default function AutoScrollGallery() {
                                         className="object-cover"
                                         sizes="320px"
                                         draggable={false}
+                                        unoptimized
                                     />
                                     {/* Hover overlay */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -92,6 +93,7 @@ export default function AutoScrollGallery() {
                                         className="object-cover"
                                         sizes="320px"
                                         draggable={false}
+                                        unoptimized
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                     <div className="absolute inset-0 rounded-2xl ring-2 ring-purple-500/0 group-hover:ring-purple-500/50 transition-all duration-300" />
@@ -118,6 +120,7 @@ export default function AutoScrollGallery() {
                                         className="object-cover"
                                         sizes="320px"
                                         draggable={false}
+                                        unoptimized
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                     <div className="absolute inset-0 rounded-2xl ring-2 ring-blue-500/0 group-hover:ring-blue-500/50 transition-all duration-300" />

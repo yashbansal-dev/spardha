@@ -292,6 +292,7 @@ export default function SeamlessInfiniteGallery() {
                                     sizes="(max-width: 768px) 280px, 320px"
                                     draggable={false}
                                     loading="lazy"
+                                    unoptimized
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
                             </ViewportTracker>

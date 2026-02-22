@@ -245,6 +245,7 @@ export default function InfiniteGallery() {
                                 className="object-cover"
                                 sizes="(max-width: 768px) 288px, 320px"
                                 draggable={false}
+                                unoptimized
                             />
                             {/* Gradient overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
