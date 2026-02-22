@@ -39,7 +39,7 @@ const SPORTS_DATA = [
     },
     {
         id: 'football',
-        name: 'Football (7v7 / 5v5)',
+        name: 'Football',
         image: '/assets/games/football.JPG',
         date: '14th - 16th Feb',
         type: 'Flagship Event',
@@ -273,6 +273,11 @@ const EventCardContent = ({ sport, index, onOpenRules }: { sport: typeof SPORTS_
                 <div className="w-full md:flex-1 flex flex-col justify-start items-center md:items-start text-center md:text-left space-y-2 md:space-y-4">
                     <h2 className="text-3xl md:text-6xl font-black font-sans uppercase text-white tracking-tighter drop-shadow-xl m-0 leading-none">
                         {sport.name}
+                        {sport.id === 'football' && sport.hasGender && (
+                            <span className="ml-2 text-2xl md:text-4xl text-white/70">
+                                ({gender === 'boys' ? '7v7' : '5v5'})
+                            </span>
+                        )}
                     </h2>
                     <div className="flex items-center gap-3 opacity-80 justify-center md:justify-start">
                         <span className="text-xl md:text-2xl font-outline-2 text-transparent font-black uppercase tracking-widest">
