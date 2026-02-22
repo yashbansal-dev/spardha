@@ -52,7 +52,7 @@ export default function VictoryMoment({ orderId, cart }: Props) {
             >
                 <div className="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
                     <span className="text-gray-400 uppercase text-xs tracking-widest">Athlete ID</span>
-                    <span className="text-neon-cyan font-mono font-bold text-xl">{orderId}</span>
+                    <span className="text-neon-cyan font-bold text-xl">{orderId}</span>
                 </div>
 
                 <div className="space-y-4 mb-8">

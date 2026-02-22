@@ -11,27 +11,36 @@ html {
   background-color: #020617;
 }
 
+/* Base typography */
 body {
   background-color: #020617;
   color: var(--foreground);
   overflow-x: hidden;
+  font-family: var(--font-gang), sans-serif;
 }
 
-/* Force Font Everywhere - Using Variable from localFont */
-* {
-  font-family: var(--font-gang), sans-serif !important;
+/* Paragraphs and descriptive text use Alice */
+p,
+li,
+input,
+select,
+textarea,
+a:not(.font-gang),
+span:not(.font-gang) {
+  font-family: var(--font-alice), serif;
 }
-
-/* Global Small Text - Alice Font Override removed to unify fonts */
 
 h1,
 h2,
-h3,
+h3 {
+  font-family: var(--font-gang), sans-serif;
+  letter-spacing: 0.1em;
+}
+
 h4,
 h5,
 h6 {
-  font-family: var(--font-gang), sans-serif !important;
-  letter-spacing: 0.1em !important;
+  font-family: var(--font-alice), serif;
 }
 
 /* Utility to restore Gang font (overriding Alice) */

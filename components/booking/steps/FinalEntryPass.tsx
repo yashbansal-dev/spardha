@@ -151,7 +151,7 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
                     <div className="border-t-2 border-black pt-4 flex justify-between items-end">
                         <div>
                             <div className="text-xs font-bold uppercase tracking-wider mb-1">Total Payable</div>
-                            <div className="text-4xl font-black font-mono tracking-tighter">₹{total.toFixed(0)}</div>
+                            <div className="text-4xl font-black tracking-tighter">₹{total.toFixed(0)}</div>
                             <div className="text-[10px] text-gray-500">(Total Amount)</div>
                         </div>
                         <FaBarcode className="text-6xl opacity-50" />
@@ -166,7 +166,7 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
 
                     <div className="mt-4">
                         <FaQrcode className="text-6xl mb-2 mx-auto" />
-                        <div className="text-[10px] font-mono uppercase text-gray-400">Scan to Verify</div>
+                        <div className="text-[10px] uppercase text-gray-400">Scan to Verify</div>
                     </div>
 
                     <button

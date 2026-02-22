@@ -163,7 +163,7 @@ const Team = () => {
                             <h1 className="text-5xl md:text-6xl lg:text-7xl font-gang font-black uppercase tracking-widest mb-6 bg-gradient-to-r from-red-600 via-red-500 to-white bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(255,0,0,0.4)]">
                                 Meet The Team
                             </h1>
-                            <p className="text-base md:text-lg lg:text-xl text-spardha-textMuted max-w-4xl mx-auto px-4 sm:px-0 font-gang tracking-widest uppercase">
+                            <p className="text-base md:text-lg lg:text-xl text-spardha-textMuted max-w-4xl mx-auto px-4 sm:px-0 tracking-widest uppercase">
                                 The dedicated individuals working tirelessly to make Spardha 2026 an unforgettable experience
                             </p>
                         </motion.div>
@@ -203,175 +203,83 @@ const Team = () => {
                                     <div className="w-16 h-[1px] bg-spardha-gold/40 mx-auto"></div>
                                 </motion.div>
 
-                                {/* EDITORIAL MINIMALIST DESIGN FOR FIRST FOUR CATEGORIES */}
-                                {catIndex < 4 ? (
-                                    <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-7xl mx-auto px-4 md:px-0">
-                                        {category.members.map((member, memIndex) => {
-                                            const cardId = `${catIndex}-${memIndex}`;
-                                            const isHovered = hoveredEditorial === cardId;
-                                            const isActive = isMobile || isHovered;
+                                {/* UNIFIED DESIGN FOR ALL CATEGORIES */}
+                                <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-7xl mx-auto px-4 md:px-0">
+                                    {category.members.map((member, memIndex) => {
+                                        const cardId = `${catIndex}-${memIndex}`;
+                                        const isHovered = hoveredEditorial === cardId;
+                                        const isActive = isMobile || isHovered;
 
-                                            return (
+                                        return (
+                                            <motion.div
+                                                key={memIndex}
+                                                initial={{ opacity: 0, y: 40 }}
+                                                whileInView={{ opacity: 1, y: 0 }}
+                                                viewport={{ once: true }}
+                                                transition={{ delay: memIndex * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                                                onMouseEnter={() => setHoveredEditorial(cardId)}
+                                                onMouseLeave={() => setHoveredEditorial(null)}
+                                                className="group w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-[400px]"
+                                            >
                                                 <motion.div
-                                                    key={memIndex}
-                                                    initial={{ opacity: 0, y: 40 }}
-                                                    whileInView={{ opacity: 1, y: 0 }}
-                                                    viewport={{ once: true }}
-                                                    transition={{ delay: memIndex * 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                                                    onMouseEnter={() => setHoveredEditorial(cardId)}
-                                                    onMouseLeave={() => setHoveredEditorial(null)}
-                                                    className="group w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-[400px]"
-                                                >
-                                                    <motion.div
-                                                        animate={{
-                                                            height: isActive ? (isMobile ? '450px' : '560px') : (isMobile ? '400px' : '480px')
-                                                        }}
-                                                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                                                        className="relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden"
-                                                    >
-
-
-                                                        {/* Image Container */}
-                                                        <div className="relative h-full overflow-hidden">
-                                                            {/* Member Image Animation */}
-                                                            <motion.div
-                                                                animate={{
-                                                                    filter: 'grayscale(0%)',
-                                                                    scale: isActive ? 1.05 : 1
-                                                                }}
-                                                                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                                                                className={`absolute inset-0 bg-gradient-to-br ${category.gradient}`}
-                                                            >
-                                                                {/* Member Image */}
-                                                                {member.image && (
-                                                                    <div className="absolute inset-0 transition-transform duration-700">
-                                                                        <Image
-                                                                            src={member.image}
-                                                                            alt={member.name}
-                                                                            fill
-                                                                            className="object-cover"
-                                                                            style={{
-                                                                                transform: member.rotate ? `rotate(${member.rotate}deg) scale(${isMobile ? 1.9 : 1.5})` : 'none'
-                                                                            }}
-                                                                            sizes="(max-width: 768px) 100vw, 50vw"
-                                                                            priority={catIndex === 0}
-                                                                        />
-
-
-
-                                                                    </div>
-                                                                )}
-
-
-                                                            </motion.div>
-
-                                                            {/* Gradient Overlay */}
-                                                            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80"></div>
-
-                                                            {/* Name and Position - Revealed on Bottom */}
-                                                            <div className="absolute bottom-0 left-0 right-0 p-8">
-                                                                <motion.div
-                                                                    animate={{ y: isActive ? 0 : 20, opacity: isActive ? 1 : 0.8 }}
-                                                                    transition={{ duration: 0.4 }}
-                                                                >
-                                                                    <p className="text-xs text-spardha-gold uppercase tracking-[0.3em] font-semibold mb-2">
-                                                                        {member.position}
-                                                                    </p>
-                                                                    <h4 className="text-3xl font-gang tracking-widest uppercase text-white">
-                                                                        {member.name}
-                                                                    </h4>
-                                                                    <p className={`mt-4 text-sm text-white/70 leading-relaxed max-w-xs transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                                                                        {/* @ts-expect-error: bio exists on some members */}
-                                                                        {member.bio}
-                                                                    </p>
-                                                                </motion.div>
-                                                            </div>
-                                                        </div>
-                                                    </motion.div>
-                                                </motion.div>
-                                            );
-                                        })}
-                                    </div>
-                                ) : (
-                                    /* ACCORDION DESIGN FOR OTHER CATEGORIES */
-                                    <div
-                                        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:flex lg:flex-nowrap gap-4 lg:gap-2 p-4 max-w-full"
-                                        onMouseLeave={() => setHoveredIndex(null)}
-                                    >
-                                        {category.members.map((member, memIndex) => {
-                                            const globalIndex = `${catIndex}-${memIndex}`;
-                                            const isHovered = hoveredIndex === globalIndex;
-                                            const isAnyHovered = !isMobile && hoveredIndex !== null && hoveredIndex.startsWith(`${catIndex}-`);
-                                            const isActive = isMobile || isHovered;
-
-                                            return (
-                                                <motion.div
-                                                    key={memIndex}
-                                                    initial={{ opacity: 0, y: 30 }}
-                                                    whileInView={{ opacity: 1, y: 0 }}
-                                                    viewport={{ once: true }}
-                                                    transition={{ delay: memIndex * 0.05, duration: 0.4 }}
-                                                    onMouseEnter={() => setHoveredIndex(globalIndex)}
-                                                    className="group relative transition-all duration-500 ease-out"
-                                                    style={{
-                                                        flex: isActive ? '5' : '1',
-                                                        minWidth: isAnyHovered && !isActive ? '40px' : '90px',
-                                                        maxWidth: isActive ? '450px' : '220px'
+                                                    animate={{
+                                                        height: isActive ? (isMobile ? '450px' : '560px') : (isMobile ? '400px' : '480px')
                                                     }}
+                                                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                                                    className="relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden"
                                                 >
-                                                    <div className="relative bg-spardha-base rounded-2xl overflow-hidden border border-spardha-gold/10 hover:border-spardha-gold/40 transition-all duration-500 h-[400px] hover:shadow-2xl hover:shadow-spardha-gold/20">
-                                                        <div className="relative h-full overflow-hidden">
-                                                            {/* Member Image or Background Gradient */}
-                                                            {/* @ts-expect-error: image exists on some members */}
-                                                            {member.image || category.img ? (
-                                                                <>
-                                                                    <div className="absolute inset-0 transition-all duration-500">
-                                                                        <Image
-                                                                            /* @ts-expect-error: image exists on some members */
-                                                                            src={member.image || category.img}
-                                                                            alt={member.name}
-                                                                            fill
-                                                                            className="object-cover"
-                                                                            style={{
-                                                                                transform: member.rotate ? `rotate(${member.rotate}deg) scale(${isMobile ? 1.9 : 1.5})` : 'none'
-                                                                            }}
-                                                                            sizes="(max-width: 768px) 100vw, 33vw"
-                                                                        />
-
-
-
-                                                                    </div>
-                                                                    <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60 group-hover:from-black/50 group-hover:via-black/30 group-hover:to-black/50 transition-all duration-500"></div>
-                                                                </>
-                                                            ) : (
-                                                                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-80 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                                                    {/* Image Container */}
+                                                    <div className="relative h-full overflow-hidden">
+                                                        <motion.div
+                                                            animate={{
+                                                                filter: 'grayscale(0%)',
+                                                                scale: isActive ? 1.05 : 1
+                                                            }}
+                                                            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                                                            className={`absolute inset-0 bg-gradient-to-br ${category.gradient}`}
+                                                        >
+                                                            {member.image && (
+                                                                <div className="absolute inset-0 transition-transform duration-700">
+                                                                    <Image
+                                                                        src={member.image}
+                                                                        alt={member.name}
+                                                                        fill
+                                                                        className="object-cover"
+                                                                        style={{
+                                                                            transform: member.rotate ? `rotate(${member.rotate}deg) scale(${isMobile ? 1.9 : 1.5})` : 'none'
+                                                                        }}
+                                                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                                                        priority={catIndex === 0}
+                                                                    />
+                                                                </div>
                                                             )}
+                                                        </motion.div>
 
-                                                            {/* Subtle Pattern */}
-                                                            <div className="absolute inset-0 opacity-20" style={{
-                                                                backgroundImage: `radial-gradient(circle at 20% 50%, rgba(255,255,255,0.2) 1px, transparent 1px)`,
-                                                                backgroundSize: '20px 20px'
-                                                            }}></div>
+                                                        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80"></div>
 
-
-
-                                                            {/* Info Bar - Slides up only on Hover */}
-                                                            <div className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 transition-all duration-500 ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
-                                                                <h4 className="text-lg md:text-xl font-gang tracking-widest uppercase text-spardha-text mb-1 group-hover:text-spardha-gold transition-colors leading-tight">
-                                                                    {member.name}
-                                                                </h4>
-                                                                <p className="text-xs text-spardha-textMuted uppercase tracking-wider font-gang">
+                                                        <div className="absolute bottom-0 left-0 right-0 p-8">
+                                                            <motion.div
+                                                                animate={{ y: isActive ? 0 : 20, opacity: isActive ? 1 : 0.8 }}
+                                                                transition={{ duration: 0.4 }}
+                                                            >
+                                                                <p className="text-xs text-spardha-gold uppercase tracking-[0.3em] font-semibold mb-2">
                                                                     {member.position}
                                                                 </p>
-                                                                <div className={`h-[2px] w-12 mt-4 bg-gradient-to-r ${category.gradient}`}></div>
-                                                            </div>
+                                                                <h4 className="text-3xl font-gang tracking-widest uppercase text-white">
+                                                                    {member.name}
+                                                                </h4>
+                                                                <p className={`mt-4 text-sm text-white/70 leading-relaxed max-w-xs transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                                                                    {/* @ts-expect-error: bio exists on some members */}
+                                                                    {member.bio}
+                                                                </p>
+                                                            </motion.div>
                                                         </div>
                                                     </div>
                                                 </motion.div>
-                                            );
-                                        })}
-                                    </div>
-                                )}
+                                            </motion.div>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         ))}
                     </div>

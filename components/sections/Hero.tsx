@@ -54,51 +54,20 @@ function GlitchedTitle({ text }: { text: string }) {
         >
             <style>{GLITCH_CSS}</style>
 
-            {/* ── Warm ambient glow ── */}
-            <span
-                aria-hidden="true"
-                className={`${cls} absolute inset-0 pointer-events-none`}
-                style={{
-                    ...fontOverride,
-                    color: '#c05820',
-                    opacity: 0.28,
-                    filter: 'blur(22px)',
-                    whiteSpace: 'nowrap',
-                    transform: 'scale(1.06)',
-                }}
-            >{text}</span>
-
             {/* ── Ghost base for sizing ── */}
             <span
                 className={`${cls} opacity-0 block`}
                 style={{ ...fontOverride, whiteSpace: 'nowrap' }}
             >{text}</span>
 
-            {/* ── TOP half — clipped 0→46%, shifted RIGHT ── */}
+            {/* ── Main Title Layer ── */}
             <span
                 aria-hidden="true"
-                className={`${cls} absolute inset-0`}
+                className={`${cls} absolute inset-0 bg-gradient-to-r from-white via-neon-orange to-white bg-clip-text text-transparent`}
                 style={{
                     ...fontOverride,
                     whiteSpace: 'nowrap',
-                    color: '#ff2a00',
-                    clipPath: 'polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%)',
-                    transform: 'translateX(0px)',
-                    textShadow: '-4px 4px 0 rgba(0,0,0,0.9)',
-                }}
-            >{text}</span>
-
-            {/* ── BOTTOM half — clipped 50→100% ── */}
-            <span
-                aria-hidden="true"
-                className={`${cls} absolute inset-0`}
-                style={{
-                    ...fontOverride,
-                    whiteSpace: 'nowrap',
-                    color: '#cc0000',
-                    clipPath: 'polygon(0% 50%, 100% 50%, 100% 100%, 0% 100%)',
-                    transform: 'translateX(0px)',
-                    textShadow: '4px 4px 0 rgba(0,0,0,0.9)',
+                    filter: 'drop-shadow(0 0 12px rgba(227, 114, 51, 0.35))',
                 }}
             >{text}</span>
 
@@ -280,10 +249,10 @@ export default function Hero() {
                             className="flex items-center gap-4 mb-3"
                         >
                             <span
-                                className="tracking-[0.15em] text-lg sm:text-2xl md:text-3xl font-black font-gang font-restore uppercase"
+                                className="tracking-[0.15em] text-lg sm:text-2xl md:text-3xl font-black font-gang uppercase"
                                 style={{
-                                    color: '#ff1a1a',
-                                    textShadow: '-1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 2px 15px rgba(255,0,0,0.2)'
+                                    color: '#ffffff',
+                                    textShadow: '-1px 1px 0 rgba(0,0,0,0.8), 1px 1px 0 rgba(0,0,0,0.8), 0 2px 15px rgba(255,255,255,0.1)'
                                 }}
                             >JK Lakshmipat University Presents</span>
                         </motion.div>

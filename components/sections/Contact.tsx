@@ -62,7 +62,7 @@ export default function Contact() {
                                     href="https://maps.app.goo.gl/Pz6JmG4a5p9Y2j2Q6"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="font-gang text-gray-400 text-base hover:text-neon-cyan transition-colors block"
+                                    className="text-gray-400 text-base hover:text-neon-cyan transition-colors block"
                                 >
                                     JK Lakshmipat University, Near Mahindra SEZ, P.O. Mahapura, Ajmer Road, Jaipur - 302026
                                 </a>
@@ -72,14 +72,14 @@ export default function Contact() {
                             <div className="p-3 bg-white/5 rounded-lg text-neon-cyan"><FaEnvelope size={20} /></div>
                             <div>
                                 <h4 className="text-white font-bold mb-1">Email</h4>
-                                <p className="font-gang text-gray-400 text-base">spardha@jklu.edu.in</p>
+                                <p className="text-gray-400 text-base">spardha@jklu.edu.in</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
                             <div className="p-3 bg-white/5 rounded-lg text-neon-cyan"><FaPhone size={20} /></div>
                             <div>
                                 <h4 className="text-white font-bold mb-1">Phone</h4>
-                                <p className="font-gang text-gray-400 text-base">+91 98765 43210</p>
+                                <p className="text-gray-400 text-base">+91 98765 43210</p>
                             </div>
                         </div>
                     </div>

@@ -17,7 +17,7 @@ export default function ContactContent() {
                     <h1 className="text-5xl md:text-9xl font-gang text-white uppercase mb-6 tracking-wider">
                         GET IN TOUCH
                     </h1>
-                    <p className="font-sans text-gray-400 text-lg max-w-xl mx-auto tracking-wide">
+                    <p className="text-gray-400 text-lg max-w-xl mx-auto tracking-wide">
                         WE ARE HERE TO HELP YOU NAVIGATE THE ARENA.
                     </p>
                 </div>
@@ -28,14 +28,14 @@ export default function ContactContent() {
                     <div className="space-y-16">
                         <div className="group">
                             <h3 className="text-3xl font-gang uppercase text-neon-cyan mb-4 tracking-widest">General Inquiries</h3>
-                            <a href="mailto:spardha@jklu.edu.in" className="font-sans text-2xl md:text-5xl font-bold text-white group-hover:text-neon-cyan transition-colors block break-all">
+                            <a href="mailto:spardha@jklu.edu.in" className="text-2xl md:text-5xl font-bold text-white group-hover:text-neon-cyan transition-colors block break-all">
                                 spardha@jklu.edu.in
                             </a>
                         </div>
 
                         <div className="group">
                             <h3 className="text-3xl font-gang uppercase text-neon-cyan mb-4 tracking-widest">Emergency Line</h3>
-                            <a href="tel:+919876543210" className="font-sans text-2xl md:text-5xl font-bold text-white group-hover:text-neon-cyan transition-colors block">
+                            <a href="tel:+919876543210" className="text-2xl md:text-5xl font-bold text-white group-hover:text-neon-cyan transition-colors block">
                                 +91 98765 43210
                             </a>
                         </div>
@@ -46,7 +46,7 @@ export default function ContactContent() {
                                 href="https://maps.app.goo.gl/Pz6JmG4a5p9Y2j2Q6"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="font-sans text-xl text-gray-400 not-italic leading-relaxed block hover:text-neon-cyan transition-colors"
+                                className="text-xl text-gray-400 not-italic leading-relaxed block hover:text-neon-cyan transition-colors"
                             >
                                 JK Lakshmipat University,<br />
                                 Mahapura, Ajmer Road,<br />
@@ -125,18 +125,18 @@ function ContactForm() {
     return (
         <form className="space-y-8" onSubmit={handleSubmit}>
             <div className="group">
-                <label className="block text-xs font-sans uppercase tracking-[0.2em] text-neon-cyan mb-2">Your Identity</label>
-                <input required name="name" type="text" className="w-full bg-transparent border-b border-white/20 py-4 text-xl font-sans text-white focus:border-neon-cyan outline-none transition-colors placeholder:text-white/20" placeholder="Name or Team Name" />
+                <label className="block text-xs uppercase tracking-[0.2em] text-neon-cyan mb-2">Your Identity</label>
+                <input required name="name" type="text" className="w-full bg-transparent border-b border-white/20 py-4 text-xl text-white focus:border-neon-cyan outline-none transition-colors placeholder:text-white/20" placeholder="Name or Team Name" />
             </div>
 
             <div className="group">
-                <label className="block text-xs font-sans uppercase tracking-[0.2em] text-neon-cyan mb-2">Communication Channel</label>
-                <input required name="email" type="email" className="w-full bg-transparent border-b border-white/20 py-4 text-xl font-sans text-white focus:border-neon-cyan outline-none transition-colors placeholder:text-white/20" placeholder="Email Address" />
+                <label className="block text-xs uppercase tracking-[0.2em] text-neon-cyan mb-2">Communication Channel</label>
+                <input required name="email" type="email" className="w-full bg-transparent border-b border-white/20 py-4 text-xl text-white focus:border-neon-cyan outline-none transition-colors placeholder:text-white/20" placeholder="Email Address" />
             </div>
 
             <div className="group">
-                <label className="block text-xs font-sans uppercase tracking-[0.2em] text-neon-cyan mb-2">Transmission</label>
-                <textarea required name="message" className="w-full bg-transparent border-b border-white/20 py-4 text-xl font-sans text-white focus:border-neon-cyan outline-none transition-colors h-32 resize-none placeholder:text-white/20" placeholder="Enter your message..."></textarea>
+                <label className="block text-xs uppercase tracking-[0.2em] text-neon-cyan mb-2">Transmission</label>
+                <textarea required name="message" className="w-full bg-transparent border-b border-white/20 py-4 text-xl text-white focus:border-neon-cyan outline-none transition-colors h-32 resize-none placeholder:text-white/20" placeholder="Enter your message..."></textarea>
             </div>
 
             <button disabled={status === 'submitting'} className="mt-8 px-12 py-5 bg-white text-black font-gang text-xl uppercase tracking-widest hover:bg-neon-cyan hover:text-white transition-all w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed">

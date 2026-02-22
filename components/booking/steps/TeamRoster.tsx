@@ -107,12 +107,12 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
             <div className="text-center mb-8">
                 <div className="inline-flex items-center gap-2 text-neon-cyan mb-2 border border-neon-cyan/30 px-4 py-1 rounded-full bg-black/50 backdrop-blur-sm">
                     <FaUsers />
-                    <span className="text-xs font-mono uppercase tracking-widest">Team Management Protocol</span>
+                    <span className="text-xs uppercase tracking-widest">Team Management Protocol</span>
                 </div>
                 <h2 className="text-3xl md:text-5xl font-black italic uppercase text-white tracking-wider">
                     ASSEMBLE <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-blue-500">SQUAD</span>
                 </h2>
-                <p className="text-gray-400 mt-2 font-mono text-sm">
+                <p className="text-gray-400 mt-2 text-sm">
                     {currentSport.name} • {currentSportIndex + 1} of {teamSports.length} Team Events
                 </p>
             </div>
@@ -171,7 +171,7 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
                             <h3 className="text-xl font-bold text-white uppercase flex items-center gap-2">
                                 Active Roster
                             </h3>
-                            <p className="text-xs text-gray-500 font-mono mt-1">
+                            <p className="text-xs text-gray-500 mt-1">
                                 {minPlayers} Required • {maxPlayers} Max
                             </p>
                         </div>
@@ -197,7 +197,7 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
                                         className="bg-white/5 border border-white/5 rounded-lg p-3 flex justify-between items-center group hover:bg-white/10 transition-colors"
                                     >
                                         <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-800 to-black flex items-center justify-center text-xs font-mono text-gray-400 border border-white/10">
+                                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-800 to-black flex items-center justify-center text-xs text-gray-400 border border-white/10">
                                                 {String(idx + 1).padStart(2, '0')}
                                             </div>
                                             <div>

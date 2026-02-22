@@ -9,14 +9,18 @@ export default function ClientLoader({
 }: {
     children: React.ReactNode;
 }) {
-    const [isLoading, setIsLoading] = useState(true);
     const pathname = usePathname();
+    const [isLoading, setIsLoading] = useState(pathname === "/");
 
     useEffect(() => {
-        // Trigger loading screen on every navigation
-        setIsLoading(true);
+        // Strictly show loader ONLY on homepage
+        if (pathname === "/") {
+            setIsLoading(true);
+        } else {
+            setIsLoading(false);
+        }
 
-        // Scroll to top on navigation to simulate fresh page load
+        // Scroll to top on navigation
         window.scrollTo(0, 0);
     }, [pathname]);
 

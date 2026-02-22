@@ -182,7 +182,7 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                     <div className="space-y-4">
                         {/* Name Input */}
                         <div className="group relative">
-                            <label className="text-[10px] font-mono text-neon-cyan uppercase tracking-widest mb-2 flex justify-between">
+                            <label className="text-[10px] text-neon-cyan uppercase tracking-widest mb-2 flex justify-between">
                                 <span className="flex items-center gap-2"><FaIdCard /> Full Name</span>
                                 {watchedValues.fullName?.length > 2 && <FaWifi className="text-green-500 animate-pulse" />}
                             </label>
@@ -190,7 +190,7 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                 <div className="absolute -inset-0.5 bg-gradient-to-r from-neon-cyan to-orange-500 rounded-lg opacity-0 group-focus-within:opacity-75 transition duration-500 blur-sm"></div>
                                 <input
                                     {...register("fullName")}
-                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 pl-12 text-white font-bold tracking-wider focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
+                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 pl-12 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="ENTER FULL NAME"
                                     autoComplete="name"
                                     spellCheck="false"
@@ -199,19 +199,19 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                     <div className="w-1.5 h-1.5 bg-neon-cyan rounded-full"></div>
                                 </div>
                             </div>
-                            {errors.fullName && <p className="text-red-500 text-[10px] font-mono mt-1 text-right">{errors.fullName.message}</p>}
+                            {errors.fullName && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.fullName.message}</p>}
                         </div>
 
                         {/* Gender & Age Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="group relative">
-                                <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <label className="text-[10px] text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
                                     <span className="w-2 h-2 rounded-full bg-pink-500"></span> Gender
                                 </label>
                                 <div className="relative">
                                     <select
                                         {...register("gender")}
-                                        className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white font-bold tracking-wider focus:outline-none focus:bg-black/80 transition-all appearance-none"
+                                        className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all appearance-none"
                                     >
                                         <option value="" className="bg-black text-gray-500">SELECT GENDER</option>
                                         <option value="Male" className="bg-black">Male</option>
@@ -219,103 +219,103 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                         <option value="Other" className="bg-black">Other</option>
                                     </select>
                                 </div>
-                                {errors.gender && <p className="text-red-500 text-[10px] font-mono mt-1 text-right">{errors.gender.message}</p>}
+                                {errors.gender && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.gender.message}</p>}
                             </div>
 
                             <div className="group relative">
-                                <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <label className="text-[10px] text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
                                     <span className="w-2 h-2 rounded-full bg-yellow-500"></span> Age
                                 </label>
                                 <input
                                     {...register("age")}
                                     type="number"
-                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white font-bold tracking-wider focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
+                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="AGE"
                                 />
-                                {errors.age && <p className="text-red-500 text-[10px] font-mono mt-1 text-right">{errors.age.message}</p>}
+                                {errors.age && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.age.message}</p>}
                             </div>
                         </div>
 
                         {/* College & University ID Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="group relative">
-                                <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <label className="text-[10px] text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
                                     <FaUniversity /> Institute Name
                                 </label>
                                 <input
                                     {...register("college")}
-                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white font-bold tracking-wider focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
+                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="UNIVERSITY NAME"
                                 />
-                                {errors.college && <p className="text-red-500 text-[10px] font-mono mt-1 text-right">{errors.college.message}</p>}
+                                {errors.college && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.college.message}</p>}
                             </div>
 
                             <div className="group relative">
-                                <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <label className="text-[10px] text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
                                     <FaIdCard /> University ID
                                 </label>
                                 <input
                                     {...register("universityIdCard")}
-                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white font-bold tracking-wider focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
+                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="ID NUMBER"
                                 />
-                                {errors.universityIdCard && <p className="text-red-500 text-[10px] font-mono mt-1 text-right">{errors.universityIdCard.message}</p>}
+                                {errors.universityIdCard && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.universityIdCard.message}</p>}
                             </div>
                         </div>
 
                         {/* Contact, Email, City Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="group relative">
-                                <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <label className="text-[10px] text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
                                     <FaPhoneAlt /> Phone
                                 </label>
                                 <input
                                     {...register("phone")}
                                     type="tel"
-                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white font-bold tracking-wider focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
+                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="PHONE"
                                 />
-                                {errors.phone && <p className="text-red-500 text-[10px] font-mono mt-1 text-right">{errors.phone.message}</p>}
+                                {errors.phone && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.phone.message}</p>}
                             </div>
 
                             <div className="group relative md:col-span-2">
-                                <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <label className="text-[10px] text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
                                     <FaEnvelope /> Email
                                 </label>
                                 <input
                                     {...register("email")}
                                     type="email"
-                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white font-bold tracking-wider focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
+                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="EMAIL ADDRESS"
                                 />
-                                {errors.email && <p className="text-red-500 text-[10px] font-mono mt-1 text-right">{errors.email.message}</p>}
+                                {errors.email && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.email.message}</p>}
                             </div>
                         </div>
 
                         {/* Address & City */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="group relative">
-                                <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <label className="text-[10px] text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
                                     <FaCity /> City
                                 </label>
                                 <input
                                     {...register("city")}
-                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white font-bold tracking-wider focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
+                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="CITY"
                                 />
-                                {errors.city && <p className="text-red-500 text-[10px] font-mono mt-1 text-right">{errors.city.message}</p>}
+                                {errors.city && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.city.message}</p>}
                             </div>
 
                             <div className="group relative md:col-span-2">
-                                <label className="text-[10px] font-mono text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <label className="text-[10px] text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
                                     <span className="w-2 h-2 rounded-full bg-purple-500"></span> Address
                                 </label>
                                 <input
                                     {...register("address")}
-                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white font-bold tracking-wider focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
+                                    className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="FULL ADDRESS"
                                 />
-                                {errors.address && <p className="text-red-500 text-[10px] font-mono mt-1 text-right">{errors.address.message}</p>}
+                                {errors.address && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.address.message}</p>}
                             </div>
                         </div>
                     </div>
