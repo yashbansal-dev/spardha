@@ -216,7 +216,7 @@ export default function Hero() {
                         }}
                         transition={{
                             opacity: { duration: 1.2, ease: "easeInOut" },
-                            scale: { duration: 7, ease: "linear" } 
+                            scale: { duration: 7, ease: "linear" }
                         }}
                     >
                         <Image
@@ -225,37 +225,12 @@ export default function Hero() {
                             fill
                             className="object-cover object-center"
                             priority
-<<<<<<< HEAD
                             quality={90}
                             sizes="100vw"
                         />
-=======
-<<<<<<< HEAD
-                            sizes="(max-width: 768px) 100vw, 100vw"
-                        />
-                        {/* Preload next image efficiently without display: none DOM issues on mobile browsers */}
-                        <div className="absolute opacity-0 pointer-events-none -z-10 w-[1px] h-[1px] overflow-hidden">
-                            <Image
-                                src={HERO_IMAGES[(currentImageIndex + 1) % HERO_IMAGES.length]}
-                                alt="preload"
-                                width={10}
-                                height={10}
-                                priority
-                            />
-                        </div>
-=======
-                            quality={90}
-                            sizes="100vw"
-                        />
->>>>>>> save-work
 
                         {/* Preload next image for smoothness */}
                         <link rel="preload" href={HERO_IMAGES[(currentImageIndex + 1) % HERO_IMAGES.length]} as="image" />
-
-<<<<<<< HEAD
-=======
->>>>>>> 6c176b0 (finishing)
->>>>>>> save-work
                     </motion.div>
                 </AnimatePresence>
 
