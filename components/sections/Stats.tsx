@@ -1,108 +1,184 @@
-'use client';
-
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import { FaTrophy, FaUsers, FaUniversity, FaGamepad, FaBolt } from "react-icons/fa";
-
 const battlefields = [
     {
         id: "cricket",
         name: "CRICKET",
         image: "/assets/games/cricket_premium.png",
-        color: "from-blue-600 to-indigo-600",
-        accent: "text-blue-500",
         stats: "11v11 // FIELD",
-        gridClass: "md:col-span-2 md:row-span-2",
-        description: "The ultimate clash for glory on the pitch. Showcase your strategy and power."
+        zone: "ZONE_A",
+        description: "TACTICAL BATTLEFIELD FOR ELITE COMPETITION. STRATEGIC DOMINANCE REQUIRED.",
+        color: "#00f2ff"
     },
     {
         id: "football",
         name: "FOOTBALL",
         image: "/assets/games/football_premium.png",
-        color: "from-emerald-600 to-teal-600",
-        accent: "text-emerald-500",
         stats: "7v7 // TURF",
-        gridClass: "md:col-span-1 md:row-span-1",
-        description: "Speed, precision, and raw energy on the field."
+        zone: "ZONE_B",
+        description: "HIGH-INTENSITY ENGAGEMENT ZONE. SPEED AND PRECISION ARE VITAL.",
+        color: "#10b981"
     },
     {
         id: "volleyball",
         name: "VOLLEYBALL",
         image: "/assets/games/volleyball_premium.png",
-        color: "from-purple-600 to-pink-600",
-        accent: "text-purple-500",
         stats: "6v6 // NET",
-        gridClass: "md:col-span-1 md:row-span-1",
-        description: "Rise above the competition. Every spike counts."
+        zone: "ZONE_C",
+        description: "AERIAL SUPREMACY ZONE. DEFY GRAVITY, SECURE THE MATCH.",
+        color: "#8b5cf6"
     },
     {
         id: "basketball",
         name: "BASKETBALL",
         image: "/assets/games/basketball_premium.png",
-        color: "from-orange-600 to-red-600",
-        accent: "text-orange-500",
         stats: "5v5 // COURT",
-        gridClass: "md:col-span-1 md:row-span-1",
-        description: "Dominate the paint and hit nothing but net."
+        zone: "ZONE_D",
+        description: "CLOSE-QUARTERS COMBAT. DOMINATE THE PAINT, HIT THE ARC.",
+        color: "#f97316"
     },
     {
         id: "badminton",
         name: "BADMINTON",
         image: "/assets/games/badminton_premium.png",
-        color: "from-rose-600 to-red-600",
-        accent: "text-rose-500",
         stats: "1v1 // COURT",
-        gridClass: "md:col-span-1 md:row-span-1",
-        description: "Agility meets power in the fastest racquet sport."
+        zone: "ZONE_E",
+        description: "PRECISION EXECUTION. THE FASTEST STRIKES IN THE OPERATION.",
+        color: "#e11d48"
     },
 ];
 
 export default function SportsArsenal() {
+    const [activeIdx, setActiveIdx] = useState(0);
+    const activeField = battlefields[activeIdx];
+
     return (
-        <section className="relative min-h-screen bg-black overflow-hidden flex flex-col justify-center py-20 font-sans">
-            {/* Background elements */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.05)_0%,transparent_70%)]"></div>
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] md:bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_at_center,black,transparent)]"></div>
+        <section className="relative min-h-screen bg-black overflow-hidden flex flex-col justify-center py-24 font-sans border-y border-white/5">
+            {/* Cyber-HUD Background */}
+            <div className="absolute inset-0 pointer-events-none opacity-20">
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.1)_0%,transparent_100%)]"></div>
             </div>
 
-            <div className="container mx-auto px-4 z-20">
+            <div className="container mx-auto px-6 z-20 flex flex-col h-full lg:max-h-[800px]">
                 {/* Header */}
-                <div className="max-w-7xl mx-auto mb-16 relative">
+                <div className="mb-12 flex justify-between items-end border-b border-white/10 pb-6 relative overflow-hidden">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        className="flex flex-col items-center md:items-start"
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                     >
-                        <h2 className="text-7xl md:text-9xl font-black font-gang text-white tracking-tighter uppercase leading-none relative">
+                        <h2 className="text-6xl md:text-8xl lg:text-[10rem] font-black font-gang text-white tracking-tighter uppercase leading-none selection:bg-neon-cyan selection:text-black">
                             BATTLE<span className="text-neon-cyan">FIELD</span>
-                            <span className="absolute -top-6 -right-12 text-xs font-mono text-neon-cyan/50 tracking-[0.5em] hidden md:block">EST. 2026 // SYSTEM ACTIVE</span>
                         </h2>
-                        <div className="h-1 w-24 bg-neon-cyan mt-4"></div>
                     </motion.div>
+
+                    <div className="hidden lg:flex flex-col items-end font-mono text-[10px] text-white/40 tracking-[0.5em] uppercase">
+                        <span>Terminal Protocol v4.0.2</span>
+                        <span className="text-neon-cyan animate-pulse">Status: Active Search</span>
+                    </div>
                 </div>
 
-                {/* Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                    {battlefields.map((field, idx) => (
-                        <BentoCard key={field.id} field={field} index={idx} />
-                    ))}
+                <div className="flex-1 flex flex-col lg:flex-row gap-12 items-stretch">
+                    {/* Tactical Selector (Left) */}
+                    <div className="w-full lg:w-1/3 flex flex-col gap-4">
+                        <div className="flex items-center gap-4 mb-4 opacity-50">
+                            <div className="h-[1px] w-8 bg-white"></div>
+                            <span className="text-[10px] font-mono tracking-widest uppercase">Arena Selection</span>
+                        </div>
+
+                        {battlefields.map((field, idx) => (
+                            <button
+                                key={field.id}
+                                onMouseEnter={() => setActiveIdx(idx)}
+                                className={`relative group flex items-center gap-6 p-4 rounded-xl transition-all duration-500 overflow-hidden border ${activeIdx === idx ? 'bg-white/10 border-white/20' : 'bg-transparent border-white/5 grayscale hover:grayscale-0 hover:bg-white/5'}`}
+                            >
+                                <span className={`text-sm font-mono font-black ${activeIdx === idx ? 'text-neon-cyan' : 'text-white/20'}`}>0{idx + 1}</span>
+                                <div className="flex flex-col items-start">
+                                    <span className={`text-2xl md:text-3xl font-black font-gang tracking-tighter transition-all ${activeIdx === idx ? 'text-white translate-x-2' : 'text-white/40'}`}>
+                                        {field.name}
+                                    </span>
+                                    <span className={`text-[10px] font-mono uppercase tracking-widest transition-opacity ${activeIdx === idx ? 'opacity-60' : 'opacity-0'}`}>
+                                        {field.stats}
+                                    </span>
+                                </div>
+
+                                {activeIdx === idx && (
+                                    <motion.div
+                                        layoutId="active-bg"
+                                        className="absolute inset-0 bg-gradient-to-r from-neon-cyan/10 to-transparent pointer-events-none"
+                                    />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Dynamic Preview (Right) */}
+                    <div className="w-full lg:flex-1 relative aspect-video lg:aspect-auto rounded-3xl overflow-hidden border border-white/10 group bg-zinc-950">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={activeField.id}
+                                initial={{ opacity: 0, scale: 1.1, 'x': 20 }}
+                                animate={{ opacity: 1, scale: 1, 'x': 0 }}
+                                exit={{ opacity: 0, scale: 0.9, 'x': -20 }}
+                                transition={{ duration: 0.6, ease: "easeOut" }}
+                                className="absolute inset-0"
+                            >
+                                <div className="relative w-full h-full overflow-hidden">
+                                    {/* 3D Tilt Wrapper */}
+                                    <InteractiveView image={activeField.image} name={activeField.name} />
+                                </div>
+
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 pointer-events-none"></div>
+
+                                {/* Info HUD */}
+                                <div className="absolute bottom-8 left-8 right-8 z-20 flex flex-col md:flex-row items-end justify-between gap-6 pointer-events-none">
+                                    <div className="max-w-md">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <span className="px-2 py-0.5 bg-neon-cyan text-black text-[10px] font-mono font-black uppercase tracking-tighter">
+                                                {activeField.zone}
+                                            </span>
+                                            <div className="h-[1px] w-12 bg-white/20"></div>
+                                        </div>
+                                        <p className="text-[11px] md:text-xs font-bold text-white/60 leading-relaxed tracking-widest uppercase italic">
+                                            {activeField.description}
+                                        </p>
+                                    </div>
+
+                                    <div className="flex flex-col items-end gap-2 pr-4">
+                                        <div className="text-neon-cyan text-xs font-mono tracking-widest animate-pulse uppercase">Target Locked // 0{activeIdx + 1}</div>
+                                        <div className="h-[2px] w-32 bg-white/10 overflow-hidden">
+                                            <motion.div
+                                                initial={{ x: "-100%" }}
+                                                animate={{ x: "100%" }}
+                                                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                                className="w-full h-full bg-neon-cyan"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </AnimatePresence>
+
+                        {/* Corner Brackets */}
+                        <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-white/20 group-hover:border-neon-cyan transition-colors pointer-events-none"></div>
+                        <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-white/20 group-hover:border-neon-cyan transition-colors pointer-events-none"></div>
+                        <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-white/20 group-hover:border-neon-cyan transition-colors pointer-events-none"></div>
+                        <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-white/20 group-hover:border-neon-cyan transition-colors pointer-events-none"></div>
+                    </div>
                 </div>
 
-                {/* Footer Stats */}
-                <div className="w-full max-w-7xl mx-auto mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-12">
-                    <StatHUD label="Arenas" value="11" sub="Tactical Zones" />
-                    <StatHUD label="Athletes" value="500+" sub="Warriors" />
-                    <StatHUD label="Institutes" value="40+" sub="Legions" />
-                    <StatHUD label="Bounty" value="1.6L" sub="Credits" isCurrency />
+                {/* Footer Stats - High Freq Nodes */}
+                <div className="w-full mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 border-t border-white/5 pt-12 relative">
+                    <div className="absolute -top-1 left-0 w-8 h-2 bg-neon-cyan/50"></div>
+                    <StatNode label="Active Areas" value="11" />
+                    <StatNode label="Confirmed Ops" value="500+" />
+                    <StatNode label="Institutional Nodes" value="40+" />
+                    <StatNode label="Bounty Pool" value="1.6L" isCurrency />
                 </div>
             </div>
         </section>
     );
 }
 
-function BentoCard({ field, index }: any) {
+function InteractiveView({ image, name }: { image: string, name: string }) {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
     const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10]);
@@ -110,12 +186,8 @@ function BentoCard({ field, index }: any) {
 
     function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
         const rect = e.currentTarget.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseXPercent = (e.clientX - rect.left) / width - 0.5;
-        const mouseYPercent = (e.clientY - rect.top) / height - 0.5;
-        mouseX.set(mouseXPercent);
-        mouseY.set(mouseYPercent);
+        mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+        mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
     }
 
     function handleMouseLeave() {
@@ -125,96 +197,57 @@ function BentoCard({ field, index }: any) {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1, duration: 0.8 }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            style={{
-                perspective: 1200,
-            }}
-            className={`${field.gridClass} group relative cursor-pointer min-h-[300px] rounded-3xl overflow-hidden border border-white/10 bg-zinc-900/50 backdrop-blur-sm`}
+            className="w-full h-full relative cursor-crosshair overflow-hidden"
+            style={{ perspective: 1000 }}
         >
             <motion.div
-                style={{
-                    rotateX,
-                    rotateY,
-                    transformStyle: "preserve-3d",
-                }}
-                className="w-full h-full relative"
+                style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+                className="w-full h-full"
             >
-                {/* Image Container */}
-                <div className="absolute inset-0 translate-z-[-20px] scale-110">
-                    <Image
-                        src={field.image}
-                        alt={field.name}
-                        fill
-                        className="object-cover opacity-60 group-hover:opacity-80 transition-all duration-700 desaturate-[0.3] group-hover:desaturate-0 group-hover:scale-110"
-                        priority={index < 2}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                </div>
-
-                {/* Content Overlay */}
-                <div className="absolute inset-0 p-8 flex flex-col justify-end translate-z-[50px]">
-                    <div className="relative z-10">
-                        <motion.div
-                            className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full w-fit mb-4 border border-white/20"
-                        >
-                            <span className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] text-neon-cyan uppercase flex items-center gap-2">
-                                <FaBolt className="animate-pulse" /> {field.stats}
-                            </span>
-                        </motion.div>
-
-                        <h3 className="text-3xl md:text-5xl font-black font-gang text-white mb-2 tracking-tighter group-hover:text-neon-cyan transition-colors duration-300">
-                            {field.name}
-                        </h3>
-
-                        <p className="text-xs md:text-sm text-white/50 max-w-[250px] line-clamp-2 md:line-clamp-none transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 font-medium tracking-tight">
-                            {field.description}
-                        </p>
-                    </div>
-
-                    {/* HUD Elements */}
-                    <div className="absolute top-6 right-6 flex flex-col items-end gap-1 opacity-40 group-hover:opacity-100 transition-opacity">
-                        <div className="w-12 h-[2px] bg-white group-hover:bg-neon-cyan"></div>
-                        <div className="w-6 h-[1px] bg-white/50 group-hover:bg-neon-cyan/50"></div>
-                    </div>
-                </div>
-
-                {/* Reflection/Interactive Glow */}
-                <motion.div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-20 pointer-events-none"
-                    style={{
-                        background: useTransform(
-                            [mouseX, mouseY],
-                            ([x, y]) => `radial-gradient(circle at ${(x as any * 100) + 50}% ${(y as any * 100) + 50}%, white, transparent)`
-                        ),
-                    }}
+                <Image
+                    src={image}
+                    alt={name}
+                    fill
+                    className="object-cover scale-110 pointer-events-none"
+                    priority
                 />
 
-                {/* Scanning line effect */}
-                <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,rgba(6,182,212,0.1)_50%,transparent_100%)] h-[2px] w-full top-[-100%] group-hover:top-[200%] transition-all duration-1000 ease-in-out pointer-events-none"></div>
+                {/* HUD Scanning Grid Overlay */}
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black,transparent)]"></div>
+
+                {/* Move with mouse "Red Dot" */}
+                <motion.div
+                    style={{
+                        x: useTransform(mouseX, [-0.5, 0.5], [-200, 200]),
+                        y: useTransform(mouseY, [-0.5, 0.5], [-200, 200])
+                    }}
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                >
+                    <div className="w-24 h-24 border border-neon-cyan/40 rounded-full flex items-center justify-center relative">
+                        <div className="absolute w-[2px] h-full bg-neon-cyan/20"></div>
+                        <div className="absolute w-full h-[2px] bg-neon-cyan/20"></div>
+                        <div className="w-1 h-1 bg-red-500 rounded-full shadow-[0_0_10px_red]"></div>
+                    </div>
+                </motion.div>
             </motion.div>
         </motion.div>
     );
 }
 
-function StatHUD({ label, value, sub, isCurrency }: any) {
+function StatNode({ label, value, isCurrency }: any) {
     return (
-        <div className="flex flex-col group gap-1">
+        <div className="flex flex-col group gap-2">
+            <div className="flex items-center gap-2">
+                <div className="w-1 h-3 bg-white/20 group-hover:bg-neon-cyan transition-colors"></div>
+                <span className="text-[10px] font-mono font-black uppercase text-white/30 tracking-widest group-hover:text-white/60 transition-colors">{label}</span>
+            </div>
             <div className="flex items-baseline gap-2">
-                {isCurrency && <span className="text-neon-orange text-2xl font-black font-gang">₹</span>}
+                {isCurrency && <span className="text-neon-orange text-2xl font-black font-gang -mr-1">₹</span>}
                 <span className="text-5xl md:text-7xl font-black text-white font-gang tracking-tighter group-hover:text-neon-cyan transition-colors duration-300">
                     {value}
                 </span>
-            </div>
-            <div className="flex items-center gap-2 mt-2">
-                <div className="h-[2px] w-8 bg-neon-cyan"></div>
-                <div className="flex flex-col">
-                    <span className="text-xs font-mono font-black uppercase tracking-[0.2em] text-white/80">{label}</span>
-                    <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-white/30">{sub}</span>
-                </div>
             </div>
         </div>
     );
