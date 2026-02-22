@@ -15,7 +15,7 @@ const teamMembers = [
         gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
         members: [
             {
-                name: 'Dr. Vijay SekharChellaboina',
+                name: 'Dr. VijaySekhar Chellaboina',
                 image: '/assets/Core_photos/vijay.png',
             }
         ]
@@ -46,7 +46,6 @@ const teamMembers = [
                 name: 'Shubham Jain',
                 position: 'President',
                 image: '/assets/Core_photos/shubhamjain_v2.jpg',
-                bio: 'Coordinating student activities and ensuring seamless operations.'
             },
             {
                 name: 'Ishaan Saraswat',
@@ -102,7 +101,7 @@ const teamMembers = [
         gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
         members: [
             { name: 'Parth Bhardwaj', position: 'Discipline Head', image: '/assets/Core_photos/parth_bhardwaj.jpg' },
-            { name: 'Tanik Gupta', position: 'Discipline Head', image: '/assets/Core_photos/TanikGupta_Core_Discipline.jpg' },
+            { name: 'Tanik Gupta', position: 'Discipline Head', image: '/assets/Core_photos/TanikGupta_Core_Discipline_edited.png' },
             { name: 'Kartik Sharma', position: 'Internal Arrangements', image: '/assets/Core_photos/KartikSharma.jpg' },
             { name: 'Roshan Jangir', position: 'Photography & Social Media', image: '/assets/Core_photos/Roshan_jangir.jpg' },
             { name: 'Smile Chhabra', position: 'Prize & Certificate', image: '/assets/Core_photos/Smilechhabra.jpeg' },
@@ -295,5 +294,5 @@ const Team = () => {
 };
 
 export default Team;
- 
- 
+
+
