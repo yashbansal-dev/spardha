@@ -15,10 +15,8 @@ const teamMembers = [
         gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
         members: [
             {
-                name: 'Vijay Chellobonia',
-                position: 'Vice Chancellor',
+                name: 'Dr. Vijay Chellaboina',
                 image: '/assets/Core_photos/vijay.png',
-                bio: 'Leading strategic initiatives and academic excellence.'
             }
         ]
     },
@@ -27,13 +25,13 @@ const teamMembers = [
         gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
         members: [
             {
-                name: 'Deepak Sogani',
+                name: 'Mr. Deepak Sogani',
                 position: 'Incharge Of Student Affairs',
                 image: '/assets/Core_photos/deepak_sogani.png',
                 bio: 'Dedicated to fostering student growth and ensuring smooth event execution.'
             },
             {
-                name: 'Vaibhav Topiwala',
+                name: 'Mr. Vaibhav Topiwala',
                 position: 'Sports Officer',
                 image: '/assets/Core_photos/VaibhavTopiwala.jpeg',
                 bio: 'Leading the sports committee with vision and dedication.'

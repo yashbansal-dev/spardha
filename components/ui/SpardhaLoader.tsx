@@ -68,21 +68,21 @@ export default function SpardhaLoader({ onComplete, className }: SpardhaLoaderPr
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(227,114,51,0.1)_0%,transparent_70%)]"></div>
             </div>
 
-            <div className="relative z-10">
+            <div className="relative z-10 flex flex-col items-center">
                 {/* Main Logo Text with Glitch */}
-                <div className="relative">
-                    <motion.h1
-                        initial={{ opacity: 0, letterSpacing: "0.5em" }}
-                        animate={{ opacity: 1, letterSpacing: "0.2em" }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="text-6xl md:text-8xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 font-gang relative"
-                    >
+                <motion.div
+                    initial={{ opacity: 0, letterSpacing: "0.5em", marginRight: "-0.5em" }}
+                    animate={{ opacity: 1, letterSpacing: "0.2em", marginRight: "-0.2em" }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="relative flex items-center justify-center"
+                >
+                    <h1 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 font-gang relative">
                         {displayText}
-                    </motion.h1>
+                    </h1>
 
                     {/* Glitch Overlay (Optional red/blue shift) */}
                     <motion.div
-                        className="absolute top-0 left-0 w-full h-full text-6xl md:text-8xl font-black tracking-widest text-neon-cyan opacity-50 mix-blend-screen pointer-events-none"
+                        className="absolute top-0 left-0 w-full h-full text-6xl md:text-8xl font-black text-neon-cyan opacity-50 mix-blend-screen pointer-events-none flex items-center justify-center"
                         animate={{
                             x: [0, -2, 2, -1, 1, 0],
                             opacity: [0.5, 0.3, 0.6, 0.3, 0.5]
@@ -94,11 +94,11 @@ export default function SpardhaLoader({ onComplete, className }: SpardhaLoaderPr
                         }}
                         style={{ clipPath: "polygon(0 0, 100% 0, 100% 45%, 0 45%)" }}
                     >
-                        SPARDHA
+                        {targetWord}
                     </motion.div>
 
                     <motion.div
-                        className="absolute top-0 left-0 w-full h-full text-6xl md:text-8xl font-black tracking-widest text-neon-blue opacity-50 mix-blend-screen pointer-events-none"
+                        className="absolute top-0 left-0 w-full h-full text-6xl md:text-8xl font-black text-neon-blue opacity-50 mix-blend-screen pointer-events-none flex items-center justify-center"
                         animate={{
                             x: [0, 2, -2, 1, -1, 0],
                             opacity: [0.5, 0.3, 0.6, 0.3, 0.5]
@@ -110,9 +110,9 @@ export default function SpardhaLoader({ onComplete, className }: SpardhaLoaderPr
                         }}
                         style={{ clipPath: "polygon(0 55%, 100% 55%, 100% 100%, 0 100%)" }}
                     >
-                        SPARDHA
+                        {targetWord}
                     </motion.div>
-                </div>
+                </motion.div>
             </div>
 
             {/* Corner Decorations */}
