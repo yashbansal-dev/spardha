@@ -90,7 +90,9 @@ const teamMembers = [
             {
                 name: 'Ashmit Sharma',
                 position: 'Organizing Head',
-                image: '/assets/Core_photos/ashmit_sharma_v4.png',
+                image: '/assets/Core_photos/ashmit_new.png',
+                priority: true,
+                unoptimized: true,
                 bio: 'Bridging administration and on-ground execution for India\'s premier sports fest.'
             }
         ]
@@ -249,7 +251,8 @@ const Team = () => {
                                                                             transform: member.rotate ? `rotate(${member.rotate}deg) scale(${isMobile ? 1.9 : 1.5})` : 'none'
                                                                         }}
                                                                         sizes="(max-width: 768px) 100vw, 50vw"
-                                                                        priority={catIndex === 0}
+                                                                        priority={catIndex === 0 || (member as any).priority}
+                                                                        unoptimized={(member as any).unoptimized}
                                                                     />
                                                                 </div>
                                                             )}
