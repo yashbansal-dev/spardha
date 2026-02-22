@@ -7,24 +7,14 @@ import ParallaxBackground from "@/components/ParallaxBackground";
 import SpardhaLoader from "@/components/ui/SpardhaLoader";
 
 export default function EventsPage() {
-    const [isLoading, setIsLoading] = useState(true);
-
     return (
-        <>
-            {isLoading && (
-                <SpardhaLoader
-                    onComplete={() => setIsLoading(false)}
-                    className="z-[9999]"
-                />
-            )}
-            <main className="min-h-screen text-white selection:bg-neon-cyan selection:text-black relative bg-[#020617]">
-                <ParallaxBackground />
-                <Navbar />
+        <main className="min-h-screen text-white selection:bg-neon-cyan selection:text-black relative bg-[#020617]">
+            <ParallaxBackground />
+            <Navbar />
 
-                {/* Scroll Stack Events Implementation */}
-                <EventsScrollStack />
+            {/* Scroll Stack Events Implementation */}
+            <EventsScrollStack />
 
-            </main>
-        </>
+        </main>
     );
 }

@@ -12,45 +12,30 @@ import ParallaxBackground from "@/components/ParallaxBackground";
 import SpardhaLoader from "@/components/ui/SpardhaLoader";
 
 export default function HomeContent() {
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        // Show loader on initial mount
-        setIsLoading(true);
-    }, []);
-
     return (
-        <>
-            {isLoading && (
-                <SpardhaLoader
-                    onComplete={() => setIsLoading(false)}
-                    className="z-[9999]"
-                />
-            )}
-            <main className="min-h-screen text-white selection:bg-neon-cyan selection:text-black relative bg-black">
-                <ParallaxBackground />
+        <main className="min-h-screen text-white selection:bg-neon-cyan selection:text-black relative bg-black">
+            <ParallaxBackground />
 
-                <div className="relative z-10">
-                    <Navbar />
+            <div className="relative z-10">
+                <Navbar />
 
-                    <Hero />
+                <Hero />
 
-                    <div className="relative z-30">
-                        <SportsMarquee />
-                    </div>
-
-                    {/* Story Section - Full width cinematic */}
-                    <Story />
-
-                    {/* Stats Section */}
-                    <Stats />
-
-                    {/* Final CTA */}
-                    <FinalCTA />
-
-                    <Footer />
+                <div className="relative z-30">
+                    <SportsMarquee />
                 </div>
-            </main>
-        </>
+
+                {/* Story Section - Full width cinematic */}
+                <Story />
+
+                {/* Stats Section */}
+                <Stats />
+
+                {/* Final CTA */}
+                <FinalCTA />
+
+                <Footer />
+            </div>
+        </main>
     );
 }
