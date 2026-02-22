@@ -1,13 +1,11 @@
-'use client';
+import { Metadata } from 'next';
+import GalleryContent from '@/components/GalleryContent';
 
-import Navbar from '@/components/Navbar';
-import SeamlessInfiniteGallery from '@/components/gallery/SeamlessInfiniteGallery';
+export const metadata: Metadata = {
+    title: "Gallery | SPARDHA 2026",
+    description: "Relive the greatest moments from SPARDHA. High-energy action shots from our annual sports festival.",
+};
 
 export default function Gallery() {
-    return (
-        <main className="min-h-screen bg-[#1A1A1A] text-white overflow-hidden">
-            <Navbar />
-            <SeamlessInfiniteGallery />
-        </main>
-    );
+    return <GalleryContent />;
 }

@@ -52,7 +52,7 @@ export default function CustomCursor() {
     // Optimized hover detection - reduced throttle to 16ms (60fps) for instant feeling
     const handleMouseOver = useCallback((e: MouseEvent) => {
         const now = Date.now();
-        if (now - lastCheckRef.current < 16) return; 
+        if (now - lastCheckRef.current < 16) return;
         lastCheckRef.current = now;
 
         const target = e.target as HTMLElement;
@@ -61,7 +61,12 @@ export default function CustomCursor() {
             target.tagName === 'BUTTON' ||
             target.tagName === 'A' ||
             target.tagName === 'INPUT' ||
+            target.tagName === 'SELECT' ||
+            target.tagName === 'TEXTAREA' ||
             target.tagName === 'LABEL' ||
+            target.tagName === 'SUMMARY' ||
+            target.getAttribute('role') === 'button' ||
+            target.getAttribute('role') === 'link' ||
             target.closest('button') ||
             target.closest('a') ||
             target.closest('.interactive') ||
@@ -94,7 +99,7 @@ export default function CustomCursor() {
         <>
             <style jsx global>{`
                 @media (pointer: fine) and (min-width: 768px) {
-                    body, a, button, input, select, textarea, .cursor-pointer {
+                    body, a, button, input, select, textarea, summary, [role="button"], [role="link"], .cursor-pointer {
                         cursor: none !important;
                     }
                 }

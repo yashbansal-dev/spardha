@@ -4,12 +4,13 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Define the shape of a Cart Item
 export interface CartItem {
-    id: string;      // Unique ID (e.g., 'football-boys', 'cricket-leather-boys')
+    id: string;      // Unique ID (e.g., 'football-boys', 'leather-cricket-boys')
     name: string;    // Sport Name
     category: string;// 'boys' | 'girls' | 'open'
     price: number;   // Numeric price
     color?: string;  // For UI emphasis
     image?: string;  // Background image
+    pricingType?: 'person' | 'team';
 }
 
 // Define the Context Shape

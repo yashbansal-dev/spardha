@@ -1,4 +1,10 @@
 import Navbar from '@/components/Navbar';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Schedule | SPARDHA 2026",
+    description: "The official timeline for SPARDHA 2026. Keep track of all matches and events.",
+};
 
 export default function SchedulePage() {
     return (
