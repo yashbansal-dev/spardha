@@ -64,32 +64,24 @@ export default function SeamlessInfiniteGallery() {
     const updateTiles = useCallback((latestX: number, latestY: number) => {
         const vpX = -latestX;
         const vpY = -latestY;
-        const tileX = Math.floor(vpX / TILE_WIDTH);
-        const tileY = Math.floor(vpY / TILE_HEIGHT);
 
-        if (isMobileRef.current) {
-            const modX = vpX % TILE_WIDTH;
-            const progressX = modX >= 0 ? modX : TILE_WIDTH + modX;
-            const startX = progressX < TILE_WIDTH / 2 ? tileX - 1 : tileX;
+        const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 1920;
+        const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 1080;
 
-            const modY = vpY % TILE_HEIGHT;
-            const progressY = modY >= 0 ? modY : TILE_HEIGHT + modY;
-            const startY = progressY < TILE_HEIGHT / 2 ? tileY - 1 : tileY;
+        const paddingBuffer = 200; // preload 200px before reaching edge
 
-            setActiveTiles(prev => {
-                if (prev.startX !== startX || prev.startY !== startY || prev.endX !== startX + 1 || prev.endY !== startY + 1) {
-                    return { startX, endX: startX + 1, startY, endY: startY + 1 };
-                }
-                return prev;
-            });
-        } else {
-            setActiveTiles(prev => {
-                if (prev.startX !== tileX - 1 || prev.startY !== tileY - 1 || prev.endX !== tileX + 1 || prev.endY !== tileY + 1) {
-                    return { startX: tileX - 1, endX: tileX + 1, startY: tileY - 1, endY: tileY + 1 };
-                }
-                return prev;
-            });
-        }
+        const startX = Math.floor((vpX - paddingBuffer) / TILE_WIDTH);
+        const endX = Math.floor((vpX + windowWidth + paddingBuffer) / TILE_WIDTH);
+
+        const startY = Math.floor((vpY - paddingBuffer) / TILE_HEIGHT);
+        const endY = Math.floor((vpY + windowHeight + paddingBuffer) / TILE_HEIGHT);
+
+        setActiveTiles(prev => {
+            if (prev.startX !== startX || prev.startY !== startY || prev.endX !== endX || prev.endY !== endY) {
+                return { startX, endX, startY, endY };
+            }
+            return prev;
+        });
     }, []);
 
     useMotionValueEvent(x, "change", (latest) => updateTiles(latest, y.get()));
@@ -107,7 +99,8 @@ export default function SeamlessInfiniteGallery() {
                     const tileCol = idx % GRID_COLS;
                     const globalRow = ty * GRID_ROWS + tileRow;
                     const globalCol = tx * GRID_COLS + tileCol;
-                    const linearIndex = globalRow * GRID_COLS + globalCol;
+                    // Deterministic pseudo-random offset based on global coordinates to avoid diagonal repeating
+                    const linearIndex = Math.abs(globalRow * 73 + globalCol * 31);
 
                     const len = shuffledImages.length;
                     const imageIndex = ((linearIndex % len) + len) % len;
@@ -195,7 +188,6 @@ export default function SeamlessInfiniteGallery() {
                 drag
                 dragConstraints={{ left: -1000000, right: 1000000, top: -1000000, bottom: 1000000 }}
                 dragElastic={0}
-                dragDamping={30}
                 dragMomentum={true}
                 dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
                 style={{
@@ -219,15 +211,14 @@ export default function SeamlessInfiniteGallery() {
                             className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:z-50 ring-1 ring-white/10 group-hover:ring-gold-500/50 cursor-pointer"
                             onClick={() => handleImageInteraction(item.src)}
                         >
-                            <Image
+                            {/* Native image tag used instead of Next.js Image for massive DOM speedup during rapid grid mounts */}
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
                                 src={item.src}
                                 alt="Spardha moment"
-                                fill
-                                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                sizes="(max-width: 768px) 280px, 320px"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 draggable={false}
                                 loading="lazy"
-                                unoptimized
                                 decoding="async"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
