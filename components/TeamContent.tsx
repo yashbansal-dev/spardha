@@ -109,7 +109,7 @@ const teamMembers = [
             { name: 'Satvik Agrawal', position: 'Food & Accommodation', image: '/assets/Core_photos/SatvikSharma.webp' },
             { name: 'Yash Bansal', position: 'Tech & Support Head', image: '/assets/Core_photos/YashBansal.jpg' },
             { name: 'Shlok Chaturvedi', position: 'First Aid Head', image: '/assets/Core_photos/ShlokChaturvedi.jpg' },
-            { name: 'Parineeta Jain', position: 'Sponsorship & Promotion', image: '/assets/Core_photos/ParineetaJain.jpg' },
+            { name: 'Parineeta Jain', position: 'Sponsorship & Promotion Head', image: '/assets/Core_photos/ParineetaJain.jpg' },
             { name: 'Gourang Tak', position: 'Transportation Head', image: '/assets/Core_photos/GourangTak.jpg' },
             { name: 'Rishika Sharma', position: 'Registration Head', image: '/assets/Core_photos/Rishikasharma.jpeg' },
             { name: 'Akshali Srivastava', position: 'Media Head', image: '/assets/Core_photos/AkshaliSrivastava.jpg', rotate: 90 },
