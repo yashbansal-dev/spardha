@@ -10,11 +10,13 @@ import { FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 const IMAGE_WIDTH = 280;
 const IMAGE_HEIGHT = 180;
 const SPACING = 15;
-const TILE_WIDTH = 5 * IMAGE_WIDTH + 5 * SPACING;
-const TILE_HEIGHT = 5 * IMAGE_HEIGHT + 5 * SPACING;
+const GRID_ROWS = 4;
+const GRID_COLS = 4;
+const TILE_WIDTH = GRID_COLS * IMAGE_WIDTH + GRID_COLS * SPACING;
+const TILE_HEIGHT = GRID_ROWS * IMAGE_HEIGHT + GRID_ROWS * SPACING;
 
-const BASE_GRID = Array.from({ length: 5 }, (_, row) =>
-    Array.from({ length: 5 }, (_, col) => ({
+const BASE_GRID = Array.from({ length: GRID_ROWS }, (_, row) =>
+    Array.from({ length: GRID_COLS }, (_, col) => ({
         x: col * (IMAGE_WIDTH + SPACING),
         y: row * (IMAGE_HEIGHT + SPACING),
     }))
@@ -49,11 +51,15 @@ export default function SeamlessInfiniteGallery() {
     // Initialize shuffled images on mount
     useEffect(() => {
         setShuffledImages(smartShuffle(SPORTS_IMAGES));
+        isMobileRef.current = window.innerWidth < 768;
+        updateTiles(x.get(), y.get());
+
         const checkMobile = () => {
-            isMobileRef.current = window.innerWidth < 768;
-            updateTiles(x.get(), y.get());
+            if (isMobileRef.current !== (window.innerWidth < 768)) {
+                isMobileRef.current = window.innerWidth < 768;
+                updateTiles(x.get(), y.get());
+            }
         };
-        checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,11 +107,11 @@ export default function SeamlessInfiniteGallery() {
         for (let ty = activeTiles.startY; ty <= activeTiles.endY; ty++) {
             for (let tx = activeTiles.startX; tx <= activeTiles.endX; tx++) {
                 BASE_GRID.forEach((pos, idx) => {
-                    const tileRow = Math.floor(idx / 5);
-                    const tileCol = idx % 5;
-                    const globalRow = ty * 5 + tileRow;
-                    const globalCol = tx * 5 + tileCol;
-                    const linearIndex = globalRow * 5 + globalCol;
+                    const tileRow = Math.floor(idx / GRID_COLS);
+                    const tileCol = idx % GRID_COLS;
+                    const globalRow = ty * GRID_ROWS + tileRow;
+                    const globalCol = tx * GRID_COLS + tileCol;
+                    const linearIndex = globalRow * GRID_COLS + globalCol;
 
                     const len = shuffledImages.length;
                     const imageIndex = ((linearIndex % len) + len) % len;
@@ -257,7 +263,6 @@ export default function SeamlessInfiniteGallery() {
                 </svg>
             </motion.div>
 
-            {/* Tiled Canvas */}
             <motion.div
                 className="absolute inset-0"
                 style={{
@@ -293,6 +298,7 @@ export default function SeamlessInfiniteGallery() {
                                     draggable={false}
                                     loading="lazy"
                                     unoptimized
+                                    decoding="async"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
                             </ViewportTracker>
@@ -312,10 +318,10 @@ export default function SeamlessInfiniteGallery() {
                         onClick={() => setActiveLightboxImage(null)}
                     >
                         <motion.div
-                            initial={{ scale: 0.9, opacity: 0 }}
+                            initial={{ scale: 0.95, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.9, opacity: 0 }}
-                            transition={{ type: "spring", bounce: 0.3 }}
+                            exit={{ scale: 0.95, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
                             className="relative w-full max-w-5xl aspect-[4/3] md:aspect-video bg-black rounded-lg overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10 flex items-center justify-center"
                             onClick={(e) => e.stopPropagation()}
                         >
@@ -412,12 +418,10 @@ function ViewportTracker({
         const vpX = -x.get();
         const vpY = -y.get();
 
-        // Viewport bounds + safety margin (render 1 screen ahead)
-        // Screen is roughly 400x900 on mobile, margin 600px
-        const viewL = vpX - 600;
-        const viewR = vpX + 1000;
-        const viewT = vpY - 600;
-        const viewB = vpY + 1500;
+        const viewL = vpX - 300;
+        const viewR = vpX + window.innerWidth + 300;
+        const viewT = vpY - 300;
+        const viewB = vpY + window.innerHeight + 300;
 
         // Image bounds
         const imgL = itemX;
