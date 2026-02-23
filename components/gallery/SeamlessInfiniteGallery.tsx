@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { motion, useMotionValue, useMotionValueEvent, AnimatePresence } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { smartShuffle } from '@/utils/smartShuffle';
 import { SPORTS_IMAGES } from '@/data/galleryImages';
 import { FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -38,9 +38,11 @@ export default function SeamlessInfiniteGallery() {
 
     const isMobileRef = useRef(false);
 
-    // Mouse Pos for cursor
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
+    // Mouse Pos for cursor (Smooth Physics for lag-free cursor)
+    const rawMouseX = useMotionValue(0);
+    const rawMouseY = useMotionValue(0);
+    const mouseX = useSpring(rawMouseX, { stiffness: 600, damping: 40, mass: 0.1 });
+    const mouseY = useSpring(rawMouseY, { stiffness: 600, damping: 40, mass: 0.1 });
 
     // Initialize shuffled images on mount
     useEffect(() => {
@@ -126,8 +128,8 @@ export default function SeamlessInfiniteGallery() {
     }, [activeTiles, shuffledImages]);
 
     const handlePointerMove = (e: React.PointerEvent) => {
-        mouseX.set(e.clientX);
-        mouseY.set(e.clientY);
+        rawMouseX.set(e.clientX);
+        rawMouseY.set(e.clientY);
     };
 
     const handleWheel = (e: React.WheelEvent) => {
@@ -164,26 +166,28 @@ export default function SeamlessInfiniteGallery() {
 
     return (
         <section
-            className="relative w-screen h-screen overflow-hidden bg-[#050505] cursor-none select-none touch-none"
+            className="relative w-screen h-screen overflow-hidden bg-[#050505] cursor-auto md:cursor-none select-none touch-none"
             onPointerMove={handlePointerMove}
             onWheel={handleWheel}
         >
             {/* Custom Cursor */}
             <motion.div
-                className="fixed z-[100] pointer-events-none md:block hidden"
+                className="fixed z-[100] pointer-events-none md:block hidden will-change-transform"
                 style={{
                     x: mouseX,
                     y: mouseY,
                     translateX: "-50%",
                     translateY: "-50%",
-                    scale: 1, // Optional: adjust scale on drag if needed
+                    transformOrigin: "center center"
                 }}
             >
-                <svg width="32" height="48" viewBox="0 0 40 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
-                    <path d="M20 5 L5 45 L35 45 Z" fill="white" fillOpacity="0.2" stroke="white" strokeWidth="1.5" />
-                    <circle cx="20" cy="48" r="7" fill="#FFD700" />
-                    <rect x="13" y="45" width="14" height="2" fill="#B22222" />
-                </svg>
+                <div className="relative flex items-center justify-center filter drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">
+                    <svg width="24" height="36" viewBox="0 0 40 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 5 L5 45 L35 45 Z" fill="white" fillOpacity="0.4" stroke="white" strokeWidth="2" strokeLinejoin="round" />
+                        <circle cx="20" cy="48" r="6" fill="#FFD700" />
+                        <rect x="14" y="44" width="12" height="3" fill="#B22222" rx="1" />
+                    </svg>
+                </div>
             </motion.div>
 
             <motion.div
