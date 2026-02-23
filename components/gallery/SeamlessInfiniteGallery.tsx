@@ -28,8 +28,6 @@ export default function SeamlessInfiniteGallery() {
     const y = useMotionValue(0);
 
     const isDragging = useRef(false);
-    const lastMousePos = useRef({ x: 0, y: 0 });
-    const clickStartPos = useRef({ x: 0, y: 0 });
 
     // Grid State
     const [activeTiles, setActiveTiles] = useState({ startX: -1, endX: 1, startY: -1, endY: 1 });
@@ -127,29 +125,9 @@ export default function SeamlessInfiniteGallery() {
         return positions;
     }, [activeTiles, shuffledImages]);
 
-    const handleMouseDown = (e: React.MouseEvent) => {
-        isDragging.current = true;
-        lastMousePos.current = { x: e.clientX, y: e.clientY };
-        clickStartPos.current = { x: e.clientX, y: e.clientY };
-    };
-
-    const handleMouseMove = (e: React.MouseEvent) => {
+    const handlePointerMove = (e: React.PointerEvent) => {
         mouseX.set(e.clientX);
         mouseY.set(e.clientY);
-
-        if (!isDragging.current) return;
-
-        const dx = e.clientX - lastMousePos.current.x;
-        const dy = e.clientY - lastMousePos.current.y;
-
-        x.set(x.get() + dx);
-        y.set(y.get() + dy);
-
-        lastMousePos.current = { x: e.clientX, y: e.clientY };
-    };
-
-    const handleMouseUp = () => {
-        isDragging.current = false;
     };
 
     const handleWheel = (e: React.WheelEvent) => {
@@ -157,54 +135,9 @@ export default function SeamlessInfiniteGallery() {
         y.set(y.get() - e.deltaY);
     };
 
-    const handleTouchStart = (e: React.TouchEvent) => {
-        isDragging.current = true;
-        const touch = e.touches[0];
-        lastMousePos.current = { x: touch.clientX, y: touch.clientY };
-        clickStartPos.current = { x: touch.clientX, y: touch.clientY };
-    };
-
-    const handleTouchMove = (e: React.TouchEvent) => {
-        if (!isDragging.current) return;
-        const touch = e.touches[0];
-
-        mouseX.set(touch.clientX);
-        mouseY.set(touch.clientY);
-
-        const dx = touch.clientX - lastMousePos.current.x;
-        const dy = touch.clientY - lastMousePos.current.y;
-
-        x.set(x.get() + dx);
-        y.set(y.get() + dy);
-
-        lastMousePos.current = { x: touch.clientX, y: touch.clientY };
-    };
-
-    const handleTouchEnd = () => {
-        isDragging.current = false;
-    };
-
-    const handleImageInteraction = (src: string, e: React.MouseEvent | React.TouchEvent) => {
-        e.preventDefault();
-
-        // Don't open lightbox if another is already open
+    const handleImageInteraction = (src: string) => {
         if (activeLightboxImage) return;
-
-        let clientX = 0, clientY = 0;
-        if ('touches' in e && e.changedTouches) {
-            clientX = e.changedTouches[0].clientX;
-            clientY = e.changedTouches[0].clientY;
-        } else if ('clientX' in e) {
-            clientX = (e as React.MouseEvent).clientX;
-            clientY = (e as React.MouseEvent).clientY;
-        }
-
-        const dx = Math.abs(clientX - clickStartPos.current.x);
-        const dy = Math.abs(clientY - clickStartPos.current.y);
-
-        if (dx < 10 && dy < 10) {
-            setActiveLightboxImage(src);
-        }
+        setActiveLightboxImage(src);
     };
 
     const lightboxNext = (e: React.MouseEvent) => {
@@ -232,18 +165,12 @@ export default function SeamlessInfiniteGallery() {
     return (
         <section
             className="relative w-screen h-screen overflow-hidden bg-[#050505] cursor-none select-none touch-none"
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
+            onPointerMove={handlePointerMove}
             onWheel={handleWheel}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
         >
             {/* Custom Cursor */}
             <motion.div
-                className="fixed z-[100] pointer-events-none transition-transform duration-75 ease-out md:block hidden"
+                className="fixed z-[100] pointer-events-none md:block hidden"
                 style={{
                     x: mouseX,
                     y: mouseY,
@@ -260,7 +187,13 @@ export default function SeamlessInfiniteGallery() {
             </motion.div>
 
             <motion.div
-                className="absolute inset-0"
+                className="absolute inset-0 cursor-grab active:cursor-grabbing"
+                drag
+                dragConstraints={{ left: -1000000, right: 1000000, top: -1000000, bottom: 1000000 }}
+                dragElastic={0}
+                dragDamping={30}
+                dragMomentum={true}
+                dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
                 style={{
                     x,
                     y,
@@ -280,8 +213,7 @@ export default function SeamlessInfiniteGallery() {
                     >
                         <div
                             className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:z-50 ring-1 ring-white/10 group-hover:ring-gold-500/50 cursor-pointer"
-                            onMouseUp={(e) => handleImageInteraction(item.src, e)}
-                            onTouchEnd={(e) => handleImageInteraction(item.src, e)}
+                            onClick={() => handleImageInteraction(item.src)}
                         >
                             <div className="absolute inset-0 bg-white/5 animate-pulse" /> {/* Placeholder while unmounted */}
                             <Image
