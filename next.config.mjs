@@ -7,7 +7,7 @@ const nextConfig = {
         ignoreBuildErrors: true,
     },
     images: {
-        unoptimized: true,
+        unoptimized: true, // Disabled Vercel Image Optimization to preserve free tier limits
         formats: ['image/avif', 'image/webp'],
         remotePatterns: [
             {
