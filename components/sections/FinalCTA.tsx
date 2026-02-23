@@ -37,37 +37,37 @@ export default function FinalCTA() {
                 <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 md:gap-4 w-[120%] sm:w-[120%] md:w-full shrink-0 h-max p-2 md:p-4 font-sans uppercase">
                     {/* Column 1 - Left on mobile */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/121A0589.JPG', position: 'object-top' },
-                        { src: '/assets/validictory/121A0592.JPG', position: 'object-top' },
-                        { src: '/assets/validictory/121A0595.JPG', position: 'object-center' }
+                        { src: '/assets/validictory/121A0589-thumb.webp', position: 'object-top' },
+                        { src: '/assets/validictory/121A0592-thumb.webp', position: 'object-top' },
+                        { src: '/assets/validictory/121A0595-thumb.webp', position: 'object-center' }
                     ]} className="flex" />
 
                     {/* Column 2 - Right on mobile */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/121A0597.JPG', position: 'object-top' },
-                        { src: '/assets/validictory/121A0601.JPG', position: 'object-center' },
-                        { src: '/assets/validictory/121A0602.JPG', position: 'object-center' }
+                        { src: '/assets/validictory/121A0597-thumb.webp', position: 'object-top' },
+                        { src: '/assets/validictory/121A0601-thumb.webp', position: 'object-center' },
+                        { src: '/assets/validictory/121A0602-thumb.webp', position: 'object-center' }
                     ]} className="mt-12 flex" />
 
                     {/* Column 3 - Hidden on mobile, visible on desktop */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/121A0604.JPG', position: 'object-top' },
-                        { src: '/assets/validictory/121A0608.JPG', position: 'object-top' },
-                        { src: '/assets/validictory/121A0622.JPG', position: 'object-center' }
+                        { src: '/assets/validictory/121A0604-thumb.webp', position: 'object-top' },
+                        { src: '/assets/validictory/121A0608-thumb.webp', position: 'object-top' },
+                        { src: '/assets/validictory/121A0622-thumb.webp', position: 'object-center' }
                     ]} className="mt-24 md:mt-0 hidden md:flex" />
 
                     {/* Column 4 */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/DSC_0990.JPG', position: 'object-center' },
-                        { src: '/assets/validictory/121A0625.JPG', position: 'object-center' },
-                        { src: '/assets/validictory/121A0629.JPG', position: 'object-center' }
+                        { src: '/assets/validictory/DSC_0990-thumb.webp', position: 'object-center' },
+                        { src: '/assets/validictory/121A0625-thumb.webp', position: 'object-center' },
+                        { src: '/assets/validictory/121A0629-thumb.webp', position: 'object-center' }
                     ]} className="hidden lg:flex" />
 
                     {/* Column 5 */}
                     <StaticColumn images={[
-                        { src: '/assets/validictory/DSC_0932.JPG', position: 'object-center' },
-                        { src: '/assets/validictory/DSC_0953.JPG', position: 'object-center' },
-                        { src: '/assets/validictory/121A0662.JPG', position: 'object-center' }
+                        { src: '/assets/validictory/DSC_0932-thumb.webp', position: 'object-center' },
+                        { src: '/assets/validictory/DSC_0953-thumb.webp', position: 'object-center' },
+                        { src: '/assets/validictory/121A0662-thumb.webp', position: 'object-center' }
                     ]} className="hidden lg:flex" />
                 </div>
             </div>
@@ -90,8 +90,8 @@ export default function FinalCTA() {
             {/* 4. Top Fade-In */}
             <div className="absolute inset-x-0 top-0 h-[40vh] bg-gradient-to-b from-[#050505] via-[#050505]/60 to-transparent z-10 pointer-events-none" />
 
-            <div className="absolute top-1/2 left-1/4 w-[40vw] h-[40vw] bg-neon-cyan/5 rounded-full blur-[120px] pointer-events-none z-5" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-red-600/10 rounded-full blur-[100px] pointer-events-none z-5" />
+            <div className="absolute top-1/2 left-1/4 w-[40vw] h-[40vw] bg-neon-cyan/5 rounded-full blur-[60px] pointer-events-none z-5" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-red-600/10 rounded-full blur-[50px] pointer-events-none z-5" />
 
             {/* 5. Looming Watermark Text */}
             <div className="absolute top-[20%] inset-x-0 flex justify-center pointer-events-none z-0">
@@ -171,14 +171,14 @@ function StaticColumn({ images, className }: { images: (string | ImageProps)[], 
                 const position = typeof item === 'string' ? 'object-center' : (item.position || 'object-center');
 
                 return (
-                    <div key={i} className="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-white/5 hover:scale-[1.02] transition-all duration-500 shadow-2xl">
-                        <Image
+                    <div key={i} className="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-white/5 hover:scale-[1.02] transition-transform duration-500 shadow-2xl">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                             src={src}
                             alt="Ceremony Moment"
-                            fill
-                            className={`object-cover brightness-[1.15] contrast-[1.1] saturate-[1.1] ${position}`}
-                            sizes="(max-width: 768px) 100vw, 33vw"
-                            priority={i < 2}
+                            className={`absolute inset-0 w-full h-full object-cover brightness-[1.15] contrast-[1.1] saturate-[1.1] ${position}`}
+                            loading={i < 2 ? "eager" : "lazy"}
+                            decoding="async"
                         />
                     </div>
                 );
@@ -243,7 +243,7 @@ function Ticket({ handleRegisterClick }: { handleRegisterClick: (e: React.MouseE
                     style={{ transform: "translateZ(0px)" }}
                 >
                     {/* Background Texture - Concrete/Noise */}
-                    <div className="absolute inset-0 bg-[url('/assets/noise.png')] opacity-10 md:mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-[url('/assets/noise.png')] opacity-10" />
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50" />
 
                     {/* Content Grid */}
@@ -313,7 +313,7 @@ function Ticket({ handleRegisterClick }: { handleRegisterClick: (e: React.MouseE
 
                     {/* Glare Overlay */}
                     <motion.div
-                        className="absolute inset-0 z-30 pointer-events-none opacity-30 group-hover:opacity-50 transition-opacity duration-300 mix-blend-overlay"
+                        className="absolute inset-0 z-30 pointer-events-none opacity-30 group-hover:opacity-50 transition-opacity duration-300"
                         style={{
                             background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.4) 45%, rgba(0,243,255,0.2) 50%, transparent 54%)",
                             backgroundSize: "200% 200%",
