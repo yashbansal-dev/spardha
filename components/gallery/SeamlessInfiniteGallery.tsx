@@ -219,7 +219,6 @@ export default function SeamlessInfiniteGallery() {
                             className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:z-50 ring-1 ring-white/10 group-hover:ring-gold-500/50 cursor-pointer"
                             onClick={() => handleImageInteraction(item.src)}
                         >
-                            <div className="absolute inset-0 bg-white/5 animate-pulse" /> {/* Placeholder while unmounted */}
                             <Image
                                 src={item.src}
                                 alt="Spardha moment"
