@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { motion, useMotionValue, useSpring, useMotionValueEvent, AnimatePresence } from 'framer-motion';
+import { motion, useMotionValue, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { smartShuffle } from '@/utils/smartShuffle';
 import { SPORTS_IMAGES } from '@/data/galleryImages';
 import { FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
@@ -26,10 +26,6 @@ export default function SeamlessInfiniteGallery() {
     // Motion Values for performant updates
     const x = useMotionValue(0);
     const y = useMotionValue(0);
-
-    // Smooth physics (optional, but good for drag momentum)
-    const smoothX = useSpring(x, { damping: 50, stiffness: 400 });
-    const smoothY = useSpring(y, { damping: 50, stiffness: 400 });
 
     const isDragging = useRef(false);
     const lastMousePos = useRef({ x: 0, y: 0 });
@@ -266,8 +262,8 @@ export default function SeamlessInfiniteGallery() {
             <motion.div
                 className="absolute inset-0"
                 style={{
-                    x: smoothX,
-                    y: smoothY,
+                    x,
+                    y,
                     willChange: 'transform',
                 }}
             >
@@ -287,21 +283,19 @@ export default function SeamlessInfiniteGallery() {
                             onMouseUp={(e) => handleImageInteraction(item.src, e)}
                             onTouchEnd={(e) => handleImageInteraction(item.src, e)}
                         >
-                            <ViewportTracker itemX={item.x} itemY={item.y} x={x} y={y}>
-                                <div className="absolute inset-0 bg-white/5 animate-pulse" /> {/* Placeholder while unmounted */}
-                                <Image
-                                    src={item.src}
-                                    alt="Spardha moment"
-                                    fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                    sizes="(max-width: 768px) 280px, 320px"
-                                    draggable={false}
-                                    loading="lazy"
-                                    unoptimized
-                                    decoding="async"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
-                            </ViewportTracker>
+                            <div className="absolute inset-0 bg-white/5 animate-pulse" /> {/* Placeholder while unmounted */}
+                            <Image
+                                src={item.src}
+                                alt="Spardha moment"
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                sizes="(max-width: 768px) 280px, 320px"
+                                draggable={false}
+                                loading="lazy"
+                                unoptimized
+                                decoding="async"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
                         </div>
                     </div>
                 ))}
@@ -382,64 +376,4 @@ export default function SeamlessInfiniteGallery() {
             </div>
         </section>
     );
-}
-
-function ViewportTracker({
-    itemX,
-    itemY,
-    x,
-    y,
-    children
-}: {
-    itemX: number;
-    itemY: number;
-    x: import('framer-motion').MotionValue<number>;
-    y: import('framer-motion').MotionValue<number>;
-    children: React.ReactNode
-}) {
-    // Only strictly unmount on mobile to save GPU memory; desktop handles it fine
-    const [isVisible, setIsVisible] = useState(true);
-    const isMobile = useRef(false);
-
-    useEffect(() => {
-        isMobile.current = window.innerWidth < 768;
-        if (isMobile.current) checkVisibility();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    useMotionValueEvent(x, "change", () => {
-        if (isMobile.current) checkVisibility();
-    });
-    useMotionValueEvent(y, "change", () => {
-        if (isMobile.current) checkVisibility();
-    });
-
-    const checkVisibility = useCallback(() => {
-        const vpX = -x.get();
-        const vpY = -y.get();
-
-        const viewL = vpX - 300;
-        const viewR = vpX + window.innerWidth + 300;
-        const viewT = vpY - 300;
-        const viewB = vpY + window.innerHeight + 300;
-
-        // Image bounds
-        const imgL = itemX;
-        const imgR = itemX + IMAGE_WIDTH;
-        const imgT = itemY;
-        const imgB = itemY + IMAGE_HEIGHT;
-
-        // Check intersection
-        const visible = imgR > viewL && imgL < viewR && imgB > viewT && imgT < viewB;
-
-        if (visible !== isVisible) {
-            setIsVisible(visible);
-        }
-    }, [itemX, itemY, x, y, isVisible]);
-
-    if (!isVisible) {
-        return <div className="w-full h-full bg-[#111] animate-pulse rounded-xl shadow-2xl" />; // Very cheap placeholder
-    }
-
-    return <>{children}</>;
 }
