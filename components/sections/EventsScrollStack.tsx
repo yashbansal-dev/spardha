@@ -58,7 +58,7 @@ const SPORTS_DATA = [
     {
         id: 'basketball',
         name: 'Basketball',
-        image: '/assets/games/basketball.JPG',
+        image: '/basketball-night.jpg',
         date: '15th - 16th Feb',
         type: 'Core Sport',
         color: 'from-[#431407] to-[#7c2d12]',

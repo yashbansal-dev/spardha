@@ -113,7 +113,8 @@ const teamMembers = [
             { name: 'Gourang Tak', position: 'Transportation Head', image: '/assets/Core_photos/GourangTak.jpg' },
             { name: 'Rishika Sharma', position: 'Registration Head', image: '/assets/Core_photos/Rishikasharma.jpeg' },
             { name: 'Akshali Srivastava', position: 'Media Head', image: '/assets/Core_photos/AkshaliSrivastava.jpg', rotate: 90 },
-            { name: 'Pratigya Bomb', position: 'Registration Head', image: '/assets/Core_photos/pratigya_bomb.jpg' }
+            { name: 'Pratigya Bomb', position: 'Registration Head', image: '/assets/Core_photos/pratigya_bomb.jpg' },
+            { name: 'Adhiraj Singh', position: 'Design Head', image: '/assets/Core_photos/adhiraj.jpg' }
         ]
     },
     {
@@ -265,9 +266,9 @@ const Team = () => {
                                                                     transition={{ duration: 0.4 }}
                                                                 >
                                                                     <p className="text-xs text-spardha-gold uppercase tracking-[0.3em] font-semibold mb-2">
-                                                                        {member.position}
+                                                                        {(member as any).position}
                                                                     </p>
-                                                                    <h4 className="text-3xl font-gang tracking-widest uppercase text-white">
+                                                                    <h4 className="text-3xl font-gang tracking-widest uppercase bg-gradient-to-r from-white via-neon-orange to-white bg-clip-text text-transparent" style={{ filter: 'drop-shadow(0 0 12px rgba(227, 114, 51, 0.35))' }}>
                                                                         {member.name}
                                                                     </h4>
                                                                     <p className={`mt-4 text-sm text-white/70 leading-relaxed max-w-xs transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}>

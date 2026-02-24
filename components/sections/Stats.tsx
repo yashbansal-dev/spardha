@@ -36,7 +36,7 @@ const battlefields = [
     {
         id: "basketball",
         name: "BASKETBALL",
-        image: "/basketball-match.jpg",
+        image: "/assets/games/basketball.JPG",
         stats: "5v5 // COURT",
         zone: "ZONE_D",
         description: "CLOSE-QUARTERS COMBAT. DOMINATE THE PAINT, HIT THE ARC.",
@@ -205,7 +205,7 @@ function InteractiveView({ image, name }: { image: string, name: string }) {
         <motion.div
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="w-full h-full relative cursor-crosshair overflow-hidden"
+            className="w-full h-full relative overflow-hidden"
             style={{ perspective: 1000 }}
         >
             <motion.div
@@ -216,27 +216,11 @@ function InteractiveView({ image, name }: { image: string, name: string }) {
                     src={image}
                     alt={name}
                     fill
+                    quality={100}
+                    unoptimized
                     className="object-cover scale-110 pointer-events-none"
                     priority
                 />
-
-                {/* HUD Scanning Grid Overlay */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none [mask-image:radial-gradient(ellipse_at_center,black,transparent)]"></div>
-
-                {/* Move with mouse "Red Dot" */}
-                <motion.div
-                    style={{
-                        x: useTransform(mouseX, [-0.5, 0.5], [-200, 200]),
-                        y: useTransform(mouseY, [-0.5, 0.5], [-200, 200])
-                    }}
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                >
-                    <div className="w-24 h-24 border border-neon-cyan/40 rounded-full flex items-center justify-center relative">
-                        <div className="absolute w-[2px] h-full bg-neon-cyan/20"></div>
-                        <div className="absolute w-full h-[2px] bg-neon-cyan/20"></div>
-                        <div className="w-1 h-1 bg-red-500 rounded-full shadow-[0_0_10px_red]"></div>
-                    </div>
-                </motion.div>
             </motion.div>
         </motion.div>
     );
