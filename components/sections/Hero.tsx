@@ -36,7 +36,7 @@ const GLITCH_CSS = `
 function GlitchedTitle({ text }: { text: string }) {
     // Responsive class — same size as old motion.h2
     const cls =
-        'font-black tracking-tighter uppercase leading-none font-gang ' +
+        'font-black tracking-[0.1em] md:tracking-[0.15em] lg:tracking-[0.2em] uppercase leading-none font-gang ' +
         'text-[15vw] sm:text-[16vw] md:text-[9.5rem]';
 
     // globals.css sets font-alice !important on span elements.

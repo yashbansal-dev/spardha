@@ -140,7 +140,7 @@ export default function Story() {
                         </div>
                         <h2 className="text-3xl sm:text-4xl md:text-7xl font-bold text-white mb-6 uppercase">
                             <DecryptText text="Between Fear" /> <br />
-                            <span className="text-neon-cyan">And Courage</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple">And Courage</span>
                         </h2>
                         <p className="text-gray-400 max-w-lg mx-auto leading-relaxed border-l-2 border-red-500 pl-4 text-left">
                             Protocol initialized. The arena is not just a ground; it's a crucible where hesitation is deleted and legends are compiled.
@@ -159,7 +159,7 @@ export default function Story() {
                             MISSION_02: ENDURANCE
                         </div>
                         <h2 className="text-3xl sm:text-4xl md:text-7xl font-bold text-white mb-6 uppercase">
-                            <span className="text-red-500">Fatigue Is</span> <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple">Fatigue Is</span> <br />
                             <DecryptText text="Just a Glitch" />
                         </h2>
                         <p className="text-gray-400 max-w-lg mx-auto leading-relaxed border-r-2 border-neon-cyan pr-4 text-right">
