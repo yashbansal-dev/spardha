@@ -150,36 +150,17 @@ const Team = () => {
     }, []);
 
     const content = (
-        <div className={isFullPage ? 'min-h-screen bg-black pt-24' : ''}>
+        <div className="bg-black w-full min-h-screen">
             {isFullPage && <Navbar />}
-            {isFullPage && (
-                <section className="section-padding bg-black">
-                    <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-6xl">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                            className="text-center mt-12 md:mt-20 lg:mt-24"
-                        >
-                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-gang font-black uppercase tracking-widest mb-6 bg-gradient-to-r from-red-600 via-red-500 to-white bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(255,0,0,0.4)]">
-                                Meet The Team
-                            </h1>
-                            <p className="text-base md:text-lg lg:text-xl text-spardha-textMuted max-w-4xl mx-auto px-4 sm:px-0 tracking-widest uppercase">
-                                The dedicated individuals working tirelessly to make Spardha 2026 an unforgettable experience
-                            </p>
-                        </motion.div>
-                    </div>
-                </section>
-            )}
 
-            <section id="team" className={`${isFullPage ? 'section-padding' : 'min-h-screen section-padding'} bg-black`}>
+            <section id="team" className="bg-black w-full pb-24">
                 <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
                     {!isFullPage && (
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="text-center mb-16"
+                            className="text-center mb-16 pt-24"
                         >
                             <h2 className="text-4xl md:text-5xl font-gang tracking-widest uppercase text-spardha-text mb-4">
                                 The <span className="text-spardha-gold">Architects</span>
@@ -188,102 +169,122 @@ const Team = () => {
                         </motion.div>
                     )}
 
-                    <div className="space-y-24">
-                        {teamMembers.map((category, catIndex) => (
-                            <div key={catIndex}>
-                                {/* Category Title */}
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    className="mb-12"
-                                >
-                                    <h3 className="text-xl font-semibold text-spardha-textMuted uppercase tracking-widest mb-2 text-center">
-                                        {category.role}
-                                    </h3>
-                                    <div className="w-16 h-[1px] bg-spardha-gold/40 mx-auto"></div>
-                                </motion.div>
+                    <div className="flex flex-col gap-24 w-full">
+                        {teamMembers.map((category, catIndex) => {
+                            const isFirst = isFullPage && catIndex === 0;
+                            return (
+                                <div key={catIndex} className={isFirst ? "min-h-[100dvh] w-full flex flex-col items-center justify-center pt-24" : "flex flex-col items-center w-full"}>
+                                    {/* Meet The Team Title (Only for VC on full page) */}
+                                    {isFirst && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.6 }}
+                                            className="text-center mb-12 sm:mb-16 md:mb-20 w-full"
+                                        >
+                                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-gang font-black uppercase tracking-widest mb-6 bg-gradient-to-r from-white via-neon-orange to-white bg-clip-text text-transparent" style={{ filter: 'drop-shadow(0 0 12px rgba(227, 114, 51, 0.35))' }}>
+                                                Meet The Team
+                                            </h1>
+                                            <p className="text-base md:text-lg lg:text-xl text-spardha-textMuted max-w-4xl mx-auto px-4 sm:px-0 tracking-widest uppercase">
+                                                The dedicated individuals working tirelessly to make Spardha 2026 an unforgettable experience
+                                            </p>
+                                        </motion.div>
+                                    )}
 
-                                {/* UNIFIED DESIGN FOR ALL CATEGORIES */}
-                                <div className="flex flex-wrap justify-center gap-6 md:gap-8 max-w-7xl mx-auto px-4 md:px-0">
-                                    {category.members.map((member, memIndex) => {
-                                        const cardId = `${catIndex}-${memIndex}`;
-                                        const isHovered = hoveredEditorial === cardId;
-                                        const isActive = isMobile || isHovered;
+                                    {/* Category Title */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        className="mb-8 md:mb-12 w-full flex flex-col items-center"
+                                    >
+                                        <h3 className="text-xl font-semibold text-spardha-textMuted uppercase tracking-widest mb-2 text-center">
+                                            {category.role}
+                                        </h3>
+                                        <div className="w-16 h-[1px] bg-spardha-gold/40 mx-auto"></div>
+                                    </motion.div>
 
-                                        return (
-                                            <motion.div
-                                                key={memIndex}
-                                                initial={{ opacity: 0, y: 40 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                viewport={{ once: true }}
-                                                transition={{ delay: memIndex * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                                                onMouseEnter={() => setHoveredEditorial(cardId)}
-                                                onMouseLeave={() => setHoveredEditorial(null)}
-                                                className="group w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-[400px]"
-                                            >
+                                    {/* UNIFIED DESIGN FOR ALL CATEGORIES */}
+                                    <div className="w-full flex flex-wrap justify-center gap-6 md:gap-8 max-w-7xl mx-auto px-4 md:px-0">
+                                        {category.members.map((member, memIndex) => {
+                                            const cardId = `${catIndex}-${memIndex}`;
+                                            const isHovered = hoveredEditorial === cardId;
+                                            const isActive = isMobile || isHovered;
+
+                                            return (
                                                 <motion.div
-                                                    animate={{
-                                                        height: isActive ? (isMobile ? '450px' : '560px') : (isMobile ? '400px' : '480px')
-                                                    }}
-                                                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                                                    className="relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden"
+                                                    key={memIndex}
+                                                    initial={{ opacity: 0, y: 40 }}
+                                                    whileInView={{ opacity: 1, y: 0 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ delay: memIndex * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                                                    onMouseEnter={() => setHoveredEditorial(cardId)}
+                                                    onMouseLeave={() => setHoveredEditorial(null)}
+                                                    className="group w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)] max-w-[400px]"
                                                 >
-                                                    {/* Image Container */}
-                                                    <div className="relative h-full overflow-hidden">
-                                                        <motion.div
-                                                            animate={{
-                                                                filter: 'grayscale(0%)',
-                                                                scale: isActive ? 1.05 : 1
-                                                            }}
-                                                            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                                                            className={`absolute inset-0 bg-gradient-to-br ${category.gradient}`}
-                                                        >
-                                                            {member.image && (
-                                                                <div className="absolute inset-0 transition-transform duration-700">
-                                                                    <Image
-                                                                        src={member.image}
-                                                                        alt={member.name}
-                                                                        fill
-                                                                        className="object-cover"
-                                                                        style={{
-                                                                            transform: (member as any).rotate ? `rotate(${(member as any).rotate}deg) scale(${isMobile ? 1.9 : 1.5})` : 'none'
-                                                                        }}
-                                                                        sizes="(max-width: 768px) 100vw, 50vw"
-                                                                        priority={catIndex === 0 || (member as any).priority}
-                                                                        unoptimized={(member as any).unoptimized}
-                                                                    />
-                                                                </div>
-                                                            )}
-                                                        </motion.div>
-
-                                                        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80"></div>
-
-                                                        <div className="absolute bottom-0 left-0 right-0 p-8">
+                                                    <motion.div
+                                                        animate={{
+                                                            height: isActive ? (isMobile ? '450px' : '560px') : (isMobile ? '400px' : '480px')
+                                                        }}
+                                                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                                                        className="relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden"
+                                                    >
+                                                        {/* Image Container */}
+                                                        <div className="relative h-full overflow-hidden">
                                                             <motion.div
-                                                                animate={{ y: isActive ? 0 : 20, opacity: isActive ? 1 : 0.8 }}
-                                                                transition={{ duration: 0.4 }}
+                                                                animate={{
+                                                                    filter: 'grayscale(0%)',
+                                                                    scale: isActive ? 1.05 : 1
+                                                                }}
+                                                                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                                                                className={`absolute inset-0 bg-gradient-to-br ${category.gradient}`}
                                                             >
-                                                                <p className="text-xs text-spardha-gold uppercase tracking-[0.3em] font-semibold mb-2">
-                                                                    {member.position}
-                                                                </p>
-                                                                <h4 className="text-3xl font-gang tracking-widest uppercase text-white">
-                                                                    {member.name}
-                                                                </h4>
-                                                                <p className={`mt-4 text-sm text-white/70 leading-relaxed max-w-xs transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                                                                    {/* @ts-expect-error: bio exists on some members */}
-                                                                    {member.bio}
-                                                                </p>
+                                                                {member.image && (
+                                                                    <div className="absolute inset-0 transition-transform duration-700">
+                                                                        <Image
+                                                                            src={member.image}
+                                                                            alt={member.name}
+                                                                            fill
+                                                                            className="object-cover"
+                                                                            style={{
+                                                                                transform: (member as any).rotate ? `rotate(${(member as any).rotate}deg) scale(${isMobile ? 1.9 : 1.5})` : 'none'
+                                                                            }}
+                                                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                                                            priority={catIndex === 0 || (member as any).priority}
+                                                                            unoptimized={(member as any).unoptimized}
+                                                                        />
+                                                                    </div>
+                                                                )}
                                                             </motion.div>
+
+                                                            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80"></div>
+
+                                                            <div className="absolute bottom-0 left-0 right-0 p-8">
+                                                                <motion.div
+                                                                    animate={{ y: isActive ? 0 : 20, opacity: isActive ? 1 : 0.8 }}
+                                                                    transition={{ duration: 0.4 }}
+                                                                >
+                                                                    <p className="text-xs text-spardha-gold uppercase tracking-[0.3em] font-semibold mb-2">
+                                                                        {member.position}
+                                                                    </p>
+                                                                    <h4 className="text-3xl font-gang tracking-widest uppercase text-white">
+                                                                        {member.name}
+                                                                    </h4>
+                                                                    <p className={`mt-4 text-sm text-white/70 leading-relaxed max-w-xs transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                                                                        {/* @ts-expect-error: bio exists on some members */}
+                                                                        {member.bio}
+                                                                    </p>
+                                                                </motion.div>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </motion.div>
                                                 </motion.div>
-                                            </motion.div>
-                                        );
-                                    })}
+                                            );
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </section >

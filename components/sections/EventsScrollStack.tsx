@@ -463,7 +463,7 @@ export default function EventsScrollStack() {
             <div className="event-header relative md:absolute pt-24 md:pt-0 md:top-[11vh] w-full z-40 pointer-events-none mix-blend-normal transition-all duration-300">
                 <div className="w-full max-w-[1400px] mx-auto px-6 text-center">
                     <h2 className="text-neon-cyan font-gang tracking-[0.5em] text-xs md:text-sm uppercase mb-2 drop-shadow-md">The Arena</h2>
-                    <h1 className="event-title text-4xl md:text-6xl xl:text-7xl font-gang uppercase tracking-widest drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] transition-all duration-300 bg-gradient-to-r from-red-600 via-red-500 to-white bg-clip-text text-transparent">
+                    <h1 className="event-title text-4xl md:text-6xl xl:text-7xl font-gang uppercase tracking-widest transition-all duration-300 bg-gradient-to-r from-white via-neon-orange to-white bg-clip-text text-transparent" style={{ filter: 'drop-shadow(0 0 12px rgba(227, 114, 51, 0.35))' }}>
                         Event Schedule
                     </h1>
                 </div>
