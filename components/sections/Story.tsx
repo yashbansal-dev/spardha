@@ -155,7 +155,7 @@ export default function Story() {
                             display: useTransform(smoothProgress, (v) => (v < 0.3 || v > 0.65) ? "none" : "block")
                         }}
                     >
-                        <div className="text-red-500 text-sm mb-4 tracking-[0.5em] border-b border-red-500/30 inline-block pb-2">
+                        <div className="text-neon-cyan text-sm mb-4 tracking-[0.5em] border-b border-neon-cyan/30 inline-block pb-2">
                             MISSION_02: ENDURANCE
                         </div>
                         <h2 className="text-3xl sm:text-4xl md:text-7xl font-bold text-white mb-6 uppercase">
@@ -175,7 +175,7 @@ export default function Story() {
                             display: useTransform(smoothProgress, (v) => v < 0.65 ? "none" : "block")
                         }}
                     >
-                        <div className="text-white/50 text-sm mb-4 tracking-[0.5em] border-b border-white/20 inline-block pb-2">
+                        <div className="text-neon-cyan text-sm mb-4 tracking-[0.5em] border-b border-neon-cyan/30 inline-block pb-2">
                             MISSION_03: VICTORY
                         </div>
                         <h2 className="text-3xl sm:text-4xl md:text-7xl font-bold text-white mb-6 uppercase">

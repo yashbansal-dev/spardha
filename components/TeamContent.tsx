@@ -43,11 +43,6 @@ const teamMembers = [
         gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
         members: [
             {
-                name: 'Shubham Jain',
-                position: 'President',
-                image: '/assets/Core_photos/shubhamjain_v2.jpg',
-            },
-            {
                 name: 'Ishaan Saraswat',
                 position: 'General Secretary',
                 image: '/assets/Core_photos/IshaanSaraswat.jpeg',

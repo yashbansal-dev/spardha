@@ -281,48 +281,57 @@ export default function Hero() {
 
                         {/* Prize Pool */}
                         <motion.div
-                            className="mt-8 mb-6"
+                            className="mt-8 mb-6 relative z-50 group"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6, duration: 0.8 }}
                         >
-                            <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-white/90">
-                                Prize Pool Worth Over{" "}
-                                <span className="text-neon-cyan font-bold">₹1,60,000+</span>
-                            </p>
+                            <div className="px-6 py-2">
+                                <p className="text-xl sm:text-2xl md:text-3xl font-gang text-white tracking-widest uppercase drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]">
+                                    Total Prize Pool <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-orange font-black px-2 drop-shadow-[0_0_8px_rgba(227,114,51,0.8)]">₹1,60,000+</span>
+                                </p>
+                            </div>
                         </motion.div>
 
-                        {/* Unique Creative Register Button (Skewed Cyber Style) */}
+                        {/* Unique "God-Tier" Register Button */}
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.8, duration: 0.8 }}
-                            className="mt-8 z-50"
+                            className="mt-6 z-50 group"
                         >
-                            <a href="/register" onClick={handleRegisterClick} className="group relative inline-block p-4">
-                                {/* Main Button Container (Skewed) */}
-                                <div className="relative px-12 py-4 bg-white/5 border border-neon-cyan/50 transform -skew-x-12 hover:skew-x-0 hover:bg-neon-cyan/10 hover:border-neon-cyan transition-all duration-300 ease-out overflow-hidden">
+                            <a
+                                href="/register"
+                                onClick={handleRegisterClick}
+                                className="relative inline-block"
+                            >
+                                {/* Outer decorative cut-out box */}
+                                <div className="absolute inset-[-5px] border border-neon-cyan/20 z-0">
+                                    <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-neon-cyan opacity-50 group-hover:scale-125 transition-transform duration-300"></div>
+                                    <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-neon-cyan opacity-50 group-hover:scale-125 transition-transform duration-300"></div>
+                                </div>
 
-                                    {/* Glitch Overlay (Hidden by default, shows on hover) */}
-                                    <div className="absolute inset-0 bg-neon-cyan/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out skew-x-12 pointer-events-none" />
+                                {/* Main Button Body */}
+                                <div className="relative z-10 px-8 py-4 bg-transparent border border-neon-cyan overflow-hidden backdrop-blur-sm transition-all duration-300 group-hover:border-white">
+                                    {/* Hover sweep effect */}
+                                    <div className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-neon-cyan/20 to-transparent group-hover:left-[100%] transition-all duration-700 ease-in-out pointer-events-none"></div>
 
-                                    {/* Corner Accents */}
-                                    <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-neon-cyan -translate-x-1 -translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300" />
-                                    <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-neon-cyan translate-x-1 translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300" />
-                                    <div className="absolute top-0 right-0 w-2 h-2 bg-neon-cyan/0 group-hover:bg-neon-cyan/50 transition-all duration-300" />
-                                    <div className="absolute bottom-0 left-0 w-2 h-2 bg-neon-cyan/0 group-hover:bg-neon-cyan/50 transition-all duration-300" />
-
-                                    {/* Text (Counter-skewed to straighten) */}
-                                    <div className="relative transform skew-x-12 group-hover:skew-x-0 transition-all duration-300 flex items-center gap-3">
-                                        <span className="text-neon-cyan font-black tracking-[0.2em] uppercase text-lg md:text-xl group-hover:text-white transition-colors duration-300">
+                                    <div className="relative flex items-center justify-center gap-4">
+                                        <span className="font-gang text-neon-cyan text-xl md:text-2xl font-black uppercase tracking-[0.2em] group-hover:text-white transition-colors duration-300 drop-shadow-[0_0_8px_rgba(227,114,51,0.5)]">
                                             Register Now
                                         </span>
-                                        <FaArrowRight className="text-neon-cyan text-sm group-hover:translate-x-2 group-hover:text-white transition-all duration-300" />
+                                        {/* Stylized Arrow Component */}
+                                        <div className="relative w-8 h-8 flex items-center justify-center border border-neon-cyan/50 rounded-full group-hover:border-white group-hover:bg-white transition-all duration-300">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="text-neon-cyan group-hover:text-black transition-colors duration-300 transform group-hover:translate-x-1">
+                                                <path d="M5 12H19" stroke="currentColor" strokeWidth="3" strokeLinecap="square" strokeLinejoin="miter" />
+                                                <path d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="3" strokeLinecap="square" strokeLinejoin="miter" />
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {/* Outer Ghost Border (Echo effect) */}
-                                <div className="absolute inset-0 border border-neon-cyan/20 transform -skew-x-12 scale-105 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 pointer-events-none" />
+                                {/* Ambient Glow */}
+                                <div className="absolute inset-0 bg-neon-cyan/20 blur-xl rounded-full scale-110 opacity-30 group-hover:opacity-60 transition-opacity duration-300 pointer-events-none"></div>
                             </a>
                         </motion.div>
 
@@ -335,10 +344,39 @@ export default function Hero() {
             {/* Bottom Vignette */}
             <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none"></div>
 
+            {/* Bottom Left Athlete Style Registration Notice */}
+            <motion.div
+                className="absolute bottom-6 md:bottom-10 left-4 md:left-10 z-50 flex items-center gap-3 backdrop-blur-md bg-black/50 border border-white/10 rounded-full pl-2 pr-6 py-2 shadow-2xl"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1, duration: 0.8 }}
+            >
+                {/* Athlete Image Container */}
+                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-red-500/80 bg-black flex-shrink-0 shadow-[0_0_15px_rgba(239,68,68,0.4)] flex justify-center items-center">
+                    <Image
+                        src="/assets/images/spardha_logo.png"
+                        alt="Spardha Logo"
+                        fill
+                        className="object-contain filter p-1"
+                        sizes="48px"
+                    />
+                </div>
+
+                {/* Text Content */}
+                <div className="flex flex-col justify-center">
+                    <span className="text-white font-black text-sm md:text-base uppercase tracking-widest leading-none drop-shadow-md">
+                        Registration <span className="text-red-500">Closed</span>
+                    </span>
+                    <span className="text-white/60 font-bold text-[10px] md:text-xs tracking-[0.2em] mt-1 uppercase">
+                        On 22 March
+                    </span>
+                </div>
+            </motion.div>
+
             <RegistrationModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
             />
-        </section>
+        </section >
     );
 }
