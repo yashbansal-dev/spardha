@@ -254,6 +254,8 @@ const EventCardContent = ({ sport, index, onOpenRules }: { sport: typeof SPORTS_
                     priority={index === 0}
                     className="object-cover group-hover:scale-110 transition-all duration-700"
                 />
+                {/* Dark Overlay for Readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/80 z-10 pointer-events-none"></div>
             </div>
 
 
@@ -271,7 +273,10 @@ const EventCardContent = ({ sport, index, onOpenRules }: { sport: typeof SPORTS_
 
                 {/* LEFT: Branding */}
                 <div className="w-full md:flex-1 flex flex-col justify-start items-center md:items-start text-center md:text-left space-y-2 md:space-y-4">
-                    <h2 className="text-3xl md:text-6xl font-black font-sans uppercase text-white tracking-tighter drop-shadow-xl m-0 leading-none">
+                    <h2
+                        className="text-3xl md:text-6xl font-black font-sans uppercase text-white tracking-tighter drop-shadow-xl m-0 leading-none"
+                        style={{ textShadow: '2px 4px 15px rgba(0,0,0,0.8), -1px -1px 0 rgba(0,0,0,0.5), 1px -1px 0 rgba(0,0,0,0.5)' }}
+                    >
                         {sport.name}
                         {sport.id === 'football' && sport.hasGender && (
                             <span className="ml-2 text-2xl md:text-4xl text-white/70">
@@ -462,7 +467,7 @@ export default function EventsScrollStack() {
             {/* Header */}
             <div className="event-header relative md:absolute pt-24 md:pt-0 md:top-[11vh] w-full z-40 pointer-events-none mix-blend-normal transition-all duration-300">
                 <div className="w-full max-w-[1400px] mx-auto px-6 text-center">
-                    <h2 className="text-neon-cyan font-gang tracking-[0.5em] text-xs md:text-sm uppercase mb-2 drop-shadow-md">The Arena</h2>
+                    <h2 className="font-gang tracking-[0.5em] text-xs md:text-sm uppercase mb-2 drop-shadow-md bg-gradient-to-r from-white via-neon-orange to-white bg-clip-text text-transparent" style={{ filter: 'drop-shadow(0 0 12px rgba(227, 114, 51, 0.35))' }}>The Arena</h2>
                     <h1 className="event-title text-4xl md:text-6xl xl:text-7xl font-gang uppercase tracking-widest transition-all duration-300 bg-gradient-to-r from-white via-neon-orange to-white bg-clip-text text-transparent" style={{ filter: 'drop-shadow(0 0 12px rgba(227, 114, 51, 0.35))' }}>
                         Event Schedule
                     </h1>

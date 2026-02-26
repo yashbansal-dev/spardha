@@ -91,7 +91,7 @@ export default function FinalCTA() {
             <div className="absolute inset-x-0 top-0 h-[40vh] bg-gradient-to-b from-[#050505] via-[#050505]/60 to-transparent z-10 pointer-events-none" />
 
             <div className="absolute top-1/2 left-1/4 w-[40vw] h-[40vw] bg-neon-cyan/5 rounded-full blur-[60px] pointer-events-none z-5" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-red-600/10 rounded-full blur-[50px] pointer-events-none z-5" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-neon-orange/10 rounded-full blur-[50px] pointer-events-none z-5" />
 
             {/* 5. Looming Watermark Text */}
             <div className="absolute top-[20%] inset-x-0 flex justify-center pointer-events-none z-0">
@@ -109,7 +109,7 @@ export default function FinalCTA() {
                     className="text-center"
                 >
                     <h2 className="text-3xl md:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-2xl">
-                        Enter The <span className="text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-red-800">Arena</span>
+                        Enter The <span className="text-transparent bg-clip-text bg-gradient-to-br from-neon-orange to-neon-purple">Arena</span>
                     </h2>
                     <p className="text-white/40 text-sm md:text-lg max-w-md mx-auto font-light tracking-wide">
                         The silence before the storm. <br /> Your legacy begins here.
