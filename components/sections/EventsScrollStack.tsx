@@ -156,7 +156,7 @@ const SPORTS_DATA = [
         hasGender: false,
         prize: { open: '₹8,800' },
         fee: { open: 1100 },
-        rulebook: '/docs/Rule_Book_Leather_Cricket_Spardha.pdf',
+        rulebook: '/docs/BOX CRICKET RULE BOOK.pdf',
         rules: { open: ['6 Over Matches', 'Underarm Bowling', '8 Players'] }
     },
     {
