@@ -36,7 +36,7 @@ export default function ContactContent() {
                         <div className="group">
                             <h3 className="text-3xl font-gang uppercase text-neon-cyan mb-4 tracking-widest">Emergency Line</h3>
                             <a href="tel:+91 8619011601" className="text-2xl md:text-5xl font-bold text-white group-hover:text-neon-cyan transition-colors block">
-                                +91 98765 43210
+                                +91 8619011601
                             </a>
                         </div>
 
