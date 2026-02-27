@@ -352,7 +352,7 @@ export default function Hero() {
                 transition={{ delay: 1, duration: 0.8 }}
             >
                 {/* Athlete Image Container */}
-                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-red-500/80 bg-black flex-shrink-0 shadow-[0_0_15px_rgba(239,68,68,0.4)] flex justify-center items-center">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-neon-orange/80 bg-black flex-shrink-0 shadow-[0_0_15px_rgba(227,114,51,0.4)] flex justify-center items-center">
                     <Image
                         src="/assets/images/spardha_logo.png"
                         alt="Spardha Logo"
@@ -365,7 +365,7 @@ export default function Hero() {
                 {/* Text Content */}
                 <div className="flex flex-col justify-center">
                     <span className="text-white font-black text-sm md:text-base uppercase tracking-widest leading-none drop-shadow-md">
-                        Registration <span className="text-red-500">Closed</span>
+                        Registration <span className="text-neon-orange">Closed</span>
                     </span>
                     <span className="text-white/60 font-bold text-[10px] md:text-xs tracking-[0.2em] mt-1 uppercase">
                         On 22 March
