@@ -1,32 +1,20 @@
 import Navbar from '@/components/Navbar';
+import OrbitalChronoSystem from '@/components/sections/OrbitalChronoSystem';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: "Schedule | SPARDHA 2026",
-    description: "The official timeline for SPARDHA 2026. Keep track of all matches and events.",
+    description: "Navigate the Spardha 2026 timeline through our immersive Tactical Orbital Chronograph and 3D Stacked Arena.",
 };
 
 export default function SchedulePage() {
     return (
-        <main className="min-h-screen bg-black text-white relative font-sans flex flex-col">
+        <main className="w-full bg-black text-white relative font-sans flex flex-col pt-0 selection:bg-neon-cyan/30">
             <Navbar />
 
-            <div className="flex-1 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
-                {/* Background Ambient Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-neon-cyan/20 rounded-full blur-[120px] pointer-events-none" />
+            {/* Phase 1: The Orbital Timeline */}
+            <OrbitalChronoSystem />
 
-                <div className="relative z-10 space-y-6">
-                    <h1 className="text-6xl md:text-8xl font-gang text-transparent bg-clip-text bg-gradient-to-r from-white via-neon-cyan to-white tracking-widest drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
-                        SCHEDULE
-                    </h1>
-                    <p className="text-xl md:text-3xl font-gang text-gray-400 tracking-widest uppercase border-y border-white/10 py-4 max-w-2xl mx-auto">
-                        Coming Soon
-                    </p>
-                    <p className="text-sm text-white/50 font-mono tracking-wide">
-                        The timeline of glory is being forged. Stay tuned.
-                    </p>
-                </div>
-            </div>
         </main>
     );
 }
