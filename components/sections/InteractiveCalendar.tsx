@@ -152,9 +152,17 @@ const DayView = ({ currentMonth, events, onEventClick }: { currentMonth: Date, e
             {/* Events Grid */}
             <div className="flex-1 overflow-y-auto no-scrollbar relative bg-zinc-950/20">
                 {/* Header for the day */}
-                <div className="sticky top-0 z-40 h-24 flex flex-col items-center justify-center border-b border-white/10 bg-black/90 backdrop-blur-xl">
-                    <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-[0.3em] mb-1">{format(currentMonth, 'EEEE')}</span>
-                    <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter">{format(currentMonth, 'MMMM do')}</h3>
+                <div className="sticky top-0 z-40 h-32 flex items-stretch border-b border-white/20 bg-black/95 backdrop-blur-2xl">
+                    <div className="bg-[#001f3f] border-r border-[#004080] flex flex-col items-center justify-center px-6 shadow-[inset_0_0_30px_rgba(0,100,255,0.2)]">
+                        {"DAY".split("").map((char, i) => (
+                            <span key={i} className="text-white text-[10px] md:text-xs font-black leading-none tracking-[0.2em] uppercase italic">{char}</span>
+                        ))}
+                        <span className="text-white text-3xl md:text-4xl font-black mt-1 italic drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">{format(currentMonth, 'd') === '27' ? '1' : format(currentMonth, 'd') === '28' ? '2' : '3'}</span>
+                    </div>
+                    <div className="flex-1 flex flex-col justify-center px-8 bg-gradient-to-r from-[#001f3f]/50 to-transparent">
+                        <span className="text-[10px] md:text-xs font-mono text-cyan-400 uppercase tracking-[0.4em] mb-1 font-bold">{format(currentMonth, 'EEEE')}</span>
+                        <h3 className="text-xl md:text-3xl font-black text-white italic uppercase tracking-tighter drop-shadow-md">{format(currentMonth, 'MMMM do')}</h3>
+                    </div>
                 </div>
 
                 <div className="relative" style={{ height: `${hours.length * hHeight}px` }}>
@@ -211,14 +219,14 @@ const DayView = ({ currentMonth, events, onEventClick }: { currentMonth: Date, e
 const FestivalGrid = ({ events, onEventClick }: { events: SpardhaEvent[], onEventClick: (e: SpardhaEvent) => void }) => {
     const dates = [new Date(2026, 2, 27), new Date(2026, 2, 28), new Date(2026, 2, 29)];
     const hours = Array.from({ length: 15 }, (_, i) => i + 8); // 8 AM to 10 PM
-    const hHeight = 160; // Increased scale for more breathing room
+    const hHeight = 160;
 
     return (
         <div className="w-full bg-black/20 rounded-[50px] overflow-hidden border border-white/10 backdrop-blur-3xl flex flex-col md:flex-row h-[1000px] shadow-2xl">
             {/* Time Column */}
-            <div className="w-16 md:w-24 border-r border-white/5 flex flex-col pt-24 bg-black/60 sticky left-0 z-50">
+            <div className="w-16 md:w-24 border-r border-white/5 flex flex-col pt-32 bg-black/60 sticky left-0 z-50">
                 {hours.map(hour => (
-                    <div key={hour} className="h-[160px] text-[10px] md:text-xs font-mono text-white/20 text-center italic border-b border-white/5 last:border-0 pt-4 flex-shrink-0">
+                    <div key={hour} className="h-[160px] text-[10px] md:text-sm font-mono text-white/30 text-center italic border-b border-white/5 last:border-0 pt-4 flex-shrink-0">
                         {hour}:00
                     </div>
                 ))}
@@ -231,16 +239,26 @@ const FestivalGrid = ({ events, onEventClick }: { events: SpardhaEvent[], onEven
 
                     return (
                         <div key={dIdx} className="flex-1 min-w-[450px] border-r border-white/10 last:border-0 relative bg-gradient-to-b from-white/[0.02] to-transparent">
-                            {/* Sticky Day Header */}
-                            <div className="sticky top-0 z-40 h-24 flex flex-col items-center justify-center border-b border-white/10 bg-black/90 backdrop-blur-xl">
-                                <motion.span
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="text-[10px] font-mono text-cyan-400 uppercase tracking-[0.3em] mb-1"
-                                >
-                                    FESTIVAL_DAY_0{dIdx + 1}
-                                </motion.span>
-                                <span className="text-2xl font-black text-white italic uppercase tracking-tighter">{format(day, 'MMMM do')}</span>
+                            {/* Sticky Day Header - Brochure Style */}
+                            <div className="sticky top-0 z-40 h-32 flex items-stretch border-b border-white/20 bg-black/95 backdrop-blur-2xl">
+                                <div className="bg-[#001f3f] border-r border-[#004080] flex flex-col items-center justify-center px-6 shadow-[inset_0_0_30px_rgba(0,100,255,0.2)]">
+                                    {"DAY".split("").map((char, i) => (
+                                        <span key={i} className="text-white text-[10px] md:text-xs font-black leading-none tracking-[0.2em] uppercase italic">{char}</span>
+                                    ))}
+                                    <span className="text-white text-3xl md:text-4xl font-black mt-1 italic drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">{dIdx + 1}</span>
+                                </div>
+                                <div className="flex-1 flex flex-col justify-center px-8 bg-gradient-to-r from-[#001f3f]/50 to-transparent">
+                                    <motion.span
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        className="text-[10px] md:text-xs font-mono text-cyan-400 uppercase tracking-[0.4em] mb-1 font-bold"
+                                    >
+                                        SPARDHA_DAY_0{dIdx + 1}
+                                    </motion.span>
+                                    <span className="text-xl md:text-3xl font-black text-white italic uppercase tracking-tighter drop-shadow-md">{format(day, 'MMMM do')}</span>
+                                </div>
+                                {/* Header accent */}
+                                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#f97316]/5 to-transparent pointer-events-none" />
                             </div>
 
                             <div className="relative" style={{ height: `${hours.length * hHeight}px` }}>
@@ -260,39 +278,48 @@ const FestivalGrid = ({ events, onEventClick }: { events: SpardhaEvent[], onEven
                                         const height = duration * hHeight;
 
                                         const color = SPORT_COLORS[event.sport] || SPORT_COLORS.Default;
-                                        const Icon = SPORT_ICONS[event.sport] || SPORT_ICONS.Default;
+                                        const isBrochureEvent = event.sport === 'All';
 
                                         return (
                                             <motion.div
                                                 key={event.id}
-                                                initial={{ opacity: 0, x: 20, scale: 0.95 }}
-                                                animate={{ opacity: 1, x: 0, scale: 1 }}
-                                                transition={{ duration: 0.4, ease: "easeOut" }}
+                                                initial={{ opacity: 0, scale: 0.95 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{ duration: 0.4 }}
                                                 onClick={() => onEventClick(event)}
                                                 whileHover={{
                                                     scale: 1.02,
                                                     zIndex: 50,
-                                                    boxShadow: `0 0 60px ${color}40`,
-                                                    borderColor: `${color}80`
+                                                    boxShadow: isBrochureEvent ? `0 0 70px ${color}40` : `0 0 50px ${color}30`,
+                                                    borderColor: isBrochureEvent ? `${color}80` : `${color}60`
                                                 }}
-                                                className="absolute rounded-[20px] p-3 md:p-4 cursor-pointer border shadow-2xl flex flex-col overflow-hidden group transition-all"
+                                                className={`absolute rounded-[24px] p-4 md:p-6 cursor-pointer border shadow-2xl flex flex-col overflow-hidden group transition-all ${isBrochureEvent ? 'ring-1 ring-orange-500/20' : ''}`}
                                                 style={{
                                                     top: `${top + 10}px`,
                                                     height: `${height - 20}px`,
                                                     width: `${event.width - 4}%`,
                                                     left: `${event.left + 2}%`,
-                                                    backgroundColor: `${color}15`,
-                                                    borderColor: `${color}30`,
-                                                    backdropFilter: 'blur(8px)'
+                                                    backgroundColor: isBrochureEvent ? '#001a35' : `${color}15`,
+                                                    borderColor: isBrochureEvent ? '#003366' : `${color}30`,
+                                                    backdropFilter: 'blur(12px)'
                                                 }}
                                             >
-                                                <div className="flex-1 flex items-center justify-center text-center w-full relative z-10">
-                                                    <h4 className="text-[10px] md:text-xs lg:text-sm font-black text-white group-hover:text-cyan-400 transition-colors uppercase italic tracking-tight leading-tight break-words line-clamp-6 w-full px-1" style={{ wordBreak: 'break-word' }}>
+                                                {/* Card Background Glow */}
+                                                <div className={`absolute -right-8 -bottom-8 w-48 h-48 blur-3xl rounded-full transition-colors ${isBrochureEvent ? 'bg-orange-500/10 group-hover:bg-orange-500/20' : 'bg-white/[0.03] group-hover:bg-white/10'}`} />
+
+                                                <div className="relative z-10 flex flex-col h-full justify-center text-center">
+                                                    {isBrochureEvent && (
+                                                        <span className="text-[10px] md:text-xs font-mono text-orange-500 uppercase tracking-widest mb-2 font-black">
+                                                            {event.startTime} - HIGHLIGHT
+                                                        </span>
+                                                    )}
+                                                    <h4 className={`font-black text-white group-hover:text-cyan-400 transition-colors uppercase italic tracking-tight leading-tight break-words line-clamp-4 ${isBrochureEvent ? 'text-lg md:text-2xl lg:text-3xl' : 'text-xs md:text-sm lg:text-lg'}`} style={{ wordBreak: 'break-word' }}>
                                                         {event.title}
                                                     </h4>
+                                                    {!isBrochureEvent && (
+                                                        <span className="text-[10px] mt-2 text-white/40 font-mono tracking-wider">{event.startTime} - {event.endTime}</span>
+                                                    )}
                                                 </div>
-
-                                                <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-white/[0.03] blur-3xl rounded-full group-hover:bg-white/10 transition-colors" />
                                             </motion.div>
                                         );
                                     })}

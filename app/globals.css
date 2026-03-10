@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #020617;
+  --background: #000000;
   --foreground: #ffffff;
 }
 
 html {
-  background-color: #020617;
+  background-color: #000000;
 }
 
 /* Base typography */
 body {
-  background-color: #020617;
+  background-color: #000000;
   color: var(--foreground);
   overflow-x: hidden;
   font-family: var(--font-gang), sans-serif;
