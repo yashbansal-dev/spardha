@@ -102,95 +102,147 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
     };
 
     return (
-        <div className="h-full flex flex-col items-center justify-center p-4">
-            <h2 className="text-3xl font-black italic uppercase text-white mb-8 text-center">
-                Review Your <span className="text-neon-cyan">Entry Pass</span>
-            </h2>
+        <div className="h-full flex flex-col items-center justify-start pt-4 px-4 pb-20 overflow-y-auto">
+            <div className="text-center mb-8">
+                <div className="inline-flex items-center gap-2 text-neon-cyan mb-2 border border-neon-cyan/30 px-4 py-1 rounded-full bg-black/50 backdrop-blur-sm">
+                    <FaLock className="text-xs" />
+                    <span className="text-[10px] uppercase tracking-[0.3em]">Secure Checkout Protocol</span>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-black italic uppercase text-white tracking-wider">
+                    FINAL <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-blue-500">SUMMARY</span>
+                </h2>
+                <p className="text-gray-400 mt-2 text-sm font-mono">
+                    ORDER #SP-{Math.random().toString(36).substr(2, 6).toUpperCase()} // REVIEW DETAILS BEFORE DEPLOYMENT
+                </p>
+            </div>
 
             <motion.div
-                initial={{ y: 50, opacity: 0 }}
+                initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="w-full max-w-3xl bg-white text-black rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(255,255,255,0.1)] relative flex flex-col md:flex-row"
+                className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-6"
             >
-                {/* Left: Main Ticket Info */}
-                <div className="flex-1 p-8 border-r-2 border-dashed border-gray-300 relative">
+                {/* Left: Ticket Pass */}
+                <div className="lg:col-span-2 bg-white text-black rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,243,255,0.1)] flex flex-col md:flex-row relative">
                     {/* Perforations */}
-                    <div className="absolute top-[-10px] right-[-10px] w-5 h-5 bg-black rounded-full"></div>
-                    <div className="absolute bottom-[-10px] right-[-10px] w-5 h-5 bg-black rounded-full"></div>
+                    <div className="absolute top-[40%] md:top-[-10px] right-[-10px] md:right-[200px] w-5 h-5 bg-[#020617] rounded-full z-10"></div>
+                    <div className="absolute bottom-[60%] md:bottom-[-10px] right-[-10px] md:right-[200px] w-5 h-5 bg-[#020617] rounded-full z-10"></div>
 
-                    <div className="flex justify-between items-start mb-6">
-                        <div>
-                            <div className="text-xs font-bold tracking-[0.2em] text-gray-500 uppercase">Event</div>
-                            <div className="text-2xl font-black italic uppercase tracking-tighter">SPARDHA 2026</div>
-                        </div>
-                        <div className="text-right">
-                            <div className="text-xs font-bold tracking-[0.2em] text-gray-500 uppercase">Venue</div>
-                            <div className="font-bold">JKLU ARENA</div>
-                        </div>
-                    </div>
-
-                    <div className="space-y-4 mb-8">
-                        <div>
-                            <div className="text-xs text-gray-400 uppercase tracking-wider">Athlete</div>
-                            <div className="font-bold text-xl uppercase">{userData.fullName || "GUEST ATHLETE"}</div>
-                            <div className="text-sm text-gray-500">{userData.college}</div>
-                        </div>
-
-                        <div>
-                            <div className="text-xs text-gray-400 uppercase tracking-wider mb-2">Registered Events</div>
-                            <div className="flex flex-wrap gap-2">
-                                {cart.map(item => (
-                                    <span key={item.id} className="bg-black text-white px-3 py-1 text-xs font-bold uppercase rounded-sm">
-                                        {item.name}
-                                    </span>
-                                ))}
+                    <div className="flex-1 p-8 border-b-2 md:border-b-0 md:border-r-2 border-dashed border-gray-300 relative">
+                        <div className="flex justify-between items-start mb-8">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-black rounded-lg">
+                                    <span className="text-neon-cyan font-black italic text-xl">S</span>
+                                </div>
+                                <div>
+                                    <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Organizer</div>
+                                    <div className="text-lg font-black italic uppercase tracking-tight">SPARDHA 2026</div>
+                                </div>
+                            </div>
+                            <div className="text-right">
+                                <div className="text-[10px] font-bold text-gray-400">ACCESS LEVEL</div>
+                                <div className="text-xs font-black bg-black text-white px-2 py-0.5 rounded">ELITE ATHLETE</div>
                             </div>
                         </div>
+
+                        <div className="grid grid-cols-2 gap-6 mb-8">
+                            <div>
+                                <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Athlete</div>
+                                <div className="font-black text-lg uppercase truncate">{userData.fullName || "ATHLETE"}</div>
+                                <div className="text-[10px] text-gray-500 uppercase truncate">{userData.college}</div>
+                            </div>
+                            <div>
+                                <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-1">Venue</div>
+                                <div className="font-black text-lg uppercase">JKLU ARENA</div>
+                                <div className="text-[10px] text-gray-500 uppercase">JAIPUR, INDIA</div>
+                            </div>
+                        </div>
+
+                        <div className="mb-8">
+                            <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-2">Registered Operations</div>
+                            <div className="flex flex-wrap gap-2">
+                                {cart.map(item => (
+                                    <span key={item.id} className="bg-black text-[#22d3ee] px-3 py-1 text-[10px] font-black uppercase rounded flex items-center gap-1">
+                                        <FaCheckCircle className="text-[8px]" /> {item.name}
+                                    </span>
+                                ))}
+                                {cart.length === 0 && <span className="text-gray-400 text-xs italic">No events selected</span>}
+                            </div>
+                        </div>
+
+                        <div className="flex justify-between items-end mt-auto pt-6 border-t border-gray-100">
+                            <div>
+                                <div className="text-[10px] font-bold text-gray-400 uppercase mb-1">Order Status</div>
+                                <div className="text-amber-500 font-black text-xs uppercase flex items-center gap-1.5">
+                                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></div>
+                                    Awaiting Payment
+                                </div>
+                            </div>
+                            <FaBarcode className="text-5xl opacity-20" />
+                        </div>
                     </div>
 
-                    <div className="border-t-2 border-black pt-4 flex justify-between items-end">
-                        <div>
-                            <div className="text-xs font-bold uppercase tracking-wider mb-1">Total Payable</div>
-                            <div className="text-4xl font-black tracking-tighter">₹{total.toFixed(0)}</div>
-                            <div className="text-[10px] text-gray-500">(Total Amount)</div>
+                    {/* Ticket Stub */}
+                    <div className="w-full md:w-[200px] bg-gray-50 p-8 flex flex-col items-center justify-center relative">
+                        <FaQrcode className="text-6xl mb-4 text-black/80" />
+                        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center">
+                            Scan to<br />Verify Entry
                         </div>
-                        <FaBarcode className="text-6xl opacity-50" />
                     </div>
                 </div>
 
-                {/* Right: Stub / Action */}
-                <div className="w-full md:w-48 bg-gray-100 p-6 flex flex-col justify-between items-center text-center relative">
-                    {/* Perforations */}
-                    <div className="absolute top-[-10px] left-[-10px] w-5 h-5 bg-black rounded-full"></div>
-                    <div className="absolute bottom-[-10px] left-[-10px] w-5 h-5 bg-black rounded-full"></div>
+                {/* Right: Checkout Sidebar */}
+                <div className="bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col h-fit backdrop-blur-sm">
+                    <h3 className="text-sm font-bold text-white uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                        <span className="w-2 h-2 bg-neon-cyan rounded-full"></span>
+                        Checkout Details
+                    </h3>
 
-                    <div className="mt-4">
-                        <FaQrcode className="text-6xl mb-2 mx-auto" />
-                        <div className="text-[10px] uppercase text-gray-400">Scan to Verify</div>
+                    <div className="space-y-4 mb-8">
+                        <div className="flex justify-between text-xs font-mono">
+                            <span className="text-gray-500 uppercase">Subtotal</span>
+                            <span className="text-white">₹{subtotal.toFixed(2)}</span>
+                        </div>
+                        <div className="border-t border-white/10 pt-4 flex justify-between items-end">
+                            <span className="text-xs font-bold text-gray-300 uppercase">Total Amount</span>
+                            <span className="text-3xl font-black text-neon-cyan font-mono">₹{total.toFixed(0)}</span>
+                        </div>
                     </div>
 
-                    <button
-                        onClick={handlePayment}
-                        disabled={isProcessing}
-                        className="w-full bg-black text-white py-4 font-black italic uppercase tracking-wider hover:bg-neon-cyan hover:text-black transition-colors flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        {isProcessing ? (
-                            <span className="animate-pulse">Processing...</span>
-                        ) : (
-                            <>
-                                <FaLock className="text-sm group-hover:hidden" />
-                                <span>PAY & JOIN</span>
-                            </>
-                        )}
-                    </button>
+                    <div className="space-y-3">
+                        <button
+                            onClick={handlePayment}
+                            disabled={isProcessing}
+                            className="w-full bg-white text-black py-4 rounded-xl font-black italic uppercase tracking-wider hover:bg-neon-cyan transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+                        >
+                            {isProcessing ? (
+                                <span className="animate-pulse flex items-center gap-2">
+                                    <div className="w-2 h-2 bg-black rounded-full animate-bounce"></div>
+                                    Processing...
+                                </span>
+                            ) : (
+                                <>
+                                    <span>PAY & FINALIZE</span>
+                                    <FaLock className="text-xs opacity-50" />
+                                </>
+                            )}
+                        </button>
+
+                        <button
+                            onClick={onPrev}
+                            disabled={isProcessing}
+                            className="w-full text-[10px] text-gray-500 hover:text-white uppercase tracking-widest transition-colors flex items-center justify-center gap-2 py-2"
+                        >
+                            &larr; Modify Registration
+                        </button>
+                    </div>
+
+                    <div className="mt-6 pt-6 border-t border-white/5">
+                        <p className="text-[9px] text-center text-gray-600 font-mono leading-relaxed italic">
+                            By clicking PAY, you agree to Spardha 2026 Terms of Service and Refund Policy.
+                        </p>
+                    </div>
                 </div>
             </motion.div>
-
-            <div className="mt-8">
-                <button onClick={onPrev} disabled={isProcessing} className="text-gray-500 hover:text-white transition-colors text-sm uppercase tracking-widest">
-                    &larr; Modified Selection
-                </button>
-            </div>
         </div>
     );
 }

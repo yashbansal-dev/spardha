@@ -270,6 +270,12 @@ export default function SportsDraftBoard({ cart, addToCart, removeFromCart, onNe
     // Construct a Set of active IDs for O(1) lookups during rendering
     const cartIds = useMemo(() => new Set(cart.map(item => item.id)), [cart]);
 
+    // --- SIDEBAR VIEW MODE ---
+    const [viewMode, setViewMode] = useState<'selection' | 'review'>('selection');
+
+    const totalAmount = cart.reduce((a, b) => a + b.price, 0);
+    const hasTeamSports = cart.some(item => item.pricingType === 'team');
+
     return (
         <div className="flex flex-col h-full">
             <div className="flex flex-col md:flex-row h-full gap-6">
@@ -302,79 +308,133 @@ export default function SportsDraftBoard({ cart, addToCart, removeFromCart, onNe
 
                 {/* RIGHT: Loadout Sidebar */}
                 <div className="w-full md:w-80 bg-[#080808] border-t md:border-t-0 md:border-l border-white/10 p-6 flex flex-col relative z-40 shadow-[-10px_0_30px_rgba(0,0,0,0.5)]">
-                    <div className="flex-1">
-                        <h3 className="text-sm font-mono text-gray-500 uppercase tracking-widest mb-6 flex justify-between items-center">
-                            <span>Your Loadout</span>
-                            <span className="text-neon-cyan">{cart.length} Active</span>
-                        </h3>
+                    <AnimatePresence mode="wait">
+                        {viewMode === 'selection' ? (
+                            <motion.div
+                                key="selection"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                className="flex-1 flex flex-col"
+                            >
+                                <h3 className="text-sm font-mono text-gray-500 uppercase tracking-widest mb-6 flex justify-between items-center">
+                                    <span>Your Selection</span>
+                                    <span className="text-neon-cyan">{cart.length} Active</span>
+                                </h3>
 
-                        <div className="space-y-3 overflow-y-auto max-h-[60vh] custom-scrollbar pr-2">
-                            <AnimatePresence mode="popLayout" initial={false}>
-                                {cart.map((item) => (
-                                    <motion.div
-                                        key={item.id}
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        exit={{ opacity: 0, x: -20 }}
-                                        layout
-                                        className="bg-white/5 border border-white/10 p-3 rounded-r-lg border-l-4 border-l-neon-cyan flex justify-between items-center group hover:bg-white/10 transition-colors"
-                                    >
-                                        <div>
-                                            <div className="font-bold text-sm uppercase text-white flex items-center gap-2">
-                                                {item.name}
-                                            </div>
-                                            <div className="text-[10px] font-mono text-gray-400 uppercase mt-1 flex gap-2">
-                                                <span className={`${item.category === 'Girls' ? 'text-pink-400' : item.category === 'Boys' ? 'text-blue-400' : 'text-neon-cyan'}`}>
-                                                    [{item.category || 'Open'}]
-                                                </span>
-                                                <span>₹{item.price}</span>
-                                            </div>
+                                <div className="flex-1 space-y-3 overflow-y-auto max-h-[50vh] custom-scrollbar pr-2 mb-6">
+                                    <AnimatePresence mode="popLayout" initial={false}>
+                                        {cart.map((item) => (
+                                            <motion.div
+                                                key={item.id}
+                                                layout
+                                                initial={{ opacity: 0, x: 10 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                exit={{ opacity: 0, scale: 0.9 }}
+                                                className="bg-white/5 border border-white/10 p-3 rounded-lg border-l-4 border-l-neon-cyan flex justify-between items-center group hover:bg-white/10 transition-colors"
+                                            >
+                                                <div>
+                                                    <div className="font-bold text-xs uppercase text-white truncate max-w-[140px]">
+                                                        {item.name}
+                                                    </div>
+                                                    <div className="text-[10px] font-mono text-gray-400 uppercase mt-1">
+                                                        ₹{item.price}
+                                                    </div>
+                                                </div>
+                                                <button
+                                                    onClick={() => removeFromCart(item.id)}
+                                                    className="text-gray-600 hover:text-red-500 transition-colors p-1"
+                                                >
+                                                    &times;
+                                                </button>
+                                            </motion.div>
+                                        ))}
+                                    </AnimatePresence>
+
+                                    {cart.length === 0 && (
+                                        <div className="text-gray-600 text-[10px] text-center py-8 border border-dashed border-white/10 rounded-xl">
+                                            NO EVENTS SELECTED
                                         </div>
-                                        <button
-                                            onClick={() => removeFromCart(item.id)}
-                                            className="text-gray-600 hover:text-red-500 transition-colors p-2"
-                                        >
-                                            &times;
-                                        </button>
-                                    </motion.div>
-                                ))}
-                            </AnimatePresence>
-
-                            {cart.length === 0 && (
-                                <div className="text-gray-600 text-xs text-center py-12 border border-dashed border-white/10 rounded-xl">
-                                    <FaInfoCircle className="mx-auto mb-2 text-lg opacity-50" />
-                                    NO EVENTS SELECTED<br />Select events from the board
+                                    )}
                                 </div>
-                            )}
-                        </div>
-                    </div>
 
-                    <div className="mt-8 pt-6 border-t border-white/10">
-                        <div className="flex justify-between items-end mb-6">
-                            <span className="text-xs text-gray-400 uppercase tracking-widest">Total Fees</span>
-                            <span className="text-2xl font-black font-mono text-neon-cyan">
-                                ₹{cart.reduce((a, b) => a + b.price, 0)}
-                            </span>
-                        </div>
-
-                        <div className="flex flex-col gap-3">
-                            <button
-                                onClick={onNext}
-                                disabled={cart.length === 0}
-                                className="w-full bg-gradient-to-r from-neon-cyan to-blue-500 text-black font-black italic uppercase py-4 rounded-xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_20px_rgba(0,243,255,0.3)] disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed group"
+                                <div className="mt-auto pt-4 border-t border-white/10">
+                                    <div className="flex justify-between items-end mb-4">
+                                        <span className="text-[10px] text-gray-500 uppercase font-mono">Subtotal</span>
+                                        <span className="text-xl font-bold font-mono text-white">₹{totalAmount}</span>
+                                    </div>
+                                    <button
+                                        onClick={() => setViewMode('review')}
+                                        disabled={cart.length === 0}
+                                        className="w-full bg-white text-black font-black uppercase py-3 rounded-lg hover:bg-neon-cyan transition-all disabled:opacity-30 text-xs italic"
+                                    >
+                                        Review Loadout & Checkout
+                                    </button>
+                                </div>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="review"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                className="flex-1 flex flex-col"
                             >
-                                Confirm Selection <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
-                            </button>
+                                <button
+                                    onClick={() => setViewMode('selection')}
+                                    className="text-[10px] text-neon-cyan uppercase font-mono mb-4 hover:underline flex items-center gap-1"
+                                >
+                                    &larr; Back to Selection
+                                </button>
 
-                            <button
-                                onClick={onPrev}
-                                className="w-full bg-white/5 border border-white/10 text-gray-400 font-bold uppercase py-3 rounded-xl hover:bg-white/10 hover:text-white transition-all text-xs flex items-center justify-center gap-2"
-                            >
-                                <span>←</span> Edit Profile Details
-                            </button>
-                        </div>
+                                <h3 className="text-xl font-black italic uppercase text-white mb-6">
+                                    Final <span className="text-neon-cyan">Review</span>
+                                </h3>
 
-                    </div>
+                                <div className="flex-1 bg-white/5 rounded-xl p-4 border border-white/10 mb-6 space-y-4">
+                                    <div className="space-y-2 max-h-[30vh] overflow-y-auto custom-scrollbar pr-2">
+                                        {cart.map(item => (
+                                            <div key={item.id} className="flex justify-between text-xs">
+                                                <span className="text-gray-400 uppercase">{item.name} ({item.category})</span>
+                                                <span className="text-white font-mono">₹{item.price}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="border-t border-white/10 pt-4 flex justify-between items-center">
+                                        <span className="text-xs font-bold text-gray-300 uppercase">TOTAL DUE</span>
+                                        <span className="text-2xl font-black text-neon-cyan font-mono">₹{totalAmount}</span>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-3">
+                                    <button
+                                        onClick={onNext}
+                                        className="w-full bg-gradient-to-r from-neon-cyan to-blue-500 text-black font-black italic uppercase py-4 rounded-xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_20px_rgba(0,243,255,0.3)] relative group overflow-hidden"
+                                    >
+                                        <span className="relative z-10">
+                                            {hasTeamSports ? 'Assemble Team & Pay' : 'Finalize & Pay'} &rarr;
+                                        </span>
+                                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                                    </button>
+
+                                    <p className="text-[10px] text-gray-500 text-center font-mono leading-relaxed">
+                                        {hasTeamSports
+                                            ? "// Team details required in next step"
+                                            : "// Proceeding to secure payment checkout"}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    {viewMode === 'selection' && (
+                        <button
+                            onClick={onPrev}
+                            className="mt-4 w-full text-[10px] text-gray-600 hover:text-gray-400 uppercase tracking-widest transition-colors flex items-center justify-center gap-2"
+                        >
+                            &larr; Edit Athlete Profile
+                        </button>
+                    )}
                 </div>
             </div>
 

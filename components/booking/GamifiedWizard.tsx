@@ -112,6 +112,34 @@ export default function GamifiedWizard() {
         }
     }, [searchParams]);
 
+    // 3. LISTEN FOR CHECKOUT TRIGGER
+    useEffect(() => {
+        const isCheckout = searchParams.get('checkout') === 'true';
+        const timestamp = searchParams.get('t'); // Unique timestamp ensures this fires on every click
+
+        if (isCheckout) {
+            console.log("Checkout triggered via URL/Timestamp", timestamp);
+
+            // Give a tiny moment for draft restoration if email is missing but might be in localStorage
+            const hasSavedData = userData.email || localStorage.getItem('spardha-user-email');
+
+            if (hasSavedData) {
+                // Determine destination
+                const hasTeamSports = cart.some(item => item.pricingType === 'team');
+                const targetStep = hasTeamSports ? 3 : 4;
+
+                // Only move if we aren't already there or beyond
+                if (step < targetStep || (isCheckout && step === 2)) {
+                    console.log("Jumping to target step:", targetStep);
+                    setStep(targetStep);
+                }
+            } else {
+                // If NO data and NO draft, we must ensure they are at Step 1
+                if (step !== 1) setStep(1);
+            }
+        }
+    }, [searchParams, userData.email, userData.fullName, cart.length]); // depend on email/params
+
     const [orderId, setOrderId] = useState('');
 
     // Navigation logic with Team Roster check
