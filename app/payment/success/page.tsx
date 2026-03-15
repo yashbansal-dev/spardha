@@ -20,28 +20,45 @@ function SuccessContent() {
         }
 
         const verifyPayment = async () => {
-            try {
-                const response = await fetch(`/api/payments/verify/${orderId}`);
-                const data = await response.json();
-                const paymentsArr = Array.isArray(data.data) ? data.data : [];
-                const lastPayment = paymentsArr[paymentsArr.length - 1];
-                const isPaid = data.success && lastPayment?.payment_status === 'SUCCESS';
+            const MAX_RETRIES = 5;
+            const RETRY_DELAY = 3000; // 3 seconds
 
-                if (isPaid) {
-                    setStatus('success');
-                    setOrderDetails(data.data);
-                    try {
-                        await fetch(`/api/payments/success/${orderId}`);
-                    } catch (e) {
-                        console.error('Success handler error:', e);
+            for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+                try {
+                    console.log(`🔍 Verification attempt ${attempt}/${MAX_RETRIES}...`);
+                    const response = await fetch(`/api/payments/verify/${orderId}`);
+                    const data = await response.json();
+                    const paymentsArr = Array.isArray(data.data) ? data.data : [];
+                    const lastPayment = paymentsArr[paymentsArr.length - 1];
+                    const isPaid = data.success && lastPayment?.payment_status === 'SUCCESS';
+
+                    if (isPaid) {
+                        setStatus('success');
+                        setOrderDetails(data.data);
+                        try {
+                            await fetch(`/api/payments/success/${orderId}`);
+                        } catch (e) {
+                            console.error('Success handler error:', e);
+                        }
+                        return; // Done — payment confirmed!
                     }
-                } else {
-                    setStatus('failed');
+
+                    // Not confirmed yet — wait and retry (unless last attempt)
+                    if (attempt < MAX_RETRIES) {
+                        console.log(`⏳ Payment not confirmed yet, retrying in ${RETRY_DELAY / 1000}s...`);
+                        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+                    }
+                } catch (error) {
+                    console.error(`Verification attempt ${attempt} failed:`, error);
+                    if (attempt < MAX_RETRIES) {
+                        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+                    }
                 }
-            } catch (error) {
-                console.error('Payment verification failed:', error);
-                setStatus('failed');
             }
+
+            // All retries exhausted — show failed
+            console.log('❌ Payment verification failed after all retries');
+            setStatus('failed');
         };
 
         verifyPayment();
