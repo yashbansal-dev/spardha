@@ -365,10 +365,10 @@ export default function Hero() {
                 {/* Text Content */}
                 <div className="flex flex-col justify-center">
                     <span className="text-white font-black text-sm md:text-base uppercase tracking-widest leading-none drop-shadow-md">
-                        Registration <span className="text-neon-orange">Closed</span>
+                        Registration <span className="text-neon-orange">Closing</span>
                     </span>
                     <span className="text-white/60 font-bold text-[10px] md:text-xs tracking-[0.2em] mt-1 uppercase">
-                        On 22 March
+                        On 22nd March
                     </span>
                 </div>
             </motion.div>

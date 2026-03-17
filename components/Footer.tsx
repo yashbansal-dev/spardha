@@ -126,7 +126,7 @@ export default function Footer() {
                     <div className="flex flex-col gap-4">
                         <h3 className="text-neon-cyan font-bold uppercase tracking-widest mb-2 font-alice">Products/Services</h3>
                         <p className="text-gray-400 text-sm leading-relaxed font-alice">
-                            Registration for Sports Events, Cultural Competitions, and Flagship Flagship Event.
+                            Registration for Sports Events, Cultural Competitions, and Flagship Event.
                         </p>
                     </div>
 

@@ -52,8 +52,7 @@ export default function BrochurePage() {
                     <h2 className="text-5xl font-gang uppercase mb-12 text-center">Key Intel</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                         {[
-                            { q: "REGISTRATION?", a: "Register via the Events page or at the on-site desk with College ID." },
-                            { q: "ACCOMMODATION?", a: "Available for outstation teams. See Brochure pg. 14 for rates." },
+                            { q: "REGISTRATION?", a: "Register via the Events page" },
                             { q: "MULTIPLE SPORTS?", a: "Allowed if schedules don't clash. Manage your own timeline." },
                             { q: "ENTRY REQS?", a: "Valid College ID + Registration Receipt mandatory at Main Gate." }
                         ].map((faq, i) => (
