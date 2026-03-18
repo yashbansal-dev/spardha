@@ -265,14 +265,6 @@ export default function SeamlessInfiniteGallery() {
                             />
 
                             {/* UI Controls */}
-                            <div className="absolute top-4 right-4 z-[300]">
-                                <button
-                                    onClick={(e) => { e.stopPropagation(); setActiveLightboxImage(null); }}
-                                    className="p-3 bg-black/60 hover:bg-white text-white hover:text-black rounded-full transition-colors border border-white/20 cursor-pointer pointer-events-auto"
-                                >
-                                    <FaTimes className="w-5 h-5" />
-                                </button>
-                            </div>
                             <div className="absolute inset-y-0 left-0 flex items-center pl-2 md:pl-6 z-[300]">
                                 <button
                                     onClick={(e) => { e.stopPropagation(); lightboxPrev(e); }}

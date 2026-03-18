@@ -59,7 +59,7 @@ export default function Contact() {
                             <div>
                                 <h4 className="text-white font-bold mb-1">Address</h4>
                                 <a
-                                    href="https://maps.app.goo.gl/Pz6JmG4a5p9Y2j2Q6"
+                                    href="https://www.google.com/maps/place/JK+Lakshmipat+University/@26.836603,75.650304,16z/data=!4m6!3m5!1s0x396c4af4fe68f403:0x3bf05f95df22b8c4!8m2!3d26.8366033!4d75.6503042!16s%2Fm%2F0cp46q7?hl=en&entry=ttu&g_ep=EgoyMDI2MDMxNS4wIKXMDSoASAFQAw%3D%3D"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-gray-400 text-base hover:text-neon-cyan transition-colors block"

@@ -43,7 +43,7 @@ export default function ContactContent() {
                         <div className="group border-t border-white/10 pt-12">
                             <h3 className="text-3xl font-gang uppercase text-neon-cyan mb-6 tracking-widest">Headquarters</h3>
                             <a
-                                href="https://maps.app.goo.gl/Pz6JmG4a5p9Y2j2Q6"
+                                href="https://www.google.com/maps/place/JK+Lakshmipat+University/@26.836603,75.650304,16z/data=!4m6!3m5!1s0x396c4af4fe68f403:0x3bf05f95df22b8c4!8m2!3d26.8366033!4d75.6503042!16s%2Fm%2F0cp46q7?hl=en&entry=ttu&g_ep=EgoyMDI2MDMxNS4wIKXMDSoASAFQAw%3D%3D"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-xl text-gray-400 not-italic leading-relaxed block hover:text-neon-cyan transition-colors"
