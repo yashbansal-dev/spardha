@@ -49,6 +49,22 @@ h6 {
   font-family: var(--font-gang), sans-serif !important;
 }
 
+/* Admin Dashboard Overrides */
+.admin-dashboard,
+.admin-dashboard * {
+  font-family: var(--font-inter), sans-serif !important;
+}
+
+.admin-dashboard h1,
+.admin-dashboard h2,
+.admin-dashboard h3,
+.admin-dashboard h4,
+.admin-dashboard h5,
+.admin-dashboard h6 {
+  letter-spacing: normal;
+  text-transform: none;
+}
+
 html {
   scroll-behavior: smooth;
 }

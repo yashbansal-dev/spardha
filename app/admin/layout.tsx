@@ -17,7 +17,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-gray-50 flex admin-dashboard font-inter">
       {/* Mobile sidebar backdrop */}
       <AnimatePresence>
         {sidebarOpen && (

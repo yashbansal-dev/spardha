@@ -267,7 +267,25 @@ export default function GamifiedWizard() {
                     {/* Interactive Level Indicator */}
                     <div className="flex items-center gap-1.5 md:gap-2">
                         {steps.map((s) => {
-                            const isClickable = s.id < step || (s.id === 2 && userData.email) || (s.id === 3 && cart.length > 0);
+                            // VALIDATION FOR EACH STEP
+                            const isStep1Complete = 
+                                userData.fullName?.length > 2 && 
+                                userData.college?.length > 2 && 
+                                userData.city?.length > 2 && 
+                                userData.phone?.length >= 10 && 
+                                userData.email?.includes('@') &&
+                                userData.gender &&
+                                userData.age &&
+                                userData.universityIdCard &&
+                                userData.address;
+
+                            const isStep2Complete = cart.length > 0;
+
+                            const isClickable = 
+                                s.id < step || // Allow going back to any previous step
+                                (s.id === 2 && isStep1Complete) || // Level 2 only if Step 1 is complete
+                                (s.id === 3 && isStep1Complete && isStep2Complete) || // Level 3 only if Step 1 & 2 are complete
+                                (s.id === 4 && isStep1Complete && isStep2Complete); // Level 4 same as Level 3 (if no team sports, Level 3 is skipped anyway in nextStep)
 
                             return (
                                 <button
@@ -278,7 +296,7 @@ export default function GamifiedWizard() {
                                         ? 'bg-neon-cyan shadow-[0_0_10px_rgba(0,243,255,0.5)]'
                                         : 'bg-white/10'
                                         } ${isClickable ? 'cursor-pointer hover:bg-neon-cyan/50 hover:scale-y-125' : 'cursor-not-allowed'}`}
-                                    title={isClickable ? `Back to ${s.title}` : s.title}
+                                    title={isClickable ? `Go to ${s.title}` : s.title}
                                 />
                             );
                         })}

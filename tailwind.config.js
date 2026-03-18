@@ -30,6 +30,7 @@ module.exports = {
         cinzel: ['var(--font-gang)', 'serif'], // Override legacy cinzel classes
         gang: ['var(--font-gang)', 'sans-serif'],
         alice: ['var(--font-alice)', 'serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
       },
       keyframes: {
         float: {

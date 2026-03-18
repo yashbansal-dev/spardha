@@ -87,7 +87,9 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
         updateTeamMembers(currentSport.id, newMembers);
     };
 
-    const handleNext = () => {
+    const [isSaving, setIsSaving] = useState(false);
+
+    const handleNext = async () => {
         if (currentMembers.length < minPlayers) {
             alert(`Please add at least ${minPlayers} members for ${currentSport.name}`);
             return;
@@ -96,7 +98,27 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
         if (currentSportIndex < teamSports.length - 1) {
             setCurrentSportIndex(prev => prev + 1);
         } else {
-            onNext();
+            // FINAL ROSTER CONFIRMATION
+            setIsSaving(true);
+            try {
+                const response = await fetch('/api/save-team-members', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ teamMembers })
+                });
+                
+                const data = await response.json();
+                if (!data.success) {
+                    console.warn('Backend failed to save team members, but continuing...', data.message);
+                } else {
+                    console.log('✅ Team members persisted successfully');
+                }
+            } catch (err) {
+                console.error('Failed to save team members early:', err);
+            } finally {
+                setIsSaving(false);
+                onNext();
+            }
         }
     };
 
@@ -131,6 +153,7 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
                                 {...register('name')}
                                 placeholder="PLAYER NAME"
                                 className="w-full bg-black/50 border border-white/10 rounded-lg p-4 text-white placeholder:text-gray-600 focus:border-neon-cyan outline-none transition-colors"
+                                required
                             />
                             {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name.message}</p>}
                         </div>
@@ -139,6 +162,7 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
                                 {...register('email')}
                                 placeholder="EMAIL ADDRESS"
                                 className="w-full bg-black/50 border border-white/10 rounded-lg p-4 text-white placeholder:text-gray-600 focus:border-neon-cyan outline-none transition-colors"
+                                required
                             />
                             {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
                         </div>
@@ -147,6 +171,7 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
                                 {...register('phone')}
                                 placeholder="CONTACT NUMBER"
                                 className="w-full bg-black/50 border border-white/10 rounded-lg p-4 text-white placeholder:text-gray-600 focus:border-neon-cyan outline-none transition-colors"
+                                required
                             />
                             {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone.message}</p>}
                         </div>
@@ -236,9 +261,19 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
 
                 <button
                     onClick={handleNext}
-                    className="bg-neon-cyan text-black px-8 py-3 rounded-lg font-black uppercase italic hover:scale-105 transition-transform flex items-center gap-2"
+                    disabled={isSaving}
+                    className="bg-neon-cyan text-black px-8 py-3 rounded-lg font-black uppercase italic hover:scale-105 transition-transform flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    {currentSportIndex < teamSports.length - 1 ? 'Next Squad' : 'Confirm ROSTER'} &rarr;
+                    {isSaving ? (
+                        <span className="flex items-center gap-2">
+                            <div className="w-2 h-2 bg-black rounded-full animate-bounce"></div>
+                            SAVING...
+                        </span>
+                    ) : (
+                        <>
+                            {currentSportIndex < teamSports.length - 1 ? 'Next Squad' : 'Confirm ROSTER'} &rarr;
+                        </>
+                    )}
                 </button>
             </div>
         </div>

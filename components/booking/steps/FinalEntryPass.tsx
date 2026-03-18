@@ -84,11 +84,16 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
                     mode: data.data.environment || 'sandbox',
                 });
 
+                const orderId = data.data.order_id;
+                const returnUrl = `${window.location.origin}/payment/success?order_id=${orderId}`;
+
                 const checkoutOptions = {
                     paymentSessionId: data.data.payment_session_id,
                     redirectTarget: '_self',
+                    return_url: returnUrl, // Tell SDK where to redirect after payment
                 };
 
+                console.log('💳 Cashfree checkout with return_url:', returnUrl);
                 cashfree.checkout(checkoutOptions);
             } else {
                 alert('Failed to create order: ' + data.message);

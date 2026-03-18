@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from 'next/font/local';
-import { Alice } from 'next/font/google';
+import { Alice, Inter } from 'next/font/google';
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import "./globals.css";
 import ClientLoader from "@/components/ClientLoader";
@@ -24,6 +24,12 @@ const alice = Alice({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-alice',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -51,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${gangOfThree.variable} ${alice.variable} antialiased font-gang`}
+        className={`${gangOfThree.variable} ${alice.variable} ${inter.variable} antialiased font-gang`}
       >
         <CartProvider>
           <SmoothScroll>

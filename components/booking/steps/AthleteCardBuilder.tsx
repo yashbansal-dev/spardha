@@ -192,6 +192,7 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                     placeholder="ENTER FULL NAME"
                                     autoComplete="name"
                                     spellCheck="false"
+                                    required
                                 />
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 bg-white/10 rounded-full flex items-center justify-center">
                                     <div className="w-1.5 h-1.5 bg-neon-cyan rounded-full"></div>
@@ -210,6 +211,7 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                     <select
                                         {...register("gender")}
                                         className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all appearance-none"
+                                        required
                                     >
                                         <option value="" className="bg-black text-gray-500">SELECT GENDER</option>
                                         <option value="Male" className="bg-black">Male</option>
@@ -229,6 +231,7 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                     type="number"
                                     className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="AGE"
+                                    required
                                 />
                                 {errors.age && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.age.message}</p>}
                             </div>
@@ -244,6 +247,7 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                     {...register("college")}
                                     className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="UNIVERSITY NAME"
+                                    required
                                 />
                                 {errors.college && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.college.message}</p>}
                             </div>
@@ -256,6 +260,7 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                     {...register("universityIdCard")}
                                     className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="ID NUMBER"
+                                    required
                                 />
                                 {errors.universityIdCard && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.universityIdCard.message}</p>}
                             </div>
@@ -272,6 +277,7 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                     type="tel"
                                     className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="PHONE"
+                                    required
                                 />
                                 {errors.phone && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.phone.message}</p>}
                             </div>
@@ -285,6 +291,7 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                     type="email"
                                     className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="EMAIL ADDRESS"
+                                    required
                                 />
                                 {errors.email && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.email.message}</p>}
                             </div>
@@ -300,6 +307,7 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                     {...register("city")}
                                     className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="CITY"
+                                    required
                                 />
                                 {errors.city && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.city.message}</p>}
                             </div>
@@ -312,6 +320,7 @@ export default function AthleteCardBuilder({ data, updateData, onNext }: Props) 
                                     {...register("address")}
                                     className="relative w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:bg-black/80 transition-all placeholder:text-white/20"
                                     placeholder="FULL ADDRESS"
+                                    required
                                 />
                                 {errors.address && <p className="text-red-500 text-[10px] mt-1 text-right">{errors.address.message}</p>}
                             </div>
