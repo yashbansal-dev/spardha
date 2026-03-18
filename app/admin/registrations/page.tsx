@@ -90,7 +90,7 @@ export default function RegistrationsPage() {
           >
             <option value="all">All Events</option>
             {/* These should ideally be fetched from the API, hardcoding some for demo */}
-            <option value="Sabrang'25">Sabrang'25</option>
+            <option value="Sabrang'25">Sabrang&apos;25</option>
             <option value="Esports">Esports</option>
             <option value="Dance Battle">Dance Battle</option>
           </select>

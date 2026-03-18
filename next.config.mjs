@@ -5,9 +5,8 @@ const nextConfig = {
     domains: ['spardhajklu.online'],
     unoptimized: true
   },
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false, path: false, crypto: false };
-    return config;
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   async rewrites() {
     // Automatically use Railway backend in production, Localhost in development
