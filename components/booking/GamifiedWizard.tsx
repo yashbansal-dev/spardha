@@ -76,13 +76,13 @@ export default function GamifiedWizard() {
         address: ''
     });
 
-    // TEAM MEMBERS STATE: Map of eventId -> TeamMember[]
+    // TEAM MEMBERS STATE: Map of cartItemId -> TeamMember[]
     const [teamMembers, setTeamMembers] = useState<Record<string, TeamMember[]>>({});
 
-    const updateTeamMembers = (eventId: string, members: TeamMember[]) => {
+    const updateTeamMembers = (cartItemId: string, members: TeamMember[]) => {
         setTeamMembers(prev => ({
             ...prev,
-            [eventId]: members
+            [cartItemId]: members
         }));
     };
 

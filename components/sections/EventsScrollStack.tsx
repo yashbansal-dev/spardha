@@ -7,7 +7,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
     FaFutbol, FaBasketballBall, FaGamepad,
-    FaArrowRight, FaTrophy, FaShoppingCart, FaInfoCircle, FaCheck
+    FaArrowRight, FaTrophy, FaShoppingCart, FaInfoCircle, FaCheck, FaPlus, FaMinus
 } from 'react-icons/fa';
 import { MdSportsCricket, MdSportsKabaddi, MdFemale, MdMale } from 'react-icons/md';
 import { GiShuttlecock, GiVolleyballBall } from 'react-icons/gi';
@@ -212,34 +212,34 @@ const SPORTS_DATA = [
 // --- Internal Component for Card Logic ---
 const EventCardContent = ({ sport, index, onOpenRules }: { sport: typeof SPORTS_DATA[0], index: number, onOpenRules: (title: string, rules: string[]) => void }) => {
     const [gender, setGender] = useState<'boys' | 'girls'>('boys');
-    const [added, setAdded] = useState(false);
-    const { addToCart } = useCart();
+    const { items: cartItems, addToCart, removeFromCart } = useCart();
+    const activeId = `${sport.id}-${sport.hasGender ? gender : 'open'}`;
+    const currentCount = cartItems.filter(item => item.id === activeId).length;
 
-    // 3D Tilt Logic Removed as per user request
-    const cardRef = useRef<HTMLDivElement>(null);
-
-    const activePrize = sport.hasGender ? sport.prize[gender] : sport.prize.open;
+    const activePrize = sport.hasGender ? (sport.prize as any)[gender] : sport.prize.open;
     // @ts-ignore - dynamic indexing
-    const activeRules = sport.hasGender ? sport.rules[gender] : sport.rules.open;
+    const activeRules = sport.hasGender ? (sport.rules as any)[gender] : (sport.rules as any).open;
 
-    const handleAddToCart = (e: React.MouseEvent) => {
-        e.stopPropagation(); // Prevent card click
+    const handleUpdateQuantity = (delta: 1 | -1) => {
+        if (delta === 1) {
+            // Price from Fee Structure
+            // @ts-ignore
+            const activeFee = sport.fee ? (sport.hasGender ? (sport.fee[gender] || 0) : (sport.fee.open || 0)) : 0;
+            const price = activeFee || 0;
 
-        // Price from Fee Structure
-        // @ts-ignore
-        const activeFee = sport.fee ? (sport.hasGender ? (sport.fee[gender] || 0) : (sport.fee.open || 0)) : 0;
-        const price = activeFee || 0;
-
-        addToCart({
-            id: `${sport.id}-${sport.hasGender ? gender : 'open'}`,
-            name: sport.name,
-            category: sport.hasGender ? (gender === 'boys' ? 'Boys' : 'Girls') : 'Open',
-            price: price,
-            color: sport.color
-        });
-
-        setAdded(true);
-        setTimeout(() => setAdded(false), 1500); // Just for visual feedback not logic
+            addToCart({
+                id: activeId,
+                name: sport.name,
+                category: sport.hasGender ? (gender === 'boys' ? 'Boys' : 'Girls') : 'Open',
+                price: price,
+                color: sport.color
+            });
+        } else {
+            const itemsOfType = cartItems.filter(item => item.id === activeId);
+            if (itemsOfType.length > 0) {
+                removeFromCart(itemsOfType[itemsOfType.length - 1].cartItemId);
+            }
+        }
     };
 
     return (
@@ -367,21 +367,32 @@ const EventCardContent = ({ sport, index, onOpenRules }: { sport: typeof SPORTS_
                             <span className="text-3xl font-gang text-white drop-shadow-lg">{activePrize}</span>
                         </div>
 
-                        <button
-                            onClick={handleAddToCart}
-                            disabled={added}
-                            className={`flex-1 h-14 px-8 bg-white text-black hover:bg-neon-cyan hover:text-white transition-all rounded-full font-bold uppercase tracking-widest flex items-center justify-center gap-3 group shadow-[0_0_20px_rgba(255,255,255,0.2)] ${added ? '!bg-green-500 !text-white' : ''}`}
-                        >
-                            {added ? (
-                                <>
-                                    <FaCheck /> Added
-                                </>
-                            ) : (
-                                <>
-                                    Add <FaShoppingCart className="group-hover:translate-x-1 transition-transform" />
-                                </>
-                            )}
-                        </button>
+                        {currentCount === 0 ? (
+                            <button
+                                onClick={() => handleUpdateQuantity(1)}
+                                className={`flex-1 h-14 px-8 bg-white text-black hover:bg-neon-cyan hover:text-white transition-all rounded-full font-bold uppercase tracking-widest flex items-center justify-center gap-3 group shadow-[0_0_20px_rgba(255,255,255,0.2)]`}
+                            >
+                                Add <FaShoppingCart className="group-hover:translate-x-1 transition-transform" />
+                            </button>
+                        ) : (
+                            <div className="flex-1 h-14 flex items-center bg-[#0a0a0a] border-2 border-neon-cyan rounded-full overflow-hidden shadow-[0_0_30px_rgba(34,211,238,0.4)]">
+                                <button
+                                    onClick={() => handleUpdateQuantity(-1)}
+                                    className="px-6 h-full bg-white/5 hover:bg-neon-cyan text-white hover:text-black transition-all border-r border-white/10 flex items-center justify-center"
+                                >
+                                    <FaMinus className="text-xl" />
+                                </button>
+                                <div className="flex-1 text-center text-3xl font-black text-white font-mono tracking-tighter">
+                                    {currentCount}
+                                </div>
+                                <button
+                                    onClick={() => handleUpdateQuantity(1)}
+                                    className="px-6 h-full bg-white/5 hover:bg-neon-cyan text-white hover:text-black transition-all border-l border-white/10 flex items-center justify-center"
+                                >
+                                    <FaPlus className="text-xl" />
+                                </button>
+                            </div>
+                        )}
                     </div>
 
                 </div>

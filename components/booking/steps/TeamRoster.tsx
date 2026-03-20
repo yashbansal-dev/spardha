@@ -18,8 +18,8 @@ export interface TeamMember {
 // Props for the component
 interface Props {
     cart: SportItem[];
-    teamMembers: Record<string, TeamMember[]>; // Map eventId -> TeamMember[]
-    updateTeamMembers: (eventId: string, members: TeamMember[]) => void;
+    teamMembers: Record<string, TeamMember[]>; // Map cartItemId -> TeamMember[]
+    updateTeamMembers: (cartItemId: string, members: TeamMember[]) => void;
     onNext: () => void;
     onPrev: () => void;
 }
@@ -54,7 +54,7 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
 
     if (!currentSport) return null;
 
-    const currentMembers = teamMembers[currentSport.id] || [];
+    const currentMembers = teamMembers[currentSport.cartItemId] || [];
 
     // Limits (Hardcoded for now, could be dynamic)
     const getLimit = (id: string) => {
@@ -77,14 +77,14 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
         }
 
         const newMembers = [...currentMembers, data];
-        updateTeamMembers(currentSport.id, newMembers);
+        updateTeamMembers(currentSport.cartItemId, newMembers);
         reset();
     };
 
     const removeMember = (index: number) => {
         const newMembers = [...currentMembers];
         newMembers.splice(index, 1);
-        updateTeamMembers(currentSport.id, newMembers);
+        updateTeamMembers(currentSport.cartItemId, newMembers);
     };
 
     const [isSaving, setIsSaving] = useState(false);

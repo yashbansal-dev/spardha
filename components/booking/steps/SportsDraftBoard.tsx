@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, memo, useCallback, useRef, useEffect } from 'react';
 import { SportItem } from '../GamifiedWizard';
-import { FaFutbol, FaBasketballBall, FaRunning, FaGamepad, FaChessKing, FaCheck, FaInfoCircle } from 'react-icons/fa';
+import { FaFutbol, FaBasketballBall, FaRunning, FaGamepad, FaChessKing, FaCheck, FaInfoCircle, FaPlus, FaMinus } from 'react-icons/fa';
 import { MdSportsCricket, MdSportsKabaddi, MdFemale, MdMale } from 'react-icons/md';
 import { GiShuttlecock, GiVolleyballBall } from 'react-icons/gi';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -137,10 +137,12 @@ export const ALL_SPORTS = [
 ];
 
 
+import { CartItem } from '@/context/CartContext';
+
 interface Props {
-    cart: SportItem[];
-    addToCart: (item: SportItem) => void;
-    removeFromCart: (id: string) => void;
+    cart: CartItem[];
+    addToCart: (item: Omit<CartItem, 'cartItemId'>) => void;
+    removeFromCart: (cartItemId: string) => void;
     onNext: () => void;
     onPrev: () => void;
 }
@@ -150,13 +152,51 @@ interface Props {
 // Props are simplified to primitives or stable callbacks where possible.
 interface SportCardProps {
     sport: typeof ALL_SPORTS[0];
-    isBoyInCart: boolean;
-    isGirlInCart: boolean;
-    isOpenInCart: boolean;
-    onToggle: (sport: typeof ALL_SPORTS[0], category: 'Boys' | 'Girls' | 'Open') => void;
+    boyCount: number;
+    girlCount: number;
+    openCount: number;
+    onUpdate: (sport: typeof ALL_SPORTS[0], category: 'Boys' | 'Girls' | 'Open', delta: 1 | -1) => void;
 }
 
-const SportCard = memo(({ sport, isBoyInCart, isGirlInCart, isOpenInCart, onToggle }: SportCardProps) => {
+const SportCard = memo(({ sport, boyCount, girlCount, openCount, onUpdate }: SportCardProps) => {
+    const renderQuantitySelector = (category: 'Boys' | 'Girls' | 'Open', count: number) => {
+        const isGirl = category === 'Girls';
+        const isBoy = category === 'Boys';
+        
+        if (count === 0) {
+            return (
+                <button
+                    onClick={() => onUpdate(sport, category, 1)}
+                    className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 border bg-white/5 text-gray-400 border-white/10 hover:bg-white/10 hover:text-white`}
+                >
+                    {isBoy && <MdMale className="text-lg" />}
+                    {isGirl && <MdFemale className="text-lg" />}
+                    {category === 'Open' ? 'ADD TO ROSTER' : category}
+                </button>
+            );
+        }
+
+        return (
+            <div className={`flex-1 flex items-center bg-[#111] border-2 rounded-lg overflow-hidden shadow-xl ${isGirl ? 'border-pink-500' : isBoy ? 'border-blue-500' : 'border-neon-cyan'}`}>
+                <button
+                    onClick={() => onUpdate(sport, category, -1)}
+                    className="w-10 h-10 bg-white/5 hover:bg-white/20 transition-all text-white flex items-center justify-center border-r border-white/10"
+                >
+                    <FaMinus className="text-sm" />
+                </button>
+                <div className={`flex-1 text-center text-lg font-black ${isGirl ? 'text-pink-500' : isBoy ? 'text-blue-400' : 'text-neon-cyan'} font-mono`}>
+                    {count}
+                </div>
+                <button
+                    onClick={() => onUpdate(sport, category, 1)}
+                    className="w-10 h-10 bg-white/5 hover:bg-white/20 transition-all text-white flex items-center justify-center border-l border-white/10"
+                >
+                    <FaPlus className="text-sm" />
+                </button>
+            </div>
+        );
+    };
+
     return (
         <div className="group relative bg-[#111] rounded-2xl overflow-hidden border border-white/10 hover:border-neon-cyan/50 transition-colors duration-300 hover:shadow-[0_0_30px_rgba(0,243,255,0.1)] will-change-transform h-[320px] flex flex-col">
             {/* Background Image */}
@@ -192,36 +232,18 @@ const SportCard = memo(({ sport, isBoyInCart, isGirlInCart, isOpenInCart, onTogg
                     </div>
                 </div>
 
-
                 <div className="flex gap-2 mt-auto">
                     {sport.hasGender ? (
                         <>
-                            {(!(sport as any).onlyGender || (sport as any).onlyGender === 'Boys') && (
-                                <button
-                                    onClick={() => onToggle(sport, 'Boys')}
-                                    className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 border ${isBoyInCart ? 'bg-neon-cyan text-black border-neon-cyan shadow-[0_0_15px_rgba(34,211,238,0.4)]' : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'}`}
-                                >
-                                    {isBoyInCart ? <FaCheck /> : <MdMale className="text-lg" />}
-                                    BOYS
-                                </button>
-                            )}
-                            {(!(sport as any).onlyGender || (sport as any).onlyGender === 'Girls') && (
-                                <button
-                                    onClick={() => onToggle(sport, 'Girls')}
-                                    className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 border ${isGirlInCart ? 'bg-pink-500 text-white border-pink-500 shadow-[0_0_15px_rgba(236,72,153,0.4)]' : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'}`}
-                                >
-                                    {isGirlInCart ? <FaCheck /> : <MdFemale className="text-lg" />}
-                                    GIRLS
-                                </button>
-                            )}
+                            {(!(sport as any).onlyGender || (sport as any).onlyGender === 'Boys') && 
+                                renderQuantitySelector('Boys', boyCount)
+                            }
+                            {(!(sport as any).onlyGender || (sport as any).onlyGender === 'Girls') && 
+                                renderQuantitySelector('Girls', girlCount)
+                            }
                         </>
                     ) : (
-                        <button
-                            onClick={() => onToggle(sport, 'Open')}
-                            className={`w-full py-3 rounded-lg text-sm font-bold uppercase transition-all flex items-center justify-center gap-2 border ${isOpenInCart ? 'bg-neon-cyan text-black border-neon-cyan shadow-[0_0_15px_rgba(34,211,238,0.4)]' : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10 hover:text-white'}`}
-                        >
-                            {isOpenInCart ? 'ADDED TO ROSTER' : 'ADD TO ROSTER'}
-                        </button>
+                        renderQuantitySelector('Open', openCount)
                     )}
                 </div>
             </div>
@@ -239,15 +261,11 @@ export default function SportsDraftBoard({ cart, addToCart, removeFromCart, onNe
         cartRef.current = cart;
     }, [cart]);
 
-    // Stable callback - doesn't change on re-renders, so SportCard doesn't re-render unless its specific props change
-    const toggleSport = useCallback((sport: typeof ALL_SPORTS[0], category: 'Boys' | 'Girls' | 'Open') => {
-        const currentCart = cartRef.current;
+    // Stable callback
+    const updateQuantity = useCallback((sport: typeof ALL_SPORTS[0], category: 'Boys' | 'Girls' | 'Open', delta: 1 | -1) => {
         const uniqueId = category !== 'Open' ? `${sport.id}-${category}` : sport.id;
-        const existingItem = currentCart.find(item => item.id === uniqueId);
 
-        if (existingItem) {
-            removeFromCart(uniqueId);
-        } else {
+        if (delta === 1) {
             let finalPrice = sport.price;
             if (category === 'Boys' && (sport as any).fees?.boys !== undefined) finalPrice = (sport as any).fees.boys;
             if (category === 'Girls' && (sport as any).fees?.girls !== undefined) finalPrice = (sport as any).fees.girls;
@@ -263,12 +281,25 @@ export default function SportsDraftBoard({ cart, addToCart, removeFromCart, onNe
                 color: color,
                 pricingType: (sport as any).pricingType
             });
-
+        } else {
+            // Find the last added item of this type to remove
+            const currentCart = cartRef.current;
+            const itemsOfType = currentCart.filter(item => item.id === uniqueId);
+            if (itemsOfType.length > 0) {
+                const lastItem = itemsOfType[itemsOfType.length - 1];
+                removeFromCart(lastItem.cartItemId);
+            }
         }
-    }, [addToCart, removeFromCart]); // Only recreate if context helpers change (rare)
+    }, [addToCart, removeFromCart]);
 
-    // Construct a Set of active IDs for O(1) lookups during rendering
-    const cartIds = useMemo(() => new Set(cart.map(item => item.id)), [cart]);
+    // Construct counts for O(1) lookups during rendering
+    const counts = useMemo(() => {
+        const c: Record<string, number> = {};
+        cart.forEach(item => {
+            c[item.id] = (c[item.id] || 0) + 1;
+        });
+        return c;
+    }, [cart]);
 
     // --- SIDEBAR VIEW MODE ---
     const [viewMode, setViewMode] = useState<'selection' | 'review'>('selection');
@@ -293,16 +324,20 @@ export default function SportsDraftBoard({ cart, addToCart, removeFromCart, onNe
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-20">
-                        {ALL_SPORTS.map((sport) => (
-                            <SportCard
-                                key={sport.id}
-                                sport={sport}
-                                isBoyInCart={cartIds.has(`${sport.id}-Boys`)}
-                                isGirlInCart={cartIds.has(`${sport.id}-Girls`)}
-                                isOpenInCart={cartIds.has(sport.id)}
-                                onToggle={toggleSport}
-                            />
-                        ))}
+                        {ALL_SPORTS.map((sport) => {
+                            const boyId = `${sport.id}-Boys`;
+                            const girlId = `${sport.id}-Girls`;
+                            return (
+                                <SportCard
+                                    key={sport.id}
+                                    sport={sport}
+                                    boyCount={counts[boyId] || 0}
+                                    girlCount={counts[girlId] || 0}
+                                    openCount={counts[sport.id] || 0}
+                                    onUpdate={updateQuantity}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -326,7 +361,7 @@ export default function SportsDraftBoard({ cart, addToCart, removeFromCart, onNe
                                     <AnimatePresence mode="popLayout" initial={false}>
                                         {cart.map((item) => (
                                             <motion.div
-                                                key={item.id}
+                                                key={item.cartItemId}
                                                 layout
                                                 initial={{ opacity: 0, x: 10 }}
                                                 animate={{ opacity: 1, x: 0 }}
@@ -342,7 +377,7 @@ export default function SportsDraftBoard({ cart, addToCart, removeFromCart, onNe
                                                     </div>
                                                 </div>
                                                 <button
-                                                    onClick={() => removeFromCart(item.id)}
+                                                    onClick={() => removeFromCart(item.cartItemId)}
                                                     className="text-gray-600 hover:text-red-500 transition-colors p-1"
                                                 >
                                                     &times;
@@ -394,7 +429,7 @@ export default function SportsDraftBoard({ cart, addToCart, removeFromCart, onNe
                                 <div className="flex-1 bg-white/5 rounded-xl p-4 border border-white/10 mb-6 space-y-4">
                                     <div className="space-y-2 max-h-[30vh] overflow-y-auto custom-scrollbar pr-2">
                                         {cart.map(item => (
-                                            <div key={item.id} className="flex justify-between text-xs">
+                                            <div key={item.cartItemId} className="flex justify-between text-xs">
                                                 <span className="text-gray-400 uppercase">{item.name} ({item.category})</span>
                                                 <span className="text-white font-mono">₹{item.price}</span>
                                             </div>

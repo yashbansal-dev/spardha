@@ -4,7 +4,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Define the shape of a Cart Item
 export interface CartItem {
-    id: string;      // Unique ID (e.g., 'football-boys', 'leather-cricket-boys')
+    id: string;      // Sport ID (e.g., 'football-boys')
+    cartItemId: string; // Unique instance ID in cart
     name: string;    // Sport Name
     category: string;// 'boys' | 'girls' | 'open'
     price: number;   // Numeric price
@@ -17,8 +18,8 @@ export interface CartItem {
 interface CartContextType {
     items: CartItem[];
     isOpen: boolean;
-    addToCart: (item: CartItem) => void;
-    removeFromCart: (itemId: string) => void;
+    addToCart: (item: Omit<CartItem, 'cartItemId'>) => void;
+    removeFromCart: (cartItemId: string) => void;
     toggleCart: () => void;
     setCart: (items: CartItem[]) => void;
     totalAmount: number;
@@ -47,17 +48,19 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('spardha-cart', JSON.stringify(items));
     }, [items]);
 
-    const addToCart = (newItem: CartItem) => {
+    const addToCart = (newItem: Omit<CartItem, 'cartItemId'>) => {
         setItems(prev => {
-            // Prevent duplicates
-            if (prev.some(item => item.id === newItem.id)) return prev;
-            return [...prev, newItem];
+            const itemWithId: CartItem = {
+                ...newItem,
+                cartItemId: `item-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+            };
+            return [...prev, itemWithId];
         });
         setIsOpen(true); // Auto-open cart on add
     };
 
-    const removeFromCart = (itemId: string) => {
-        setItems(prev => prev.filter(item => item.id !== itemId));
+    const removeFromCart = (cartItemId: string) => {
+        setItems(prev => prev.filter(item => item.cartItemId !== cartItemId));
     };
 
     const toggleCart = () => setIsOpen(prev => !prev);

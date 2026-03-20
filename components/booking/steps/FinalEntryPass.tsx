@@ -64,15 +64,15 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
                     customerGender: userData.gender,
                     customerAge: userData.age,
                     universityName: userData.college,
-                    universityIdCard: userData.universityIdCard,
                     address: userData.address,
-                    teamMembers: teamMembers,
                     items: cart.map(item => ({
                         id: item.id,
-                        title: item.name,
+                        name: item.name,
                         category: item.category,
-                        price: item.price
-                    }))
+                        price: item.price,
+                        quantity: 1
+                    })),
+                    teamMembers: teamMembers // Already keyed by cartItemId
                 }),
             });
 
