@@ -302,8 +302,23 @@ export default function GamifiedWizard() {
                         })}
                     </div>
 
-                    <div className="font-mono font-bold text-neon-cyan text-xs md:text-base">
-                        LEVEL {step}/{steps.length}
+                    <div className="flex items-center gap-4">
+                        {step === 1 && (userData.email || userData.fullName) && (
+                            <button 
+                                onClick={() => {
+                                    if(confirm('Are you sure you want to clear the form?')) {
+                                        localStorage.removeItem('spardha-user-email');
+                                        window.location.reload();
+                                    }
+                                }}
+                                className="text-[10px] uppercase border border-red-500/50 text-red-400 px-2 py-1 rounded hover:bg-red-500/10 transition-colors"
+                            >
+                                Not you? Reset
+                            </button>
+                        )}
+                        <div className="font-mono font-bold text-neon-cyan text-xs md:text-base">
+                            LEVEL {step}/{steps.length}
+                        </div>
                     </div>
 
                 </div>

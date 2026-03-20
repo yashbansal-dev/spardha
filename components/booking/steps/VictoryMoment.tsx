@@ -18,6 +18,11 @@ export default function VictoryMoment({ orderId, cart }: Props) {
     const [showConfetti, setShowConfetti] = useState(true);
 
     useEffect(() => {
+        // --- CRITICAL FIX: Clear draft from localStorage on successful registration ---
+        // This prevents the next user on the same device from seeing this user's data.
+        localStorage.removeItem('spardha-user-email');
+        console.log('✅ Local draft cleared of successful registration.');
+
         const timer = setTimeout(() => setShowConfetti(false), 8000); // Stop confetti after 8s
         return () => clearTimeout(timer);
     }, []);
