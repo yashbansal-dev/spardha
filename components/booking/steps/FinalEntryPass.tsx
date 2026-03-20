@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { SportItem, UserData } from '../GamifiedWizard';
 import { TeamMember } from './TeamRoster';
-import { FaBarcode, FaQrcode, FaCheckCircle, FaLock, FaUsers } from 'react-icons/fa';
+import { FaBarcode, FaQrcode, FaCheckCircle, FaLock, FaUsers, FaExclamationTriangle } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 declare global {
@@ -43,7 +43,24 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
         loadSdk();
     }, []);
 
+    const isDataComplete = 
+        userData.fullName?.length > 2 && 
+        userData.college?.length > 2 && 
+        userData.city?.length > 2 && 
+        userData.phone?.length >= 10 && 
+        userData.email?.includes('@') &&
+        userData.gender &&
+        userData.age &&
+        userData.universityIdCard &&
+        userData.address;
+
     const handlePayment = async () => {
+        if (!isDataComplete) {
+            alert('CRITICAL ERROR: Registration details are incomplete. Please go back and fill all fields.');
+            onPrev(); // Force them back to earlier steps
+            return;
+        }
+
         if (!sdkLoaded) {
             alert('Payment SDK is still loading. Please wait...');
             return;
@@ -216,7 +233,7 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
                     <div className="space-y-3">
                         <button
                             onClick={handlePayment}
-                            disabled={isProcessing}
+                            disabled={isProcessing || !isDataComplete}
                             className="w-full bg-white text-black py-4 rounded-xl font-black italic uppercase tracking-wider hover:bg-neon-cyan transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_30px_rgba(255,255,255,0.1)]"
                         >
                             {isProcessing ? (
@@ -226,11 +243,18 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
                                 </span>
                             ) : (
                                 <>
-                                    <span>PAY & FINALIZE</span>
+                                    <span>{isDataComplete ? 'PAY & FINALIZE' : 'DETAILS INCOMPLETE'}</span>
                                     <FaLock className="text-xs opacity-50" />
                                 </>
                             )}
                         </button>
+
+                        {!isDataComplete && (
+                            <p className="text-[10px] text-red-500 font-bold animate-pulse text-center">
+                                <FaExclamationTriangle className="inline mr-1" /> 
+                                MISSING ATHLETE DETAILS
+                            </p>
+                        )}
 
                         <button
                             onClick={onPrev}

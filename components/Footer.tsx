@@ -66,6 +66,7 @@ export default function Footer() {
                                 return (
                                     <button
                                         key={i}
+                                        id="footer-map-trigger"
                                         onClick={(e) => {
                                             e.preventDefault();
                                             setShowMap(true);

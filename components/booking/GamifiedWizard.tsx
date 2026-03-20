@@ -120,10 +120,22 @@ export default function GamifiedWizard() {
         if (isCheckout) {
             console.log("Checkout triggered via URL/Timestamp", timestamp);
 
+            // Validation for Step 1
+            const isStep1Complete = 
+                userData.fullName?.length > 2 && 
+                userData.college?.length > 2 && 
+                userData.city?.length > 2 && 
+                userData.phone?.length >= 10 && 
+                userData.email?.includes('@') &&
+                userData.gender &&
+                userData.age &&
+                userData.universityIdCard &&
+                userData.address;
+
             // Give a tiny moment for draft restoration if email is missing but might be in localStorage
             const hasSavedData = userData.email || localStorage.getItem('spardha-user-email');
 
-            if (hasSavedData) {
+            if (hasSavedData && isStep1Complete) {
                 // Determine destination
                 const hasTeamSports = cart.some(item => item.pricingType === 'team');
                 const targetStep = hasTeamSports ? 3 : 4;
@@ -134,11 +146,17 @@ export default function GamifiedWizard() {
                     setStep(targetStep);
                 }
             } else {
-                // If NO data and NO draft, we must ensure they are at Step 1
+                // If NO data or INCOMPLETE data, we must ensure they are at Step 1
+                console.log("Incomplete data for checkout jump, staying at Step 1");
                 if (step !== 1) setStep(1);
             }
         }
-    }, [searchParams, userData.email, userData.fullName, cart.length]); // depend on email/params
+    }, [searchParams, userData, cart.length]); // depend on full userData for checkout validation
+    
+    // 4. SCROLL TO TOP ON STEP CHANGE
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [step]);
 
     const [orderId, setOrderId] = useState('');
 
@@ -218,6 +236,9 @@ export default function GamifiedWizard() {
         // Debounce save
         const timer = setTimeout(async () => {
             if (!userData.email || !userData.email.includes('@')) return;
+            
+            // --- CRITICAL: Do not save draft if user has already reached Victory (step 5) ---
+            if (step === 5) return;
 
             // Save email to local storage to enable restore on return
             localStorage.setItem('spardha-user-email', userData.email);
@@ -292,7 +313,7 @@ export default function GamifiedWizard() {
                                     key={s.id}
                                     onClick={() => isClickable && setStep(s.id)}
                                     disabled={!isClickable}
-                                    className={`h-1.5 md:h-2 w-3 md:w-8 rounded-full transition-all duration-300 ${s.id <= step
+                                    className={`h-1.5 md:h-2 w-5 md:w-8 rounded-full transition-all duration-300 ${s.id <= step
                                         ? 'bg-neon-cyan shadow-[0_0_10px_rgba(0,243,255,0.5)]'
                                         : 'bg-white/10'
                                         } ${isClickable ? 'cursor-pointer hover:bg-neon-cyan/50 hover:scale-y-125' : 'cursor-not-allowed'}`}
@@ -308,6 +329,7 @@ export default function GamifiedWizard() {
                                 onClick={() => {
                                     if(confirm('Are you sure you want to clear the form?')) {
                                         localStorage.removeItem('spardha-user-email');
+                                        localStorage.removeItem('spardha-cart');
                                         window.location.reload();
                                     }
                                 }}
@@ -316,8 +338,11 @@ export default function GamifiedWizard() {
                                 Not you? Reset
                             </button>
                         )}
-                        <div className="font-mono font-bold text-neon-cyan text-xs md:text-base">
-                            LEVEL {step}/{steps.length}
+                        <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg backdrop-blur-sm shadow-[0_0_15px_rgba(0,243,255,0.1)] group hover:border-neon-cyan/30 transition-all duration-300">
+                            <span className="w-1.5 h-1.5 bg-neon-cyan rounded-full animate-pulse shadow-[0_0_8px_#00f3ff]"></span>
+                            <div className="font-mono font-bold text-neon-cyan text-[10px] md:text-xs uppercase tracking-tighter">
+                                LEVEL 0{step} <span className="text-white/30 mx-0.5">/</span> 0{steps.length}
+                            </div>
                         </div>
                     </div>
 

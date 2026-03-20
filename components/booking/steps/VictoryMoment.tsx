@@ -21,7 +21,8 @@ export default function VictoryMoment({ orderId, cart }: Props) {
         // --- CRITICAL FIX: Clear draft from localStorage on successful registration ---
         // This prevents the next user on the same device from seeing this user's data.
         localStorage.removeItem('spardha-user-email');
-        console.log('✅ Local draft cleared of successful registration.');
+        localStorage.removeItem('spardha-cart');
+        console.log('✅ Local draft and cart cleared of successful registration.');
 
         const timer = setTimeout(() => setShowConfetti(false), 8000); // Stop confetti after 8s
         return () => clearTimeout(timer);
@@ -74,7 +75,10 @@ export default function VictoryMoment({ orderId, cart }: Props) {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                    <button className="w-full bg-white text-black font-bold py-3 rounded flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors">
+                    <button 
+                        onClick={() => window.print()}
+                        className="w-full bg-white text-black font-bold py-3 rounded flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors"
+                    >
                         <FaDownload /> DOWNLOAD ENTRY PASS
                     </button>
                     <Link href="/" className="w-full bg-transparent border border-white/20 text-white font-bold py-3 rounded flex items-center justify-center gap-2 hover:bg-white/5 transition-colors">

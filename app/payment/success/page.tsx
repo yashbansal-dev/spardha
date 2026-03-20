@@ -14,6 +14,11 @@ function SuccessContent() {
     const [orderDetails, setOrderDetails] = useState<any>(null);
 
     useEffect(() => {
+        // Clear draft from localStorage on successful redirect to this page
+        localStorage.removeItem('spardha-user-email');
+        localStorage.removeItem('spardha-cart');
+        console.log('✅ Local draft and cart cleared on payment success page.');
+
         // If no order ID in URL, something is truly wrong
         if (!orderId) {
             setStatus('no_order');

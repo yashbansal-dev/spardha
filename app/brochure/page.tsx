@@ -26,10 +26,10 @@ export default function BrochurePage() {
                 {/* Downloads List - Bold & tabular */}
                 <div className="max-w-5xl mx-auto mb-32 space-y-4">
                     {[
-                        { title: 'SPARDHA 2026 BROCHURE', size: '12.5 MB', type: 'PDF' },
-                        { title: 'OFFICIAL RULEBOOK', size: '4.2 MB', type: 'PDF' },
-                        { title: 'EVENT SCHEDULE', size: '1.8 MB', type: 'PDF' },
-                        { title: 'CAMPUS MAP', size: '2.4 MB', type: 'PNG' },
+                        { title: 'SPARDHA 2026 BROCHURE', size: '18.7 MB', type: 'PDF', href: '/docs/Brochure.pdf' },
+                        { title: 'OFFICIAL RULEBOOK', size: '0.6 MB', type: 'PDF', href: '/docs/rulebook.pdf' },
+                        { title: 'EVENT SCHEDULE', size: 'Pending', type: 'PDF', href: '#', ComingSoon: true },
+                        { title: 'CAMPUS MAP', size: 'Live', type: 'MAP', href: '#', isMap: true },
                     ].map((item, i) => (
                         <div key={i} className="group flex flex-col md:flex-row items-center justify-between bg-white/5 border border-white/5 p-8 hover:bg-white/10 hover:border-neon-cyan/50 transition-all duration-300">
                             <div className="flex items-center gap-6 w-full md:w-auto mb-4 md:mb-0">
@@ -40,9 +40,26 @@ export default function BrochurePage() {
                                 </div>
                             </div>
 
-                            <button className="font-sans font-bold text-sm uppercase tracking-widest flex items-center gap-3 text-white border border-white/20 px-8 py-3 rounded-full group-hover:bg-neon-cyan group-hover:border-neon-cyan group-hover:text-black transition-all">
-                                Download <FaDownload />
-                            </button>
+                            {item.ComingSoon ? (
+                                <span className="font-sans font-bold text-xs uppercase tracking-widest text-[#444] border border-white/5 px-8 py-3 rounded-full">
+                                    Coming Soon
+                                </span>
+                            ) : item.isMap ? (
+                                <button 
+                                    onClick={() => document.getElementById('footer-map-trigger')?.click()}
+                                    className="font-sans font-bold text-sm uppercase tracking-widest flex items-center gap-3 text-white border border-white/20 px-8 py-3 rounded-full group-hover:bg-neon-cyan group-hover:border-neon-cyan group-hover:text-black transition-all"
+                                >
+                                    Open Map <FaChevronRight />
+                                </button>
+                            ) : (
+                                <a 
+                                    href={item.href}
+                                    download
+                                    className="font-sans font-bold text-sm uppercase tracking-widest flex items-center gap-3 text-white border border-white/20 px-8 py-3 rounded-full group-hover:bg-neon-cyan group-hover:border-neon-cyan group-hover:text-black transition-all"
+                                >
+                                    Download <FaDownload />
+                                </a>
+                            )}
                         </div>
                     ))}
                 </div>

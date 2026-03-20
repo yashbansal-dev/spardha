@@ -57,16 +57,21 @@ export default function TeamRoster({ cart, teamMembers, updateTeamMembers, onNex
     const currentMembers = teamMembers[currentSport.cartItemId] || [];
 
     // Limits (Hardcoded for now, could be dynamic)
-    const getLimit = (id: string) => {
-        if (id.includes('cricket')) return 15;
-        if (id.includes('football')) return 12; // 7v7 + subs
-        if (id.includes('basketball')) return 12;
-        if (id.includes('volleyball')) return 12;
-        if (id.includes('kabaddi')) return 12;
-        return 10;
+    const getLimit = (id: string): { min: number; max: number } => {
+        const lowerId = id.toLowerCase();
+        if (lowerId.includes('cricket')) return { min: 6, max: 15 };
+        if (lowerId.includes('football')) return { min: 5, max: 12 };
+        if (lowerId.includes('basketball')) return { min: 3, max: 12 };
+        if (lowerId.includes('volleyball')) return { min: 5, max: 12 };
+        if (lowerId.includes('kabaddi')) return { min: 6, max: 12 };
+        if (lowerId.includes('badminton-doubles')) return { min: 1, max: 1 }; // Captain + 1 Partner
+        if (lowerId.includes('esports')) return { min: 4, max: 5 }; // Captain + 4 or 5
+        return { min: 2, max: 10 };
     };
-    const maxPlayers = getLimit(currentSport.id);
-    const minPlayers = 2; // At least some members besides captain
+
+    const limits = getLimit(currentSport.id);
+    const maxPlayers = limits.max;
+    const minPlayers = limits.min;
 
     const addMember = (data: TeamMember) => {
         if (currentMembers.length >= maxPlayers) return;
