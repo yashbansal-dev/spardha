@@ -82,6 +82,8 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
                     customerAge: userData.age,
                     universityName: userData.college,
                     address: userData.address,
+                    universityIdCard: userData.universityIdCard,
+                    referralCode: userData.referralCode,
                     items: cart.map(item => ({
                         id: item.id,
                         name: item.name,
