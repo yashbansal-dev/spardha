@@ -107,7 +107,7 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
                 const checkoutOptions = {
                     paymentSessionId: data.data.payment_session_id,
                     redirectTarget: '_self',
-                    return_url: returnUrl, // Tell SDK where to redirect after payment
+                    returnUrl: returnUrl, // Tell SDK where to redirect after payment
                 };
 
                 console.log('💳 Cashfree checkout with return_url:', returnUrl);

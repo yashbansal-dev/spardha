@@ -98,7 +98,7 @@ export default function ArenaPayment({ userData, teamMembers, cart, onPrev, amou
                 const checkoutOptions = {
                     paymentSessionId: data.data.payment_session_id,
                     redirectTarget: '_self', // Redirect in same tab
-                    return_url: returnUrl, // Explicitly tell SDK where to redirect after payment
+                    returnUrl: returnUrl, // Explicitly tell SDK where to redirect after payment
                 };
 
                 console.log('💳 Cashfree checkout with return_url:', returnUrl); // DEBUG LOG
