@@ -344,34 +344,7 @@ export default function Hero() {
             {/* Bottom Vignette */}
             <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none"></div>
 
-            {/* Bottom Left Athlete Style Registration Notice */}
-            <motion.div
-                className="absolute bottom-6 md:bottom-10 left-4 md:left-10 z-50 flex items-center gap-3 backdrop-blur-md bg-black/50 border border-white/10 rounded-full pl-2 pr-6 py-2 shadow-2xl"
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1, duration: 0.8 }}
-            >
-                {/* Athlete Image Container */}
-                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-neon-orange/80 bg-black flex-shrink-0 shadow-[0_0_15px_rgba(227,114,51,0.4)] flex justify-center items-center">
-                    <Image
-                        src="/assets/images/spardha_logo.png"
-                        alt="Spardha Logo"
-                        fill
-                        className="object-contain filter p-1"
-                        sizes="48px"
-                    />
-                </div>
 
-                {/* Text Content */}
-                <div className="flex flex-col justify-center">
-                    <span className="text-white font-black text-sm md:text-base uppercase tracking-widest leading-none drop-shadow-md">
-                        Registration <span className="text-neon-orange">Closing</span>
-                    </span>
-                    <span className="text-white/60 font-bold text-[10px] md:text-xs tracking-[0.2em] mt-1 uppercase">
-                        On 22nd March
-                    </span>
-                </div>
-            </motion.div>
 
             <RegistrationModal
                 isOpen={isModalOpen}

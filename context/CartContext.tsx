@@ -30,23 +30,29 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
     const [isOpen, setIsOpen] = useState(false);
+    const [isInitialized, setIsInitialized] = useState(false);
 
     // Load from local storage on mount
     useEffect(() => {
         const savedCart = localStorage.getItem('spardha-cart');
         if (savedCart) {
             try {
-                setItems(JSON.parse(savedCart));
+                const parsed = JSON.parse(savedCart);
+                if (Array.isArray(parsed) && parsed.length >= 0) {
+                    setItems(parsed);
+                }
             } catch (e) {
                 console.error("Failed to parse cart", e);
             }
         }
+        setIsInitialized(true);
     }, []);
 
     // Save to local storage on change
     useEffect(() => {
+        if (!isInitialized) return; // Prevent overwriting with initial empty state
         localStorage.setItem('spardha-cart', JSON.stringify(items));
-    }, [items]);
+    }, [items, isInitialized]);
 
     const addToCart = (newItem: Omit<CartItem, 'cartItemId'>) => {
         setItems(prev => {

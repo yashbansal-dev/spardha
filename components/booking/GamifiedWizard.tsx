@@ -21,6 +21,7 @@ export type UserData = {
     age: string;
     universityIdCard: string;
     address: string;
+    referralCode?: string;
 };
 
 export type SportItem = CartItem;
@@ -73,7 +74,8 @@ export default function GamifiedWizard() {
         gender: '',
         age: '',
         universityIdCard: '',
-        address: ''
+        address: '',
+        referralCode: ''
     });
 
     // TEAM MEMBERS STATE: Map of cartItemId -> TeamMember[]
@@ -198,31 +200,52 @@ export default function GamifiedWizard() {
     const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://spardha-backend-production.up.railway.app';
     const [isRestoring, setIsRestoring] = useState(false);
 
-    // 1. Restore Draft on Mount (if email exists in localStorage or just check)
+    // 1. Restore Draft on Mount (Synchronously from localStorage + Async from API)
     useEffect(() => {
-        const checkDraft = async () => {
-            // Try to get email from localStorage if we saved it there previously
-            const savedEmail = localStorage.getItem('spardha-user-email');
-            if (!savedEmail) return;
+        // --- PHASE A: Sync from localStorage (Immediate) ---
+        const savedEmail = localStorage.getItem('spardha-user-email');
+        const savedLocalData = localStorage.getItem('spardha-user-data');
+        const savedLocalTeam = localStorage.getItem('spardha-team-members');
+        
+        if (savedLocalData) {
+            try {
+                const parsed = JSON.parse(savedLocalData);
+                setUserData(prev => ({ ...prev, ...parsed }));
+            } catch (e) {
+                console.error("Failed to parse local user data", e);
+            }
+        }
 
+        if (savedLocalTeam) {
+            try {
+                const parsed = JSON.parse(savedLocalTeam);
+                setTeamMembers(parsed);
+            } catch (e) {
+                console.error("Failed to parse local team members", e);
+            }
+        }
+
+        if (!savedEmail) return;
+
+        // --- PHASE B: Async from API (Backup/Cross-Device) ---
+        const checkDraft = async () => {
             try {
                 setIsRestoring(true);
-                console.log("Found saved email, checking for draft...", savedEmail);
+                console.log("Checking for remote draft...", savedEmail);
                 const res = await fetch(`${API_URL}/api/draft?email=${savedEmail}`);
                 const data = await res.json();
 
                 if (data.success && data.draft) {
-                    console.log("Restoring draft:", data.draft);
+                    console.log("Restoring remote draft:", data.draft);
                     const { step: savedStep, userData: savedUserData, cart: savedCart, teamMembers: savedTeamMembers } = data.draft;
 
-                    if (savedUserData) setUserData(savedUserData);
+                    if (savedUserData) setUserData(prev => ({ ...prev, ...savedUserData }));
                     if (savedCart && savedCart.length > 0) setCart(savedCart);
                     if (savedTeamMembers) setTeamMembers(savedTeamMembers);
-                    // Optional: Restore step, or let user start at 1 but with data filled
                     if (savedStep && savedStep > 1) setStep(savedStep);
                 }
             } catch (err) {
-                console.error("Failed to restore draft", err);
+                console.error("Failed to restore remote draft", err);
             } finally {
                 setIsRestoring(false);
             }
@@ -231,20 +254,26 @@ export default function GamifiedWizard() {
         checkDraft();
     }, []);
 
-    // 2. Auto-Save when state changes
+    // 2. Auto-Save Logic
+    // 2a. Immediate local storage sync
     useEffect(() => {
-        // Debounce save
+        if (userData.email) {
+            localStorage.setItem('spardha-user-email', userData.email);
+            localStorage.setItem('spardha-user-data', JSON.stringify(userData));
+        }
+    }, [userData]);
+
+    useEffect(() => {
+        localStorage.setItem('spardha-team-members', JSON.stringify(teamMembers));
+    }, [teamMembers]);
+
+    // 2b. Debounced API sync
+    useEffect(() => {
         const timer = setTimeout(async () => {
             if (!userData.email || !userData.email.includes('@')) return;
-            
-            // --- CRITICAL: Do not save draft if user has already reached Victory (step 5) ---
             if (step === 5) return;
 
-            // Save email to local storage to enable restore on return
-            localStorage.setItem('spardha-user-email', userData.email);
-
             try {
-                // Formatting payload
                 const payload = {
                     email: userData.email,
                     step,
@@ -258,11 +287,11 @@ export default function GamifiedWizard() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-                console.log("Draft auto-saved");
+                console.log("Draft auto-saved to cloud");
             } catch (err) {
-                console.error("Failed to auto-save draft", err);
+                console.error("Failed to auto-save draft to cloud", err);
             }
-        }, 2000); // 2 second debounce
+        }, 2000);
 
         return () => clearTimeout(timer);
     }, [userData, cart, teamMembers, step]);
@@ -271,7 +300,7 @@ export default function GamifiedWizard() {
         { id: 1, title: 'Athlete Profile' },
         { id: 2, title: 'Sport Selection' },
         { id: 3, title: 'Team Roster' },
-        { id: 4, title: 'Final Pass' },
+        { id: 4, title: 'Review & Pay' },
         { id: 5, title: 'Victory' }
     ];
 

@@ -55,8 +55,9 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
         userData.address;
 
     const handlePayment = async () => {
-        if (!isDataComplete) {
-            alert('CRITICAL ERROR: Registration details are incomplete. Please go back and fill all fields.');
+        if (!isDataComplete || cart.length === 0) {
+            console.error("Payload validation failed", { userData, cartCount: cart.length });
+            alert('CRITICAL ERROR: Registration details are incomplete or cart is empty. Please go back and ensure all fields are filled.');
             onPrev(); // Force them back to earlier steps
             return;
         }
@@ -133,10 +134,10 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
                     <span className="text-[10px] uppercase tracking-[0.3em]">Secure Checkout Protocol</span>
                 </div>
                 <h2 className="text-3xl md:text-5xl font-black italic uppercase text-white tracking-wider">
-                    FINAL <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-blue-500">SUMMARY</span>
+                    CHECKOUT <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-blue-500">SUMMARY</span>
                 </h2>
-                <p className="text-gray-400 mt-2 text-sm font-mono">
-                    ORDER #SP-{Math.random().toString(36).substr(2, 6).toUpperCase()} // REVIEW DETAILS BEFORE DEPLOYMENT
+                <p className="text-gray-400 mt-2 text-sm font-mono uppercase tracking-widest">
+                    Review Details & Secure Enrollment
                 </p>
             </div>
 
@@ -195,21 +196,26 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
 
                         <div className="flex justify-between items-end mt-auto pt-6 border-t border-gray-100">
                             <div>
-                                <div className="text-[10px] font-bold text-gray-400 uppercase mb-1">Order Status</div>
-                                <div className="text-amber-500 font-black text-xs uppercase flex items-center gap-1.5">
-                                    <div className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></div>
+                                <div className="text-[10px] font-bold text-gray-400 uppercase mb-1">Current Status</div>
+                                <div className="text-neon-cyan font-black text-xs uppercase flex items-center gap-1.5">
+                                    <div className="w-1.5 h-1.5 bg-neon-cyan rounded-full animate-pulse"></div>
                                     Awaiting Payment
                                 </div>
                             </div>
-                            <FaBarcode className="text-5xl opacity-20" />
+                            <div className="flex items-center gap-2 opacity-30">
+                                <span className="text-[8px] font-mono uppercase">Secure Checkout</span>
+                                <FaLock className="text-sm" />
+                            </div>
                         </div>
                     </div>
 
-                    {/* Ticket Stub */}
-                    <div className="w-full md:w-[200px] bg-gray-50 p-8 flex flex-col items-center justify-center relative">
-                        <FaQrcode className="text-6xl mb-4 text-black/80" />
+                    {/* Ticket Stub - HIDDEN BEFORE PAYMENT */}
+                    <div className="hidden md:flex w-[200px] bg-gray-50 p-8 flex-col items-center justify-center relative border-l-2 border-dashed border-gray-200">
+                        <div className="w-12 h-12 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center mb-4">
+                            <FaLock className="text-gray-300" />
+                        </div>
                         <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center">
-                            Scan to<br />Verify Entry
+                            Ticket Issued<br />After Payment
                         </div>
                     </div>
                 </div>
@@ -241,7 +247,7 @@ export default function FinalEntryPass({ cart, userData, teamMembers, onNext, on
                             {isProcessing ? (
                                 <span className="animate-pulse flex items-center gap-2">
                                     <div className="w-2 h-2 bg-black rounded-full animate-bounce"></div>
-                                    Processing...
+                                    Initing Gateway...
                                 </span>
                             ) : (
                                 <>
